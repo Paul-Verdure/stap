@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+/* ===========================================================================
+   STAP — "soft brutalism" design system
+   Source of truth: design tokens provided for the mockups. The palette and
+   typography are FROZEN. No auto dark mode, no color outside the palette.
+   Tokens are exposed to Tailwind v4 via @theme (generates the matching color,
+   font and radius utilities). No tailwind.config.ts (Tailwind v4).
+=========================================================================== */
+@theme {
+  /* --- Colors (frozen) -------------------------------------------------- */
+  --color-background: #f5f0e8; /* warm beige — main background           */
+  --color-foreground: #1a1a1a; /* deep black — text, structural borders  */
+  --color-surface: #ffffff; /* off-white — surfaces on the beige bg   */
+  --color-accent: #e8a020; /* amber — actions, accents, active state */
+  --color-muted: #5a5650; /* warm gray — secondary text, labels     */
+  --color-border: #e8e4dc; /* light gray — separators, disabled      */
+  --color-destructive: #b45309; /* burnt amber — destructive actions      */
+
+  /* --- Typography (frozen) --------------------------------------------- */
+  /* Syne: headings & accents. Inter: body text. Mono: system stack.       */
+  --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Menlo", "Consolas", monospace;
+
+  /* --- Radius ("physical object" feel, no sharp corners) -------------- */
+  --radius-sm: 0.375rem; /* 6px  — tags, badges                     */
+  --radius-md: 0.75rem; /* 12px — buttons, secondary cards         */
+  --radius-lg: 1rem; /* 16px — primary cards                    */
+  --radius-xl: 1.75rem; /* 28px — screens, overlays                */
+}
+
+/* ===========================================================================
+   Custom utilities (Tailwind v4 syntax: @utility)
+=========================================================================== */
+
+/* Structural border: 1.5px deep black (primary cards, buttons).
+   Thin separators just use `border border-border` (1px). */
+@utility border-structural {
+  border-width: 1.5px;
+  border-style: solid;
+  border-color: var(--color-foreground);
+}
+
+/* ===========================================================================
+   Base
+=========================================================================== */
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans); /* Inter by default; headings = font-display */
+  }
+}

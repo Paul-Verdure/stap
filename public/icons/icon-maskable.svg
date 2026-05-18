@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Stap">
+  <!-- Maskable: full-bleed background, glyph kept inside the ~80% safe zone. -->
+  <rect width="512" height="512" fill="#F5F0E8"/>
+  <text x="256" y="276" font-family="Syne, system-ui, sans-serif" font-size="248" font-weight="800" fill="#1A1A1A" text-anchor="middle" dominant-baseline="middle">S</text>
+</svg>

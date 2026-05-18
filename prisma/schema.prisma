@@ -1,0 +1,18 @@
+// Stap — Prisma schema.
+// CONFIG ONLY for now: datasource + generator. Business models will be added
+// in a later step.
+// Docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+// Prisma 7 no longer ships a Rust query engine: the runtime connection goes
+// through a driver adapter (@prisma/adapter-pg, see lib/db.ts). The URLs are
+// therefore NOT declared here:
+//   - runtime   -> DATABASE_URL (Supavisor pooler, port 6543) via the adapter
+//   - CLI / migr -> DIRECT_URL  (direct connection, port 5432) via prisma.config.ts
+datasource db {
+  provider = "postgresql"
+}

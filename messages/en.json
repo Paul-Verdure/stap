@@ -1,0 +1,12 @@
+{
+  "Home": {
+    "kicker": "Stap",
+    "title": "Leer Nederlands",
+    "subtitle": "Technical scaffolding in place — soft brutalism design system active."
+  },
+  "Offline": {
+    "kicker": "Stap",
+    "title": "Offline",
+    "body": "No internet connection. Reconnect to keep learning."
+  }
+}
