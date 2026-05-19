@@ -8,5 +8,19 @@
     "kicker": "Stap",
     "title": "Offline",
     "body": "No internet connection. Reconnect to keep learning."
+  },
+  "Auth": {
+    "kicker": "Stap",
+    "title": "Welcome back",
+    "subtitle": "Enter your email and we'll send you a magic link to sign in. No password to remember.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "submit": "Send the magic link",
+    "sending": "Sending…",
+    "sentTitle": "Check your inbox",
+    "sentBody": "We've sent you a magic link. Open it on this device to sign in.",
+    "error": "Something went wrong. Please try again.",
+    "signedInAs": "Signed in as",
+    "signOut": "Sign out"
   }
 }

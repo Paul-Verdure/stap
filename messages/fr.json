@@ -8,5 +8,19 @@
     "kicker": "Stap",
     "title": "Hors ligne",
     "body": "Pas de connexion internet. Reconnectez-vous pour continuer à apprendre."
+  },
+  "Auth": {
+    "kicker": "Stap",
+    "title": "Content de vous revoir",
+    "subtitle": "Entrez votre email, on vous envoie un lien magique pour vous connecter. Aucun mot de passe à retenir.",
+    "emailLabel": "Adresse email",
+    "emailPlaceholder": "vous@exemple.com",
+    "submit": "Envoyer le lien magique",
+    "sending": "Envoi…",
+    "sentTitle": "Vérifiez votre boîte mail",
+    "sentBody": "On vous a envoyé un lien magique. Ouvrez-le sur cet appareil pour vous connecter.",
+    "error": "Une erreur s'est produite. Réessayez.",
+    "signedInAs": "Connecté en tant que",
+    "signOut": "Se déconnecter"
   }
 }

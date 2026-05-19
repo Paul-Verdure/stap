@@ -1,7 +1,12 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import { signOut } from "@/lib/auth/actions";
+import { getCurrentUser } from "@/lib/auth/user";
+
 // Scaffolding placeholder — exercises the design system tokens and i18n for
-// visual validation. To be replaced by the real UI in a later step.
+// visual validation. Now also a protected route: the proxy guarantees a
+// session here, so getCurrentUser() is non-null. To be replaced by the real
+// UI in a later step.
 export default async function Home({
   params,
 }: {
@@ -10,6 +15,8 @@ export default async function Home({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("Home");
+  const tAuth = await getTranslations("Auth");
+  const user = await getCurrentUser();
 
   return (
     <main className="flex flex-1 flex-col items-center justify-center p-5">
@@ -23,6 +30,21 @@ export default async function Home({
         <p className="mt-5 text-[15px] leading-relaxed text-muted">
           {t("subtitle")}
         </p>
+
+        <div className="mt-6 border-t border-border pt-5">
+          <p className="text-[12px] font-bold uppercase tracking-[0.04em] text-muted">
+            {tAuth("signedInAs")}
+          </p>
+          <p className="mt-1 font-mono text-[13px] break-all">{user?.email}</p>
+          <form action={signOut} className="mt-4">
+            <button
+              type="submit"
+              className="border-structural rounded-md px-4 py-2 text-[13px] font-bold"
+            >
+              {tAuth("signOut")}
+            </button>
+          </form>
+        </div>
       </div>
     </main>
   );
