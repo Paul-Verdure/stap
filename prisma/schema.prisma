@@ -80,6 +80,9 @@ model User {
 
 model Phrase {
   id         String   @id @default(cuid())
+  // Stable identifier (kebab-case) — anchor for idempotent seeding and
+  // human-readable references across files / logs.
+  slug       String   @unique
   textNl     String   @map("text_nl")
   ipa        String
   audioUrl   String?  @map("audio_url")
@@ -92,14 +95,19 @@ model Phrase {
   createdAt  DateTime @default(now()) @map("created_at")
   updatedAt  DateTime @updatedAt @map("updated_at")
 
-  contexts        PhraseContext[]
+  // Catalog content is tagged on two ORTHOGONAL axes:
+  //   - themes      : what the phrase IS pedagogically (greeting, number…)
+  //   - lifeContexts: WHERE it is realistically used (office, shops…)
+  themes          PhraseTheme[]
+  lifeContexts    PhraseLifeContext[]
   challenges      Challenge[]
   vocabularyCards VocabularyCard[]
 
   @@map("phrases")
 }
 
-model Context {
+// Pedagogical theme of a phrase (what it teaches): greeting, number, etc.
+model Theme {
   id            String   @id @default(cuid())
   slug          String   @unique
   // Localized labels — ADR 0001.
@@ -110,22 +118,54 @@ model Context {
   createdAt     DateTime @default(now()) @map("created_at")
   updatedAt     DateTime @updatedAt @map("updated_at")
 
-  phrases PhraseContext[]
+  phrases PhraseTheme[]
 
-  @@map("contexts")
+  @@map("themes")
 }
 
-// Many-to-many join between Phrase and Context.
-model PhraseContext {
-  phraseId  String @map("phrase_id")
-  contextId String @map("context_id")
+// Real-life situation where a phrase is realistically used: office,
+// neighbors, shops, etc. Used at runtime to personalize daily challenges
+// based on the user's declared environments.
+model LifeContext {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  // Localized labels — ADR 0001.
+  nameEn        String   @map("name_en")
+  nameFr        String   @map("name_fr")
+  descriptionEn String   @map("description_en")
+  descriptionFr String   @map("description_fr")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
 
-  phrase  Phrase  @relation(fields: [phraseId], references: [id], onDelete: Cascade)
-  context Context @relation(fields: [contextId], references: [id], onDelete: Cascade)
+  phrases PhraseLifeContext[]
 
-  @@id([phraseId, contextId])
-  @@index([contextId])
-  @@map("phrase_contexts")
+  @@map("life_contexts")
+}
+
+// M2M join between Phrase and Theme.
+model PhraseTheme {
+  phraseId String @map("phrase_id")
+  themeId  String @map("theme_id")
+
+  phrase Phrase @relation(fields: [phraseId], references: [id], onDelete: Cascade)
+  theme  Theme  @relation(fields: [themeId], references: [id], onDelete: Cascade)
+
+  @@id([phraseId, themeId])
+  @@index([themeId])
+  @@map("phrase_themes")
+}
+
+// M2M join between Phrase and LifeContext.
+model PhraseLifeContext {
+  phraseId      String @map("phrase_id")
+  lifeContextId String @map("life_context_id")
+
+  phrase      Phrase      @relation(fields: [phraseId], references: [id], onDelete: Cascade)
+  lifeContext LifeContext @relation(fields: [lifeContextId], references: [id], onDelete: Cascade)
+
+  @@id([phraseId, lifeContextId])
+  @@index([lifeContextId])
+  @@map("phrase_life_contexts")
 }
 
 // --- User-owned (RLS: owner-only, in Phase B) -----------------------------

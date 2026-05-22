@@ -10,6 +10,7 @@
     "postinstall": "prisma generate",
     "db:generate": "prisma generate",
     "db:ping": "tsx scripts/db-ping.ts",
+    "db:seed": "tsx scripts/db-seed.ts",
     "db:migrate": "prisma migrate dev",
     "db:push": "prisma db push",
     "db:studio": "prisma studio"

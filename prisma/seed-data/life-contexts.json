@@ -1,0 +1,58 @@
+[
+  {
+    "slug": "office",
+    "nameEn": "Office",
+    "nameFr": "Bureau",
+    "descriptionEn": "Workplace exchanges with colleagues, managers and clients.",
+    "descriptionFr": "Échanges au travail avec collègues, managers et clients."
+  },
+  {
+    "slug": "daycare-school",
+    "nameEn": "Daycare & school",
+    "nameFr": "Crèche & école",
+    "descriptionEn": "Drop-offs, pick-ups, and chats with teachers and other parents.",
+    "descriptionFr": "Dépôts, sorties, et discussions avec enseignants et autres parents."
+  },
+  {
+    "slug": "neighbors",
+    "nameEn": "Neighbors",
+    "nameFr": "Voisinage",
+    "descriptionEn": "Quick exchanges in the building, on the street, or in the yard.",
+    "descriptionFr": "Courts échanges dans l'immeuble, la rue ou la cour."
+  },
+  {
+    "slug": "shops",
+    "nameEn": "Shops",
+    "nameFr": "Commerces",
+    "descriptionEn": "Bakeries, supermarkets, takeout counters and small shops.",
+    "descriptionFr": "Boulangerie, supermarché, comptoirs à emporter et petits commerces."
+  },
+  {
+    "slug": "leisure-sports",
+    "nameEn": "Leisure & sports",
+    "nameFr": "Loisirs & sport",
+    "descriptionEn": "Gym, sports clubs, hobby groups and informal meetups.",
+    "descriptionFr": "Salle de sport, clubs, groupes de loisirs et rencontres informelles."
+  },
+  {
+    "slug": "family",
+    "nameEn": "Family",
+    "nameFr": "Famille",
+    "descriptionEn": "At home, with close family and everyday domestic life.",
+    "descriptionFr": "À la maison, en famille proche, dans le quotidien domestique."
+  },
+  {
+    "slug": "friends",
+    "nameEn": "Friends",
+    "nameFr": "Amis",
+    "descriptionEn": "Hanging out, parties, dinners and time spent with friends.",
+    "descriptionFr": "Sorties, soirées, dîners et moments entre amis."
+  },
+  {
+    "slug": "administration",
+    "nameEn": "Administration",
+    "nameFr": "Administration",
+    "descriptionEn": "Town hall, bank, doctor and other official appointments.",
+    "descriptionFr": "Mairie, banque, médecin et autres rendez-vous officiels."
+  }
+]
