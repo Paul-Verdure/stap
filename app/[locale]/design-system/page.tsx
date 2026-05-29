@@ -1,6 +1,11 @@
 import { setRequestLocale } from "next-intl/server";
 
 import { ThemeToggle } from "@/components/system/theme-toggle";
+import { Link } from "@/i18n/navigation";
+import { Cta, IconButton, SecondaryLink } from "@/components/ui/button";
+import { CloseIcon, FiltersIcon, SettingsIcon } from "@/components/ui/icons";
+import { ListenButton } from "@/components/ui/listen-button";
+import { Card, HeroSurface, StatusPill, Tag } from "@/components/ui/surface";
 import {
   countSteps,
   MiniRhythm,
@@ -93,7 +98,7 @@ export default async function DesignSystemPage({
   }).format(sample);
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-12 px-5 py-10">
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-14 px-5 py-10">
       <header className="flex flex-col gap-4">
         <Eyebrow>Stap · Design system</Eyebrow>
         <h1 className="font-display text-display">G1 — Primitives</h1>
@@ -330,6 +335,193 @@ export default async function DesignSystemPage({
           </Specimen>
         </div>
       </Section>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* G1.4 — Buttons & audio                                           */}
+      {/* ---------------------------------------------------------------- */}
+
+      <Section title="Buttons & audio" eyebrow="G1.4 · Actions">
+        <div className="flex flex-col gap-8">
+          <Specimen
+            name="<Cta>"
+            note="primary (amber) · ink · commitment (sticky, full-width) · disabled (dashed)."
+          >
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-wrap items-center gap-3">
+                <Cta variant="primary">I&apos;ll get ready</Cta>
+                <Cta variant="ink">Done</Cta>
+                <Cta variant="primary" disabled>
+                  Next
+                </Cta>
+              </div>
+              <Cta variant="commitment">I&apos;ll give it a try</Cta>
+            </div>
+          </Specimen>
+
+          <Specimen
+            name="<Cta asChild>"
+            note="Composes with a link (Radix Slot) — same treatment, real <a>."
+          >
+            <Cta asChild variant="ink">
+              <Link href="/">Resume prep</Link>
+            </Cta>
+          </Specimen>
+
+          <Specimen
+            name="<SecondaryLink>"
+            note="Low-emphasis text action, dashed underline."
+          >
+            <SecondaryLink>I already have an account</SecondaryLink>
+          </Specimen>
+
+          <Specimen
+            name="<ListenButton> — 3 scales"
+            note="Invariant ink circle + amber speaker. sr-only label carries the Dutch phrase (lang='nl')."
+          >
+            <div className="flex items-center gap-6">
+              <span className="flex items-center gap-2 text-body">
+                <Nl>buurman</Nl>
+                <ListenButton
+                  scale="word"
+                  srLabel={
+                    <>
+                      Listen to <Nl>buurman</Nl>
+                    </>
+                  }
+                />
+              </span>
+              <ListenButton
+                scale="sentence"
+                srLabel={
+                  <>
+                    Listen to <Nl>Goedemorgen, hoe gaat het?</Nl>
+                  </>
+                }
+              />
+              <ListenButton
+                scale="disc"
+                srLabel={
+                  <>
+                    Listen to <Nl>Goedemorgen</Nl>
+                  </>
+                }
+              />
+            </div>
+          </Specimen>
+
+          <Specimen
+            name="<IconButton>"
+            note="Circular, icon-only. label = accessible name; icon decorative."
+          >
+            <div className="flex items-center gap-3">
+              <IconButton label="Close">
+                <CloseIcon className="h-5 w-5" />
+              </IconButton>
+              <IconButton label="Filters">
+                <FiltersIcon className="h-5 w-5" />
+              </IconButton>
+              <IconButton label="Settings">
+                <SettingsIcon className="h-5 w-5" />
+              </IconButton>
+            </div>
+          </Specimen>
+        </div>
+      </Section>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* G1.5 — Surfaces & hero                                           */}
+      {/* ---------------------------------------------------------------- */}
+
+      <Section title="Surfaces & hero" eyebrow="G1.5 · Containers">
+        <div className="flex flex-col gap-8">
+          <Specimen
+            name="<Card>"
+            note="Everyday surface: beige-light, 1.5px ink border, radius lg (16px) / md (12px)."
+          >
+            <div className="flex flex-col gap-4">
+              <Card>
+                <h3 className="font-display text-greeting">A primary card</h3>
+                <p className="mt-1 text-body text-muted">
+                  Beige-light surface, ink border, 24px padding, radius 16.
+                </p>
+              </Card>
+              <Card radius="md" padding="sm">
+                <p className="text-body text-muted">
+                  Secondary card — radius 12, tighter padding.
+                </p>
+              </Card>
+            </div>
+          </Specimen>
+
+          <Specimen
+            name="<HeroSurface> — the signature, as a challenge card"
+            note="Ink + amber, invariant across themes. Tags, StatusPill and ListenButton all sit on it."
+          >
+            <HeroSurface as="article">
+              <div className="flex items-center justify-between gap-3">
+                <Eyebrow tone="accent">Today · Step</Eyebrow>
+                <StatusPill>Prep viewed</StatusPill>
+              </div>
+              <Question as="p" className="mt-3 text-hero-fg">
+                Greet a colleague <span className="text-accent">in Dutch</span>
+              </Question>
+              <p className="mt-1 text-helper text-hero-muted">→ At the office</p>
+              <p className="mt-4 font-display text-greeting">
+                <Nl>Goedemorgen, hoe gaat het?</Nl>
+              </p>
+              <p className="text-helper text-hero-muted">
+                Good morning, how are you?
+              </p>
+              <div className="mt-4 flex items-center justify-between gap-3">
+                <div className="flex flex-wrap items-center gap-2">
+                  <Tag tone="amber">A2</Tag>
+                  <Tag tone="hero">office</Tag>
+                  <Tag tone="hero">greetings</Tag>
+                </div>
+                <ListenButton
+                  scale="sentence"
+                  srLabel={
+                    <>
+                      Listen to <Nl>Goedemorgen, hoe gaat het?</Nl>
+                    </>
+                  }
+                />
+              </div>
+            </HeroSurface>
+          </Specimen>
+
+          <Specimen
+            name="<Tag>"
+            note="default (on beige) · hero (on ink) · amber (emphasis, invariant ink text)."
+          >
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-wrap items-center gap-2">
+                <Tag>office</Tag>
+                <Tag>greetings</Tag>
+                <Tag tone="amber">A2</Tag>
+              </div>
+              <HeroSurface padding="sm" className="w-fit">
+                <div className="flex flex-wrap items-center gap-2">
+                  <Tag tone="hero">on hero</Tag>
+                  <Tag tone="amber">A2</Tag>
+                </div>
+              </HeroSurface>
+            </div>
+          </Specimen>
+
+          <Specimen
+            name="<StatusPill>"
+            note="Amber status inside the hero (Prep viewed, Done). Amber fill + invariant ink text."
+          >
+            <HeroSurface padding="sm" className="w-fit">
+              <div className="flex items-center gap-3">
+                <StatusPill>Prep viewed</StatusPill>
+                <StatusPill>Done</StatusPill>
+              </div>
+            </HeroSurface>
+          </Specimen>
+        </div>
+      </Section>
     </main>
   );
 }
@@ -344,7 +536,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="flex flex-col gap-4">
+    <section className="flex flex-col gap-5">
       <SectionRule>{eyebrow}</SectionRule>
       <SectionHead as="h2" title={title} />
       {children}
@@ -362,12 +554,16 @@ function Specimen({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-3 border-l border-hairline pl-4">
+    <div className="flex flex-col gap-2.5">
       <div className="flex flex-col gap-0.5">
         <code className="font-mono text-helper text-foreground">{name}</code>
         <Helper>{note}</Helper>
       </div>
-      <div>{children}</div>
+      {/* Padded "stage" so demos never touch the frame; the hairline border on
+          the page background reads as neutral, letting bg-surface demos pop. */}
+      <div className="overflow-x-auto rounded-lg border border-hairline px-6 py-6">
+        {children}
+      </div>
     </div>
   );
 }

@@ -37,6 +37,9 @@
 
   /* Accent (frozen, constant across themes) */
   --stap-amber: #e8a020;     /* amber — single accent + consequence color   */
+  --stap-on-accent: #1a1a1a; /* ink — text/icons ON amber fill, BOTH themes
+                                (amber is light: ink-on-amber ≈ 7:1; beige
+                                would fail, so this must NOT invert)         */
 
   /* Hero treatment — INVARIANT across themes (Stap's signature: ink + amber).
      The hero NEVER inverts; instead, in dark mode (where page bg is also ink)
@@ -64,6 +67,7 @@
   --stap-hairline: #2e2c28;  /* subtle dark hairline                         */
 
   --stap-amber: #e8a020;     /* UNCHANGED — Stap's signature                 */
+  --stap-on-accent: #1a1a1a; /* UNCHANGED — ink-on-amber stays readable      */
 
   /* Hero treatment stays ink + amber even in dark mode (signature is
      inviolable). Page bg is now also ink, so the hero gets a beige border to
@@ -87,6 +91,7 @@
   --color-muted: var(--stap-muted);
   --color-hairline: var(--stap-hairline);
   --color-accent: var(--stap-amber);
+  --color-on-accent: var(--stap-on-accent);
   --color-hero-bg: var(--stap-hero-bg);
   --color-hero-fg: var(--stap-hero-fg);
   --color-hero-muted: var(--stap-hero-muted);
