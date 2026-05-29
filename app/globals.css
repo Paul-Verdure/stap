@@ -1,54 +1,203 @@
 @import "tailwindcss";
 
 /* ===========================================================================
-   STAP — "soft brutalism" design system
-   Source of truth: design tokens provided for the mockups. The palette and
-   typography are FROZEN. No auto dark mode, no color outside the palette.
-   Tokens are exposed to Tailwind v4 via @theme (generates the matching color,
-   font and radius utilities). No tailwind.config.ts (Tailwind v4).
-=========================================================================== */
-@theme {
-  /* --- Colors (frozen) -------------------------------------------------- */
-  --color-background: #f5f0e8; /* warm beige — main background           */
-  --color-foreground: #1a1a1a; /* deep black — text, structural borders  */
-  --color-surface: #ffffff; /* off-white — surfaces on the beige bg   */
-  --color-accent: #e8a020; /* amber — actions, accents, active state */
-  --color-muted: #5a5650; /* warm gray — secondary text, labels     */
-  --color-border: #e8e4dc; /* light gray — separators, disabled      */
-  --color-destructive: #b45309; /* burnt amber — destructive actions      */
+   STAP — soft brutalism design system, tokens layer (G1.1).
+   ---------------------------------------------------------------------------
+   Palette and typography are FROZEN. Amber is the only color; it is reserved
+   for accent + consequence and is INVARIANT across themes. There is no
+   semantic red/green anywhere — destructive states reuse amber + ink.
 
-  /* --- Typography (frozen) --------------------------------------------- */
-  /* Syne: headings & accents. Inter: body text. Mono: system stack.       */
+   Strategy:
+     - Raw values live as CSS variables (`--stap-*`) on :root (light) and on
+       [data-theme="dark"] (dark = ink/beige inversion, amber constant).
+     - Tailwind utility names are generated from those variables via
+       `@theme inline`, so `bg-background`, `text-foreground` etc. work in
+       both themes without `dark:` prefixes.
+     - A `@custom-variant dark` is exposed for explicit overrides when
+       per-theme branching is unavoidable.
+=========================================================================== */
+
+/* --- Tailwind dark variant: opt-in, attribute-driven (no media query) ----- */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* --- Light theme (default) ----------------------------------------------- */
+:root {
+  /* Surfaces */
+  --stap-bg: #f5f0e8;        /* warm beige — app background                 */
+  --stap-surface: #fbf7f0;   /* beige-light — cards above background        */
+  --stap-offwhite: #ffffff;  /* off-white — brightest surface, used sparely */
+
+  /* Ink (text + structural borders) */
+  --stap-ink: #1a1a1a;       /* deep black — text, 1.5px borders            */
+  --stap-ink-2: #2a2a2a;     /* slightly lifted ink — inset hero accents    */
+
+  /* Secondary ink */
+  --stap-muted: #5a5650;     /* warm gray — secondary text, captions        */
+  --stap-hairline: #e8e4dc;  /* light beige — 1px separators                */
+
+  /* Accent (frozen, constant across themes) */
+  --stap-amber: #e8a020;     /* amber — single accent + consequence color   */
+
+  /* Hero treatment — INVARIANT across themes (Stap's signature: ink + amber).
+     The hero NEVER inverts; instead, in dark mode (where page bg is also ink)
+     a beige border distinguishes the hero from the surrounding page. Amber
+     therefore always renders on ink → high contrast in both themes. */
+  --stap-hero-bg: #1a1a1a;      /* always ink                                */
+  --stap-hero-fg: #f5f0e8;      /* always beige (primary text on hero)       */
+  --stap-hero-muted: #8a857d;   /* desaturated beige, ≥5:1 on ink            */
+  --stap-hero-border: #1a1a1a;  /* same as bg in light → no visible border   */
+
+  /* Scrim for modals */
+  --stap-scrim: rgba(26, 26, 26, 0.45);
+}
+
+/* --- Dark theme (manual toggle, ink ↔ beige inversion, amber unchanged) -- */
+[data-theme="dark"] {
+  --stap-bg: #1a1a1a;        /* ink becomes background                       */
+  --stap-surface: #242220;   /* slightly lifted, warm dark                   */
+  --stap-offwhite: #2c2a28;  /* warmest dark surface                         */
+
+  --stap-ink: #f5f0e8;       /* beige becomes foreground text                */
+  --stap-ink-2: #c4c0b8;     /* secondary text on dark                       */
+
+  --stap-muted: #948f87;     /* lighter warm gray — captions on dark         */
+  --stap-hairline: #2e2c28;  /* subtle dark hairline                         */
+
+  --stap-amber: #e8a020;     /* UNCHANGED — Stap's signature                 */
+
+  /* Hero treatment stays ink + amber even in dark mode (signature is
+     inviolable). Page bg is now also ink, so the hero gets a beige border to
+     carve it out of the surrounding dark surface. */
+  --stap-hero-border: #f5f0e8;
+
+  --stap-scrim: rgba(0, 0, 0, 0.6);
+}
+
+/* ===========================================================================
+   Tailwind theme — exposes the CSS variables above as utility names.
+   `@theme inline` re-evaluates on each cascade so dark mode swaps live.
+=========================================================================== */
+@theme inline {
+  /* Color utilities: bg-*, text-*, border-*, ring-*, etc. */
+  --color-background: var(--stap-bg);
+  --color-surface: var(--stap-surface);
+  --color-offwhite: var(--stap-offwhite);
+  --color-foreground: var(--stap-ink);
+  --color-ink-2: var(--stap-ink-2);
+  --color-muted: var(--stap-muted);
+  --color-hairline: var(--stap-hairline);
+  --color-accent: var(--stap-amber);
+  --color-hero-bg: var(--stap-hero-bg);
+  --color-hero-fg: var(--stap-hero-fg);
+  --color-hero-muted: var(--stap-hero-muted);
+  --color-hero-border: var(--stap-hero-border);
+  --color-scrim: var(--stap-scrim);
+
+  /* Fonts (variables wired by next/font in the layout) */
   --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "SF Mono", "Menlo", "Consolas", monospace;
 
-  /* --- Radius ("physical object" feel, no sharp corners) -------------- */
-  --radius-sm: 0.375rem; /* 6px  — tags, badges                     */
-  --radius-md: 0.75rem; /* 12px — buttons, secondary cards         */
-  --radius-lg: 1rem; /* 16px — primary cards                    */
-  --radius-xl: 1.75rem; /* 28px — screens, overlays                */
+  /* Radii — Stap uses a small, discrete radius scale */
+  --radius-sm: 0.375rem; /*  6px — tags, badges, status pills        */
+  --radius-md: 0.75rem;  /* 12px — buttons, secondary cards          */
+  --radius-lg: 1rem;     /* 16px — primary cards, hero surfaces      */
+  --radius-xl: 1.75rem;  /* 28px — full-screen modals, bottom sheets */
+
+  /* Typography ramp (semantic, Syne for display, Inter for body) */
+  /* The plan is 8px-based spacing; type sizes lock the design vocabulary.   */
+  --text-eyebrow: 0.6875rem;            /* 11px — uppercase section labels   */
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.05em;
+  --text-eyebrow--font-weight: 700;
+
+  --text-helper: 0.8125rem;             /* 13px — captions, helper, dates    */
+  --text-helper--line-height: 1.4;
+
+  --text-body: 0.9375rem;               /* 15px — body default                */
+  --text-body--line-height: 1.55;
+
+  --text-greeting: 1.375rem;            /* 22px — greeting, text-input value */
+  --text-greeting--line-height: 1.2;
+  --text-greeting--font-weight: 700;
+
+  --text-question: 1.75rem;             /* 28px — Question (Home, prep)      */
+  --text-question--line-height: 1.15;
+  --text-question--letter-spacing: -0.01em;
+  --text-question--font-weight: 800;
+
+  --text-display: 2.25rem;              /* 36px — IdentityCard name          */
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.02em;
+  --text-display--font-weight: 800;
 }
 
 /* ===========================================================================
-   Custom utilities (Tailwind v4 syntax: @utility)
+   Custom utilities (Tailwind v4 `@utility` syntax)
 =========================================================================== */
 
-/* Structural border: 1.5px deep black (primary cards, buttons).
-   Thin separators just use `border border-border` (1px). */
+/* 1.5px ink border — Stap's structural border (cards, buttons, inputs). */
 @utility border-structural {
   border-width: 1.5px;
   border-style: solid;
   border-color: var(--color-foreground);
 }
 
+/* 1px hairline separator — thin neutral rule between blocks. */
+@utility border-hairline {
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--color-hairline);
+}
+
+/* Dashed ink border — used by add-chip and disabled CTA. */
+@utility border-dashed-ink {
+  border-width: 1.5px;
+  border-style: dashed;
+  border-color: var(--color-foreground);
+}
+
+/* Amber blinking caret for TextInput (single-line) — Stap signature input. */
+@utility caret-amber-blink {
+  caret-color: var(--color-accent);
+}
+
+/* Hero treatment shorthand — the Stap signature. INVARIANT across themes
+   (ink + amber). In dark mode the 1.5px border swaps from ink (invisible
+   over the now-ink page bg would be a problem) to beige, carving the hero
+   out of the dark page. Use on cards, ID hero, recap banners. */
+@utility surface-hero {
+  background-color: var(--color-hero-bg);
+  color: var(--color-hero-fg);
+  border: 1.5px solid var(--color-hero-border);
+}
+
 /* ===========================================================================
-   Base
+   Base layer
 =========================================================================== */
 @layer base {
+  /* Avoid color flash before the theme attribute is set on <html>. */
+  html {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    color-scheme: light;
+  }
+  html[data-theme="dark"] {
+    color-scheme: dark;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: var(--font-sans); /* Inter by default; headings = font-display */
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Focus ring: the ONE shadow Stap allows (a11y, not decoration). */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
   }
 }

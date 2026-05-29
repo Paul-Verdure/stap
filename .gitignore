@@ -55,6 +55,7 @@ Desktop.ini
 # --- Claude Code (local, machine-specific) ---------------------------------
 .claude/settings.local.json
 .claude/worktrees/
+.claude/launch.json
 
 # --- Logs / debug ----------------------------------------------------------
 *.pem
