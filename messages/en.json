@@ -13,9 +13,9 @@
     "emailPlaceholder": "you@example.com",
     "submit": "Send me a magic link",
     "sending": "Sending…",
-    "invalidEmail": "Please enter a valid email address.",
     "sentTitle": "Check your inbox",
-    "sentBody": "If an account exists for {email}, a sign-in link is on its way. Open it on this device to continue.",
+    "sentBody": "We've sent you a magic link. Open it on this device to sign in.",
+    "error": "Something went wrong. Please try again.",
     "back": "Back to start"
   },
   "Nav": {
