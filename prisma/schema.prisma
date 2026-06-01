@@ -1,6 +1,14 @@
 // Stap — Prisma schema.
-// CONFIG ONLY for now: datasource + generator. Business models will be added
-// in a later step.
+// Datasource + generator are config-only (URLs are wired in prisma.config.ts
+// and lib/db.ts for Prisma 7, not here).
+//
+// Business models follow:
+//   - ADR 0001 (docs/decisions/0001-i18n-db-strategy.md): localized catalog
+//     fields use one column per locale, suffix _en / _fr, NOT NULL, en first.
+//   - Roadmap Phase A decisions: one phrase per daily challenge; the weekly
+//     rhythm is DERIVED from DailyActivity (no streak/rhythm table); the
+//     vocabulary model is debt-free spaced exposure (no SM-2 due dates).
+//
 // Docs: https://pris.ly/d/prisma-schema
 
 generator client {
@@ -15,4 +23,234 @@ generator client {
 //   - CLI / migr -> DIRECT_URL  (direct connection, port 5432) via prisma.config.ts
 datasource db {
   provider = "postgresql"
+}
+
+// --- Enums -----------------------------------------------------------------
+
+// UI locales. Values intentionally match i18n/routing.ts locale codes
+// (ADR 0001: DB locale suffixes must stay in sync with next-intl).
+enum Locale {
+  en
+  fr
+}
+
+// CEFR-ish difficulty. A0 = pre-A1 (absolute beginner).
+enum Level {
+  A0
+  A1
+  A2
+  B1
+  B2
+}
+
+// Daily challenge state machine. "MISSED" — never "FAILED" — per the
+// non-coercive philosophy. Home renders 3 states; MISSED covers an elapsed,
+// unvalidated day.
+enum ChallengeState {
+  PENDING
+  PREPARED
+  DONE
+  MISSED
+}
+
+// --- User ------------------------------------------------------------------
+
+// Mirror of Supabase auth.users. `id` equals auth.users.id and is populated
+// by a Postgres trigger (roadmap Phase D) — hence no Prisma default. The real
+// foreign key to auth.users is added via a custom SQL migration in Phase D,
+// since the `auth` schema is outside Prisma's managed schema.
+model User {
+  id          String   @id @db.Uuid
+  email       String   @unique
+  displayName String?  @map("display_name")
+  uiLocale    Locale   @default(en) @map("ui_locale")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  challenges      Challenge[]
+  vocabularyCards VocabularyCard[]
+  journalEntries  JournalEntry[]
+  dailyActivities DailyActivity[]
+  seasonalReviews SeasonalReview[]
+
+  @@map("users")
+}
+
+// --- Catalog (shared, public authenticated read; RLS in Phase B) ----------
+
+model Phrase {
+  id         String   @id @default(cuid())
+  // Stable identifier (kebab-case) — anchor for idempotent seeding and
+  // human-readable references across files / logs.
+  slug       String   @unique
+  textNl     String   @map("text_nl")
+  ipa        String
+  audioUrl   String?  @map("audio_url")
+  level      Level
+  // Localized aids — ADR 0001 (one column per locale, NOT NULL, en first).
+  phoneticEn String   @map("phonetic_en")
+  phoneticFr String   @map("phonetic_fr")
+  meaningEn  String   @map("meaning_en")
+  meaningFr  String   @map("meaning_fr")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  // Catalog content is tagged on two ORTHOGONAL axes:
+  //   - themes      : what the phrase IS pedagogically (greeting, number…)
+  //   - lifeContexts: WHERE it is realistically used (office, shops…)
+  themes          PhraseTheme[]
+  lifeContexts    PhraseLifeContext[]
+  challenges      Challenge[]
+  vocabularyCards VocabularyCard[]
+
+  @@map("phrases")
+}
+
+// Pedagogical theme of a phrase (what it teaches): greeting, number, etc.
+model Theme {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  // Localized labels — ADR 0001.
+  nameEn        String   @map("name_en")
+  nameFr        String   @map("name_fr")
+  descriptionEn String   @map("description_en")
+  descriptionFr String   @map("description_fr")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  phrases PhraseTheme[]
+
+  @@map("themes")
+}
+
+// Real-life situation where a phrase is realistically used: office,
+// neighbors, shops, etc. Used at runtime to personalize daily challenges
+// based on the user's declared environments.
+model LifeContext {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  // Localized labels — ADR 0001.
+  nameEn        String   @map("name_en")
+  nameFr        String   @map("name_fr")
+  descriptionEn String   @map("description_en")
+  descriptionFr String   @map("description_fr")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  phrases PhraseLifeContext[]
+
+  @@map("life_contexts")
+}
+
+// M2M join between Phrase and Theme.
+model PhraseTheme {
+  phraseId String @map("phrase_id")
+  themeId  String @map("theme_id")
+
+  phrase Phrase @relation(fields: [phraseId], references: [id], onDelete: Cascade)
+  theme  Theme  @relation(fields: [themeId], references: [id], onDelete: Cascade)
+
+  @@id([phraseId, themeId])
+  @@index([themeId])
+  @@map("phrase_themes")
+}
+
+// M2M join between Phrase and LifeContext.
+model PhraseLifeContext {
+  phraseId      String @map("phrase_id")
+  lifeContextId String @map("life_context_id")
+
+  phrase      Phrase      @relation(fields: [phraseId], references: [id], onDelete: Cascade)
+  lifeContext LifeContext @relation(fields: [lifeContextId], references: [id], onDelete: Cascade)
+
+  @@id([phraseId, lifeContextId])
+  @@index([lifeContextId])
+  @@map("phrase_life_contexts")
+}
+
+// --- User-owned (RLS: owner-only, in Phase B) -----------------------------
+
+// One challenge per user per day, bound to a single phrase.
+model Challenge {
+  id          String         @id @default(cuid())
+  userId      String         @map("user_id") @db.Uuid
+  date        DateTime       @db.Date
+  phraseId    String         @map("phrase_id")
+  state       ChallengeState @default(PENDING)
+  preparedAt  DateTime?      @map("prepared_at")
+  validatedAt DateTime?      @map("validated_at")
+  createdAt   DateTime       @default(now()) @map("created_at")
+  updatedAt   DateTime       @updatedAt @map("updated_at")
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  phrase Phrase @relation(fields: [phraseId], references: [id], onDelete: Restrict)
+
+  // (userId, date) also serves as the userId-prefix index.
+  @@unique([userId, date])
+  @@index([phraseId])
+  @@map("challenges")
+}
+
+// Debt-free spaced exposure (ADR/Phase A "Option 2"): no due dates, no
+// backlog. `strength` decays with time (computed from lastSeenAt at read);
+// the card is created on first exposure and fed by challenge validation.
+model VocabularyCard {
+  id            String    @id @default(cuid())
+  userId        String    @map("user_id") @db.Uuid
+  phraseId      String    @map("phrase_id")
+  exposureCount Int       @default(0) @map("exposure_count")
+  strength      Float     @default(0)
+  lastSeenAt    DateTime? @map("last_seen_at")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  phrase Phrase @relation(fields: [phraseId], references: [id], onDelete: Restrict)
+
+  @@unique([userId, phraseId])
+  @@index([phraseId])
+  @@map("vocabulary_cards")
+}
+
+// Strictly private personal notes (strictest RLS in Phase B).
+model JournalEntry {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id") @db.Uuid
+  body      String   @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("journal_entries")
+}
+
+// One lightweight row per day the user engaged. The 7-day weekly rhythm is
+// DERIVED from these rows (no duplicated challenge state, no streak counter).
+model DailyActivity {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id") @db.Uuid
+  date      DateTime @db.Date
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+  @@map("daily_activities")
+}
+
+// Quarterly retrospective. `summary` is a generated stats snapshot.
+model SeasonalReview {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id") @db.Uuid
+  year      Int
+  quarter   Int
+  summary   String   @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, year, quarter])
+  @@map("seasonal_reviews")
 }

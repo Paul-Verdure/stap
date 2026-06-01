@@ -1,0 +1,37 @@
+[
+  {
+    "slug": "greetings",
+    "nameEn": "Greetings",
+    "nameFr": "Salutations",
+    "descriptionEn": "Hellos, goodbyes, and time-of-day openers used in everyday encounters.",
+    "descriptionFr": "Bonjours, au revoirs et formules selon le moment de la journée."
+  },
+  {
+    "slug": "politeness",
+    "nameEn": "Politeness",
+    "nameFr": "Politesse",
+    "descriptionEn": "Thanks, please, apologies, and the small markers that smooth interactions.",
+    "descriptionFr": "Mercis, s'il te plaît, excuses et petits mots qui adoucissent l'échange."
+  },
+  {
+    "slug": "daily-life",
+    "nameEn": "Daily life",
+    "nameFr": "Vie quotidienne",
+    "descriptionEn": "Short phrases for introducing yourself and exchanging the basics.",
+    "descriptionFr": "Courtes phrases pour se présenter et échanger l'essentiel."
+  },
+  {
+    "slug": "food-drink",
+    "nameEn": "Food & drink",
+    "nameFr": "Manger & boire",
+    "descriptionEn": "Ordering, asking for, and talking about everyday food and drink.",
+    "descriptionFr": "Commander, demander et parler de ce qu'on mange et boit au quotidien."
+  },
+  {
+    "slug": "numbers",
+    "nameEn": "Numbers",
+    "nameFr": "Nombres",
+    "descriptionEn": "Cardinal numbers used for counting, prices, and quantities.",
+    "descriptionFr": "Nombres cardinaux pour compter, payer et indiquer des quantités."
+  }
+]

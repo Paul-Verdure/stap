@@ -1,5 +1,5 @@
 import createMiddleware from "next-intl/middleware";
-import { type NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 
 import { routing } from "@/i18n/routing";
 import { updateSession } from "@/lib/supabase/middleware";
@@ -15,6 +15,13 @@ import { updateSession } from "@/lib/supabase/middleware";
 const handleI18nRouting = createMiddleware(routing);
 
 export async function proxy(request: NextRequest) {
+  // Locale-agnostic machine route (magic-link email confirm). No i18n
+  // redirect and no session refresh here — app/auth/confirm establishes the
+  // session itself via verifyOtp.
+  if (request.nextUrl.pathname.startsWith("/auth")) {
+    return NextResponse.next();
+  }
+
   const response = handleI18nRouting(request);
   return await updateSession(request, response);
 }

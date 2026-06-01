@@ -13,9 +13,9 @@
     "emailPlaceholder": "vous@exemple.com",
     "submit": "Envoyez-moi un lien magique",
     "sending": "Envoi…",
-    "invalidEmail": "Veuillez saisir une adresse e-mail valide.",
     "sentTitle": "Vérifiez votre boîte mail",
-    "sentBody": "Si un compte existe pour {email}, un lien de connexion arrive. Ouvrez-le sur cet appareil pour continuer.",
+    "sentBody": "Nous vous avons envoyé un lien magique. Ouvrez-le sur cet appareil pour vous connecter.",
+    "error": "Une erreur s'est produite. Réessayez.",
     "back": "Revenir au début"
   },
   "Nav": {

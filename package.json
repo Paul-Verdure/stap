@@ -9,6 +9,9 @@
     "lint": "eslint",
     "postinstall": "prisma generate",
     "db:generate": "prisma generate",
+    "db:ping": "tsx scripts/db-ping.ts",
+    "db:seed": "tsx scripts/db-seed.ts",
+    "db:sync-audio": "tsx scripts/db-sync-audio.ts",
     "db:migrate": "prisma migrate dev",
     "db:push": "prisma db push",
     "db:studio": "prisma studio"
@@ -45,6 +48,7 @@
     "prisma": "7.8.0",
     "serwist": "9.5.11",
     "tailwindcss": "^4",
+    "tsx": "^4.22.2",
     "typescript": "^5"
   },
   "packageManager": "pnpm@10.33.3+sha512.a19744364a7e248b92657a4ca5973f9354d21caf982579674b1c539f32c7420c47138ad8b1254df07aba9bc782d9b3029e3db34d5dbff974326eb74dac8ff489"
