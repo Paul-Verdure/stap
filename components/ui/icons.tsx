@@ -82,3 +82,12 @@ export function PlusIcon(props: IconProps) {
     </svg>
   );
 }
+
+/** Arrow left — the TopBar back control on sub-routes. */
+export function BackIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M15 5 8 12l7 7" />
+    </svg>
+  );
+}

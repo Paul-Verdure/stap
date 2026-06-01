@@ -1,5 +1,20 @@
 import { createServerClient } from "@supabase/ssr";
-import { type NextRequest, type NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
+
+import { routing } from "@/i18n/routing";
+
+// Path prefixes (after the locale segment) that require an authenticated
+// session — the (app) route group. Everything else (the public welcome entry,
+// /design-system, /~offline) is open.
+const PROTECTED_PREFIXES = ["/today", "/journal", "/games", "/profile"];
+
+function isProtected(pathWithoutLocale: string): boolean {
+  return PROTECTED_PREFIXES.some(
+    (prefix) =>
+      pathWithoutLocale === prefix ||
+      pathWithoutLocale.startsWith(`${prefix}/`),
+  );
+}
 
 // Refreshes the Supabase auth session and writes the updated auth cookies
 // onto an EXISTING response — here, the response produced by the next-intl
@@ -30,8 +45,38 @@ export async function updateSession(
 
   // IMPORTANT: do not run any logic between createServerClient and getUser().
   // A simple mistake here can make sessions hard to debug (random logouts).
-  await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  // No auth-gating / redirect logic yet (scaffolding only).
+  // Auth boundary for the (app) route group. The locale prefix is always
+  // present by the time we get here: un-prefixed paths are redirected by the
+  // next-intl middleware first, then re-enter through this proxy.
+  const segments = request.nextUrl.pathname.split("/");
+  const maybeLocale = segments[1];
+  const hasKnownLocale = (routing.locales as readonly string[]).includes(
+    maybeLocale,
+  );
+
+  if (hasKnownLocale && !user) {
+    const pathWithoutLocale = `/${segments.slice(2).join("/")}`;
+    if (isProtected(pathWithoutLocale)) {
+      // Send unauthenticated visitors to the public entry for this locale.
+      // NOTE: until the Phase C magic-link flow exists, this is the welcome
+      // placeholder rather than a real login screen.
+      const redirectUrl = request.nextUrl.clone();
+      redirectUrl.pathname = `/${maybeLocale}`;
+      redirectUrl.search = "";
+
+      // Carry over every cookie the i18n + Supabase steps wrote (locale +
+      // refreshed auth) so the redirect doesn't drop the session decision.
+      const redirect = NextResponse.redirect(redirectUrl);
+      response.cookies.getAll().forEach((cookie) => {
+        redirect.cookies.set(cookie);
+      });
+      return redirect;
+    }
+  }
+
   return response;
 }
