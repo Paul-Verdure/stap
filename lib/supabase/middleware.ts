@@ -61,11 +61,10 @@ export async function updateSession(
   if (hasKnownLocale && !user) {
     const pathWithoutLocale = `/${segments.slice(2).join("/")}`;
     if (isProtected(pathWithoutLocale)) {
-      // Send unauthenticated visitors to the public entry for this locale.
-      // NOTE: until the Phase C magic-link flow exists, this is the welcome
-      // placeholder rather than a real login screen.
+      // Send unauthenticated visitors to the magic-link reconnect screen for
+      // this locale.
       const redirectUrl = request.nextUrl.clone();
-      redirectUrl.pathname = `/${maybeLocale}`;
+      redirectUrl.pathname = `/${maybeLocale}/login`;
       redirectUrl.search = "";
 
       // Carry over every cookie the i18n + Supabase steps wrote (locale +

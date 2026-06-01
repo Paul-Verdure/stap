@@ -6,6 +6,18 @@
     "enter": "Enter the app",
     "haveAccount": "I already have an account"
   },
+  "Login": {
+    "title": "Welcome back",
+    "subtitle": "Enter the email tied to your account and we'll send a magic link to sign you back in.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "submit": "Send me a magic link",
+    "sending": "Sending…",
+    "invalidEmail": "Please enter a valid email address.",
+    "sentTitle": "Check your inbox",
+    "sentBody": "If an account exists for {email}, a sign-in link is on its way. Open it on this device to continue.",
+    "back": "Back to start"
+  },
   "Nav": {
     "skip": "Skip to content",
     "label": "Main navigation",

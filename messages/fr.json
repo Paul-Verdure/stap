@@ -6,6 +6,18 @@
     "enter": "Entrer dans l'app",
     "haveAccount": "J'ai déjà un compte"
   },
+  "Login": {
+    "title": "Bon retour",
+    "subtitle": "Saisissez l'adresse e-mail liée à votre compte et nous vous enverrons un lien magique pour vous reconnecter.",
+    "emailLabel": "Adresse e-mail",
+    "emailPlaceholder": "vous@exemple.com",
+    "submit": "Envoyez-moi un lien magique",
+    "sending": "Envoi…",
+    "invalidEmail": "Veuillez saisir une adresse e-mail valide.",
+    "sentTitle": "Vérifiez votre boîte mail",
+    "sentBody": "Si un compte existe pour {email}, un lien de connexion arrive. Ouvrez-le sur cet appareil pour continuer.",
+    "back": "Revenir au début"
+  },
   "Nav": {
     "skip": "Aller au contenu",
     "label": "Navigation principale",

@@ -32,7 +32,7 @@ export default async function Welcome({
             <Link href="/today">{t("enter")}</Link>
           </Cta>
           <SecondaryLink asChild className="self-center">
-            <Link href="/today">{t("haveAccount")}</Link>
+            <Link href="/login">{t("haveAccount")}</Link>
           </SecondaryLink>
         </div>
       </div>
