@@ -6,7 +6,10 @@ import type { Metadata } from "next";
 import { Syne, Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 
+import { AxeReporter } from "@/components/system/axe-reporter";
+import { ThemeProvider } from "@/components/system/theme-provider";
 import { routing } from "@/i18n/routing";
+import { themeBootstrapScript } from "@/lib/theme";
 
 import "../globals.css";
 
@@ -55,12 +58,21 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       className={`${syne.variable} ${inter.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        {/* Runs synchronously before hydration to set data-theme="dark" if
+            the stored preference (or system) is dark — prevents a flash. */}
+        <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
+      </head>
       <body className="flex min-h-full flex-col font-sans">
         {/* Registers the service worker (served at /serwist/sw.js). */}
         <SerwistProvider swUrl="/serwist/sw.js">
-          <NextIntlClientProvider>{children}</NextIntlClientProvider>
+          <ThemeProvider>
+            <NextIntlClientProvider>{children}</NextIntlClientProvider>
+          </ThemeProvider>
         </SerwistProvider>
+        <AxeReporter />
       </body>
     </html>
   );
