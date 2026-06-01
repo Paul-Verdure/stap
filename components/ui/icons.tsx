@@ -64,3 +64,21 @@ export function SettingsIcon(props: IconProps) {
     </svg>
   );
 }
+
+/** Check — checkbox tick, selected-chip marker. */
+export function CheckIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M5 12.5 10 17.5 19 6.5" />
+    </svg>
+  );
+}
+
+/** Plus — the dashed "add" chip. */
+export function PlusIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M12 5v14M5 12h14" />
+    </svg>
+  );
+}

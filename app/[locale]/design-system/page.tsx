@@ -3,9 +3,19 @@ import { setRequestLocale } from "next-intl/server";
 import { ThemeToggle } from "@/components/system/theme-toggle";
 import { Link } from "@/i18n/navigation";
 import { Cta, IconButton, SecondaryLink } from "@/components/ui/button";
+import { CheckboxRow } from "@/components/ui/checkbox-row";
+import { Chip, TimeSlot } from "@/components/ui/chip";
 import { CloseIcon, FiltersIcon, SettingsIcon } from "@/components/ui/icons";
 import { ListenButton } from "@/components/ui/listen-button";
+import {
+  BottomSheet,
+  CenteredModal,
+  ModalClose,
+} from "@/components/ui/modal";
+import { RadioGroup, RadioRow } from "@/components/ui/radio-group";
 import { Card, HeroSurface, StatusPill, Tag } from "@/components/ui/surface";
+import { Textarea, TextInput } from "@/components/ui/text-field";
+import { Toggle } from "@/components/ui/toggle";
 import {
   countSteps,
   MiniRhythm,
@@ -79,6 +89,30 @@ const SAMPLE_WEEK: RhythmDay[] = [
   { state: "empty", label: "Sunday: no step" },
 ];
 
+// Section titles in document order — drives the table of contents. The slug is
+// derived from the title and reused as each section's id (single source).
+const SECTION_TITLES = [
+  "Palette",
+  "Type tokens",
+  "Spacing (px)",
+  "Borders",
+  "Radii",
+  "Hero token preview",
+  "Typography primitives",
+  "Rhythm vocabulary",
+  "Buttons & audio",
+  "Surfaces & hero",
+  "Form primitives",
+  "Modals",
+] as const;
+
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
 export default async function DesignSystemPage({
   params,
 }: {
@@ -98,21 +132,45 @@ export default async function DesignSystemPage({
   }).format(sample);
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-14 px-5 py-10">
-      <header className="flex flex-col gap-4">
-        <Eyebrow>Stap · Design system</Eyebrow>
-        <h1 className="font-display text-display">G1 — Primitives</h1>
-        <p className="text-body text-muted">
-          Frozen palette, type ramp, spacing, borders, radii (G1.1) and the
-          typography &amp; layout primitives (G1.2). Toggle the theme to verify
-          the ink/beige inversion; amber must remain identical.
-        </p>
-        <ThemeToggle />
+    <>
+      {/* Sticky bar — keeps the theme toggle reachable while scrolling.
+          Solid background + hairline (no blur — the design avoids floating
+          translucent surfaces). */}
+      <header className="sticky top-0 z-30 border-b border-hairline bg-background">
+        <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-3 px-5 py-3">
+          <Eyebrow>Stap · Design system</Eyebrow>
+          <ThemeToggle />
+        </div>
       </header>
 
-      {/* ---------------------------------------------------------------- */}
-      {/* G1.1 — Tokens                                                    */}
-      {/* ---------------------------------------------------------------- */}
+      <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-14 px-5 py-10">
+        <div className="flex flex-col gap-4">
+          <h1 className="font-display text-display">Primitives</h1>
+          <p className="text-body text-muted">
+            Stap&apos;s shared visual vocabulary — frozen tokens and every
+            reusable primitive (typography, rhythm, buttons &amp; audio,
+            surfaces, forms, modals), with zero business logic. Toggle the theme
+            to verify the ink/beige inversion; amber must remain identical.
+          </p>
+          <nav aria-label="Sections">
+            <ul className="flex flex-wrap gap-2">
+              {SECTION_TITLES.map((title) => (
+                <li key={title}>
+                  <a
+                    href={`#${slugify(title)}`}
+                    className="inline-flex rounded-md border border-hairline px-3 py-1.5 text-helper text-muted hover:border-structural hover:text-foreground"
+                  >
+                    {title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+
+        {/* ---------------------------------------------------------------- */}
+        {/* G1.1 — Tokens                                                    */}
+        {/* ---------------------------------------------------------------- */}
 
       <Section title="Palette" eyebrow="Colors">
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -522,7 +580,195 @@ export default async function DesignSystemPage({
           </Specimen>
         </div>
       </Section>
-    </main>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* G1.6 — Form primitives                                           */}
+      {/* ---------------------------------------------------------------- */}
+
+      <Section title="Form primitives" eyebrow="G1.6 · Inputs">
+        <div className="flex flex-col gap-8">
+          <Specimen
+            name="<TextInput>"
+            note="Syne 22/700 + amber blinking caret. Enabled and disabled."
+          >
+            <div className="flex flex-col gap-4">
+              <TextInput
+                label="First name"
+                placeholder="Sophie"
+                helper="We use it only to greet you."
+              />
+              <TextInput label="Disabled" defaultValue="Locked" disabled />
+            </div>
+          </Specimen>
+
+          <Specimen
+            name="<Textarea>"
+            note="Multi-line + live character counter (native maxLength enforced)."
+          >
+            <Textarea
+              label="How did it go?"
+              placeholder="A few words about your attempt…"
+              maxLength={280}
+              helper="Optional — your words, kept private."
+            />
+          </Specimen>
+
+          <Specimen
+            name="<Toggle>"
+            note="Radix Switch — amber on, instant color, slide respects reduced-motion. On / off / disabled."
+          >
+            <div className="flex flex-col gap-4">
+              <Toggle
+                label="Daily reminder"
+                description="A nudge at your chosen time."
+                defaultChecked
+              />
+              <Toggle label="Sound & audio" />
+              <Toggle label="Disabled" disabled />
+            </div>
+          </Specimen>
+
+          <Specimen
+            name="<RadioGroup> / <RadioRow>"
+            note="Single-select. Selected = hero + amber dot (A2 preselected). Arrow keys navigate."
+          >
+            <RadioGroup aria-label="Dutch level" defaultValue="a2">
+              <RadioRow
+                value="a1"
+                label="A1 — Beginner"
+                description="A few words and set phrases."
+                tag={<Tag tone="amber">A1</Tag>}
+              />
+              <RadioRow
+                value="a2"
+                label="A2 — Elementary"
+                description="Everyday exchanges, simple sentences."
+                tag={<Tag tone="amber">A2</Tag>}
+              />
+              <RadioRow
+                value="b1"
+                label="B1 — Intermediate"
+                description="Most day-to-day situations."
+                tag={<Tag tone="amber">B1</Tag>}
+              />
+            </RadioGroup>
+          </Specimen>
+
+          <Specimen
+            name="<CheckboxRow>"
+            note="Independent multi-select, amber check. Checked / unchecked."
+          >
+            <div className="flex flex-col gap-3">
+              <CheckboxRow label="With a photo" defaultChecked />
+              <CheckboxRow
+                label="With a story"
+                description="Entries where you wrote a few words."
+              />
+            </div>
+          </Specimen>
+
+          <Specimen
+            name="<Chip>"
+            note="Multi-select: default · selected = hero + amber check · add = dashed. (Distinct from the radio dot above.)"
+          >
+            <div className="flex flex-wrap items-center gap-2">
+              <Chip>At the office</Chip>
+              <Chip selected>Daycare &amp; school</Chip>
+              <Chip>Neighbours</Chip>
+              <Chip variant="add">Add a custom one</Chip>
+            </div>
+          </Specimen>
+
+          <Specimen
+            name="<TimeSlot>"
+            note="Reminder-time grid. Selected = hero · off = outlined · disabled = dimmed."
+          >
+            <div className="grid grid-cols-4 gap-2">
+              <TimeSlot>08:00</TimeSlot>
+              <TimeSlot selected>12:00</TimeSlot>
+              <TimeSlot>18:00</TimeSlot>
+              <TimeSlot disabled>Off</TimeSlot>
+            </div>
+          </Specimen>
+        </div>
+      </Section>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* G1.7 — Modals                                                    */}
+      {/* ---------------------------------------------------------------- */}
+
+      <Section title="Modals" eyebrow="G1.7 · Overlays">
+        <div className="flex flex-col gap-8">
+          <Specimen
+            name="<CenteredModal>"
+            note="Centered + scrim, header with ×. Focus trap, ESC and backdrop dismiss (Radix Dialog)."
+          >
+            <CenteredModal
+              trigger={<Cta variant="ink">App language</Cta>}
+              title="App language"
+              description="On confirm, the app reloads in the new language."
+              footer={
+                <>
+                  <ModalClose asChild>
+                    <Cta variant="ink">Cancel</Cta>
+                  </ModalClose>
+                  <ModalClose asChild>
+                    <Cta variant="primary">Confirm</Cta>
+                  </ModalClose>
+                </>
+              }
+            >
+              <RadioGroup aria-label="App language" defaultValue="en">
+                {/* Each label stays in its OWN language (not localized). */}
+                <RadioRow value="en" label="English" description="I speak English" />
+                <RadioRow value="fr" label="Français" description="Je parle français" />
+              </RadioGroup>
+            </CenteredModal>
+          </Specimen>
+
+          <Specimen
+            name="<BottomSheet>"
+            note="Bottom-anchored, slides up, drag handle. Same dismiss behavior; used for Journal filters."
+          >
+            <BottomSheet
+              trigger={<Cta variant="ink">Filters</Cta>}
+              title="Filters"
+              footer={
+                <>
+                  <ModalClose asChild>
+                    <SecondaryLink>Reset</SecondaryLink>
+                  </ModalClose>
+                  <ModalClose asChild>
+                    <Cta variant="primary">Apply</Cta>
+                  </ModalClose>
+                </>
+              }
+            >
+              <div className="flex flex-col gap-5 pb-2">
+                <fieldset className="flex flex-col gap-3">
+                  <legend className="mb-1 text-eyebrow font-display uppercase text-muted">
+                    Content
+                  </legend>
+                  <CheckboxRow label="With a photo" defaultChecked />
+                  <CheckboxRow label="With a story" />
+                </fieldset>
+                <fieldset className="flex flex-col gap-2">
+                  <legend className="mb-1 text-eyebrow font-display uppercase text-muted">
+                    Feeling
+                  </legend>
+                  <div className="flex flex-wrap gap-2">
+                    <Chip selected>At ease</Chip>
+                    <Chip>Hesitant</Chip>
+                    <Chip>Missed it</Chip>
+                  </div>
+                </fieldset>
+              </div>
+            </BottomSheet>
+          </Specimen>
+        </div>
+      </Section>
+      </main>
+    </>
   );
 }
 
@@ -536,7 +782,10 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="flex flex-col gap-5">
+    <section
+      id={slugify(title)}
+      className="flex scroll-mt-24 flex-col gap-5"
+    >
       <SectionRule>{eyebrow}</SectionRule>
       <SectionHead as="h2" title={title} />
       {children}
@@ -560,8 +809,11 @@ function Specimen({
         <Helper>{note}</Helper>
       </div>
       {/* Padded "stage" so demos never touch the frame; the hairline border on
-          the page background reads as neutral, letting bg-surface demos pop. */}
-      <div className="overflow-x-auto rounded-lg border border-hairline px-6 py-6">
+          the page background reads as neutral, letting bg-surface demos pop.
+          No overflow-x-auto: a scrollable region without focusable content
+          would need to be keyboard-focusable (axe scrollable-region-focusable);
+          demos are sized to fit / wrap instead. */}
+      <div className="rounded-lg border border-hairline px-6 py-6">
         {children}
       </div>
     </div>
