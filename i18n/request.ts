@@ -1,6 +1,7 @@
 import { hasLocale } from "next-intl";
 import { getRequestConfig } from "next-intl/server";
 
+import { formats } from "@/lib/formats";
 import { routing } from "./routing";
 
 // Per-request i18n config. Loads the matching message catalog from
@@ -15,5 +16,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   return {
     locale,
     messages: (await import(`../messages/${locale}.json`)).default,
+    // Shared date/time/number presets — the canonical formatter (lib/formats).
+    formats,
   };
 });

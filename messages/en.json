@@ -1,8 +1,71 @@
 {
-  "Home": {
+  "Welcome": {
     "kicker": "Stap",
     "title": "Leer Nederlands",
-    "subtitle": "Technical scaffolding in place — soft brutalism design system active."
+    "subtitle": "Technical scaffolding in place — soft brutalism design system active.",
+    "enter": "Enter the app",
+    "haveAccount": "I already have an account"
+  },
+  "Login": {
+    "title": "Welcome back",
+    "subtitle": "Enter the email tied to your account and we'll send a magic link to sign you back in.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "submit": "Send me a magic link",
+    "sending": "Sending…",
+    "invalidEmail": "Please enter a valid email address.",
+    "sentTitle": "Check your inbox",
+    "sentBody": "If an account exists for {email}, a sign-in link is on its way. Open it on this device to continue.",
+    "back": "Back to start"
+  },
+  "Nav": {
+    "skip": "Skip to content",
+    "label": "Main navigation",
+    "back": "Back",
+    "today": "Today",
+    "journal": "Journal",
+    "games": "Games",
+    "profile": "Profile"
+  },
+  "Today": {
+    "title": "Today",
+    "placeholder": "Your daily challenge lives here."
+  },
+  "Prepare": {
+    "title": "Preparation",
+    "placeholder": "Get ready for today's challenge."
+  },
+  "Validate": {
+    "title": "Tell me",
+    "placeholder": "How did it go?"
+  },
+  "Journal": {
+    "title": "Journal",
+    "placeholder": "Your steps, from day one."
+  },
+  "Games": {
+    "title": "Today's games",
+    "placeholder": "Three short games to revisit the day."
+  },
+  "Profile": {
+    "title": "Profile",
+    "placeholder": "Your card and your setup.",
+    "sampleDate": "Sample date",
+    "interface": "Interface language",
+    "theme": "Theme"
+  },
+  "Status": {
+    "loading": "Loading…"
+  },
+  "Error": {
+    "title": "Something slipped",
+    "body": "We could not load this part of Stap. Try again.",
+    "retry": "Try again"
+  },
+  "NotFound": {
+    "title": "Nothing here",
+    "body": "This page does not exist (or moved).",
+    "home": "Back to start"
   },
   "Offline": {
     "kicker": "Stap",

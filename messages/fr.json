@@ -1,8 +1,71 @@
 {
-  "Home": {
+  "Welcome": {
     "kicker": "Stap",
     "title": "Leer Nederlands",
-    "subtitle": "Fondations techniques en place — design system « soft brutalism » actif."
+    "subtitle": "Fondations techniques en place — design system « soft brutalism » actif.",
+    "enter": "Entrer dans l'app",
+    "haveAccount": "J'ai déjà un compte"
+  },
+  "Login": {
+    "title": "Bon retour",
+    "subtitle": "Saisissez l'adresse e-mail liée à votre compte et nous vous enverrons un lien magique pour vous reconnecter.",
+    "emailLabel": "Adresse e-mail",
+    "emailPlaceholder": "vous@exemple.com",
+    "submit": "Envoyez-moi un lien magique",
+    "sending": "Envoi…",
+    "invalidEmail": "Veuillez saisir une adresse e-mail valide.",
+    "sentTitle": "Vérifiez votre boîte mail",
+    "sentBody": "Si un compte existe pour {email}, un lien de connexion arrive. Ouvrez-le sur cet appareil pour continuer.",
+    "back": "Revenir au début"
+  },
+  "Nav": {
+    "skip": "Aller au contenu",
+    "label": "Navigation principale",
+    "back": "Retour",
+    "today": "Aujourd'hui",
+    "journal": "Journal",
+    "games": "Jeux",
+    "profile": "Profil"
+  },
+  "Today": {
+    "title": "Aujourd'hui",
+    "placeholder": "Votre défi du jour s'affiche ici."
+  },
+  "Prepare": {
+    "title": "Préparation",
+    "placeholder": "Préparez-vous au défi du jour."
+  },
+  "Validate": {
+    "title": "Raconte",
+    "placeholder": "Comment ça s'est passé ?"
+  },
+  "Journal": {
+    "title": "Journal",
+    "placeholder": "Vos pas, depuis le premier jour."
+  },
+  "Games": {
+    "title": "Jeux du jour",
+    "placeholder": "Trois petits jeux pour revisiter la journée."
+  },
+  "Profile": {
+    "title": "Profil",
+    "placeholder": "Votre carte et vos réglages.",
+    "sampleDate": "Date d'exemple",
+    "interface": "Langue de l'interface",
+    "theme": "Thème"
+  },
+  "Status": {
+    "loading": "Chargement…"
+  },
+  "Error": {
+    "title": "Quelque chose a glissé",
+    "body": "Impossible de charger cette partie de Stap. Réessayez.",
+    "retry": "Réessayer"
+  },
+  "NotFound": {
+    "title": "Rien par ici",
+    "body": "Cette page n'existe pas (ou a été déplacée).",
+    "home": "Revenir au début"
   },
   "Offline": {
     "kicker": "Stap",

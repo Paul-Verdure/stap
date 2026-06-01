@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server";
+import { getFormatter, setRequestLocale } from "next-intl/server";
 
 import { ThemeToggle } from "@/components/system/theme-toggle";
 import { Link } from "@/i18n/navigation";
@@ -121,15 +121,13 @@ export default async function DesignSystemPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  // Locale-aware date for the DateLine demo (G2 ships the canonical
-  // formatter; here we format inline to prove /en vs /fr divergence).
+  // Locale-aware date for the DateLine demo, via the canonical formatter
+  // presets (lib/formats) — proves /en vs /fr divergence without hand-rolling
+  // Intl here.
+  const format = await getFormatter();
   const sample = new Date(2026, 4, 28); // Thu 28 May 2026
   const sampleIso = sample.toISOString();
-  const formattedDate = new Intl.DateTimeFormat(locale, {
-    weekday: "short",
-    day: "numeric",
-    month: "short",
-  }).format(sample);
+  const formattedDate = format.dateTime(sample, "short");
 
   return (
     <>
