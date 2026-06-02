@@ -4,22 +4,27 @@ import { useEffect, useRef, useState } from "react";
 import { useFormatter, useTranslations } from "next-intl";
 
 import { Cta, IconButton, SecondaryLink } from "@/components/ui/button";
-import { Chip } from "@/components/ui/chip";
+import { Chip, TimeSlot } from "@/components/ui/chip";
 import { BackIcon } from "@/components/ui/icons";
 import { LangCard } from "@/components/ui/lang-card";
 import { ProgressBar } from "@/components/ui/progress";
 import { RadioGroup, RadioRow } from "@/components/ui/radio-group";
-import { Tag } from "@/components/ui/surface";
+import { Card, HeroSurface, Tag } from "@/components/ui/surface";
 import { TextInput } from "@/components/ui/text-field";
-import { TimeSlot } from "@/components/ui/chip";
-import { Helper, Nl, Question, SectionRule } from "@/components/ui/typography";
+import { Eyebrow, Helper, Nl, Question, SectionRule } from "@/components/ui/typography";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import {
+  completeOnboarding,
+  requestOnboardingLink,
+} from "@/lib/onboarding-actions";
+import {
   initialOnboardingState,
+  isOnboardingComplete,
   ONBOARDING_LAST_STEP,
   ONBOARDING_STORAGE_KEY,
   ONBOARDING_TOTAL_STEPS,
+  toOnboardingPayload,
   type DutchLevel,
   type Frequency,
   type OnboardingState,
@@ -38,13 +43,17 @@ const LEVELS: DutchLevel[] = ["A0", "A1", "A2", "B1", "B2"];
 const FREQUENCIES: Frequency[] = ["DAILY", "THREE_PER_WEEK", "OWN_PACE"];
 const REMINDER_SLOTS = ["08:00", "12:00", "18:00"];
 const MAX_CONTEXTS = 4;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type LifeContextOption = { slug: string; name: string };
+type Phase = "collect" | "sending" | "sent" | "finalizing" | "error";
 
 export function OnboardingFlow({
   lifeContexts,
+  isAuthenticated,
 }: {
   lifeContexts: LifeContextOption[];
+  isAuthenticated: boolean;
 }) {
   const t = useTranslations("Onboarding");
   // next-intl's `t` is typed to literal keys; this loosened alias is for the
@@ -55,13 +64,14 @@ export function OnboardingFlow({
   const pathname = usePathname();
 
   const [state, setState] = useState<OnboardingState>(initialOnboardingState);
+  const [phase, setPhase] = useState<Phase>("collect");
+  const [email, setEmail] = useState("");
   const hydrated = useRef(false);
 
   // Hydrate once from localStorage (client only): the collected answers must
-  // survive the Screen-0 locale switch and the later magic-link round-trip.
+  // survive the Screen-0 locale switch and the magic-link round-trip.
   // localStorage is unavailable during SSR, so this read genuinely belongs in
-  // an effect (a lazy initializer would diverge from the server snapshot and
-  // cause a hydration mismatch).
+  // an effect (a lazy initializer would diverge from the server snapshot).
   useEffect(() => {
     try {
       const raw = localStorage.getItem(ONBOARDING_STORAGE_KEY);
@@ -123,6 +133,46 @@ export function OnboardingFlow({
     return format.dateTime(new Date(2000, 0, 1, h, m), "time");
   };
 
+  // Persist the profile for the authenticated user, then enter the app.
+  const startFinalize = () => {
+    const payload = toOnboardingPayload(state);
+    if (!payload) {
+      setPhase("error");
+      return;
+    }
+    setPhase("finalizing");
+    completeOnboarding(payload).then((res) => {
+      if (res.status === "done") {
+        try {
+          localStorage.removeItem(ONBOARDING_STORAGE_KEY);
+        } catch {
+          // Non-fatal.
+        }
+        router.replace("/today");
+      } else {
+        setPhase("error");
+      }
+    });
+  };
+
+  // Screen 6 commit. Authenticated (e.g. returning from the magic link) writes
+  // the profile directly; otherwise we email a magic link first.
+  const handleFinish = () => {
+    if (isAuthenticated) {
+      startFinalize();
+      return;
+    }
+    setPhase("sending");
+    requestOnboardingLink(email.trim(), state.locale ?? "en").then((res) => {
+      setPhase(res.status === "sent" ? "sent" : "error");
+    });
+  };
+
+  const reminderDisabled = state.frequency === "OWN_PACE";
+  const showProgress = state.step >= 2;
+  const showBack = state.step >= 3;
+  const progressValue = state.step - 1;
+
   const canContinue = (() => {
     switch (state.step) {
       case 2:
@@ -138,10 +188,73 @@ export function OnboardingFlow({
     }
   })();
 
-  const reminderDisabled = state.frequency === "OWN_PACE";
-  const showProgress = state.step >= 2;
-  const showBack = state.step >= 3;
-  const progressValue = state.step - 1;
+  const canFinish =
+    isOnboardingComplete(state) &&
+    (isAuthenticated || EMAIL_RE.test(email.trim()));
+
+  const rhythmText = () => {
+    if (!state.frequency) return "";
+    if (state.frequency === "OWN_PACE") return tt("frequency.OWN_PACE.name");
+    const freq = tt(`frequency.${state.frequency}.name`);
+    const rem = state.reminderTime ? slotLabel(state.reminderTime) : t("reminderOff");
+    return `${freq} · ${rem}`;
+  };
+
+  const selectedContextNames = lifeContexts
+    .filter((c) => state.contexts.includes(c.slug))
+    .map((c) => c.name)
+    .join(", ");
+
+  // --- Terminal phases (no stepper chrome) ---------------------------------
+
+  if (phase === "sent") {
+    return (
+      <main
+        id="main-content"
+        className="mx-auto flex min-h-full w-full max-w-md flex-1 flex-col justify-center gap-4 p-5"
+      >
+        <div
+          role="status"
+          aria-live="polite"
+          className="flex flex-col gap-2 rounded-md border-structural bg-surface p-5"
+        >
+          <p className="font-display text-greeting">{t("sentTitle")}</p>
+          <Helper>{t("sentBody")}</Helper>
+        </div>
+      </main>
+    );
+  }
+
+  if (phase === "finalizing") {
+    return (
+      <main
+        id="main-content"
+        className="mx-auto flex min-h-full w-full max-w-md flex-1 flex-col items-center justify-center gap-4 p-5"
+      >
+        <p role="status" aria-live="polite" className="text-body text-muted">
+          {t("finalizing")}
+        </p>
+      </main>
+    );
+  }
+
+  if (phase === "error") {
+    return (
+      <main
+        id="main-content"
+        className="mx-auto flex min-h-full w-full max-w-md flex-1 flex-col justify-center gap-4 p-5"
+      >
+        <div role="alert" className="flex flex-col gap-3">
+          <Helper>{t("errorGeneric")}</Helper>
+          <Cta onClick={() => setPhase("collect")} className="self-start">
+            {t("retry")}
+          </Cta>
+        </div>
+      </main>
+    );
+  }
+
+  // --- Collection stepper ---------------------------------------------------
 
   return (
     <main
@@ -336,18 +449,72 @@ export function OnboardingFlow({
           </>
         )}
 
-        {/* Screen 6 — recap + commit. Persistence is wired in the next step. */}
+        {/* Screen 6 — recap + commit (email then magic link, or direct write
+            when already authenticated). First-challenge teaser is hardcoded;
+            real selection is G4. */}
         {state.step === 6 && (
           <>
             <Question>{tt(TITLE_KEY[6])}</Question>
-            <div className="mt-auto">
-              <Cta fullWidth disabled>
+            {/* Invariant Dutch salutation. */}
+            <p className="font-display text-greeting">
+              <Nl>Klaar, {state.firstName}!</Nl>
+            </p>
+
+            <Card padding="md" className="flex flex-col gap-2">
+              <RecapRow label={t("recapName")} value={state.firstName} />
+              {state.level && (
+                <RecapRow
+                  label={t("recapLevel")}
+                  value={`${tt(`levels.${state.level}.name`)} (${state.level})`}
+                />
+              )}
+              <RecapRow label={t("recapContexts")} value={selectedContextNames} />
+              <RecapRow label={t("recapRhythm")} value={rhythmText()} />
+            </Card>
+
+            <HeroSurface padding="md">
+              <Eyebrow tone="accent">{t("teaserTitle")}</Eyebrow>
+              <p className="mt-2 text-body text-hero-fg">{t("teaserBody")}</p>
+            </HeroSurface>
+
+            {!isAuthenticated && (
+              <TextInput
+                label={t("emailLabel")}
+                helper={t("emailHelper")}
+                type="email"
+                inputMode="email"
+                autoComplete="email"
+                placeholder={t("emailPlaceholder")}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            )}
+
+            <div className="mt-auto flex flex-col gap-3">
+              <Cta
+                fullWidth
+                variant="commitment"
+                disabled={!canFinish}
+                onClick={handleFinish}
+              >
                 {t("finish")}
               </Cta>
+              <SecondaryLink className="self-center" onClick={() => patch({ step: 2 })}>
+                {t("edit")}
+              </SecondaryLink>
             </div>
           </>
         )}
       </div>
     </main>
+  );
+}
+
+function RecapRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex items-baseline justify-between gap-3">
+      <span className="text-helper text-muted">{label}</span>
+      <span className="text-body text-foreground">{value}</span>
+    </div>
   );
 }

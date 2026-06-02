@@ -52,7 +52,23 @@
       "OWN_PACE": { "name": "At my own pace", "desc": "No reminders, no pressure." }
     },
     "reminderTitle": "Daily reminder",
-    "reminderOff": "Off"
+    "reminderOff": "Off",
+    "recapName": "Name",
+    "recapLevel": "Level",
+    "recapContexts": "Contexts",
+    "recapRhythm": "Rhythm",
+    "teaserTitle": "Your first step",
+    "teaserBody": "Greet a colleague in Dutch.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "emailHelper": "We'll send a magic link to finish — no password to remember.",
+    "edit": "Edit my answers",
+    "sending": "Sending…",
+    "sentTitle": "Check your inbox",
+    "sentBody": "Open the magic link on this device to finish setting up.",
+    "finalizing": "Setting up your account…",
+    "errorGeneric": "Something went wrong. Please try again.",
+    "retry": "Try again"
   },
   "Nav": {
     "skip": "Skip to content",

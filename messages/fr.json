@@ -52,7 +52,23 @@
       "OWN_PACE": { "name": "À mon rythme", "desc": "Pas de rappel, pas de pression." }
     },
     "reminderTitle": "Rappel quotidien",
-    "reminderOff": "Désactivé"
+    "reminderOff": "Désactivé",
+    "recapName": "Prénom",
+    "recapLevel": "Niveau",
+    "recapContexts": "Contextes",
+    "recapRhythm": "Rythme",
+    "teaserTitle": "Votre premier pas",
+    "teaserBody": "Saluer un collègue en néerlandais.",
+    "emailLabel": "Adresse e-mail",
+    "emailPlaceholder": "vous@exemple.com",
+    "emailHelper": "On vous envoie un lien magique pour terminer — aucun mot de passe.",
+    "edit": "Modifier mes réponses",
+    "sending": "Envoi…",
+    "sentTitle": "Vérifiez votre boîte mail",
+    "sentBody": "Ouvrez le lien magique sur cet appareil pour terminer la configuration.",
+    "finalizing": "Configuration de votre compte…",
+    "errorGeneric": "Une erreur s'est produite. Réessayez.",
+    "retry": "Réessayer"
   },
   "Nav": {
     "skip": "Aller au contenu",

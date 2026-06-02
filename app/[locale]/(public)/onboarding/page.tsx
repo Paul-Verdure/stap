@@ -1,12 +1,15 @@
+import { redirect } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 
 import { OnboardingFlow } from "@/components/onboarding/onboarding-flow";
+import { getCurrentUser } from "@/lib/auth/user";
 import { db } from "@/lib/db";
 
 // Public new-user flow (whitelisted in middleware): it starts pre-auth at the
 // language screen and only signs the user in at the end (collect-then-sign-up).
-// Life contexts come from the seeded catalog (single source of truth) so the
-// chips stay in sync with challenge selection (G4); labels are localized here.
+// An already-onboarded user has no business here -> straight to /today. Life
+// contexts come from the seeded catalog (single source of truth), labels
+// localized here.
 export default async function OnboardingPage({
   params,
 }: {
@@ -14,6 +17,17 @@ export default async function OnboardingPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+
+  const user = await getCurrentUser();
+  if (user) {
+    const profile = await db.user.findUnique({
+      where: { id: user.id },
+      select: { onboardedAt: true },
+    });
+    if (profile?.onboardedAt) {
+      redirect(`/${locale}/today`);
+    }
+  }
 
   const rows = await db.lifeContext.findMany({
     orderBy: { slug: "asc" },
@@ -24,5 +38,7 @@ export default async function OnboardingPage({
     name: locale === "fr" ? r.nameFr : r.nameEn,
   }));
 
-  return <OnboardingFlow lifeContexts={lifeContexts} />;
+  return (
+    <OnboardingFlow lifeContexts={lifeContexts} isAuthenticated={Boolean(user)} />
+  );
 }

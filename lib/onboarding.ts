@@ -26,6 +26,39 @@ export type OnboardingState = {
   reminderTime: string | null;
 };
 
+/** Payload persisted by the completeOnboarding server action. */
+export type OnboardingPayload = {
+  firstName: string;
+  locale: Locale;
+  level: DutchLevel;
+  contexts: string[];
+  frequency: Frequency;
+  reminderTime: string | null;
+};
+
+export function isOnboardingComplete(s: OnboardingState): boolean {
+  return (
+    s.firstName.trim().length > 0 &&
+    s.level !== null &&
+    s.frequency !== null &&
+    s.contexts.length >= 1 &&
+    s.contexts.length <= 4
+  );
+}
+
+/** Build the server payload, or null when answers are incomplete. */
+export function toOnboardingPayload(s: OnboardingState): OnboardingPayload | null {
+  if (!isOnboardingComplete(s) || !s.level || !s.frequency) return null;
+  return {
+    firstName: s.firstName.trim(),
+    locale: s.locale ?? "en",
+    level: s.level,
+    contexts: s.contexts,
+    frequency: s.frequency,
+    reminderTime: s.reminderTime,
+  };
+}
+
 export const ONBOARDING_STORAGE_KEY = "stap.onboarding";
 
 export const initialOnboardingState: OnboardingState = {
