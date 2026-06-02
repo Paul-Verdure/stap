@@ -18,6 +18,21 @@
     "error": "Something went wrong. Please try again.",
     "back": "Back to start"
   },
+  "Onboarding": {
+    "progress": "Step {current} of {total}",
+    "back": "Back",
+    "next": "Continue",
+    "getStarted": "Get started",
+    "haveAccount": "I already have an account",
+    "finish": "I'm in",
+    "languagePrompt": "Choose your language",
+    "s1Title": "Welcome to Stap",
+    "s2Title": "What's your first name?",
+    "s3Title": "Your Dutch level",
+    "s4Title": "Where will you use Dutch?",
+    "s5Title": "Your rhythm",
+    "s6Title": "Ready to start"
+  },
   "Nav": {
     "skip": "Skip to content",
     "label": "Main navigation",

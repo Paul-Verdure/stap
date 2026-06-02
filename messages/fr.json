@@ -18,6 +18,21 @@
     "error": "Une erreur s'est produite. Réessayez.",
     "back": "Revenir au début"
   },
+  "Onboarding": {
+    "progress": "Étape {current} sur {total}",
+    "back": "Retour",
+    "next": "Continuer",
+    "getStarted": "Commencer",
+    "haveAccount": "J'ai déjà un compte",
+    "finish": "J'y suis",
+    "languagePrompt": "Choisissez votre langue",
+    "s1Title": "Bienvenue sur Stap",
+    "s2Title": "Quel est votre prénom ?",
+    "s3Title": "Votre niveau de néerlandais",
+    "s4Title": "Où allez-vous parler néerlandais ?",
+    "s5Title": "Votre rythme",
+    "s6Title": "Prêt à commencer"
+  },
   "Nav": {
     "skip": "Aller au contenu",
     "label": "Navigation principale",
