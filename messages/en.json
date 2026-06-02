@@ -31,7 +31,28 @@
     "s3Title": "Your Dutch level",
     "s4Title": "Where will you use Dutch?",
     "s5Title": "Your rhythm",
-    "s6Title": "Ready to start"
+    "s6Title": "Ready to start",
+    "welcomeTagline": "Learn Dutch by actually using it — one real-life step at a time.",
+    "languageTeaser": "Your learning language stays Dutch.",
+    "nameLabel": "First name",
+    "namePlaceholder": "Sofie",
+    "nameHelper": "We'll use it to greet you — just your first name is fine.",
+    "levels": {
+      "A0": { "name": "Just starting", "desc": "I don't know any Dutch yet." },
+      "A1": { "name": "Beginner", "desc": "A few words and set phrases." },
+      "A2": { "name": "Elementary", "desc": "Simple, everyday exchanges." },
+      "B1": { "name": "Intermediate", "desc": "I manage most daily situations." },
+      "B2": { "name": "Upper intermediate", "desc": "I'm fairly comfortable already." }
+    },
+    "contextsHelper": "Pick 1 to 4 — where you'll actually speak Dutch.",
+    "contextsCount": "{count} of {max} selected",
+    "frequency": {
+      "DAILY": { "name": "Every day", "desc": "One small step daily." },
+      "THREE_PER_WEEK": { "name": "3 times a week", "desc": "A steady, gentler pace." },
+      "OWN_PACE": { "name": "At my own pace", "desc": "No reminders, no pressure." }
+    },
+    "reminderTitle": "Daily reminder",
+    "reminderOff": "Off"
   },
   "Nav": {
     "skip": "Skip to content",

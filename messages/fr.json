@@ -31,7 +31,28 @@
     "s3Title": "Votre niveau de néerlandais",
     "s4Title": "Où allez-vous parler néerlandais ?",
     "s5Title": "Votre rythme",
-    "s6Title": "Prêt à commencer"
+    "s6Title": "Prêt à commencer",
+    "welcomeTagline": "Apprenez le néerlandais en le pratiquant — un pas réel à la fois.",
+    "languageTeaser": "Votre langue d'apprentissage reste le néerlandais.",
+    "nameLabel": "Prénom",
+    "namePlaceholder": "Sofie",
+    "nameHelper": "On l'utilisera pour vous saluer — votre prénom suffit.",
+    "levels": {
+      "A0": { "name": "Tout début", "desc": "Je ne connais pas encore le néerlandais." },
+      "A1": { "name": "Débutant", "desc": "Quelques mots et expressions toutes faites." },
+      "A2": { "name": "Élémentaire", "desc": "Des échanges simples du quotidien." },
+      "B1": { "name": "Intermédiaire", "desc": "Je gère la plupart des situations courantes." },
+      "B2": { "name": "Intermédiaire avancé", "desc": "Je suis déjà assez à l'aise." }
+    },
+    "contextsHelper": "Choisissez de 1 à 4 — où vous parlerez vraiment néerlandais.",
+    "contextsCount": "{count} sur {max} sélectionnés",
+    "frequency": {
+      "DAILY": { "name": "Chaque jour", "desc": "Un petit pas quotidien." },
+      "THREE_PER_WEEK": { "name": "3 fois par semaine", "desc": "Un rythme régulier, plus doux." },
+      "OWN_PACE": { "name": "À mon rythme", "desc": "Pas de rappel, pas de pression." }
+    },
+    "reminderTitle": "Rappel quotidien",
+    "reminderOff": "Désactivé"
   },
   "Nav": {
     "skip": "Aller au contenu",
