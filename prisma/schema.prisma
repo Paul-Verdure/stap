@@ -53,6 +53,14 @@ enum ChallengeState {
   MISSED
 }
 
+// How often the user wants to be challenged. OWN_PACE means no fixed cadence
+// and disables the daily reminder (reminderTime stays null).
+enum ChallengeFrequency {
+  DAILY
+  THREE_PER_WEEK
+  OWN_PACE
+}
+
 // --- User ------------------------------------------------------------------
 
 // Mirror of Supabase auth.users. `id` equals auth.users.id and is populated
@@ -62,18 +70,44 @@ enum ChallengeState {
 model User {
   id          String   @id @db.Uuid
   email       String   @unique
+  // First name captured at onboarding (invariant, never translated).
   displayName String?  @map("display_name")
   uiLocale    Locale   @default(en) @map("ui_locale")
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // Onboarding profile. Nullable until the flow completes; `onboardedAt`
+  // gates re-triggering the flow. `reminderTime` is a canonical 24h "HH:mm"
+  // slot (08:00 / 12:00 / 18:00), null when off or for OWN_PACE.
+  level        Level?              @map("level")
+  frequency    ChallengeFrequency? @map("frequency")
+  reminderTime String?             @map("reminder_time")
+  onboardedAt  DateTime?           @map("onboarded_at")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   challenges      Challenge[]
   vocabularyCards VocabularyCard[]
   journalEntries  JournalEntry[]
   dailyActivities DailyActivity[]
   seasonalReviews SeasonalReview[]
+  lifeContexts    UserLifeContext[]
 
   @@map("users")
+}
+
+// The life contexts a user selected at onboarding (1–4). Distinct from the
+// catalog's PhraseLifeContext tagging: this is the user's own environment,
+// used to personalize daily-challenge selection (G4).
+model UserLifeContext {
+  userId        String @map("user_id") @db.Uuid
+  lifeContextId String @map("life_context_id")
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lifeContext LifeContext @relation(fields: [lifeContextId], references: [id], onDelete: Cascade)
+
+  @@id([userId, lifeContextId])
+  @@index([lifeContextId])
+  @@map("user_life_contexts")
 }
 
 // --- Catalog (shared, public authenticated read; RLS in Phase B) ----------
@@ -138,6 +172,7 @@ model LifeContext {
   updatedAt     DateTime @updatedAt @map("updated_at")
 
   phrases PhraseLifeContext[]
+  users   UserLifeContext[]
 
   @@map("life_contexts")
 }
