@@ -29,7 +29,7 @@ export default async function Welcome({
         <Helper>{t("subtitle")}</Helper>
         <div className="mt-1 flex flex-col gap-3">
           <Cta asChild fullWidth>
-            <Link href="/today">{t("enter")}</Link>
+            <Link href="/onboarding">{t("enter")}</Link>
           </Cta>
           <SecondaryLink asChild className="self-center">
             <Link href="/login">{t("haveAccount")}</Link>

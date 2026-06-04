@@ -14,7 +14,13 @@ import { routing } from "@/i18n/routing";
 // stripped). The welcome entry ("/") and the design-system gallery are public
 // portfolio surfaces; the magic-link screen ("/login") and the offline page
 // complete the list. The /auth/* machine route is bypassed earlier in proxy.
-const PUBLIC_PATHS = ["/", "/login", "/design-system", "/~offline"];
+const PUBLIC_PATHS = [
+  "/",
+  "/login",
+  "/onboarding",
+  "/design-system",
+  "/~offline",
+];
 
 function isPublic(rest: string) {
   return PUBLIC_PATHS.some((p) => rest === p || rest.startsWith(`${p}/`));
