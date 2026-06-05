@@ -87,8 +87,17 @@
     "getReady": "I'll get ready",
     "markDone": "Done",
     "vocabHead": "Words to know",
-    "weekSteps": "This week: {count} steps",
-    "noChallenge": "No challenge matches your setup yet — check back soon."
+    "weekSteps": "This week: {count, plural, one {# step} other {# steps}}",
+    "noChallenge": "No challenge matches your setup yet — check back soon.",
+    "greetingReady": "Ready, {name}?",
+    "prepStatus": "Prep viewed",
+    "resumePrep": "Resume prep",
+    "doneBanner": "Step taken today",
+    "doneStatus": "Done",
+    "addToJournal": "Add to my journal",
+    "playRecap": "Play today's recap",
+    "tomorrowTitle": "Tomorrow",
+    "tomorrowBody": "A fresh step will be waiting."
   },
   "Prepare": {
     "title": "Preparation",
