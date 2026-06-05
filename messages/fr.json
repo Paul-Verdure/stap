@@ -81,7 +81,23 @@
   },
   "Today": {
     "title": "Aujourd'hui",
-    "placeholder": "Votre défi du jour s'affiche ici."
+    "placeholder": "Votre défi du jour s'affiche ici.",
+    "greeting": "Salut {name},",
+    "challengeEyebrow": "Défi du jour",
+    "getReady": "Je me prépare",
+    "markDone": "Fait",
+    "vocabHead": "Mots à connaître",
+    "weekSteps": "Cette semaine : {count, plural, one {# pas} other {# pas}}",
+    "noChallenge": "Aucun défi ne correspond encore à vos réglages — revenez bientôt.",
+    "greetingReady": "Prêt, {name} ?",
+    "prepStatus": "Prépa vue",
+    "resumePrep": "Reprendre la prépa",
+    "doneBanner": "Pas franchi aujourd'hui",
+    "doneStatus": "Fait",
+    "addToJournal": "Ajouter à mon journal",
+    "playRecap": "Revoir la journée",
+    "tomorrowTitle": "Demain",
+    "tomorrowBody": "Un nouveau pas vous attendra."
   },
   "Prepare": {
     "title": "Préparation",
