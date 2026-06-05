@@ -24,6 +24,20 @@ type Level = (typeof LEVELS)[number];
 const REPEAT_WINDOW_DAYS = 14;
 const RHYTHM_DAYS = 7;
 
+// Challenge reads include the phrase plus its life contexts (with localized
+// names) so the Home card can show the "where to use it" line.
+const CHALLENGE_INCLUDE = {
+  phrase: {
+    include: {
+      lifeContexts: {
+        include: {
+          lifeContext: { select: { slug: true, nameEn: true, nameFr: true } },
+        },
+      },
+    },
+  },
+} as const;
+
 export type UserProfile = {
   id: string;
   displayName: string | null;
@@ -108,7 +122,7 @@ export async function getTodayChallenge(profile: UserProfile) {
   const date = dateOnlyUTC();
   const where = { userId_date: { userId: profile.id, date } };
 
-  const existing = await db.challenge.findUnique({ where, include: { phrase: true } });
+  const existing = await db.challenge.findUnique({ where, include: CHALLENGE_INCLUDE });
   if (existing) return existing;
 
   const phraseId = await selectPhraseForDay(
@@ -122,11 +136,11 @@ export async function getTodayChallenge(profile: UserProfile) {
   try {
     return await db.challenge.create({
       data: { userId: profile.id, date, phraseId, state: "PENDING" },
-      include: { phrase: true },
+      include: CHALLENGE_INCLUDE,
     });
   } catch {
     // Lost a creation race on the (userId, date) unique — read the winner.
-    return db.challenge.findUnique({ where, include: { phrase: true } });
+    return db.challenge.findUnique({ where, include: CHALLENGE_INCLUDE });
   }
 }
 
