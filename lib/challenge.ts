@@ -173,22 +173,31 @@ export async function getWeekRhythm(userId: string): Promise<RhythmDay[]> {
 
   const rows = await db.challenge.findMany({
     where: { userId, date: { in: days } },
-    select: { date: true, state: true },
+    select: { date: true, state: true, feeling: true },
   });
-  const byIso = new Map(rows.map((r) => [isoDate(r.date), r.state]));
+  const byIso = new Map(rows.map((r) => [isoDate(r.date), r]));
 
   return days.map((d) => {
     const iso = isoDate(d);
     const isToday = iso === todayIso;
-    const state = byIso.get(iso);
+    const row = byIso.get(iso);
 
-    // Feeling-driven states (hesitant / no-chance) arrive in G5; for now DONE
-    // shows as a filled "at-ease" cell.
     let rhythm: RhythmState = "empty";
-    if (state === "DONE") rhythm = "at-ease";
-    else if (state === "MISSED") rhythm = "missed";
-    else if (!isToday && (state === "PENDING" || state === "PREPARED")) {
-      rhythm = "missed"; // a past day left unvalidated
+    if (row) {
+      if (row.state === "DONE") {
+        rhythm =
+          row.feeling === "HESITANT"
+            ? "hesitant"
+            : row.feeling === "MISSED"
+              ? "missed"
+              : "at-ease"; // AT_EASE or (defensively) no feeling
+      } else if (row.state === "SKIPPED") {
+        rhythm = "skip"; // "no chance today"
+      } else if (row.state === "MISSED") {
+        rhythm = "missed";
+      } else if (!isToday) {
+        rhythm = "missed"; // a past PENDING/PREPARED day left unvalidated
+      }
     }
 
     return { state: rhythm, today: isToday };
