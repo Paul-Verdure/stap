@@ -101,7 +101,14 @@
   },
   "Prepare": {
     "title": "Préparation",
-    "placeholder": "Préparez-vous au défi du jour."
+    "placeholder": "Préparez-vous au défi du jour.",
+    "recapEyebrow": "Votre défi",
+    "situationTitle": "La situation",
+    "keywordsTitle": "Les mots clés",
+    "sentenceTitle": "La phrase",
+    "tipsTitle": "Conseils",
+    "commit": "Je tente le coup",
+    "commitNudge": "Un petit pas — tu vas y arriver."
   },
   "Validate": {
     "title": "Raconte",

@@ -101,7 +101,14 @@
   },
   "Prepare": {
     "title": "Preparation",
-    "placeholder": "Get ready for today's challenge."
+    "placeholder": "Get ready for today's challenge.",
+    "recapEyebrow": "Your challenge",
+    "situationTitle": "The situation",
+    "keywordsTitle": "Key words",
+    "sentenceTitle": "The sentence",
+    "tipsTitle": "Tips",
+    "commit": "I'll give it a try",
+    "commitNudge": "A small step — you've got this."
   },
   "Validate": {
     "title": "Tell me",
