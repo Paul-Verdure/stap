@@ -128,7 +128,15 @@
     "wordsPlaceholder": "ex. dank je",
     "wordsAdd": "Ajouter un mot",
     "wordsRemove": "Retirer",
-    "save": "Enregistrer dans mon journal"
+    "save": "Enregistrer dans mon journal",
+    "saveError": "Échec de l'enregistrement — réessayez.",
+    "savedChip": "Pas franchi",
+    "savedAtEase": "Bien joué — c'était fluide.",
+    "savedHesitant": "Tu l'as fait, hésitations comprises.",
+    "savedMissed": "Tu t'es lancé. C'est ça, le pas.",
+    "weekLabel": "cette semaine",
+    "playRecap": "Revoir la journée",
+    "backHome": "Retour à l'accueil"
   },
   "Journal": {
     "title": "Journal",

@@ -128,7 +128,15 @@
     "wordsPlaceholder": "e.g. dank je",
     "wordsAdd": "Add a word",
     "wordsRemove": "Remove",
-    "save": "Save to my journal"
+    "save": "Save to my journal",
+    "saveError": "Couldn't save — please try again.",
+    "savedChip": "Step saved",
+    "savedAtEase": "Nice — that one felt good.",
+    "savedHesitant": "You did it, wobble and all.",
+    "savedMissed": "You showed up. That's the step.",
+    "weekLabel": "this week",
+    "playRecap": "Play today's recap",
+    "backHome": "Back to home"
   },
   "Journal": {
     "title": "Journal",
