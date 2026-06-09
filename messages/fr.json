@@ -116,7 +116,19 @@
   },
   "Validate": {
     "title": "Raconte",
-    "placeholder": "Comment ça s'est passé ?"
+    "placeholder": "Comment ça s'est passé ?",
+    "howWasIt": "Alors, comment ça s'est passé ?",
+    "atEase": "À l'aise",
+    "hesitant": "Hésitant",
+    "missedIt": "Manqué",
+    "noChance": "Pas eu l'occasion",
+    "storyTitle": "Votre récit",
+    "storyPlaceholder": "Que s'est-il passé ? (facultatif)",
+    "wordsTitle": "Mots entendus",
+    "wordsPlaceholder": "ex. dank je",
+    "wordsAdd": "Ajouter un mot",
+    "wordsRemove": "Retirer",
+    "save": "Enregistrer dans mon journal"
   },
   "Journal": {
     "title": "Journal",

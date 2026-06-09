@@ -116,7 +116,19 @@
   },
   "Validate": {
     "title": "Tell me",
-    "placeholder": "How did it go?"
+    "placeholder": "How did it go?",
+    "howWasIt": "So, how did it go?",
+    "atEase": "At ease",
+    "hesitant": "Hesitant",
+    "missedIt": "Missed it",
+    "noChance": "No chance today",
+    "storyTitle": "Your story",
+    "storyPlaceholder": "What happened? (optional)",
+    "wordsTitle": "Words you heard",
+    "wordsPlaceholder": "e.g. dank je",
+    "wordsAdd": "Add a word",
+    "wordsRemove": "Remove",
+    "save": "Save to my journal"
   },
   "Journal": {
     "title": "Journal",
