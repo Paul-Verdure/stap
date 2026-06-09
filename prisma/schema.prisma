@@ -51,6 +51,17 @@ enum ChallengeState {
   PREPARED
   DONE
   MISSED
+  // "No chance today" — acknowledged non-attempt (the rhythm "skip" cell).
+  SKIPPED
+}
+
+// How an attempt felt — drives the rhythm vocabulary (at-ease / hesitant /
+// missed). "MISSED" is a feeling here ("I missed it"), never "failed"; it is
+// distinct from the ChallengeState.MISSED (an elapsed, unvalidated day).
+enum Feeling {
+  AT_EASE
+  HESITANT
+  MISSED
 }
 
 // How often the user wants to be challenged. OWN_PACE means no fixed cadence
@@ -212,13 +223,16 @@ model Challenge {
   date        DateTime       @db.Date
   phraseId    String         @map("phrase_id")
   state       ChallengeState @default(PENDING)
+  // Set at validation (state DONE); null while pending/prepared/skipped.
+  feeling     Feeling?
   preparedAt  DateTime?      @map("prepared_at")
   validatedAt DateTime?      @map("validated_at")
   createdAt   DateTime       @default(now()) @map("created_at")
   updatedAt   DateTime       @updatedAt @map("updated_at")
 
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  phrase Phrase @relation(fields: [phraseId], references: [id], onDelete: Restrict)
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  phrase       Phrase        @relation(fields: [phraseId], references: [id], onDelete: Restrict)
+  journalEntry JournalEntry?
 
   // (userId, date) also serves as the userId-prefix index.
   @@unique([userId, date])
@@ -249,13 +263,21 @@ model VocabularyCard {
 
 // Strictly private personal notes (strictest RLS in Phase B).
 model JournalEntry {
-  id        String   @id @default(cuid())
-  userId    String   @map("user_id") @db.Uuid
-  body      String   @db.Text
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id          String   @id @default(cuid())
+  userId      String   @map("user_id") @db.Uuid
+  // One entry per validated challenge (the entry's feeling/phrase/context are
+  // read through this link). No-chance days create no entry.
+  challengeId String   @unique @map("challenge_id")
+  // Optional free-text story. Heard words are free text (personal, distinct
+  // from catalog VocabularyCards). Photo lands in a later storage pass.
+  body        String?  @db.Text
+  heardWords  String[] @default([]) @map("heard_words")
+  photoPath   String?  @map("photo_path")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  challenge Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@map("journal_entries")

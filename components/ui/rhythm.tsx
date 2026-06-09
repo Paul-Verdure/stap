@@ -41,12 +41,6 @@ const SIZES: Record<RhythmSize, { box: string; dot: string; offset: string }> = 
   lg: { box: "h-6 w-6 rounded-[4px]", dot: "h-2 w-2", offset: "3px" },
 };
 
-// Diagonal half-fill for the "hesitant" state (top-left triangle inked).
-const DIAGONAL: CSSProperties = {
-  background:
-    "linear-gradient(to bottom right, var(--color-foreground) 0 50%, transparent 50%)",
-};
-
 // States that count as a "step" (an attempt). `skip` and `empty` do not.
 const STEP_STATES: ReadonlySet<RhythmState> = new Set([
   "at-ease",
@@ -69,38 +63,46 @@ export function RhythmUnit({
   today = false,
   size = "md",
   label,
+  onHero = false,
   className,
 }: {
   state: RhythmState;
   today?: boolean;
   size?: RhythmSize;
   label?: string;
+  /** Render on the ink hero surface (StreakBox / Feel cards): the ink fills
+      swap to the beige hero foreground so they stay visible; amber is kept. */
+  onHero?: boolean;
   className?: string;
 }) {
   const sz = SIZES[size];
 
-  // Deterministic inline style: diagonal fill (hesitant) and the today ring.
-  // The today ring uses CSS `outline` (not box-shadow) to respect the
-  // brutalist "the only shadow is the focus ring" rule while staying
-  // combinable with every state and not affecting layout size.
-  const style: CSSProperties = {};
-  if (state === "hesitant") Object.assign(style, DIAGONAL);
+  // The "ink" of the cell tracks the surface: page foreground by default,
+  // hero foreground (beige) on the ink hero. Amber (missed) is invariant.
+  const ink = onHero ? "var(--color-hero-fg)" : "var(--color-foreground)";
+  const border = onHero ? "var(--color-hero-border)" : "var(--color-foreground)";
+
+  // Deterministic inline style. The today ring uses `outline` (not box-shadow)
+  // to respect the brutalist "the only shadow is the focus ring" rule while
+  // staying combinable with every state and not affecting layout size.
+  const style: CSSProperties = {
+    border:
+      state === "missed"
+        ? "1.5px solid var(--color-accent)"
+        : `1.5px solid ${border}`,
+  };
+  if (state === "at-ease") style.background = ink;
+  else if (state === "missed") style.background = "var(--color-accent)";
+  else if (state === "hesitant")
+    style.background = `linear-gradient(to bottom right, ${ink} 0 50%, transparent 50%)`;
   if (today) {
-    style.outline = "1.5px solid var(--color-foreground)";
+    style.outline = `1.5px solid ${ink}`;
     style.outlineOffset = sz.offset;
   }
 
   const a11y = label
     ? ({ role: "img", "aria-label": label } as const)
     : ({ "aria-hidden": true } as const);
-
-  const fill =
-    state === "at-ease"
-      ? "border-structural bg-foreground"
-      : state === "missed"
-        ? "border-[1.5px] border-accent bg-accent"
-        : // empty, hesitant, skip all share the outlined base
-          "border-structural bg-transparent";
 
   return (
     <span
@@ -109,12 +111,15 @@ export function RhythmUnit({
       className={cn(
         "inline-grid shrink-0 place-items-center",
         sz.box,
-        fill,
         className,
       )}
     >
       {state === "skip" ? (
-        <span className={cn("rounded-full bg-foreground", sz.dot)} aria-hidden />
+        <span
+          aria-hidden
+          style={{ background: ink }}
+          className={cn("rounded-full", sz.dot)}
+        />
       ) : null}
     </span>
   );
@@ -132,12 +137,14 @@ export function MiniRhythm({
   caption,
   ariaLabel,
   size = "md",
+  onHero = false,
   className,
 }: {
   days: readonly RhythmDay[];
   caption?: React.ReactNode;
   ariaLabel?: string;
   size?: RhythmSize;
+  onHero?: boolean;
   className?: string;
 }) {
   const a11y = ariaLabel
@@ -153,6 +160,7 @@ export function MiniRhythm({
             state={d.state}
             today={d.today}
             size={size}
+            onHero={onHero}
           />
         ))}
       </div>
