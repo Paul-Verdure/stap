@@ -8,6 +8,7 @@ import { TopBar } from "@/components/layout/top-bar";
 import { Cta } from "@/components/ui/button";
 import { Tag } from "@/components/ui/surface";
 import { Helper, Nl, SectionHead } from "@/components/ui/typography";
+import { markPrepared } from "@/lib/challenge-actions";
 import {
   getRelatedPhrases,
   getTodayChallenge,
@@ -127,9 +128,11 @@ export default async function PreparePage({
       {/* Sticky commitment bar — a footer landmark so all content is in a
           landmark (a11y). The write lands in G5.3. */}
       <footer className="sticky bottom-0 border-t-[1.5px] border-foreground bg-background px-5 py-4">
-        <Cta variant="commitment" fullWidth>
-          {t("commit")}
-        </Cta>
+        <form action={markPrepared}>
+          <Cta type="submit" variant="commitment" fullWidth>
+            {t("commit")}
+          </Cta>
+        </form>
         <Helper className="mt-2 text-center">{t("commitNudge")}</Helper>
       </footer>
     </>
