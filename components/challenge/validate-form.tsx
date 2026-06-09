@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/text-field";
 import { Question, SectionHead } from "@/components/ui/typography";
 import { Link } from "@/i18n/navigation";
 import {
+  markNoChance,
   saveValidation,
   type SaveValidationResult,
 } from "@/lib/challenge-actions";
@@ -118,8 +119,11 @@ export function ValidateForm({ recap }: { recap: ReactNode }) {
                 onClick={() => setFeeling("MISSED")}
               />
             </div>
-            {/* Non-attempt — a quieter, distinct action (wired in G5.6). */}
-            <SecondaryLink className="self-center">{t("noChance")}</SecondaryLink>
+            {/* Non-attempt — a quieter, distinct action: marks SKIPPED and
+                returns Home, with no journal entry. */}
+            <form action={markNoChance} className="self-center">
+              <SecondaryLink type="submit">{t("noChance")}</SecondaryLink>
+            </form>
           </section>
 
           <section className="flex flex-col gap-3">

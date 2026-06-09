@@ -26,6 +26,26 @@ export async function markPrepared() {
   redirect(`/${locale}/today`);
 }
 
+// "No chance today" — a non-attempt. Mark the challenge SKIPPED (the rhythm
+// "skip" dot) without recording a feeling or a journal entry, then return
+// Home. Only from a not-yet-validated state, so it never overrides a DONE.
+export async function markNoChance() {
+  const locale = await getLocale();
+  const user = await getCurrentUser();
+  if (!user) redirect(`/${locale}/login`);
+
+  await db.challenge.updateMany({
+    where: {
+      userId: user.id,
+      date: dateOnlyUTC(),
+      state: { in: ["PENDING", "PREPARED"] },
+    },
+    data: { state: "SKIPPED" },
+  });
+
+  redirect(`/${locale}/today`);
+}
+
 type Feeling = "AT_EASE" | "HESITANT" | "MISSED";
 
 export type SaveValidationResult =
