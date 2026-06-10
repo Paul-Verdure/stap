@@ -140,7 +140,13 @@
   },
   "Journal": {
     "title": "Journal",
-    "placeholder": "Your steps, from day one."
+    "intro": "Your steps, from day one.",
+    "counter": "{attempts, plural, one {# attempt} other {# attempts}} · {contexts, plural, one {# context} other {# contexts}}",
+    "filtersLabel": "Filter entries",
+    "groupThisWeek": "This week",
+    "groupLastWeek": "Last week",
+    "groupThisMonth": "This month",
+    "loadMore": "Show earlier entries"
   },
   "Games": {
     "title": "Today's games",

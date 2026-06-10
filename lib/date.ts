@@ -33,6 +33,17 @@ export function subDaysUTC(d: Date, days: number): Date {
   return new Date(dateOnlyUTC(d).getTime() - days * DAY_MS);
 }
 
+/** Monday-start week boundary (UTC date-only) for the given day. */
+export function startOfWeekUTC(d: Date = new Date()): Date {
+  const base = dateOnlyUTC(d);
+  return new Date(base.getTime() - ((base.getUTCDay() + 6) % 7) * DAY_MS);
+}
+
+/** First day of the given day's month (UTC date-only). */
+export function startOfMonthUTC(d: Date = new Date()): Date {
+  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1));
+}
+
 /** Deterministic 32-bit FNV-1a hash of a string — stable across processes. */
 export function hashToInt(s: string): number {
   let h = 0x811c9dc5;

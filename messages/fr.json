@@ -140,7 +140,13 @@
   },
   "Journal": {
     "title": "Journal",
-    "placeholder": "Vos pas, depuis le premier jour."
+    "intro": "Vos pas, depuis le premier jour.",
+    "counter": "{attempts, plural, one {# tentative} other {# tentatives}} · {contexts, plural, one {# contexte} other {# contextes}}",
+    "filtersLabel": "Filtrer les entrées",
+    "groupThisWeek": "Cette semaine",
+    "groupLastWeek": "La semaine dernière",
+    "groupThisMonth": "Ce mois-ci",
+    "loadMore": "Afficher les entrées précédentes"
   },
   "Games": {
     "title": "Jeux du jour",
