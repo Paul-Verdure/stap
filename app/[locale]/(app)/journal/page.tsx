@@ -2,6 +2,7 @@ import { getFormatter, getTranslations, setRequestLocale } from "next-intl/serve
 import { redirect } from "next/navigation";
 
 import { JournalEntryCard } from "@/components/journal/journal-entry-card";
+import { JournalQuickFilters } from "@/components/journal/journal-quick-filters";
 import { TopBar } from "@/components/layout/top-bar";
 import { IconButton, SecondaryLink } from "@/components/ui/button";
 import { FiltersIcon } from "@/components/ui/icons";
@@ -10,10 +11,12 @@ import { Link } from "@/i18n/navigation";
 import { getUserProfile } from "@/lib/challenge";
 import {
   countContexts,
+  filterEntries,
   getJournalEntries,
   groupEntries,
   type JournalGroup,
 } from "@/lib/journal";
+import { journalFiltersQuery, parseJournalFilters } from "@/lib/journal-filters";
 
 // The journal — grouped reverse-chronological memory notebook. Server-rendered
 // from searchParams (pagination now, filters in later steps) so the list stays
@@ -45,10 +48,12 @@ export default async function JournalPage({
       ? Math.min(rawLimit, 500)
       : PAGE_SIZE;
 
+  const filters = parseJournalFilters(sp);
   const entries = await getJournalEntries(profile, locale === "fr" ? "fr" : "en");
-  const visible = entries.slice(0, limit);
+  const filtered = filterEntries(entries, filters);
+  const visible = filtered.slice(0, limit);
   const groups = groupEntries(visible);
-  const hasMore = entries.length > visible.length;
+  const hasMore = filtered.length > visible.length;
 
   const groupLabel = (group: JournalGroup) =>
     group.kind === "month"
@@ -77,14 +82,16 @@ export default async function JournalPage({
           sub={
             <span aria-live="polite">
               {t("counter", {
-                attempts: entries.length,
-                contexts: countContexts(entries),
+                attempts: filtered.length,
+                contexts: countContexts(filtered),
               })}
             </span>
           }
         >
           {t("intro")}
         </Greeting>
+
+        <JournalQuickFilters filters={filters} />
 
         {groups.map((group) => (
           <section key={group.key} className="flex flex-col gap-3">
@@ -102,7 +109,10 @@ export default async function JournalPage({
         {hasMore ? (
           <SecondaryLink asChild className="self-center">
             <Link
-              href={{ pathname: "/journal", query: { limit: limit + PAGE_SIZE } }}
+              href={{
+                pathname: "/journal",
+                query: { ...journalFiltersQuery(filters), limit: limit + PAGE_SIZE },
+              }}
               scroll={false}
             >
               {t("loadMore")}

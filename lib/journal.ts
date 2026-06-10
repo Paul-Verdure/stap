@@ -1,7 +1,12 @@
-import type { RhythmState } from "@/components/ui/rhythm";
 import type { UserProfile } from "@/lib/challenge";
 import { isoDate, startOfMonthUTC, startOfWeekUTC, subDaysUTC } from "@/lib/date";
 import { db } from "@/lib/db";
+import {
+  matchesJournalFilters,
+  type JournalFacet,
+  type JournalFeeling,
+  type JournalFilters,
+} from "@/lib/journal-filters";
 
 /* ===========================================================================
    Journal data (G6) — the memory notebook behind /journal.
@@ -37,8 +42,9 @@ const ENTRY_INCLUDE = {
   },
 } as const;
 
-/** The per-entry "feel shape" — the rhythm states a validated day can carry. */
-export type JournalFeeling = Extract<RhythmState, "at-ease" | "hesitant" | "missed">;
+// The per-entry "feel shape" values intentionally match the rhythm-vocabulary
+// states (RhythmState) so the card can feed RhythmUnit directly.
+export type { JournalFeeling } from "@/lib/journal-filters";
 
 export type JournalEntryView = {
   id: string;
@@ -97,6 +103,26 @@ export async function getJournalEntries(
 /** Distinct user-context count across a set of entries (the header counter). */
 export function countContexts(entries: readonly JournalEntryView[]): number {
   return new Set(entries.flatMap((e) => e.contextSlugs)).size;
+}
+
+/** The serializable slice of an entry the filter predicate runs on. */
+export function toJournalFacet(entry: JournalEntryView): JournalFacet {
+  return {
+    dateIso: isoDate(entry.date),
+    feeling: entry.feeling,
+    contextSlugs: entry.contextSlugs,
+    hasStory: entry.body !== null && entry.body.length > 0,
+    hasWords: entry.heardWords.length > 0,
+  };
+}
+
+/** Apply the active filters to a full entry list (server side). */
+export function filterEntries(
+  entries: readonly JournalEntryView[],
+  filters: JournalFilters,
+  now: Date = new Date(),
+): JournalEntryView[] {
+  return entries.filter((e) => matchesJournalFilters(toJournalFacet(e), filters, now));
 }
 
 /* ---------------------------------------------------------------------------
