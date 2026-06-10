@@ -1,14 +1,13 @@
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { redirect } from "next/navigation";
 
+import { JournalEntryCard } from "@/components/journal/journal-entry-card";
 import { TopBar } from "@/components/layout/top-bar";
 import { IconButton, SecondaryLink } from "@/components/ui/button";
 import { FiltersIcon } from "@/components/ui/icons";
-import { RhythmUnit } from "@/components/ui/rhythm";
-import { DateLine, Greeting, Nl, SectionRule } from "@/components/ui/typography";
+import { Greeting, SectionRule } from "@/components/ui/typography";
 import { Link } from "@/i18n/navigation";
 import { getUserProfile } from "@/lib/challenge";
-import { isoDate } from "@/lib/date";
 import {
   countContexts,
   getJournalEntries,
@@ -93,17 +92,7 @@ export default async function JournalPage({
             <ul className="flex list-none flex-col gap-3 p-0">
               {group.entries.map((entry) => (
                 <li key={entry.id}>
-                  <article className="flex items-center justify-between gap-3 rounded-md border-structural bg-surface px-4 py-3">
-                    <div className="flex flex-col gap-0.5">
-                      <DateLine dateTime={isoDate(entry.date)}>
-                        {format.dateTime(entry.date, "short")}
-                      </DateLine>
-                      <span className="font-display text-body font-semibold">
-                        <Nl>{entry.textNl}</Nl>
-                      </span>
-                    </div>
-                    <RhythmUnit state={entry.feeling} size="lg" />
-                  </article>
+                  <JournalEntryCard entry={entry} />
                 </li>
               ))}
             </ul>

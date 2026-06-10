@@ -146,7 +146,12 @@
     "groupThisWeek": "Cette semaine",
     "groupLastWeek": "La semaine dernière",
     "groupThisMonth": "Ce mois-ci",
-    "loadMore": "Afficher les entrées précédentes"
+    "loadMore": "Afficher les entrées précédentes",
+    "feelingAtEase": "À l'aise",
+    "feelingHesitant": "Hésitant",
+    "feelingMissed": "Manqué",
+    "backToJournal": "Retour au journal",
+    "detailPlaceholder": "La vue détaillée de l'entrée arrive bientôt."
   },
   "Games": {
     "title": "Jeux du jour",

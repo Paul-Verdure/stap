@@ -146,7 +146,12 @@
     "groupThisWeek": "This week",
     "groupLastWeek": "Last week",
     "groupThisMonth": "This month",
-    "loadMore": "Show earlier entries"
+    "loadMore": "Show earlier entries",
+    "feelingAtEase": "At ease",
+    "feelingHesitant": "Hesitant",
+    "feelingMissed": "Missed it",
+    "backToJournal": "Back to journal",
+    "detailPlaceholder": "The full entry view is on its way."
   },
   "Games": {
     "title": "Today's games",
