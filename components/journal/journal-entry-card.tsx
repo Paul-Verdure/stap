@@ -1,12 +1,13 @@
 import { useFormatter, useTranslations } from "next-intl";
 
+import { FEELING_MESSAGE_KEY } from "@/components/journal/feeling-keys";
 import { ChevronIcon } from "@/components/ui/icons";
 import { RhythmUnit } from "@/components/ui/rhythm";
 import { Tag } from "@/components/ui/surface";
 import { DateLine, Nl } from "@/components/ui/typography";
 import { Link } from "@/i18n/navigation";
 import { isoDate } from "@/lib/date";
-import type { JournalEntryView, JournalFeeling } from "@/lib/journal";
+import type { JournalEntryView } from "@/lib/journal";
 
 /* ===========================================================================
    JournalEntryCard (G6) — one remembered step in the journal list.
@@ -18,12 +19,6 @@ import type { JournalEntryView, JournalFeeling } from "@/lib/journal";
    its accessible name is the cell's content (feeling label included via the
    labelled RhythmUnit).
 =========================================================================== */
-
-const FEELING_KEY: Record<JournalFeeling, "feelingAtEase" | "feelingHesitant" | "feelingMissed"> = {
-  "at-ease": "feelingAtEase",
-  hesitant: "feelingHesitant",
-  missed: "feelingMissed",
-};
 
 export function JournalEntryCard({ entry }: { entry: JournalEntryView }) {
   const t = useTranslations("Journal");
@@ -39,7 +34,7 @@ export function JournalEntryCard({ entry }: { entry: JournalEntryView }) {
           <RhythmUnit
             state={entry.feeling}
             size="lg"
-            label={t(FEELING_KEY[entry.feeling])}
+            label={t(FEELING_MESSAGE_KEY[entry.feeling])}
           />
           <span className="flex flex-col">
             <DateLine dateTime={isoDate(entry.date)}>

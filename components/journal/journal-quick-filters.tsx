@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 
+import { FEELING_MESSAGE_KEY } from "@/components/journal/feeling-keys";
 import { Chip } from "@/components/ui/chip";
 import { useRouter } from "@/i18n/navigation";
 import {
@@ -20,15 +21,6 @@ import {
    "All" clears the set. Changing a filter intentionally resets pagination
    (the limit param is dropped).
 =========================================================================== */
-
-const FEELING_KEY: Record<
-  JournalFeeling,
-  "feelingAtEase" | "feelingHesitant" | "feelingMissed"
-> = {
-  "at-ease": "feelingAtEase",
-  hesitant: "feelingHesitant",
-  missed: "feelingMissed",
-};
 
 export function JournalQuickFilters({ filters }: { filters: JournalFilters }) {
   const t = useTranslations("Journal");
@@ -66,7 +58,7 @@ export function JournalQuickFilters({ filters }: { filters: JournalFilters }) {
           selected={filters.feelings.includes(feeling)}
           onClick={() => toggle(feeling)}
         >
-          {t(FEELING_KEY[feeling])}
+          {t(FEELING_MESSAGE_KEY[feeling])}
         </Chip>
       ))}
     </div>

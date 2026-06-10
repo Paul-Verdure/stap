@@ -105,6 +105,23 @@ export function countContexts(entries: readonly JournalEntryView[]): number {
   return new Set(entries.flatMap((e) => e.contextSlugs)).size;
 }
 
+/** The user's own life contexts, localized — the filter-sheet chip options. */
+export async function getUserContextOptions(
+  profile: Pick<UserProfile, "contextSlugs">,
+  locale: "en" | "fr",
+): Promise<{ slug: string; name: string }[]> {
+  if (profile.contextSlugs.length === 0) return [];
+  const rows = await db.lifeContext.findMany({
+    where: { slug: { in: profile.contextSlugs } },
+    select: { slug: true, nameEn: true, nameFr: true },
+    orderBy: { slug: "asc" },
+  });
+  return rows.map((r) => ({
+    slug: r.slug,
+    name: locale === "fr" ? r.nameFr : r.nameEn,
+  }));
+}
+
 /** The serializable slice of an entry the filter predicate runs on. */
 export function toJournalFacet(entry: JournalEntryView): JournalFacet {
   return {

@@ -2,10 +2,10 @@ import { getFormatter, getTranslations, setRequestLocale } from "next-intl/serve
 import { redirect } from "next/navigation";
 
 import { JournalEntryCard } from "@/components/journal/journal-entry-card";
+import { JournalFiltersSheet } from "@/components/journal/journal-filters-sheet";
 import { JournalQuickFilters } from "@/components/journal/journal-quick-filters";
 import { TopBar } from "@/components/layout/top-bar";
-import { IconButton, SecondaryLink } from "@/components/ui/button";
-import { FiltersIcon } from "@/components/ui/icons";
+import { SecondaryLink } from "@/components/ui/button";
 import { Greeting, SectionRule } from "@/components/ui/typography";
 import { Link } from "@/i18n/navigation";
 import { getUserProfile } from "@/lib/challenge";
@@ -13,7 +13,9 @@ import {
   countContexts,
   filterEntries,
   getJournalEntries,
+  getUserContextOptions,
   groupEntries,
+  toJournalFacet,
   type JournalGroup,
 } from "@/lib/journal";
 import { journalFiltersQuery, parseJournalFilters } from "@/lib/journal-filters";
@@ -48,8 +50,12 @@ export default async function JournalPage({
       ? Math.min(rawLimit, 500)
       : PAGE_SIZE;
 
+  const uiLocale = locale === "fr" ? "fr" : "en";
   const filters = parseJournalFilters(sp);
-  const entries = await getJournalEntries(profile, locale === "fr" ? "fr" : "en");
+  const [entries, contextOptions] = await Promise.all([
+    getJournalEntries(profile, uiLocale),
+    getUserContextOptions(profile, uiLocale),
+  ]);
   const filtered = filterEntries(entries, filters);
   const visible = filtered.slice(0, limit);
   const groups = groupEntries(visible);
@@ -71,9 +77,12 @@ export default async function JournalPage({
       <TopBar
         title={t("title")}
         right={
-          <IconButton label={t("filtersLabel")}>
-            <FiltersIcon className="h-5 w-5" />
-          </IconButton>
+          <JournalFiltersSheet
+            filters={filters}
+            contexts={contextOptions}
+            facets={entries.map(toJournalFacet)}
+            disabled={entries.length === 0}
+          />
         }
       />
       <main id="main-content" className="flex flex-1 flex-col gap-6 px-5 pb-5">
