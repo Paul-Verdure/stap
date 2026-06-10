@@ -163,6 +163,11 @@
     "contentWords": "With added words",
     "reset": "Reset",
     "applyCount": "Apply ({count})",
+    "emptyTitle": "Your journal is waiting",
+    "emptyBody": "Every step you take lands here. Start with today's challenge.",
+    "emptyCta": "Go to today's challenge",
+    "filteredEmpty": "No steps match these filters.",
+    "clearFilters": "Clear filters",
     "backToJournal": "Back to journal",
     "detailPlaceholder": "The full entry view is on its way."
   },

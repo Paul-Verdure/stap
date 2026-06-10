@@ -163,6 +163,11 @@
     "contentWords": "Avec des mots ajoutés",
     "reset": "Réinitialiser",
     "applyCount": "Appliquer ({count})",
+    "emptyTitle": "Votre journal vous attend",
+    "emptyBody": "Chaque pas franchi s'inscrit ici. Commencez par le défi du jour.",
+    "emptyCta": "Aller au défi du jour",
+    "filteredEmpty": "Aucun pas ne correspond à ces filtres.",
+    "clearFilters": "Effacer les filtres",
     "backToJournal": "Retour au journal",
     "detailPlaceholder": "La vue détaillée de l'entrée arrive bientôt."
   },

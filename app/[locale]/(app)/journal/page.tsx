@@ -1,12 +1,13 @@
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { redirect } from "next/navigation";
 
+import { JournalEmpty } from "@/components/journal/journal-empty";
 import { JournalEntryCard } from "@/components/journal/journal-entry-card";
 import { JournalFiltersSheet } from "@/components/journal/journal-filters-sheet";
 import { JournalQuickFilters } from "@/components/journal/journal-quick-filters";
 import { TopBar } from "@/components/layout/top-bar";
 import { SecondaryLink } from "@/components/ui/button";
-import { Greeting, SectionRule } from "@/components/ui/typography";
+import { Greeting, Helper, SectionRule } from "@/components/ui/typography";
 import { Link } from "@/i18n/navigation";
 import { getUserProfile } from "@/lib/challenge";
 import {
@@ -86,48 +87,68 @@ export default async function JournalPage({
         }
       />
       <main id="main-content" className="flex flex-1 flex-col gap-6 px-5 pb-5">
-        <Greeting
-          as="h2"
-          sub={
-            <span aria-live="polite">
-              {t("counter", {
-                attempts: filtered.length,
-                contexts: countContexts(filtered),
-              })}
-            </span>
-          }
-        >
-          {t("intro")}
-        </Greeting>
-
-        <JournalQuickFilters filters={filters} />
-
-        {groups.map((group) => (
-          <section key={group.key} className="flex flex-col gap-3">
-            <SectionRule>{groupLabel(group)}</SectionRule>
-            <ul className="flex list-none flex-col gap-3 p-0">
-              {group.entries.map((entry) => (
-                <li key={entry.id}>
-                  <JournalEntryCard entry={entry} />
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))}
-
-        {hasMore ? (
-          <SecondaryLink asChild className="self-center">
-            <Link
-              href={{
-                pathname: "/journal",
-                query: { ...journalFiltersQuery(filters), limit: limit + PAGE_SIZE },
-              }}
-              scroll={false}
+        {entries.length === 0 ? (
+          // Truly empty (no entry ever) — the branded invitation.
+          <JournalEmpty />
+        ) : (
+          <>
+            <Greeting
+              as="h2"
+              sub={
+                <span aria-live="polite">
+                  {t("counter", {
+                    attempts: filtered.length,
+                    contexts: countContexts(filtered),
+                  })}
+                </span>
+              }
             >
-              {t("loadMore")}
-            </Link>
-          </SecondaryLink>
-        ) : null}
+              {t("intro")}
+            </Greeting>
+
+            <JournalQuickFilters filters={filters} />
+
+            {filtered.length === 0 ? (
+              // Entries exist but the active filters match none of them.
+              <div className="flex flex-col items-start gap-3">
+                <Helper>{t("filteredEmpty")}</Helper>
+                <SecondaryLink asChild>
+                  <Link href="/journal">{t("clearFilters")}</Link>
+                </SecondaryLink>
+              </div>
+            ) : (
+              groups.map((group) => (
+                <section key={group.key} className="flex flex-col gap-3">
+                  <SectionRule>{groupLabel(group)}</SectionRule>
+                  <ul className="flex list-none flex-col gap-3 p-0">
+                    {group.entries.map((entry) => (
+                      <li key={entry.id}>
+                        <JournalEntryCard entry={entry} />
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ))
+            )}
+
+            {hasMore ? (
+              <SecondaryLink asChild className="self-center">
+                <Link
+                  href={{
+                    pathname: "/journal",
+                    query: {
+                      ...journalFiltersQuery(filters),
+                      limit: limit + PAGE_SIZE,
+                    },
+                  }}
+                  scroll={false}
+                >
+                  {t("loadMore")}
+                </Link>
+              </SecondaryLink>
+            ) : null}
+          </>
+        )}
       </main>
     </>
   );
