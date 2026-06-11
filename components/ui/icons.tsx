@@ -91,3 +91,12 @@ export function BackIcon(props: IconProps) {
     </svg>
   );
 }
+
+/** Chevron right — the "opens a detail" affordance on list cells. */
+export function ChevronIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="m10 6 6 6-6 6" />
+    </svg>
+  );
+}

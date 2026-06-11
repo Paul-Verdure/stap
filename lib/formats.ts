@@ -20,11 +20,20 @@ export const formats = {
       month: "long",
       year: "numeric",
     },
-    // "Thu 28 May" / "jeu. 28 mai" — the compact DateLine form.
+    // "Thu 28 May" / "jeu. 28 mai" — the compact DateLine form. Date-only
+    // values (Challenge.date) are UTC-midnight keys, so format them in UTC
+    // to avoid an off-by-one day on servers west of Greenwich.
     short: {
       weekday: "short",
       day: "numeric",
       month: "short",
+      timeZone: "UTC",
+    },
+    // "May 2026" / "mai 2026" — Journal month group labels (date-only, UTC).
+    month: {
+      month: "long",
+      year: "numeric",
+      timeZone: "UTC",
     },
     // "8:00 AM" / "08:00" — reminder slots, timestamps.
     time: {
