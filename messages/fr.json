@@ -38,18 +38,42 @@
     "namePlaceholder": "Sofie",
     "nameHelper": "On l'utilisera pour vous saluer — votre prénom suffit.",
     "levels": {
-      "A0": { "name": "Tout début", "desc": "Je ne connais pas encore le néerlandais." },
-      "A1": { "name": "Débutant", "desc": "Quelques mots et expressions toutes faites." },
-      "A2": { "name": "Élémentaire", "desc": "Des échanges simples du quotidien." },
-      "B1": { "name": "Intermédiaire", "desc": "Je gère la plupart des situations courantes." },
-      "B2": { "name": "Intermédiaire avancé", "desc": "Je suis déjà assez à l'aise." }
+      "A0": {
+        "name": "Tout début",
+        "desc": "Je ne connais pas encore le néerlandais."
+      },
+      "A1": {
+        "name": "Débutant",
+        "desc": "Quelques mots et expressions toutes faites."
+      },
+      "A2": {
+        "name": "Élémentaire",
+        "desc": "Des échanges simples du quotidien."
+      },
+      "B1": {
+        "name": "Intermédiaire",
+        "desc": "Je gère la plupart des situations courantes."
+      },
+      "B2": {
+        "name": "Intermédiaire avancé",
+        "desc": "Je suis déjà assez à l'aise."
+      }
     },
     "contextsHelper": "Choisissez de 1 à 4 — où vous parlerez vraiment néerlandais.",
     "contextsCount": "{count} sur {max} sélectionnés",
     "frequency": {
-      "DAILY": { "name": "Chaque jour", "desc": "Un petit pas quotidien." },
-      "THREE_PER_WEEK": { "name": "3 fois par semaine", "desc": "Un rythme régulier, plus doux." },
-      "OWN_PACE": { "name": "À mon rythme", "desc": "Pas de rappel, pas de pression." }
+      "DAILY": {
+        "name": "Chaque jour",
+        "desc": "Un petit pas quotidien."
+      },
+      "THREE_PER_WEEK": {
+        "name": "3 fois par semaine",
+        "desc": "Un rythme régulier, plus doux."
+      },
+      "OWN_PACE": {
+        "name": "À mon rythme",
+        "desc": "Pas de rappel, pas de pression."
+      }
     },
     "reminderTitle": "Rappel quotidien",
     "reminderOff": "Désactivé",
@@ -173,7 +197,36 @@
   },
   "Games": {
     "title": "Jeux du jour",
-    "placeholder": "Trois petits jeux pour revisiter la journée."
+    "placeholder": "Trois petits jeux pour revisiter la journée.",
+    "contextEyebrow": "Le défi du jour",
+    "pickAny": "3 petits jeux · au choix",
+    "alreadyPlayed": "Déjà joué",
+    "cards": {
+      "match": {
+        "title": "À l'envers",
+        "desc": "Associe chaque phrase néerlandaise à son sens.",
+        "duration": "≈ 1 min"
+      },
+      "fill": {
+        "title": "Le bon mot",
+        "desc": "Replace le mot manquant dans la phrase.",
+        "duration": "≈ 1 min"
+      },
+      "listen": {
+        "title": "L'oreille fine",
+        "desc": "Écoute bien, choisis ce qui a été dit.",
+        "duration": "≈ 1 min"
+      }
+    },
+    "reviewWider": {
+      "title": "Le vocabulaire de la semaine",
+      "desc": "Revois plus largement les mots croisés cette semaine."
+    },
+    "review": {
+      "title": "Le vocabulaire de la semaine",
+      "back": "Retour aux jeux",
+      "body": "Une révision tranquille des mots de la semaine arrive bientôt."
+    }
   },
   "Profile": {
     "title": "Profil",

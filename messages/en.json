@@ -38,18 +38,42 @@
     "namePlaceholder": "Sofie",
     "nameHelper": "We'll use it to greet you — just your first name is fine.",
     "levels": {
-      "A0": { "name": "Just starting", "desc": "I don't know any Dutch yet." },
-      "A1": { "name": "Beginner", "desc": "A few words and set phrases." },
-      "A2": { "name": "Elementary", "desc": "Simple, everyday exchanges." },
-      "B1": { "name": "Intermediate", "desc": "I manage most daily situations." },
-      "B2": { "name": "Upper intermediate", "desc": "I'm fairly comfortable already." }
+      "A0": {
+        "name": "Just starting",
+        "desc": "I don't know any Dutch yet."
+      },
+      "A1": {
+        "name": "Beginner",
+        "desc": "A few words and set phrases."
+      },
+      "A2": {
+        "name": "Elementary",
+        "desc": "Simple, everyday exchanges."
+      },
+      "B1": {
+        "name": "Intermediate",
+        "desc": "I manage most daily situations."
+      },
+      "B2": {
+        "name": "Upper intermediate",
+        "desc": "I'm fairly comfortable already."
+      }
     },
     "contextsHelper": "Pick 1 to 4 — where you'll actually speak Dutch.",
     "contextsCount": "{count} of {max} selected",
     "frequency": {
-      "DAILY": { "name": "Every day", "desc": "One small step daily." },
-      "THREE_PER_WEEK": { "name": "3 times a week", "desc": "A steady, gentler pace." },
-      "OWN_PACE": { "name": "At my own pace", "desc": "No reminders, no pressure." }
+      "DAILY": {
+        "name": "Every day",
+        "desc": "One small step daily."
+      },
+      "THREE_PER_WEEK": {
+        "name": "3 times a week",
+        "desc": "A steady, gentler pace."
+      },
+      "OWN_PACE": {
+        "name": "At my own pace",
+        "desc": "No reminders, no pressure."
+      }
     },
     "reminderTitle": "Daily reminder",
     "reminderOff": "Off",
@@ -173,7 +197,36 @@
   },
   "Games": {
     "title": "Today's games",
-    "placeholder": "Three short games to revisit the day."
+    "placeholder": "Three short games to revisit the day.",
+    "contextEyebrow": "Today's challenge",
+    "pickAny": "3 short games · pick any",
+    "alreadyPlayed": "Already played",
+    "cards": {
+      "match": {
+        "title": "Upside down",
+        "desc": "Match each Dutch phrase with its meaning.",
+        "duration": "≈ 1 min"
+      },
+      "fill": {
+        "title": "The right word",
+        "desc": "Put the missing word back in the sentence.",
+        "duration": "≈ 1 min"
+      },
+      "listen": {
+        "title": "A sharp ear",
+        "desc": "Listen closely, pick what was said.",
+        "duration": "≈ 1 min"
+      }
+    },
+    "reviewWider": {
+      "title": "This week's vocabulary",
+      "desc": "Take a wider look at the words you met."
+    },
+    "review": {
+      "title": "This week's vocabulary",
+      "back": "Back to games",
+      "body": "A calm review of this week's words is coming soon."
+    }
   },
   "Profile": {
     "title": "Profile",
