@@ -226,6 +226,21 @@
       "title": "Le vocabulaire de la semaine",
       "back": "Retour aux jeux",
       "body": "Une révision tranquille des mots de la semaine arrive bientôt."
+    },
+    "close": "Fermer le jeu",
+    "counterLabel": "Jeu {position} sur {total}",
+    "nextGame": "Jeu suivant →",
+    "backToGames": "Retour aux jeux",
+    "end": {
+      "doneChip": "Terminé"
+    },
+    "match": {
+      "instruction": "Touche une phrase néerlandaise, puis le sens qui lui correspond.",
+      "progress": "{done} sur {total} associées",
+      "matched": "Associée",
+      "tryAgain": "Réessaie",
+      "endTitle": "Bien associé",
+      "endSubtitle": "Tu as remis chaque phrase avec son sens."
     }
   },
   "Profile": {

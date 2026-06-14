@@ -226,6 +226,21 @@
       "title": "This week's vocabulary",
       "back": "Back to games",
       "body": "A calm review of this week's words is coming soon."
+    },
+    "close": "Close the game",
+    "counterLabel": "Game {position} of {total}",
+    "nextGame": "Next game →",
+    "backToGames": "Back to games",
+    "end": {
+      "doneChip": "Done"
+    },
+    "match": {
+      "instruction": "Tap a Dutch phrase, then the meaning that goes with it.",
+      "progress": "{done} of {total} matched",
+      "matched": "Matched",
+      "tryAgain": "Try again",
+      "endTitle": "Nicely paired",
+      "endSubtitle": "You put every phrase back with its meaning."
     }
   },
   "Profile": {
