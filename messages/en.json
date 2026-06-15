@@ -242,6 +242,16 @@
       "endTitle": "Nicely paired",
       "endSubtitle": "You put every phrase back with its meaning.",
       "recapTitle": "Today's pairs"
+    },
+    "tryAgain": "Try again",
+    "roundProgress": "Round {current} of {total}",
+    "fill": {
+      "blankLabel": "missing word",
+      "nextRound": "Right — next round.",
+      "allDone": "Right — all done.",
+      "recapTitle": "The sentences you completed",
+      "endTitle": "Word in place",
+      "endSubtitle": "You found every missing word."
     }
   },
   "Profile": {

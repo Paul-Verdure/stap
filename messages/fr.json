@@ -242,6 +242,16 @@
       "endTitle": "Bien associé",
       "endSubtitle": "Tu as remis chaque phrase avec son sens.",
       "recapTitle": "Les paires du jour"
+    },
+    "tryAgain": "Réessaie",
+    "roundProgress": "Manche {current} sur {total}",
+    "fill": {
+      "blankLabel": "mot manquant",
+      "nextRound": "C'est ça — manche suivante.",
+      "allDone": "C'est ça — terminé.",
+      "recapTitle": "Les phrases complétées",
+      "endTitle": "Mot replacé",
+      "endSubtitle": "Tu as retrouvé chaque mot manquant."
     }
   },
   "Profile": {
