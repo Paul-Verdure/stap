@@ -240,7 +240,8 @@
       "matched": "Matched",
       "tryAgain": "Try again",
       "endTitle": "Nicely paired",
-      "endSubtitle": "You put every phrase back with its meaning."
+      "endSubtitle": "You put every phrase back with its meaning.",
+      "recapTitle": "Today's pairs"
     }
   },
   "Profile": {

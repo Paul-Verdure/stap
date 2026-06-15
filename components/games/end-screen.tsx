@@ -14,14 +14,14 @@ export function EndScreen({
   doneLabel,
   title,
   subtitle,
-  children,
+  recap,
   actions,
 }: {
   doneLabel: string;
   title: ReactNode;
   subtitle?: ReactNode;
   /** Optional recap block (the matched pairs / completed sentences). */
-  children?: ReactNode;
+  recap?: ReactNode;
   actions: ReactNode;
 }) {
   return (
@@ -38,7 +38,7 @@ export function EndScreen({
         {subtitle ? <p className="text-body text-muted">{subtitle}</p> : null}
       </div>
 
-      {children}
+      {recap}
 
       <div className="mt-auto flex flex-col gap-3">{actions}</div>
     </main>

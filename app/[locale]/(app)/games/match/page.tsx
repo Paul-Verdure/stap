@@ -60,7 +60,7 @@ export default async function MatchPage({
       })}
       closeLabel={t("close")}
     >
-      <MatchGame tiles={tiles} todayIso={todayIso} />
+      <MatchGame pairs={pairs} tiles={tiles} todayIso={todayIso} />
     </GameShell>
   );
 }

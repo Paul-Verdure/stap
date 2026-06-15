@@ -4,12 +4,13 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { EndScreen } from "@/components/games/end-screen";
+import { RecapBlock, RecapRow } from "@/components/games/recap-block";
 import { Cta } from "@/components/ui/button";
 import { Nl } from "@/components/ui/typography";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 import { markGamePlayed } from "@/lib/game-progress";
-import type { MatchTile } from "@/lib/game-content";
+import type { MatchPair, MatchTile } from "@/lib/game-content";
 import { gameRoute, nextGameId } from "@/lib/games";
 
 /* ===========================================================================
@@ -22,9 +23,12 @@ import { gameRoute, nextGameId } from "@/lib/games";
    aria-pressed. Progress and matched/try-again are announced via aria-live.
 =========================================================================== */
 export function MatchGame({
+  pairs,
   tiles,
   todayIso,
 }: {
+  /** The pairs in canonical order — the source for the end recap. */
+  pairs: MatchPair[];
   tiles: MatchTile[];
   /** UTC day key for the per-day played marker. */
   todayIso: string;
@@ -69,6 +73,18 @@ export function MatchGame({
         doneLabel={t("end.doneChip")}
         title={t("match.endTitle")}
         subtitle={t("match.endSubtitle")}
+        recap={
+          <RecapBlock title={t("match.recapTitle")}>
+            {pairs.map((p) => (
+              <RecapRow key={p.id}>
+                <span className="font-display text-body font-semibold">
+                  <Nl>{p.nl}</Nl>
+                </span>
+                <span className="text-helper text-muted">{p.meaning}</span>
+              </RecapRow>
+            ))}
+          </RecapBlock>
+        }
         actions={
           <>
             {next ? (

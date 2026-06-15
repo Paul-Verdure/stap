@@ -240,7 +240,8 @@
       "matched": "Associée",
       "tryAgain": "Réessaie",
       "endTitle": "Bien associé",
-      "endSubtitle": "Tu as remis chaque phrase avec son sens."
+      "endSubtitle": "Tu as remis chaque phrase avec son sens.",
+      "recapTitle": "Les paires du jour"
     }
   },
   "Profile": {
