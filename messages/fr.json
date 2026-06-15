@@ -252,6 +252,18 @@
       "recapTitle": "Les phrases complétées",
       "endTitle": "Mot replacé",
       "endSubtitle": "Tu as retrouvé chaque mot manquant."
+    },
+    "listen": {
+      "playLabel": "Écouter la phrase",
+      "replayHint": "Touche pour réécouter",
+      "comingSoon": "Audio bientôt disponible",
+      "meaningHint": "En attendant, choisis la phrase qui veut dire « {meaning} ».",
+      "nextRound": "C'est ça — manche suivante.",
+      "allDone": "C'est ça — terminé.",
+      "recapTitle": "Ce que tu as entendu",
+      "replay": "Rejouer",
+      "endTitle": "Oreille fine",
+      "endSubtitle": "Tu as saisi chaque phrase."
     }
   },
   "Profile": {

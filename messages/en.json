@@ -252,6 +252,18 @@
       "recapTitle": "The sentences you completed",
       "endTitle": "Word in place",
       "endSubtitle": "You found every missing word."
+    },
+    "listen": {
+      "playLabel": "Play the phrase",
+      "replayHint": "Tap to replay",
+      "comingSoon": "Audio coming soon",
+      "meaningHint": "Meanwhile, pick the phrase that means “{meaning}”.",
+      "nextRound": "Right — next round.",
+      "allDone": "Right — all done.",
+      "recapTitle": "What you heard",
+      "replay": "Replay",
+      "endTitle": "Sharp ear",
+      "endSubtitle": "You caught every phrase."
     }
   },
   "Profile": {

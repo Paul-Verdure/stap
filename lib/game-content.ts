@@ -110,3 +110,66 @@ export function buildFillRounds(
     };
   });
 }
+
+/* ---------------------------------------------------------------------------
+   Game C — "A sharp ear" (Listen). Each round plays one phrase; the player
+   picks it from three close Dutch variants. The phrase keeps its audio path
+   so the disc can play it (currently null for the whole catalog — the game
+   renders an honest degraded state, see the listen game component).
+--------------------------------------------------------------------------- */
+
+export type ListenSource = {
+  id: string;
+  nl: string;
+  meaning: string;
+  audioPath: string | null;
+};
+
+export type ListenOption = { word: string; correct: boolean };
+export type ListenRound = {
+  id: string;
+  /** The correct phrase (full Dutch). */
+  answer: string;
+  /** Localized meaning — the clue shown while audio is unavailable. */
+  meaning: string;
+  audioPath: string | null;
+  /** Three full Dutch variants, deterministically shuffled. */
+  options: ListenOption[];
+};
+
+const LISTEN_ROUNDS = 3;
+const LISTEN_OPTIONS = 3;
+
+/**
+ * Build up to three listen rounds from `sources` (first N become rounds; all
+ * of them seed the variant pool). Deterministic per seed.
+ */
+export function buildListenRounds(
+  sources: ListenSource[],
+  seed: string,
+): ListenRound[] {
+  const pool = [...new Set(sources.map((s) => s.nl))];
+
+  return sources.slice(0, LISTEN_ROUNDS).map((s, i) => {
+    const distractors = seededShuffle(
+      pool.filter((w) => w !== s.nl),
+      `${seed}:variant${i}`,
+    ).slice(0, LISTEN_OPTIONS - 1);
+
+    const options = seededShuffle(
+      [
+        { word: s.nl, correct: true },
+        ...distractors.map((word) => ({ word, correct: false })),
+      ],
+      `${seed}:option${i}`,
+    );
+
+    return {
+      id: s.id,
+      answer: s.nl,
+      meaning: s.meaning,
+      audioPath: s.audioPath,
+      options,
+    };
+  });
+}
