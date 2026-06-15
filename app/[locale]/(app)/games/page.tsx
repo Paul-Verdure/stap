@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 
 import { ContextBanner } from "@/components/games/context-banner";
 import { GameCardList } from "@/components/games/game-card-list";
+import { LockedState } from "@/components/games/locked-state";
 import { ReviewWiderLink } from "@/components/games/review-wider-link";
 import { TopBar } from "@/components/layout/top-bar";
 import { Helper } from "@/components/ui/typography";
@@ -30,16 +31,10 @@ export default async function GamesPage({
 
   const challenge = await getTodayChallenge(profile);
 
+  // The games replay the day, so they open only once today's challenge is
+  // DONE; otherwise the locked state guards the tab (SKIPPED is not a step).
   if (challenge?.state !== "DONE") {
-    // Placeholder until G7.6 builds the real locked state.
-    return (
-      <>
-        <TopBar title={t("title")} />
-        <main id="main-content" className="flex-1 px-5 pb-5">
-          <Helper>{t("placeholder")}</Helper>
-        </main>
-      </>
-    );
+    return <LockedState />;
   }
 
   const { phrase } = challenge;

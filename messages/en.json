@@ -264,6 +264,11 @@
       "replay": "Replay",
       "endTitle": "Sharp ear",
       "endSubtitle": "You caught every phrase."
+    },
+    "locked": {
+      "headline": "The games open after today's step",
+      "body": "They're a warm recap of the day — come back once you've done today's challenge.",
+      "cta": "See today's challenge"
     }
   },
   "Profile": {

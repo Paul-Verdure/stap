@@ -264,6 +264,11 @@
       "replay": "Rejouer",
       "endTitle": "Oreille fine",
       "endSubtitle": "Tu as saisi chaque phrase."
+    },
+    "locked": {
+      "headline": "Les jeux s'ouvrent après ton pas du jour",
+      "body": "Ce sont un récapitulatif tranquille de la journée — reviens une fois le défi du jour fait.",
+      "cta": "Voir le défi du jour"
     }
   },
   "Profile": {
