@@ -38,18 +38,42 @@
     "namePlaceholder": "Sofie",
     "nameHelper": "We'll use it to greet you — just your first name is fine.",
     "levels": {
-      "A0": { "name": "Just starting", "desc": "I don't know any Dutch yet." },
-      "A1": { "name": "Beginner", "desc": "A few words and set phrases." },
-      "A2": { "name": "Elementary", "desc": "Simple, everyday exchanges." },
-      "B1": { "name": "Intermediate", "desc": "I manage most daily situations." },
-      "B2": { "name": "Upper intermediate", "desc": "I'm fairly comfortable already." }
+      "A0": {
+        "name": "Just starting",
+        "desc": "I don't know any Dutch yet."
+      },
+      "A1": {
+        "name": "Beginner",
+        "desc": "A few words and set phrases."
+      },
+      "A2": {
+        "name": "Elementary",
+        "desc": "Simple, everyday exchanges."
+      },
+      "B1": {
+        "name": "Intermediate",
+        "desc": "I manage most daily situations."
+      },
+      "B2": {
+        "name": "Upper intermediate",
+        "desc": "I'm fairly comfortable already."
+      }
     },
     "contextsHelper": "Pick 1 to 4 — where you'll actually speak Dutch.",
     "contextsCount": "{count} of {max} selected",
     "frequency": {
-      "DAILY": { "name": "Every day", "desc": "One small step daily." },
-      "THREE_PER_WEEK": { "name": "3 times a week", "desc": "A steady, gentler pace." },
-      "OWN_PACE": { "name": "At my own pace", "desc": "No reminders, no pressure." }
+      "DAILY": {
+        "name": "Every day",
+        "desc": "One small step daily."
+      },
+      "THREE_PER_WEEK": {
+        "name": "3 times a week",
+        "desc": "A steady, gentler pace."
+      },
+      "OWN_PACE": {
+        "name": "At my own pace",
+        "desc": "No reminders, no pressure."
+      }
     },
     "reminderTitle": "Daily reminder",
     "reminderOff": "Off",
@@ -173,7 +197,79 @@
   },
   "Games": {
     "title": "Today's games",
-    "placeholder": "Three short games to revisit the day."
+    "placeholder": "Three short games to revisit the day.",
+    "contextEyebrow": "Today's challenge",
+    "pickAny": "3 short games · pick any",
+    "alreadyPlayed": "Already played",
+    "cards": {
+      "match": {
+        "title": "Upside down",
+        "desc": "Match each Dutch phrase with its meaning.",
+        "duration": "≈ 1 min"
+      },
+      "fill": {
+        "title": "The right word",
+        "desc": "Put the missing word back in the sentence.",
+        "duration": "≈ 1 min"
+      },
+      "listen": {
+        "title": "A sharp ear",
+        "desc": "Listen closely, pick what was said.",
+        "duration": "≈ 1 min"
+      }
+    },
+    "reviewWider": {
+      "title": "This week's vocabulary",
+      "desc": "Take a wider look at the words you met."
+    },
+    "review": {
+      "title": "This week's vocabulary",
+      "back": "Back to games",
+      "body": "A calm review of this week's words is coming soon."
+    },
+    "close": "Close the game",
+    "counterLabel": "Game {position} of {total}",
+    "nextGame": "Next game →",
+    "backToGames": "Back to games",
+    "end": {
+      "doneChip": "Done"
+    },
+    "match": {
+      "instruction": "Tap a Dutch phrase, then the meaning that goes with it.",
+      "progress": "{done} of {total} matched",
+      "matched": "Matched",
+      "tryAgain": "Try again",
+      "endTitle": "Nicely paired",
+      "endSubtitle": "You put every phrase back with its meaning.",
+      "recapTitle": "Today's pairs"
+    },
+    "tryAgain": "Try again",
+    "roundProgress": "Round {current} of {total}",
+    "fill": {
+      "blankLabel": "missing word",
+      "nextRound": "Right — next round.",
+      "allDone": "Right — all done.",
+      "recapTitle": "The sentences you completed",
+      "endTitle": "Word in place",
+      "endSubtitle": "You found every missing word."
+    },
+    "listen": {
+      "playLabel": "Play the phrase",
+      "replayHint": "Tap to replay",
+      "comingSoon": "Audio coming soon",
+      "meaningHint": "Meanwhile, pick the phrase that means “{meaning}”.",
+      "nextRound": "Right — next round.",
+      "allDone": "Right — all done.",
+      "recapTitle": "What you heard",
+      "replay": "Replay",
+      "endTitle": "Sharp ear",
+      "endSubtitle": "You caught every phrase."
+    },
+    "locked": {
+      "headline": "The games open after today's step",
+      "body": "They're a warm recap of the day — come back once you've done today's challenge.",
+      "cta": "See today's challenge"
+    }
   },
   "Profile": {
     "title": "Profile",

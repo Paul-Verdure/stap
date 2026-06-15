@@ -38,18 +38,42 @@
     "namePlaceholder": "Sofie",
     "nameHelper": "On l'utilisera pour vous saluer — votre prénom suffit.",
     "levels": {
-      "A0": { "name": "Tout début", "desc": "Je ne connais pas encore le néerlandais." },
-      "A1": { "name": "Débutant", "desc": "Quelques mots et expressions toutes faites." },
-      "A2": { "name": "Élémentaire", "desc": "Des échanges simples du quotidien." },
-      "B1": { "name": "Intermédiaire", "desc": "Je gère la plupart des situations courantes." },
-      "B2": { "name": "Intermédiaire avancé", "desc": "Je suis déjà assez à l'aise." }
+      "A0": {
+        "name": "Tout début",
+        "desc": "Je ne connais pas encore le néerlandais."
+      },
+      "A1": {
+        "name": "Débutant",
+        "desc": "Quelques mots et expressions toutes faites."
+      },
+      "A2": {
+        "name": "Élémentaire",
+        "desc": "Des échanges simples du quotidien."
+      },
+      "B1": {
+        "name": "Intermédiaire",
+        "desc": "Je gère la plupart des situations courantes."
+      },
+      "B2": {
+        "name": "Intermédiaire avancé",
+        "desc": "Je suis déjà assez à l'aise."
+      }
     },
     "contextsHelper": "Choisissez de 1 à 4 — où vous parlerez vraiment néerlandais.",
     "contextsCount": "{count} sur {max} sélectionnés",
     "frequency": {
-      "DAILY": { "name": "Chaque jour", "desc": "Un petit pas quotidien." },
-      "THREE_PER_WEEK": { "name": "3 fois par semaine", "desc": "Un rythme régulier, plus doux." },
-      "OWN_PACE": { "name": "À mon rythme", "desc": "Pas de rappel, pas de pression." }
+      "DAILY": {
+        "name": "Chaque jour",
+        "desc": "Un petit pas quotidien."
+      },
+      "THREE_PER_WEEK": {
+        "name": "3 fois par semaine",
+        "desc": "Un rythme régulier, plus doux."
+      },
+      "OWN_PACE": {
+        "name": "À mon rythme",
+        "desc": "Pas de rappel, pas de pression."
+      }
     },
     "reminderTitle": "Rappel quotidien",
     "reminderOff": "Désactivé",
@@ -173,7 +197,79 @@
   },
   "Games": {
     "title": "Jeux du jour",
-    "placeholder": "Trois petits jeux pour revisiter la journée."
+    "placeholder": "Trois petits jeux pour revisiter la journée.",
+    "contextEyebrow": "Le défi du jour",
+    "pickAny": "3 petits jeux · au choix",
+    "alreadyPlayed": "Déjà joué",
+    "cards": {
+      "match": {
+        "title": "À l'envers",
+        "desc": "Associe chaque phrase néerlandaise à son sens.",
+        "duration": "≈ 1 min"
+      },
+      "fill": {
+        "title": "Le bon mot",
+        "desc": "Replace le mot manquant dans la phrase.",
+        "duration": "≈ 1 min"
+      },
+      "listen": {
+        "title": "L'oreille fine",
+        "desc": "Écoute bien, choisis ce qui a été dit.",
+        "duration": "≈ 1 min"
+      }
+    },
+    "reviewWider": {
+      "title": "Le vocabulaire de la semaine",
+      "desc": "Revois plus largement les mots croisés cette semaine."
+    },
+    "review": {
+      "title": "Le vocabulaire de la semaine",
+      "back": "Retour aux jeux",
+      "body": "Une révision tranquille des mots de la semaine arrive bientôt."
+    },
+    "close": "Fermer le jeu",
+    "counterLabel": "Jeu {position} sur {total}",
+    "nextGame": "Jeu suivant →",
+    "backToGames": "Retour aux jeux",
+    "end": {
+      "doneChip": "Terminé"
+    },
+    "match": {
+      "instruction": "Touche une phrase néerlandaise, puis le sens qui lui correspond.",
+      "progress": "{done} sur {total} associées",
+      "matched": "Associée",
+      "tryAgain": "Réessaie",
+      "endTitle": "Bien associé",
+      "endSubtitle": "Tu as remis chaque phrase avec son sens.",
+      "recapTitle": "Les paires du jour"
+    },
+    "tryAgain": "Réessaie",
+    "roundProgress": "Manche {current} sur {total}",
+    "fill": {
+      "blankLabel": "mot manquant",
+      "nextRound": "C'est ça — manche suivante.",
+      "allDone": "C'est ça — terminé.",
+      "recapTitle": "Les phrases complétées",
+      "endTitle": "Mot replacé",
+      "endSubtitle": "Tu as retrouvé chaque mot manquant."
+    },
+    "listen": {
+      "playLabel": "Écouter la phrase",
+      "replayHint": "Touche pour réécouter",
+      "comingSoon": "Audio bientôt disponible",
+      "meaningHint": "En attendant, choisis la phrase qui veut dire « {meaning} ».",
+      "nextRound": "C'est ça — manche suivante.",
+      "allDone": "C'est ça — terminé.",
+      "recapTitle": "Ce que tu as entendu",
+      "replay": "Rejouer",
+      "endTitle": "Oreille fine",
+      "endSubtitle": "Tu as saisi chaque phrase."
+    },
+    "locked": {
+      "headline": "Les jeux s'ouvrent après ton pas du jour",
+      "body": "Ce sont un récapitulatif tranquille de la journée — reviens une fois le défi du jour fait.",
+      "cta": "Voir le défi du jour"
+    }
   },
   "Profile": {
     "title": "Profil",

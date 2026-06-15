@@ -24,9 +24,16 @@ const TABS = [
   { href: "/profile", key: "profile" },
 ] as const;
 
-// Routes that render in focus mode (no bottom nav). Active-game views join
-// this set in G7.
-const FOCUS_ROUTES = ["/today/prepare", "/today/validate"];
+// Routes that render in focus mode (no bottom nav): preparation, validation,
+// and the active games (the hub and the review stub keep the nav). Matched
+// exactly, so /games and /games/review are unaffected.
+const FOCUS_ROUTES = [
+  "/today/prepare",
+  "/today/validate",
+  "/games/match",
+  "/games/fill",
+  "/games/listen",
+];
 
 export function BottomNav() {
   const pathname = usePathname();
