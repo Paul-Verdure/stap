@@ -273,10 +273,21 @@
   },
   "Profile": {
     "title": "Profile",
-    "placeholder": "Your card and your setup.",
-    "sampleDate": "Sample date",
+    "settingsLabel": "Settings",
     "interface": "Interface language",
-    "theme": "Theme"
+    "theme": "Theme",
+    "identity": {
+      "stamp": "Your card",
+      "member": "Stap member",
+      "namelessFallback": "Member",
+      "levelLine": "Level {level} · Interface in {language}",
+      "levelLineNoLevel": "Interface in {language}",
+      "daysWith": "{days, plural, =0 {With Stap since today} one {With Stap for # day} other {With Stap for # days}}",
+      "languages": {
+        "en": "English",
+        "fr": "French"
+      }
+    }
   },
   "Status": {
     "loading": "Loading…"

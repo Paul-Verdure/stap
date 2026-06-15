@@ -126,6 +126,7 @@ export function IconButton({
   label,
   size = "md",
   variant = "outline",
+  asChild = false,
   className,
   children,
   ...props
@@ -133,21 +134,28 @@ export function IconButton({
   label: string;
   size?: "sm" | "md";
   variant?: "outline" | "ghost";
+  /** Render the child element (e.g. an anchor) instead of a <button>. */
+  asChild?: boolean;
   className?: string;
   children: ReactNode;
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "aria-label">) {
+  const classes = cn(
+    "inline-grid shrink-0 place-items-center rounded-full text-foreground",
+    size === "sm" ? "h-9 w-9" : "h-11 w-11", // 36 / 44px
+    variant === "outline" ? "border-structural bg-surface" : "bg-transparent",
+    className,
+  );
+
+  if (asChild) {
+    return (
+      <Slot aria-label={label} className={classes} {...props}>
+        {children}
+      </Slot>
+    );
+  }
+
   return (
-    <button
-      type="button"
-      aria-label={label}
-      className={cn(
-        "inline-grid shrink-0 place-items-center rounded-full text-foreground",
-        size === "sm" ? "h-9 w-9" : "h-11 w-11", // 36 / 44px
-        variant === "outline" ? "border-structural bg-surface" : "bg-transparent",
-        className,
-      )}
-      {...props}
-    >
+    <button type="button" aria-label={label} className={classes} {...props}>
       {children}
     </button>
   );
