@@ -287,6 +287,24 @@
         "en": "anglais",
         "fr": "français"
       }
+    },
+    "journey": {
+      "title": "Mon parcours",
+      "rhythm": {
+        "title": "Mon rythme",
+        "caption": "Cette semaine — {steps, plural, one {# pas} other {# pas}}"
+      },
+      "season": {
+        "title": "Ma saison",
+        "recap": "Nouveau récap",
+        "summary": "{steps, plural, one {# pas} other {# pas}} · {contexts, plural, one {# contexte} other {# contextes}}"
+      },
+      "v2": {
+        "title": "Bientôt en v2",
+        "subtitle": "Cet écran n'est pas encore prêt.",
+        "body": "L'historique complet du rythme et le récap saisonnier arrivent dans une version ultérieure. Votre carte et vos réglages ci-dessous sont déjà actifs.",
+        "dismiss": "Compris"
+      }
     }
   },
   "Status": {

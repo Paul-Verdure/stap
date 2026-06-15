@@ -3,9 +3,11 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { TopBar } from "@/components/layout/top-bar";
 import { IdentityCard } from "@/components/profile/identity-card";
+import { JourneyCards } from "@/components/profile/journey-cards";
 import { IconButton } from "@/components/ui/button";
 import { SettingsIcon } from "@/components/ui/icons";
-import { daysSince, getProfileIdentity } from "@/lib/profile";
+import { SectionRule } from "@/components/ui/typography";
+import { daysSince, getJourneyPreview, getProfileIdentity } from "@/lib/profile";
 
 // The Profile tab (G8): identity hero, journey stubs, editable setup,
 // preferences, account management, and the two modals. Built step by step.
@@ -22,6 +24,8 @@ export default async function ProfilePage({
   // identity here would be an inconsistent state, so bounce to onboarding.
   const identity = await getProfileIdentity();
   if (!identity) redirect(`/${locale}/onboarding`);
+
+  const journey = await getJourneyPreview();
 
   return (
     <>
@@ -44,6 +48,17 @@ export default async function ProfilePage({
           uiLocale={identity.uiLocale}
           days={daysSince(identity.createdAt)}
         />
+
+        {journey ? (
+          <section className="flex flex-col gap-3">
+            <SectionRule>{t("journey.title")}</SectionRule>
+            <JourneyCards
+              weekRhythm={journey.weekRhythm}
+              seasonSteps={journey.seasonSteps}
+              contextCount={journey.contextCount}
+            />
+          </section>
+        ) : null}
       </main>
     </>
   );

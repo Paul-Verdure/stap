@@ -1,5 +1,9 @@
+import type { RhythmDay } from "@/components/ui/rhythm";
 import { getCurrentUser } from "@/lib/auth/user";
+import { getWeekRhythm } from "@/lib/challenge";
+import { startOfMonthUTC } from "@/lib/date";
 import { db } from "@/lib/db";
+import { ChallengeState } from "@/lib/generated/prisma/enums";
 
 /* ===========================================================================
    Profile reads (G8).
@@ -45,4 +49,38 @@ export async function getProfileIdentity(): Promise<ProfileIdentity | null> {
 export function daysSince(createdAt: Date, now: Date = new Date()): number {
   const ms = now.getTime() - createdAt.getTime();
   return Math.max(0, Math.floor(ms / 86_400_000));
+}
+
+export type JourneyPreview = {
+  /** The 7-day weekly rhythm for the "My rhythm" card preview. */
+  weekRhythm: RhythmDay[];
+  /** Attempts (DONE or MISSED) since the start of the current month. */
+  seasonSteps: number;
+  /** Number of life contexts the user picked. */
+  contextCount: number;
+};
+
+/**
+ * Real-ish previews for the two (v2-stubbed) "My journey" cards: the weekly
+ * rhythm row, a season step count (month-to-date attempts), and the life
+ * context count. Scoped to the authenticated user; null when unauthenticated.
+ */
+export async function getJourneyPreview(): Promise<JourneyPreview | null> {
+  const user = await getCurrentUser();
+  if (!user) return null;
+
+  const monthStart = startOfMonthUTC();
+  const [weekRhythm, seasonSteps, contextCount] = await Promise.all([
+    getWeekRhythm(user.id),
+    db.challenge.count({
+      where: {
+        userId: user.id,
+        date: { gte: monthStart },
+        state: { in: [ChallengeState.DONE, ChallengeState.MISSED] },
+      },
+    }),
+    db.userLifeContext.count({ where: { userId: user.id } }),
+  ]);
+
+  return { weekRhythm, seasonSteps, contextCount };
 }

@@ -287,6 +287,24 @@
         "en": "English",
         "fr": "French"
       }
+    },
+    "journey": {
+      "title": "My journey",
+      "rhythm": {
+        "title": "My rhythm",
+        "caption": "This week — {steps, plural, one {# step} other {# steps}}"
+      },
+      "season": {
+        "title": "My season",
+        "recap": "New recap",
+        "summary": "{steps, plural, one {# step} other {# steps}} · {contexts, plural, one {# context} other {# contexts}}"
+      },
+      "v2": {
+        "title": "Coming in v2",
+        "subtitle": "This screen isn't built yet.",
+        "body": "Your full rhythm and the seasonal recap arrive in a later version. Your card and setup below are already live.",
+        "dismiss": "Got it"
+      }
     }
   },
   "Status": {
