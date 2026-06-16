@@ -365,7 +365,24 @@
         "cancel": "Cancel",
         "stubbed": "Account deletion isn't enabled yet — nothing was changed."
       }
+    },
+    "footer": {
+      "links": {
+        "terms": "Terms",
+        "privacy": "Privacy",
+        "notice": "Legal notice"
+      },
+      "version": "Stap v{version}",
+      "madeWith": "Made with <heart></heart> in the Netherlands",
+      "heartAlt": "love"
     }
+  },
+  "Legal": {
+    "back": "Back to profile",
+    "placeholder": "This page is being finalized and will appear here soon.",
+    "terms": { "title": "Terms of service" },
+    "privacy": { "title": "Privacy policy" },
+    "notice": { "title": "Legal notice" }
   },
   "Status": {
     "loading": "Loading…"

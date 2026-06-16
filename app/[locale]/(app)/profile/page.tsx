@@ -5,6 +5,7 @@ import { TopBar } from "@/components/layout/top-bar";
 import { AccountSection } from "@/components/profile/account-section";
 import { IdentityCard } from "@/components/profile/identity-card";
 import { JourneyCards } from "@/components/profile/journey-cards";
+import { LegalFooter } from "@/components/profile/legal-footer";
 import { PreferencesSection } from "@/components/profile/preferences-section";
 import { SetupSection } from "@/components/profile/setup-section";
 import { IconButton } from "@/components/ui/button";
@@ -84,6 +85,8 @@ export default async function ProfilePage({
         <PreferencesSection reminderTime={setup?.reminderTime ?? null} />
 
         <AccountSection email={identity.email} />
+
+        <LegalFooter />
       </main>
     </>
   );

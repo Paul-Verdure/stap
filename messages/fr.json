@@ -365,7 +365,24 @@
         "cancel": "Annuler",
         "stubbed": "La suppression de compte n'est pas encore activée — rien n'a été modifié."
       }
+    },
+    "footer": {
+      "links": {
+        "terms": "Conditions",
+        "privacy": "Confidentialité",
+        "notice": "Mentions légales"
+      },
+      "version": "Stap v{version}",
+      "madeWith": "Fait avec <heart></heart> aux Pays-Bas",
+      "heartAlt": "amour"
     }
+  },
+  "Legal": {
+    "back": "Retour au profil",
+    "placeholder": "Cette page est en cours de finalisation et apparaîtra ici bientôt.",
+    "terms": { "title": "Conditions d'utilisation" },
+    "privacy": { "title": "Politique de confidentialité" },
+    "notice": { "title": "Mentions légales" }
   },
   "Status": {
     "loading": "Chargement…"
