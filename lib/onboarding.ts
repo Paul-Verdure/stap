@@ -12,6 +12,14 @@ import type { Locale } from "@/i18n/routing";
 export type DutchLevel = "A0" | "A1" | "A2" | "B1" | "B2";
 export type Frequency = "DAILY" | "THREE_PER_WEEK" | "OWN_PACE";
 
+/* Shared option sets — single source of truth for the onboarding flow, the
+   Profile "My setup" editors, and the server-side write validation. */
+export const LEVELS: DutchLevel[] = ["A0", "A1", "A2", "B1", "B2"];
+export const FREQUENCIES: Frequency[] = ["DAILY", "THREE_PER_WEEK", "OWN_PACE"];
+/** Canonical 24h reminder slots (the only persisted non-null reminder values). */
+export const REMINDER_SLOTS = ["08:00", "12:00", "18:00"] as const;
+export const MAX_CONTEXTS = 4;
+
 export type OnboardingState = {
   /** Current screen, 0–6. */
   step: number;

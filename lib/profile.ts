@@ -1,9 +1,11 @@
+import type { LifeContextOption } from "@/components/onboarding/fields";
 import type { RhythmDay } from "@/components/ui/rhythm";
 import { getCurrentUser } from "@/lib/auth/user";
 import { getWeekRhythm } from "@/lib/challenge";
 import { startOfMonthUTC } from "@/lib/date";
 import { db } from "@/lib/db";
 import { ChallengeState } from "@/lib/generated/prisma/enums";
+import type { DutchLevel, Frequency } from "@/lib/onboarding";
 
 /* ===========================================================================
    Profile reads (G8).
@@ -83,4 +85,49 @@ export async function getJourneyPreview(): Promise<JourneyPreview | null> {
   ]);
 
   return { weekRhythm, seasonSteps, contextCount };
+}
+
+export type SetupData = {
+  level: DutchLevel | null;
+  contextSlugs: string[];
+  frequency: Frequency | null;
+  reminderTime: string | null;
+};
+
+/** The authenticated user's editable "My setup" values, or null. */
+export async function getSetupData(): Promise<SetupData | null> {
+  const user = await getCurrentUser();
+  if (!user) return null;
+
+  const row = await db.user.findUnique({
+    where: { id: user.id },
+    select: {
+      level: true,
+      frequency: true,
+      reminderTime: true,
+      lifeContexts: { select: { lifeContext: { select: { slug: true } } } },
+    },
+  });
+  if (!row) return null;
+
+  return {
+    level: row.level,
+    contextSlugs: row.lifeContexts.map((c) => c.lifeContext.slug),
+    frequency: row.frequency,
+    reminderTime: row.reminderTime,
+  };
+}
+
+/** The seeded life-context catalog, labelled in the given UI locale. */
+export async function getLifeContextOptions(
+  locale: string,
+): Promise<LifeContextOption[]> {
+  const rows = await db.lifeContext.findMany({
+    orderBy: { slug: "asc" },
+    select: { slug: true, nameEn: true, nameFr: true },
+  });
+  return rows.map((r) => ({
+    slug: r.slug,
+    name: locale === "fr" ? r.nameFr : r.nameEn,
+  }));
 }

@@ -305,6 +305,21 @@
         "body": "Your full rhythm and the seasonal recap arrive in a later version. Your card and setup below are already live.",
         "dismiss": "Got it"
       }
+    },
+    "setup": {
+      "title": "My setup",
+      "levelLabel": "Dutch level",
+      "levelTitle": "Your Dutch level",
+      "contextsLabel": "Life contexts",
+      "contextsTitle": "Your life contexts",
+      "frequencyLabel": "Challenge rhythm",
+      "frequencyTitle": "Your rhythm",
+      "notSet": "Not set",
+      "save": "Save",
+      "saving": "Saving…",
+      "cancel": "Cancel",
+      "saved": "Saved",
+      "saveError": "Could not save. Please try again."
     }
   },
   "Status": {

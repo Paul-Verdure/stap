@@ -305,6 +305,21 @@
         "body": "L'historique complet du rythme et le récap saisonnier arrivent dans une version ultérieure. Votre carte et vos réglages ci-dessous sont déjà actifs.",
         "dismiss": "Compris"
       }
+    },
+    "setup": {
+      "title": "Mes réglages",
+      "levelLabel": "Niveau de néerlandais",
+      "levelTitle": "Votre niveau de néerlandais",
+      "contextsLabel": "Contextes de vie",
+      "contextsTitle": "Vos contextes de vie",
+      "frequencyLabel": "Rythme des défis",
+      "frequencyTitle": "Votre rythme",
+      "notSet": "Non défini",
+      "save": "Enregistrer",
+      "saving": "Enregistrement…",
+      "cancel": "Annuler",
+      "saved": "Enregistré",
+      "saveError": "Échec de l'enregistrement. Veuillez réessayer."
     }
   },
   "Status": {

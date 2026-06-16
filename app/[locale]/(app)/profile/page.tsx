@@ -4,10 +4,17 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { TopBar } from "@/components/layout/top-bar";
 import { IdentityCard } from "@/components/profile/identity-card";
 import { JourneyCards } from "@/components/profile/journey-cards";
+import { SetupSection } from "@/components/profile/setup-section";
 import { IconButton } from "@/components/ui/button";
 import { SettingsIcon } from "@/components/ui/icons";
 import { SectionRule } from "@/components/ui/typography";
-import { daysSince, getJourneyPreview, getProfileIdentity } from "@/lib/profile";
+import {
+  daysSince,
+  getJourneyPreview,
+  getLifeContextOptions,
+  getProfileIdentity,
+  getSetupData,
+} from "@/lib/profile";
 
 // The Profile tab (G8): identity hero, journey stubs, editable setup,
 // preferences, account management, and the two modals. Built step by step.
@@ -26,6 +33,8 @@ export default async function ProfilePage({
   if (!identity) redirect(`/${locale}/onboarding`);
 
   const journey = await getJourneyPreview();
+  const setup = await getSetupData();
+  const lifeContexts = await getLifeContextOptions(locale);
 
   return (
     <>
@@ -58,6 +67,16 @@ export default async function ProfilePage({
               contextCount={journey.contextCount}
             />
           </section>
+        ) : null}
+
+        {setup ? (
+          <SetupSection
+            level={setup.level}
+            contextSlugs={setup.contextSlugs}
+            frequency={setup.frequency}
+            reminderTime={setup.reminderTime}
+            options={lifeContexts}
+          />
         ) : null}
       </main>
     </>
