@@ -1,44 +1,32 @@
 # Accessibility debt
 
 Tracks accepted, known accessibility gaps so they are not mistaken for fresh
-regressions. The shipped bar is **0 axe violations on every page state with all
-modals closed, light AND dark** (what G1–G7 shipped and G8 keeps). The items
-below are explicitly out of that bar for now.
+regressions. The shipped bar is **0 axe violations on every page state, light
+AND dark, with modals open or closed**.
 
-## Modal-open axe findings (app-wide, since G6)
+There is currently **no open accessibility debt**.
 
-When any modal built on the shared primitive (`components/ui/modal.tsx` —
-`CenteredModal` / `BottomSheet`, Radix Dialog) is **open**, axe reports:
+## Resolved
 
-- `aria-hidden-focus` — Radix `aria-hidden`s the background siblings (header,
-  sections, bottom nav) but their buttons/links stay focusable.
-- `page-has-heading-one` — the page's only `<h1>` (the TopBar) is inside the
-  aria-hidden background; the modal title is an `<h2>`.
-- `scrollable-region-focusable` — on text-only modals (e.g. the journey "Coming
-  in v2" placeholder) the scrollable body has no focusable child.
+### Modal-open axe findings (resolved in G8)
 
-Modal-**closed** pages are clean. This is pre-existing (present since the G6
-Journal filters sheet) and not specific to G8.
+Modals built on the shared primitive (`components/ui/modal.tsx` —
+`CenteredModal` / `BottomSheet`, Radix Dialog) used to report three axe
+violations while **open** (app-wide since the G6 Journal filters sheet):
 
-### Why it is debt and not fixed
+- `aria-hidden-focus` — Radix aria-hid the background but left its controls
+  focusable.
+- `page-has-heading-one` — the page's only `<h1>` (TopBar) was inside the
+  aria-hidden background; the modal title was an `<h2>`.
+- `scrollable-region-focusable` — text-only modals had a non-focusable scroll
+  region.
 
-G8 implemented a fix (inert background + modal-owned `<main>`/`<h1>` + a
-focusable scroll region) in commit `6c2ad42` and **reverted it** in `e308efc`:
-mutating many elements to `inert` in a mount effect stuttered the open
-animation, and the approach was rejected. Do **not** re-apply that exact
-approach without sign-off.
-
-### How modals ARE verified meanwhile
-
-Per the G8 handoff, modal correctness is asserted via the DOM rather than axe:
-focus trap + restore-to-trigger on close, Escape + backdrop dismiss, scroll
-lock (`data-scroll-locked`), and siblings receiving `aria-hidden`. Radix omits
-`aria-modal` deliberately, so modality is checked through those signals.
-
-### Future fix (needs design sign-off)
-
-A non-stuttering approach would apply `inert` off the animation critical path —
-e.g. after the open transition via Radix `onOpenChange`, or with the platform
-`inert` driven from open state rather than a broad mount-time DOM sweep — and
-still give the open modal the single `main`/`h1`. Treat as a focused, separate
-a11y task.
+**Fix** (`components/ui/modal.tsx`): while a modal is open, the background
+top-level elements are marked `inert` (controls leave the tab order and the
+a11y tree); the open modal carries the page's single `main` landmark
+(`display:contents`) and its title is the `h1`; the scroll region is
+focusable. A first attempt was reverted because it was entangled with a
+separate Tailwind-v4 zoom-in animation bug; once that was fixed
+(`@keyframes stap-zoom-in` animating scale only, not a stacked translate), the
+inert approach was re-applied and is smooth. Modal correctness is also asserted
+via the DOM (focus trap, restore-to-trigger, Escape + backdrop, scroll lock).
