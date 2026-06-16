@@ -320,6 +320,20 @@
       "cancel": "Annuler",
       "saved": "Enregistré",
       "saveError": "Échec de l'enregistrement. Veuillez réessayer."
+    },
+    "preferences": {
+      "title": "Préférences",
+      "notifications": "Notifications",
+      "notificationsDesc": "Un petit rappel quotidien pour faire votre pas.",
+      "notificationsDescTime": "Un petit rappel quotidien, vers {time}.",
+      "sound": "Son & audio",
+      "soundDesc": "Jouer la prononciation et les sons des jeux.",
+      "theme": "Apparence",
+      "themeOptions": {
+        "system": "Selon le système",
+        "dark": "Toujours sombre",
+        "light": "Toujours clair"
+      }
     }
   },
   "Status": {

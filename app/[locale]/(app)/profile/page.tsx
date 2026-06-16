@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { TopBar } from "@/components/layout/top-bar";
 import { IdentityCard } from "@/components/profile/identity-card";
 import { JourneyCards } from "@/components/profile/journey-cards";
+import { PreferencesSection } from "@/components/profile/preferences-section";
 import { SetupSection } from "@/components/profile/setup-section";
 import { IconButton } from "@/components/ui/button";
 import { SettingsIcon } from "@/components/ui/icons";
@@ -78,6 +79,8 @@ export default async function ProfilePage({
             options={lifeContexts}
           />
         ) : null}
+
+        <PreferencesSection reminderTime={setup?.reminderTime ?? null} />
       </main>
     </>
   );

@@ -320,6 +320,20 @@
       "cancel": "Cancel",
       "saved": "Saved",
       "saveError": "Could not save. Please try again."
+    },
+    "preferences": {
+      "title": "Preferences",
+      "notifications": "Notifications",
+      "notificationsDesc": "A daily nudge to take your step.",
+      "notificationsDescTime": "A daily nudge, around {time}.",
+      "sound": "Sound & audio",
+      "soundDesc": "Play pronunciation and game sounds.",
+      "theme": "Appearance",
+      "themeOptions": {
+        "system": "Match system",
+        "dark": "Always dark",
+        "light": "Always light"
+      }
     }
   },
   "Status": {
