@@ -334,6 +334,16 @@
         "dark": "Always dark",
         "light": "Always light"
       }
+    },
+    "account": {
+      "title": "Account",
+      "email": "Email",
+      "password": "Change password",
+      "export": "Export my data",
+      "exportDesc": "Download your journal and progress as JSON.",
+      "exporting": "Preparing your file…",
+      "exportError": "Export failed. Please try again.",
+      "signOut": "Sign out"
     }
   },
   "Status": {

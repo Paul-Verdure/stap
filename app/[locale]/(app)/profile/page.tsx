@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { TopBar } from "@/components/layout/top-bar";
+import { AccountSection } from "@/components/profile/account-section";
 import { IdentityCard } from "@/components/profile/identity-card";
 import { JourneyCards } from "@/components/profile/journey-cards";
 import { PreferencesSection } from "@/components/profile/preferences-section";
@@ -81,6 +82,8 @@ export default async function ProfilePage({
         ) : null}
 
         <PreferencesSection reminderTime={setup?.reminderTime ?? null} />
+
+        <AccountSection email={identity.email} />
       </main>
     </>
   );

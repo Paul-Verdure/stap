@@ -18,6 +18,7 @@ import type { DutchLevel, Frequency } from "@/lib/onboarding";
 
 export type ProfileIdentity = {
   displayName: string | null;
+  email: string;
   uiLocale: "en" | "fr";
   level: "A0" | "A1" | "A2" | "B1" | "B2" | null;
   createdAt: Date;
@@ -32,6 +33,7 @@ export async function getProfileIdentity(): Promise<ProfileIdentity | null> {
     where: { id: user.id },
     select: {
       displayName: true,
+      email: true,
       uiLocale: true,
       level: true,
       createdAt: true,
@@ -41,6 +43,7 @@ export async function getProfileIdentity(): Promise<ProfileIdentity | null> {
 
   return {
     displayName: row.displayName,
+    email: row.email,
     uiLocale: row.uiLocale,
     level: row.level,
     createdAt: row.createdAt,

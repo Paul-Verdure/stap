@@ -334,6 +334,16 @@
         "dark": "Toujours sombre",
         "light": "Toujours clair"
       }
+    },
+    "account": {
+      "title": "Compte",
+      "email": "E-mail",
+      "password": "Changer le mot de passe",
+      "export": "Exporter mes données",
+      "exportDesc": "Téléchargez votre journal et votre progression en JSON.",
+      "exporting": "Préparation du fichier…",
+      "exportError": "Échec de l'export. Veuillez réessayer.",
+      "signOut": "Se déconnecter"
     }
   },
   "Status": {
