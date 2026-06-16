@@ -348,7 +348,23 @@
       "exportDesc": "Téléchargez votre journal et votre progression en JSON.",
       "exporting": "Préparation du fichier…",
       "exportError": "Échec de l'export. Veuillez réessayer.",
-      "signOut": "Se déconnecter"
+      "signOut": "Se déconnecter",
+      "delete": {
+        "row": "Supprimer mon compte",
+        "title": "Supprimer mon compte",
+        "subtitle": "Cette action est définitive.",
+        "pill": "Action irréversible",
+        "lossIntro": "Supprimer votre compte efface définitivement :",
+        "loss1": "votre journal et toutes ses notes",
+        "loss2": "votre rythme hebdomadaire et votre progression",
+        "loss3": "vos réglages et préférences",
+        "confirmLabel": "Tapez {word} pour confirmer",
+        "word": "SUPPRIMER",
+        "confirm": "Supprimer définitivement",
+        "deleting": "Suppression…",
+        "cancel": "Annuler",
+        "stubbed": "La suppression de compte n'est pas encore activée — rien n'a été modifié."
+      }
     }
   },
   "Status": {

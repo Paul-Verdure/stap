@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
+import { DeleteAccountRow } from "@/components/profile/delete-account-row";
 import { ChevronIcon, DownloadIcon } from "@/components/ui/icons";
 import { SectionRule } from "@/components/ui/typography";
 import { Link } from "@/i18n/navigation";
@@ -94,6 +95,9 @@ export function AccountSection({ email }: { email: string }) {
           <span className="text-body font-medium">{t("signOut")}</span>
         </button>
       </form>
+
+      {/* Delete my account — destructive, confirm modal (step-7 security stop). */}
+      <DeleteAccountRow />
     </section>
   );
 }

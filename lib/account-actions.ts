@@ -50,6 +50,24 @@ export type AccountExport = {
   }[];
 };
 
+export type DeleteResult = { status: "stubbed" } | { status: "error" };
+
+/**
+ * Account deletion — STUBBED (G8 security stop, decision 2). The real flow
+ * would call the Supabase admin API with the SERVICE-ROLE secret to delete the
+ * auth user, then cascade the DB rows. That secret and the irreversible delete
+ * are deliberately NOT wired here, so this NEVER deletes anything and stays
+ * safe on the shared seed user. It only confirms a session and returns a
+ * "stubbed" marker the UI surfaces honestly. Do not implement the real delete
+ * without the user's explicit go-ahead and the service-role secret.
+ */
+export async function deleteAccount(): Promise<DeleteResult> {
+  const user = await getCurrentUser();
+  if (!user) return { status: "error" };
+  // Intentionally a no-op: nothing is deleted.
+  return { status: "stubbed" };
+}
+
 export async function exportMyData(): Promise<ExportResult> {
   const user = await getCurrentUser();
   if (!user) return { status: "error" };

@@ -348,7 +348,23 @@
       "exportDesc": "Download your journal and progress as JSON.",
       "exporting": "Preparing your file…",
       "exportError": "Export failed. Please try again.",
-      "signOut": "Sign out"
+      "signOut": "Sign out",
+      "delete": {
+        "row": "Delete my account",
+        "title": "Delete my account",
+        "subtitle": "This cannot be undone.",
+        "pill": "Irreversible action",
+        "lossIntro": "Deleting your account permanently removes:",
+        "loss1": "your journal and every note in it",
+        "loss2": "your weekly rhythm and progress",
+        "loss3": "your setup and preferences",
+        "confirmLabel": "Type {word} to confirm",
+        "word": "DELETE",
+        "confirm": "Delete permanently",
+        "deleting": "Deleting…",
+        "cancel": "Cancel",
+        "stubbed": "Account deletion isn't enabled yet — nothing was changed."
+      }
     }
   },
   "Status": {
