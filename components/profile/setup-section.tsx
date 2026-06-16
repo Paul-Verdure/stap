@@ -10,6 +10,7 @@ import {
   LevelSelect,
   useSlotLabel,
 } from "@/components/onboarding/fields";
+import { LanguageRow } from "@/components/profile/language-row";
 import { SettingsRow } from "@/components/profile/settings-row";
 import { Cta } from "@/components/ui/button";
 import { BottomSheet, ModalClose } from "@/components/ui/modal";
@@ -30,9 +31,9 @@ import {
    refreshes the server-rendered values. The whole section announces "Saved"
    politely after any successful write (a11y contract).
 
-   The Interface-language row is intentionally absent here: editing the UI
-   locale is the Language modal (step 6), which also navigates the locale
-   route and reloads — a different concern from these same-page column writes.
+   The Interface-language row (LanguageRow) is the fourth row: unlike the
+   column writes above, it opens a CenteredModal and hard-navigates the locale
+   route on confirm, so it owns its own modal + reload flow.
 =========================================================================== */
 
 export function SetupSection({
@@ -78,6 +79,7 @@ export function SetupSection({
           reminderTime={reminderTime}
           onSaved={announceSaved}
         />
+        <LanguageRow />
       </div>
 
       <span aria-live="polite" className="sr-only">

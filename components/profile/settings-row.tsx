@@ -20,7 +20,8 @@ export const SettingsRow = forwardRef<
     label: ReactNode;
     value: ReactNode;
     className?: string;
-  } & ButtonHTMLAttributes<HTMLButtonElement>
+    // Omit the HTML `value` attribute so our ReactNode `value` prop wins.
+  } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "value">
 >(function SettingsRow({ label, value, className, ...props }, ref) {
   return (
     <button ref={ref} type="button" className={cn(ROW, className)} {...props}>

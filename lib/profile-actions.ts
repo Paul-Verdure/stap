@@ -61,6 +61,15 @@ export async function updateContexts(slugs: string[]): Promise<SetupResult> {
   return { status: "done" };
 }
 
+export async function updateLocale(locale: "en" | "fr"): Promise<SetupResult> {
+  const userId = await currentUserId();
+  if (!userId) return { status: "error" };
+  if (locale !== "en" && locale !== "fr") return { status: "error" };
+
+  await db.user.update({ where: { id: userId }, data: { uiLocale: locale } });
+  return { status: "done" };
+}
+
 export async function updateFrequency(
   frequency: Frequency,
   reminderTime: string | null,
