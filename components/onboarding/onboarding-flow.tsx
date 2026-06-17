@@ -1,17 +1,21 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useFormatter, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 
+import {
+  ContextMultiSelect,
+  FrequencyReminderSelect,
+  LevelSelect,
+  useSlotLabel,
+} from "@/components/onboarding/fields";
 import { Cta, IconButton, SecondaryLink } from "@/components/ui/button";
-import { Chip, TimeSlot } from "@/components/ui/chip";
 import { BackIcon } from "@/components/ui/icons";
 import { LangCard } from "@/components/ui/lang-card";
 import { ProgressBar } from "@/components/ui/progress";
-import { RadioGroup, RadioRow } from "@/components/ui/radio-group";
-import { Card, HeroSurface, Tag } from "@/components/ui/surface";
+import { Card, HeroSurface } from "@/components/ui/surface";
 import { TextInput } from "@/components/ui/text-field";
-import { Eyebrow, Helper, Nl, Question, SectionRule } from "@/components/ui/typography";
+import { Eyebrow, Helper, Nl, Question } from "@/components/ui/typography";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import {
@@ -25,8 +29,6 @@ import {
   ONBOARDING_STORAGE_KEY,
   ONBOARDING_TOTAL_STEPS,
   toOnboardingPayload,
-  type DutchLevel,
-  type Frequency,
   type OnboardingState,
 } from "@/lib/onboarding";
 
@@ -39,10 +41,6 @@ const TITLE_KEY: Record<number, string> = {
   6: "s6Title",
 };
 
-const LEVELS: DutchLevel[] = ["A0", "A1", "A2", "B1", "B2"];
-const FREQUENCIES: Frequency[] = ["DAILY", "THREE_PER_WEEK", "OWN_PACE"];
-const REMINDER_SLOTS = ["08:00", "12:00", "18:00"];
-const MAX_CONTEXTS = 4;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type LifeContextOption = { slug: string; name: string };
@@ -59,7 +57,7 @@ export function OnboardingFlow({
   // next-intl's `t` is typed to literal keys; this loosened alias is for the
   // dynamic level/frequency/title lookups (all keys exist in the catalog).
   const tt = t as unknown as (key: string) => string;
-  const format = useFormatter();
+  const slotLabel = useSlotLabel();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -110,29 +108,6 @@ export function OnboardingFlow({
     router.replace(pathname, { locale });
   };
 
-  const toggleContext = (slug: string) => {
-    const has = state.contexts.includes(slug);
-    if (!has && state.contexts.length >= MAX_CONTEXTS) return;
-    commit({
-      ...state,
-      contexts: has
-        ? state.contexts.filter((c) => c !== slug)
-        : [...state.contexts, slug],
-    });
-  };
-
-  // "Own pace" has no fixed cadence: clear any reminder.
-  const pickFrequency = (frequency: Frequency) =>
-    patch({
-      frequency,
-      reminderTime: frequency === "OWN_PACE" ? null : state.reminderTime,
-    });
-
-  const slotLabel = (hhmm: string) => {
-    const [h, m] = hhmm.split(":").map(Number);
-    return format.dateTime(new Date(2000, 0, 1, h, m), "time");
-  };
-
   // Persist the profile for the authenticated user, then enter the app.
   const startFinalize = () => {
     const payload = toOnboardingPayload(state);
@@ -168,7 +143,6 @@ export function OnboardingFlow({
     });
   };
 
-  const reminderDisabled = state.frequency === "OWN_PACE";
   const showProgress = state.step >= 2;
   const showBack = state.step >= 3;
   const progressValue = state.step - 1;
@@ -349,20 +323,10 @@ export function OnboardingFlow({
         {state.step === 3 && (
           <>
             <Question>{tt(TITLE_KEY[3])}</Question>
-            <RadioGroup
-              value={state.level ?? ""}
-              onValueChange={(v) => patch({ level: v as DutchLevel })}
-            >
-              {LEVELS.map((code) => (
-                <RadioRow
-                  key={code}
-                  value={code}
-                  label={tt(`levels.${code}.name`)}
-                  description={tt(`levels.${code}.desc`)}
-                  tag={<Tag tone="amber">{code}</Tag>}
-                />
-              ))}
-            </RadioGroup>
+            <LevelSelect
+              value={state.level}
+              onChange={(level) => patch({ level })}
+            />
             <div className="mt-auto">
               <Cta fullWidth disabled={!canContinue} onClick={goNext}>
                 {t("next")}
@@ -377,23 +341,11 @@ export function OnboardingFlow({
           <>
             <Question>{tt(TITLE_KEY[4])}</Question>
             <Helper>{t("contextsHelper")}</Helper>
-            <div className="flex flex-wrap gap-2">
-              {lifeContexts.map((c) => (
-                <Chip
-                  key={c.slug}
-                  selected={state.contexts.includes(c.slug)}
-                  onClick={() => toggleContext(c.slug)}
-                >
-                  {c.name}
-                </Chip>
-              ))}
-            </div>
-            <p aria-live="polite" className="text-helper text-muted">
-              {t("contextsCount", {
-                count: state.contexts.length,
-                max: MAX_CONTEXTS,
-              })}
-            </p>
+            <ContextMultiSelect
+              value={state.contexts}
+              onChange={(contexts) => patch({ contexts })}
+              options={lifeContexts}
+            />
             <div className="mt-auto">
               <Cta fullWidth disabled={!canContinue} onClick={goNext}>
                 {t("next")}
@@ -406,41 +358,13 @@ export function OnboardingFlow({
         {state.step === 5 && (
           <>
             <Question>{tt(TITLE_KEY[5])}</Question>
-            <RadioGroup
-              value={state.frequency ?? ""}
-              onValueChange={(v) => pickFrequency(v as Frequency)}
-            >
-              {FREQUENCIES.map((f) => (
-                <RadioRow
-                  key={f}
-                  value={f}
-                  label={tt(`frequency.${f}.name`)}
-                  description={tt(`frequency.${f}.desc`)}
-                />
-              ))}
-            </RadioGroup>
-
-            <SectionRule>{t("reminderTitle")}</SectionRule>
-            <div className="flex flex-wrap gap-2">
-              {REMINDER_SLOTS.map((slot) => (
-                <TimeSlot
-                  key={slot}
-                  selected={state.reminderTime === slot}
-                  disabled={reminderDisabled}
-                  onClick={() => patch({ reminderTime: slot })}
-                >
-                  {slotLabel(slot)}
-                </TimeSlot>
-              ))}
-              <TimeSlot
-                selected={!reminderDisabled && state.reminderTime === null}
-                disabled={reminderDisabled}
-                onClick={() => patch({ reminderTime: null })}
-              >
-                {t("reminderOff")}
-              </TimeSlot>
-            </div>
-
+            <FrequencyReminderSelect
+              frequency={state.frequency}
+              reminderTime={state.reminderTime}
+              onChange={({ frequency, reminderTime }) =>
+                patch({ frequency, reminderTime })
+              }
+            />
             <div className="mt-auto">
               <Cta fullWidth disabled={!canContinue} onClick={goNext}>
                 {t("next")}

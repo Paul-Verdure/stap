@@ -1,7 +1,7 @@
 "use client";
 
 import * as Dialog from "@radix-ui/react-dialog";
-import type { ReactNode } from "react";
+import { type ReactNode, type RefObject, useEffect, useRef } from "react";
 
 import { cn } from "@/lib/cn";
 
@@ -24,6 +24,37 @@ import { CloseIcon } from "./icons";
 
 /** Wrap an action that should dismiss the modal: <ModalClose asChild>…</ModalClose>. */
 export const ModalClose = Dialog.Close;
+
+/* ---------------------------------------------------------------------------
+   BackgroundInert — while a modal is open, mark every other top-level element
+   `inert` so its focusable descendants leave the tab order AND the a11y tree.
+   Radix already aria-hides the background, but aria-hidden alone leaves the
+   controls focusable (axe `aria-hidden-focus`); `inert` is the complete fix.
+   Rendered inside Dialog.Content, so it mounts/unmounts with the open state.
+   It only toggles an attribute on a handful of body children, off the modal's
+   own animation path, so it does not affect the open transition.
+--------------------------------------------------------------------------- */
+function BackgroundInert({
+  contentRef,
+}: {
+  contentRef: RefObject<HTMLDivElement | null>;
+}) {
+  useEffect(() => {
+    const content = contentRef.current;
+    if (!content) return;
+    // The portal root is the body child that holds this dialog; inert all the
+    // siblings (the app shell, dev portals, streaming templates).
+    const portalRoot = Array.from(document.body.children).find((c) =>
+      c.contains(content),
+    );
+    const others = Array.from(document.body.children).filter(
+      (c) => c !== portalRoot,
+    );
+    others.forEach((n) => n.setAttribute("inert", ""));
+    return () => others.forEach((n) => n.removeAttribute("inert"));
+  }, [contentRef]);
+  return null;
+}
 
 type ModalProps = {
   /** The element that opens the modal (rendered as the Dialog trigger). */
@@ -50,7 +81,11 @@ function Chrome({
   dragHandle?: boolean;
 }) {
   return (
-    <>
+    // `main` (display:contents, so layout is unchanged) gives the open modal
+    // the page's single main landmark while the real page <main> is inert
+    // underneath (axe landmark-one-main). It also scopes the header/footer so
+    // they are no longer banner/contentinfo landmarks.
+    <main className="contents">
       <div className={cn("shrink-0 px-5", dragHandle ? "pt-3" : "pt-5")}>
         {dragHandle ? (
           <span
@@ -60,8 +95,10 @@ function Chrome({
         ) : null}
         <header className="flex items-start justify-between gap-4 pb-3">
           <div className="flex flex-col gap-1">
-            <Dialog.Title className="font-display text-greeting">
-              {title}
+            {/* The page <h1> is inert while the modal is open, so the modal
+                title carries the page's single h1 (axe page-has-heading-one). */}
+            <Dialog.Title asChild>
+              <h1 className="font-display text-greeting">{title}</h1>
             </Dialog.Title>
             {description ? (
               <Dialog.Description className="text-helper text-muted">
@@ -76,13 +113,20 @@ function Chrome({
           </Dialog.Close>
         </header>
       </div>
-      <div className="min-h-0 overflow-y-auto px-5 py-1">{children}</div>
+      {/* tabIndex makes the scroll region keyboard-reachable even when its
+          content has no focusable children (axe scrollable-region-focusable).
+          The jsx-a11y rule conflicts with that runtime requirement here — the
+          scroll container must be focusable for WCAG 2.1.1 keyboard scroll. */}
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
+      <div tabIndex={0} className="min-h-0 overflow-y-auto px-5 py-1">
+        {children}
+      </div>
       {footer ? (
         <footer className="flex shrink-0 items-center justify-end gap-3 border-t border-hairline p-5 pt-4">
           {footer}
         </footer>
       ) : null}
-    </>
+    </main>
   );
 }
 
@@ -96,18 +140,21 @@ const OVERLAY_CLASS =
 
 export function CenteredModal(props: ModalProps) {
   const { trigger, title, description, children, footer, className } = props;
+  const contentRef = useRef<HTMLDivElement>(null);
   return (
     <Dialog.Root {...rootProps(props)}>
       {trigger ? <Dialog.Trigger asChild>{trigger}</Dialog.Trigger> : null}
       <Dialog.Portal>
         <Dialog.Overlay className={OVERLAY_CLASS} />
         <Dialog.Content
+          ref={contentRef}
           className={cn(
             "fixed left-1/2 top-1/2 z-50 flex max-h-[85vh] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 flex-col rounded-xl border-structural bg-surface",
             "motion-safe:animate-[stap-zoom-in_150ms_ease-out]",
             className,
           )}
         >
+          <BackgroundInert contentRef={contentRef} />
           <Chrome
             title={title}
             description={description}
@@ -123,18 +170,21 @@ export function CenteredModal(props: ModalProps) {
 
 export function BottomSheet(props: ModalProps) {
   const { trigger, title, description, children, footer, className } = props;
+  const contentRef = useRef<HTMLDivElement>(null);
   return (
     <Dialog.Root {...rootProps(props)}>
       {trigger ? <Dialog.Trigger asChild>{trigger}</Dialog.Trigger> : null}
       <Dialog.Portal>
         <Dialog.Overlay className={OVERLAY_CLASS} />
         <Dialog.Content
+          ref={contentRef}
           className={cn(
             "fixed inset-x-0 bottom-0 z-50 mx-auto flex max-h-[85vh] w-full max-w-xl flex-col rounded-t-xl border-structural border-b-0 bg-surface",
             "motion-safe:animate-[stap-slide-up_200ms_ease-out]",
             className,
           )}
         >
+          <BackgroundInert contentRef={contentRef} />
           <Chrome
             title={title}
             description={description}

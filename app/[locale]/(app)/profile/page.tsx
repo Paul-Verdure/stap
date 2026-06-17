@@ -1,13 +1,26 @@
-import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
+import { redirect } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { TopBar } from "@/components/layout/top-bar";
-import { LocaleSwitcher } from "@/components/system/locale-switcher";
-import { ThemeToggle } from "@/components/system/theme-toggle";
-import { DateLine, Eyebrow, Helper } from "@/components/ui/typography";
+import { AccountSection } from "@/components/profile/account-section";
+import { IdentityCard } from "@/components/profile/identity-card";
+import { JourneyCards } from "@/components/profile/journey-cards";
+import { LegalFooter } from "@/components/profile/legal-footer";
+import { PreferencesSection } from "@/components/profile/preferences-section";
+import { SetupSection } from "@/components/profile/setup-section";
+import { IconButton } from "@/components/ui/button";
+import { SettingsIcon } from "@/components/ui/icons";
+import { SectionRule } from "@/components/ui/typography";
+import {
+  daysSince,
+  getJourneyPreview,
+  getLifeContextOptions,
+  getProfileIdentity,
+  getSetupData,
+} from "@/lib/profile";
 
-// Placeholder — the full profile (identity, setup, account, modals) is built
-// in G8, which also absorbs the temporary theme/locale switchers below. The
-// sample date proves the canonical formatter reformats per locale (live).
+// The Profile tab (G8): identity hero, journey stubs, editable setup,
+// preferences, account management, and the two modals. Built step by step.
 export default async function ProfilePage({
   params,
 }: {
@@ -16,32 +29,64 @@ export default async function ProfilePage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("Profile");
-  const format = await getFormatter();
 
-  const now = new Date();
+  // The (app) layout already gates on a session + onboarding; a missing
+  // identity here would be an inconsistent state, so bounce to onboarding.
+  const identity = await getProfileIdentity();
+  if (!identity) redirect(`/${locale}/onboarding`);
+
+  const journey = await getJourneyPreview();
+  const setup = await getSetupData();
+  const lifeContexts = await getLifeContextOptions(locale);
 
   return (
     <>
-      <TopBar title={t("title")} />
-      <main id="main-content" className="flex flex-1 flex-col gap-6 px-5 pb-5">
-        <Helper>{t("placeholder")}</Helper>
+      <TopBar
+        title={t("title")}
+        right={
+          // The gear jumps to the settings region lower on the page (the
+          // "#setup" anchor lands in step 3); it is a real, labelled link.
+          <IconButton asChild label={t("settingsLabel")}>
+            <a href="#setup">
+              <SettingsIcon className="h-5 w-5" />
+            </a>
+          </IconButton>
+        }
+      />
+      <main id="main-content" className="flex flex-1 flex-col gap-6 px-5 pb-8">
+        <IdentityCard
+          name={identity.displayName}
+          level={identity.level}
+          uiLocale={identity.uiLocale}
+          days={daysSince(identity.createdAt)}
+        />
 
-        <section className="flex flex-col gap-2">
-          <Eyebrow>{t("interface")}</Eyebrow>
-          <LocaleSwitcher />
-        </section>
+        {journey ? (
+          <section className="flex flex-col gap-3">
+            <SectionRule>{t("journey.title")}</SectionRule>
+            <JourneyCards
+              weekRhythm={journey.weekRhythm}
+              seasonSteps={journey.seasonSteps}
+              contextCount={journey.contextCount}
+            />
+          </section>
+        ) : null}
 
-        <section className="flex flex-col gap-2">
-          <Eyebrow>{t("theme")}</Eyebrow>
-          <ThemeToggle />
-        </section>
+        {setup ? (
+          <SetupSection
+            level={setup.level}
+            contextSlugs={setup.contextSlugs}
+            frequency={setup.frequency}
+            reminderTime={setup.reminderTime}
+            options={lifeContexts}
+          />
+        ) : null}
 
-        <section className="flex flex-col gap-1">
-          <Eyebrow>{t("sampleDate")}</Eyebrow>
-          <DateLine dateTime={now.toISOString()}>
-            {format.dateTime(now, "full")} · {format.dateTime(now, "time")}
-          </DateLine>
-        </section>
+        <PreferencesSection reminderTime={setup?.reminderTime ?? null} />
+
+        <AccountSection email={identity.email} />
+
+        <LegalFooter />
       </main>
     </>
   );

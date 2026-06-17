@@ -200,14 +200,19 @@
   }
 }
 
+/* The CenteredModal is centered with Tailwind's `translate` property
+   (-translate-x-1/2 -translate-y-1/2), which is a SEPARATE property from
+   `transform` in Tailwind v4. So this keyframe must animate `transform`
+   (scale) only — re-adding translate(-50%,-50%) here would stack on top of
+   the `translate` property and shove the modal toward the corner mid-animation. */
 @keyframes stap-zoom-in {
   from {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.96);
+    transform: scale(0.96);
   }
   to {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    transform: scale(1);
   }
 }
 

@@ -273,10 +273,116 @@
   },
   "Profile": {
     "title": "Profil",
-    "placeholder": "Votre carte et vos réglages.",
-    "sampleDate": "Date d'exemple",
+    "settingsLabel": "Réglages",
     "interface": "Langue de l'interface",
-    "theme": "Thème"
+    "theme": "Thème",
+    "identity": {
+      "stamp": "Votre carte",
+      "member": "Membre Stap",
+      "namelessFallback": "Membre",
+      "levelLine": "Niveau {level} · Interface en {language}",
+      "levelLineNoLevel": "Interface en {language}",
+      "daysWith": "{days, plural, =0 {Avec Stap depuis aujourd'hui} one {Avec Stap depuis # jour} other {Avec Stap depuis # jours}}",
+      "languages": {
+        "en": "anglais",
+        "fr": "français"
+      }
+    },
+    "journey": {
+      "title": "Mon parcours",
+      "rhythm": {
+        "title": "Mon rythme",
+        "caption": "Cette semaine — {steps, plural, one {# pas} other {# pas}}"
+      },
+      "season": {
+        "title": "Ma saison",
+        "recap": "Nouveau récap",
+        "summary": "{steps, plural, one {# pas} other {# pas}} · {contexts, plural, one {# contexte} other {# contextes}}"
+      },
+      "v2": {
+        "title": "Bientôt en v2",
+        "subtitle": "Cet écran n'est pas encore prêt.",
+        "body": "L'historique complet du rythme et le récap saisonnier arrivent dans une version ultérieure. Votre carte et vos réglages ci-dessous sont déjà actifs.",
+        "dismiss": "Compris"
+      }
+    },
+    "setup": {
+      "title": "Mes réglages",
+      "levelLabel": "Niveau de néerlandais",
+      "levelTitle": "Votre niveau de néerlandais",
+      "contextsLabel": "Contextes de vie",
+      "contextsTitle": "Vos contextes de vie",
+      "frequencyLabel": "Rythme des défis",
+      "frequencyTitle": "Votre rythme",
+      "languageLabel": "Langue de l'interface",
+      "languageTitle": "Langue de l'interface",
+      "languageSubtitle": "La langue dans laquelle Stap s'affiche.",
+      "languageNote": "À la confirmation, l'app se recharge dans la nouvelle langue. Votre rythme, votre journal et vos réglages sont inchangés.",
+      "languageConfirm": "Changer de langue",
+      "notSet": "Non défini",
+      "save": "Enregistrer",
+      "saving": "Enregistrement…",
+      "cancel": "Annuler",
+      "saved": "Enregistré",
+      "saveError": "Échec de l'enregistrement. Veuillez réessayer."
+    },
+    "preferences": {
+      "title": "Préférences",
+      "notifications": "Notifications",
+      "notificationsDesc": "Un petit rappel quotidien pour faire votre pas.",
+      "notificationsDescTime": "Un petit rappel quotidien, vers {time}.",
+      "sound": "Son & audio",
+      "soundDesc": "Jouer la prononciation et les sons des jeux.",
+      "theme": "Apparence",
+      "themeOptions": {
+        "system": "Selon le système",
+        "dark": "Toujours sombre",
+        "light": "Toujours clair"
+      }
+    },
+    "account": {
+      "title": "Compte",
+      "email": "E-mail",
+      "password": "Changer le mot de passe",
+      "export": "Exporter mes données",
+      "exportDesc": "Téléchargez votre journal et votre progression en JSON.",
+      "exporting": "Préparation du fichier…",
+      "exportError": "Échec de l'export. Veuillez réessayer.",
+      "signOut": "Se déconnecter",
+      "delete": {
+        "row": "Supprimer mon compte",
+        "title": "Supprimer mon compte",
+        "subtitle": "Cette action est définitive.",
+        "pill": "Action irréversible",
+        "lossIntro": "Supprimer votre compte efface définitivement :",
+        "loss1": "votre journal et toutes ses notes",
+        "loss2": "votre rythme hebdomadaire et votre progression",
+        "loss3": "vos réglages et préférences",
+        "confirmLabel": "Tapez {word} pour confirmer",
+        "word": "SUPPRIMER",
+        "confirm": "Supprimer définitivement",
+        "deleting": "Suppression…",
+        "cancel": "Annuler",
+        "stubbed": "La suppression de compte n'est pas encore activée — rien n'a été modifié."
+      }
+    },
+    "footer": {
+      "links": {
+        "terms": "Conditions",
+        "privacy": "Confidentialité",
+        "notice": "Mentions légales"
+      },
+      "version": "Stap v{version}",
+      "madeWith": "Fait avec <heart></heart> aux Pays-Bas",
+      "heartAlt": "amour"
+    }
+  },
+  "Legal": {
+    "back": "Retour au profil",
+    "placeholder": "Cette page est en cours de finalisation et apparaîtra ici bientôt.",
+    "terms": { "title": "Conditions d'utilisation" },
+    "privacy": { "title": "Politique de confidentialité" },
+    "notice": { "title": "Mentions légales" }
   },
   "Status": {
     "loading": "Chargement…"

@@ -273,10 +273,116 @@
   },
   "Profile": {
     "title": "Profile",
-    "placeholder": "Your card and your setup.",
-    "sampleDate": "Sample date",
+    "settingsLabel": "Settings",
     "interface": "Interface language",
-    "theme": "Theme"
+    "theme": "Theme",
+    "identity": {
+      "stamp": "Your card",
+      "member": "Stap member",
+      "namelessFallback": "Member",
+      "levelLine": "Level {level} · Interface in {language}",
+      "levelLineNoLevel": "Interface in {language}",
+      "daysWith": "{days, plural, =0 {With Stap since today} one {With Stap for # day} other {With Stap for # days}}",
+      "languages": {
+        "en": "English",
+        "fr": "French"
+      }
+    },
+    "journey": {
+      "title": "My journey",
+      "rhythm": {
+        "title": "My rhythm",
+        "caption": "This week — {steps, plural, one {# step} other {# steps}}"
+      },
+      "season": {
+        "title": "My season",
+        "recap": "New recap",
+        "summary": "{steps, plural, one {# step} other {# steps}} · {contexts, plural, one {# context} other {# contexts}}"
+      },
+      "v2": {
+        "title": "Coming in v2",
+        "subtitle": "This screen isn't built yet.",
+        "body": "Your full rhythm and the seasonal recap arrive in a later version. Your card and setup below are already live.",
+        "dismiss": "Got it"
+      }
+    },
+    "setup": {
+      "title": "My setup",
+      "levelLabel": "Dutch level",
+      "levelTitle": "Your Dutch level",
+      "contextsLabel": "Life contexts",
+      "contextsTitle": "Your life contexts",
+      "frequencyLabel": "Challenge rhythm",
+      "frequencyTitle": "Your rhythm",
+      "languageLabel": "Interface language",
+      "languageTitle": "Interface language",
+      "languageSubtitle": "The language Stap is shown in.",
+      "languageNote": "On confirm, the app reloads in the new language. Your rhythm, journal and setup are unaffected.",
+      "languageConfirm": "Switch language",
+      "notSet": "Not set",
+      "save": "Save",
+      "saving": "Saving…",
+      "cancel": "Cancel",
+      "saved": "Saved",
+      "saveError": "Could not save. Please try again."
+    },
+    "preferences": {
+      "title": "Preferences",
+      "notifications": "Notifications",
+      "notificationsDesc": "A daily nudge to take your step.",
+      "notificationsDescTime": "A daily nudge, around {time}.",
+      "sound": "Sound & audio",
+      "soundDesc": "Play pronunciation and game sounds.",
+      "theme": "Appearance",
+      "themeOptions": {
+        "system": "Match system",
+        "dark": "Always dark",
+        "light": "Always light"
+      }
+    },
+    "account": {
+      "title": "Account",
+      "email": "Email",
+      "password": "Change password",
+      "export": "Export my data",
+      "exportDesc": "Download your journal and progress as JSON.",
+      "exporting": "Preparing your file…",
+      "exportError": "Export failed. Please try again.",
+      "signOut": "Sign out",
+      "delete": {
+        "row": "Delete my account",
+        "title": "Delete my account",
+        "subtitle": "This cannot be undone.",
+        "pill": "Irreversible action",
+        "lossIntro": "Deleting your account permanently removes:",
+        "loss1": "your journal and every note in it",
+        "loss2": "your weekly rhythm and progress",
+        "loss3": "your setup and preferences",
+        "confirmLabel": "Type {word} to confirm",
+        "word": "DELETE",
+        "confirm": "Delete permanently",
+        "deleting": "Deleting…",
+        "cancel": "Cancel",
+        "stubbed": "Account deletion isn't enabled yet — nothing was changed."
+      }
+    },
+    "footer": {
+      "links": {
+        "terms": "Terms",
+        "privacy": "Privacy",
+        "notice": "Legal notice"
+      },
+      "version": "Stap v{version}",
+      "madeWith": "Made with <heart></heart> in the Netherlands",
+      "heartAlt": "love"
+    }
+  },
+  "Legal": {
+    "back": "Back to profile",
+    "placeholder": "This page is being finalized and will appear here soon.",
+    "terms": { "title": "Terms of service" },
+    "privacy": { "title": "Privacy policy" },
+    "notice": { "title": "Legal notice" }
   },
   "Status": {
     "loading": "Loading…"
