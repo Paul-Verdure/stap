@@ -401,5 +401,9 @@
     "kicker": "Stap",
     "title": "Hors ligne",
     "body": "Pas de connexion internet. Reconnectez-vous pour continuer à apprendre."
+  },
+  "Push": {
+    "reminderTitle": "Votre pas du jour",
+    "reminderBody": "Un petit défi en néerlandais vous attend."
   }
 }

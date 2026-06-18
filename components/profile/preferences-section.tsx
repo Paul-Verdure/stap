@@ -10,6 +10,11 @@ import { Toggle } from "@/components/ui/toggle";
 import { SectionRule } from "@/components/ui/typography";
 import { clearLegacyPreferences, readLegacyPreference } from "@/lib/preferences";
 import { updatePreference } from "@/lib/preferences-actions";
+import {
+  removePushSubscription,
+  savePushSubscription,
+} from "@/lib/push-actions";
+import { subscribeToPush, unsubscribeFromPush } from "@/lib/push";
 import type { ThemePreference } from "@/lib/theme";
 
 /* ===========================================================================
@@ -35,17 +40,18 @@ export function PreferencesSection({
   const slotLabel = useSlotLabel();
   const themeLabelId = useId();
 
-  // Optimistic local state: the stored server value wins, else the opt-out
-  // default (true). Toggles update it instantly; the server action revalidates
-  // the page, so a persisted value (incl. a backfill) flows back as the prop
-  // and is reconciled below — React's "adjust state on prop change" pattern.
+  // Optimistic local state; the server action revalidates the page, so a
+  // persisted value (incl. a backfill) flows back as the prop and is reconciled
+  // below — React's "adjust state on prop change" pattern. Notifications gate
+  // real Web Push, so they are opt-IN (default off until the user grants
+  // permission); Sound is opt-out (default on).
   const [notifications, setNotifications] = useState(
-    notificationsEnabled ?? true,
+    notificationsEnabled ?? false,
   );
   const [prevNotif, setPrevNotif] = useState(notificationsEnabled);
   if (notificationsEnabled !== prevNotif) {
     setPrevNotif(notificationsEnabled);
-    setNotifications(notificationsEnabled ?? true);
+    setNotifications(notificationsEnabled ?? false);
   }
 
   const [sound, setSound] = useState(soundEnabled ?? true);
@@ -76,9 +82,25 @@ export function PreferencesSection({
 
   const { preference, setPreference: setThemePreference } = useTheme();
 
-  function onNotifications(value: boolean) {
-    setNotifications(value);
-    void updatePreference("notifications", value);
+  // Notifications gate Web Push: turning it on requests permission and creates
+  // a subscription for this device; off removes it. If the browser can't
+  // subscribe (unsupported or permission denied), revert and persist off.
+  async function onNotifications(value: boolean) {
+    setNotifications(value); // optimistic
+    if (value) {
+      const sub = await subscribeToPush();
+      if (!sub) {
+        setNotifications(false);
+        void updatePreference("notifications", false);
+        return;
+      }
+      await savePushSubscription(sub);
+      void updatePreference("notifications", true);
+    } else {
+      const endpoint = await unsubscribeFromPush();
+      if (endpoint) await removePushSubscription(endpoint);
+      void updatePreference("notifications", false);
+    }
   }
   function onSound(value: boolean) {
     setSound(value);
@@ -104,7 +126,7 @@ export function PreferencesSection({
           label={t("notifications")}
           description={notifDesc}
           checked={notifications}
-          onCheckedChange={onNotifications}
+          onCheckedChange={(v) => void onNotifications(v)}
         />
       </div>
 
