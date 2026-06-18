@@ -65,7 +65,11 @@ export default async function LocaleLayout({
             the stored preference (or system) is dark — prevents a flash. */}
         <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
       </head>
-      <body className="flex min-h-full flex-col font-sans">
+      {/* Mobile-first: cap the app to a phone-width column centered on larger
+          screens (gutters show the page background) so it never stretches
+          full-bleed on a laptop. The sticky bottom nav respects this width;
+          modals are viewport-centered and already align. */}
+      <body className="mx-auto flex min-h-full w-full max-w-md flex-col font-sans">
         {/* Registers the service worker (served at /serwist/sw.js). */}
         <SerwistProvider swUrl="/serwist/sw.js">
           <ThemeProvider>
