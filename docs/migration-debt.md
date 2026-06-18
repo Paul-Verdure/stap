@@ -1,5 +1,14 @@
 # Migration debt — schema changes blocked by the prisma-CLI quarantine
 
+> **UPDATE 2026-06-18 (G9): quarantine appears RESOLVED.** The prisma CLI runs
+> again (`migrate dev` / `generate` succeed; no Defender detections after
+> Jun 11). G9 front-loaded **all four** deferred migrations while the window is
+> open: `add_game_plays`, `add_user_preferences`, `add_user_soft_delete`,
+> `add_push_subscriptions` (the new G9 push table). Each is **applied** and the
+> client is regenerated. What remains per item below is the **application-code
+> swap** (localStorage → DB) + backfill, done in the same G9 phase; once that
+> lands, this file can be deleted. If the CLI re-quarantines, do not fight it.
+
 **Why this file exists.** Since **2026-06-11**, Microsoft Defender for Endpoint
 quarantines `node_modules/prisma/build/index.js` (the prisma **7.8.0** CLI
 bundle) as `Trojan:JS/ShaiWorm.DBA!MTB`. Diagnosed a **false positive** with
