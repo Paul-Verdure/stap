@@ -10,7 +10,7 @@ import { ProgressDots } from "@/components/games/progress-dots";
 import { RecapBlock, RecapRow } from "@/components/games/recap-block";
 import { Cta } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { markGamePlayed } from "@/lib/game-progress";
+import { markGamePlayed } from "@/lib/game-plays-actions";
 import type { FillOption, FillRound } from "@/lib/game-content";
 import { gameRoute, nextGameId } from "@/lib/games";
 
@@ -22,10 +22,8 @@ import { gameRoute, nextGameId } from "@/lib/games";
 =========================================================================== */
 export function FillGame({
   rounds,
-  todayIso,
 }: {
   rounds: FillRound[];
-  todayIso: string;
 }) {
   const t = useTranslations("Games");
 
@@ -46,7 +44,7 @@ export function FillGame({
     setWrongWords([]);
     if (isLast) {
       setDone(true);
-      markGamePlayed(todayIso, "fill");
+      void markGamePlayed("fill");
       setStatus(t("fill.allDone"));
     } else {
       setRoundIndex(roundIndex + 1);

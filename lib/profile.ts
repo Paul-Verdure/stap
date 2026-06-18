@@ -121,6 +121,29 @@ export async function getSetupData(): Promise<SetupData | null> {
   };
 }
 
+export type PreferenceValues = {
+  /** null = never persisted (the UI falls back to the opt-out default). */
+  notificationsEnabled: boolean | null;
+  soundEnabled: boolean | null;
+};
+
+/** The authenticated user's stored preference toggles, or null if no user. */
+export async function getPreferences(): Promise<PreferenceValues | null> {
+  const user = await getCurrentUser();
+  if (!user) return null;
+
+  const row = await db.user.findUnique({
+    where: { id: user.id },
+    select: { notificationsEnabled: true, soundEnabled: true },
+  });
+  if (!row) return null;
+
+  return {
+    notificationsEnabled: row.notificationsEnabled,
+    soundEnabled: row.soundEnabled,
+  };
+}
+
 /** The seeded life-context catalog, labelled in the given UI locale. */
 export async function getLifeContextOptions(
   locale: string,

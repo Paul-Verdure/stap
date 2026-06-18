@@ -15,6 +15,7 @@ import {
   daysSince,
   getJourneyPreview,
   getLifeContextOptions,
+  getPreferences,
   getProfileIdentity,
   getSetupData,
 } from "@/lib/profile";
@@ -38,6 +39,7 @@ export default async function ProfilePage({
   const journey = await getJourneyPreview();
   const setup = await getSetupData();
   const lifeContexts = await getLifeContextOptions(locale);
+  const preferences = await getPreferences();
 
   return (
     <>
@@ -82,7 +84,11 @@ export default async function ProfilePage({
           />
         ) : null}
 
-        <PreferencesSection reminderTime={setup?.reminderTime ?? null} />
+        <PreferencesSection
+          reminderTime={setup?.reminderTime ?? null}
+          notificationsEnabled={preferences?.notificationsEnabled ?? null}
+          soundEnabled={preferences?.soundEnabled ?? null}
+        />
 
         <AccountSection email={identity.email} />
 

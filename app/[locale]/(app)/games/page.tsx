@@ -8,7 +8,7 @@ import { ReviewWiderLink } from "@/components/games/review-wider-link";
 import { TopBar } from "@/components/layout/top-bar";
 import { Helper } from "@/components/ui/typography";
 import { getTodayChallenge, getUserProfile } from "@/lib/challenge";
-import { dateOnlyUTC, isoDate } from "@/lib/date";
+import { getPlayedGamesToday } from "@/lib/game-plays";
 
 // Games hub (G7.1) — the warm recap of the day. Renders only when today's
 // challenge is DONE (the games replay something the user actually did);
@@ -58,7 +58,7 @@ export default async function GamesPage({
 
         <section className="flex flex-col gap-3">
           <Helper>{t("pickAny")}</Helper>
-          <GameCardList todayIso={isoDate(dateOnlyUTC())} />
+          <GameCardList played={await getPlayedGamesToday(profile.id)} />
         </section>
 
         <ReviewWiderLink />

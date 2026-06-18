@@ -58,7 +58,7 @@ export default async function FillPage({
       })}
       closeLabel={t("close")}
     >
-      <FillGame rounds={rounds} todayIso={todayIso} />
+      <FillGame rounds={rounds} />
     </GameShell>
   );
 }

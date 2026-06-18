@@ -1,73 +1,41 @@
 /* ===========================================================================
-   Client preferences (G8, step 4) — localStorage, one JSON key.
+   Legacy preferences reader (G9) — one-time localStorage → DB backfill.
    ---------------------------------------------------------------------------
-   The Notifications and Sound & audio toggles have no DB column (the prisma
-   CLI is quarantined, so no migration). Decided with the user 2026-06-15:
-   persist them client-side, exactly like the G7 played-state precedent.
-   KNOWN DEBT: move to real columns once the CLI is usable — see
-   docs/migration-debt.md. Dark mode is NOT here; it persists via useTheme.
-
-   Client-only: every function no-ops without `window`. The raw string is the
-   stable useSyncExternalStore snapshot; a custom event makes same-tab writes
-   reactive (the native `storage` event only fires in OTHER tabs).
+   The Notifications and Sound toggles moved to DB columns in G9
+   (lib/preferences-actions.ts). This module is kept ONLY to migrate values a
+   client persisted under the old G8 localStorage key: read the explicit value
+   (null if the user never set it), backfill it through the server action, then
+   clear the key. Once every client has loaded once post-G9, this module and the
+   key can be removed. Client-only: every function no-ops without `window`.
 =========================================================================== */
 
 export type PreferenceKey = "notifications" | "sound";
 
 const KEY = "stap:preferences";
-const CHANGE_EVENT = "stap:preferences-change";
 
-// Sensible opt-out defaults: both on until the user turns them off.
-const DEFAULTS: Record<PreferenceKey, boolean> = {
-  notifications: true,
-  sound: true,
-};
-
-/** Raw stored value — a string so it is a stable snapshot. */
-export function getPreferencesRaw(): string {
-  if (typeof window === "undefined") return "{}";
+/**
+ * The value a client explicitly stored for `key` under the legacy key, or null
+ * if none was ever stored (so an unset toggle is not mistaken for `false`).
+ */
+export function readLegacyPreference(key: PreferenceKey): boolean | null {
+  if (typeof window === "undefined") return null;
   try {
-    return window.localStorage.getItem(KEY) ?? "{}";
-  } catch {
-    return "{}";
-  }
-}
-
-/** Parse a raw value into the full preference set, falling back to defaults. */
-export function parsePreferences(raw: string): Record<PreferenceKey, boolean> {
-  try {
+    const raw = window.localStorage.getItem(KEY);
+    if (!raw) return null;
     const parsed: unknown = JSON.parse(raw);
     const obj = (parsed ?? {}) as Partial<Record<PreferenceKey, unknown>>;
-    return {
-      notifications:
-        typeof obj.notifications === "boolean"
-          ? obj.notifications
-          : DEFAULTS.notifications,
-      sound: typeof obj.sound === "boolean" ? obj.sound : DEFAULTS.sound,
-    };
+    return typeof obj[key] === "boolean" ? (obj[key] as boolean) : null;
   } catch {
-    return { ...DEFAULTS };
+    return null;
   }
 }
 
-/** Subscribe to same-tab writes and cross-tab storage changes. */
-export function subscribeToPreferences(onChange: () => void): () => void {
-  window.addEventListener("storage", onChange);
-  window.addEventListener(CHANGE_EVENT, onChange);
-  return () => {
-    window.removeEventListener("storage", onChange);
-    window.removeEventListener(CHANGE_EVENT, onChange);
-  };
-}
-
-/** Persist one preference and notify same-tab subscribers. */
-export function setPreference(key: PreferenceKey, value: boolean): void {
+/** Remove the legacy key after a successful backfill. */
+export function clearLegacyPreferences(): void {
   if (typeof window === "undefined") return;
   try {
-    const next = { ...parsePreferences(getPreferencesRaw()), [key]: value };
-    window.localStorage.setItem(KEY, JSON.stringify(next));
+    window.localStorage.removeItem(KEY);
   } catch {
-    // Storage full or blocked — the toggle just won't persist. Never throw.
+    // Unreadable storage — nothing to clear.
   }
-  window.dispatchEvent(new Event(CHANGE_EVENT));
 }

@@ -62,6 +62,13 @@ bundle → a new tenant detection). Just ship the workaround.
 
 ### 1. `game_plays` table — G7 "already played" game state
 
+> **✅ RESOLVED (G9, 2026-06-18).** `game_plays` created
+> (`20260618084331_add_game_plays`, owner-only RLS). Reads via
+> `lib/game-plays.ts` (`getPlayedGamesToday`), write via the
+> `lib/game-plays-actions.ts` server action (revalidates the hub). The
+> `lib/game-progress.ts` localStorage store was deleted. No backfill (the
+> signal is daily/ephemeral).
+
 - **Owner phase:** G7 (Games).
 - **Current workaround:** per-day played state lives in `localStorage`
   (`lib/game-progress.ts`, per-day key). Resets are client-only; nothing
@@ -74,6 +81,13 @@ bundle → a new tenant detection). Just ship the workaround.
   `localStorage` key on first authenticated load.
 
 ### 2. Preferences columns — G8 Notifications + Sound & audio toggles
+
+> **✅ RESOLVED (G9, 2026-06-18).** `users.notifications_enabled` /
+> `sound_enabled` added (`20260618084442_add_user_preferences`, nullable).
+> Read in `lib/profile.ts` (`getPreferences`), written via
+> `lib/preferences-actions.ts`. The Profile section seeds from the columns and
+> backfills any value stored under the old localStorage key once, then clears
+> it (`lib/preferences.ts` now holds only the legacy reader).
 
 - **Owner phase:** G8 (Profile), step 4 (Preferences). Decided with the user
   on 2026-06-15: persist in `localStorage`, noted as debt (matches the G7
@@ -95,6 +109,12 @@ bundle → a new tenant detection). Just ship the workaround.
   `reminderTime`.
 
 ### 3. Account soft-delete column — G8 Delete-account (NOT taken)
+
+> **◑ PARTIAL (G9, 2026-06-18).** The column landed
+> (`users.deleted_at`, `20260618084505_add_user_soft_delete`), so the *migration*
+> debt is cleared. The destructive action that SETS it (and the read-filtering)
+> is **still a security stop** — the `deleteAccount` action stays stubbed until
+> the user gives an explicit go-ahead. The column is unused until then.
 
 - **Owner phase:** G8 (Profile), steps 5 & 7 (Delete account). Decided with the
   user on 2026-06-15: build the full delete UI + `ConfirmInput` + localized-word

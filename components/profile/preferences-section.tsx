@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useMemo, useSyncExternalStore } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { useSlotLabel } from "@/components/onboarding/fields";
@@ -8,42 +8,82 @@ import { useTheme } from "@/components/system/theme-provider";
 import { RadioGroup, RadioRow } from "@/components/ui/radio-group";
 import { Toggle } from "@/components/ui/toggle";
 import { SectionRule } from "@/components/ui/typography";
-import {
-  getPreferencesRaw,
-  parsePreferences,
-  setPreference,
-  subscribeToPreferences,
-} from "@/lib/preferences";
+import { clearLegacyPreferences, readLegacyPreference } from "@/lib/preferences";
+import { updatePreference } from "@/lib/preferences-actions";
 import type { ThemePreference } from "@/lib/theme";
 
 /* ===========================================================================
-   PreferencesSection (G8, step 4) — the two client toggles (Notifications,
-   Sound & audio) persisted in localStorage, plus the dark-mode picker wired
-   to useTheme (already client-side, survives reload). The toggle persistence
-   is accepted debt (no DB column); see lib/preferences.ts.
+   PreferencesSection (G8 → DB-backed in G9) — the two toggles (Notifications,
+   Sound & audio) now persist in User columns via a server action, plus the
+   dark-mode picker wired to useTheme (client-side, survives reload). Server
+   values seed the toggles; a one-time effect backfills any value a client had
+   stored under the old G8 localStorage key, then drops the key.
 =========================================================================== */
 
 const CELL = "border-structural rounded-md bg-surface px-4 py-3";
 
 export function PreferencesSection({
   reminderTime,
+  notificationsEnabled,
+  soundEnabled,
 }: {
   reminderTime: string | null;
+  notificationsEnabled: boolean | null;
+  soundEnabled: boolean | null;
 }) {
   const t = useTranslations("Profile.preferences");
   const slotLabel = useSlotLabel();
   const themeLabelId = useId();
 
-  // The toggles live in localStorage; read them as an external store so the
-  // switch reflects the stored value after hydration (server snapshot = "{}").
-  const raw = useSyncExternalStore(
-    subscribeToPreferences,
-    getPreferencesRaw,
-    () => "{}",
+  // Optimistic local state: the stored server value wins, else the opt-out
+  // default (true). Toggles update it instantly; the server action revalidates
+  // the page, so a persisted value (incl. a backfill) flows back as the prop
+  // and is reconciled below — React's "adjust state on prop change" pattern.
+  const [notifications, setNotifications] = useState(
+    notificationsEnabled ?? true,
   );
-  const prefs = useMemo(() => parsePreferences(raw), [raw]);
+  const [prevNotif, setPrevNotif] = useState(notificationsEnabled);
+  if (notificationsEnabled !== prevNotif) {
+    setPrevNotif(notificationsEnabled);
+    setNotifications(notificationsEnabled ?? true);
+  }
+
+  const [sound, setSound] = useState(soundEnabled ?? true);
+  const [prevSound, setPrevSound] = useState(soundEnabled);
+  if (soundEnabled !== prevSound) {
+    setPrevSound(soundEnabled);
+    setSound(soundEnabled ?? true);
+  }
+
+  // One-time backfill: migrate any value stored under the legacy localStorage
+  // key into the DB columns, then drop the key. The action revalidates, so the
+  // migrated value returns as a prop (no setState in the effect). Runs once.
+  const backfilled = useRef(false);
+  useEffect(() => {
+    if (backfilled.current) return;
+    backfilled.current = true;
+
+    if (notificationsEnabled === null) {
+      const legacy = readLegacyPreference("notifications");
+      if (legacy !== null) void updatePreference("notifications", legacy);
+    }
+    if (soundEnabled === null) {
+      const legacy = readLegacyPreference("sound");
+      if (legacy !== null) void updatePreference("sound", legacy);
+    }
+    clearLegacyPreferences();
+  }, [notificationsEnabled, soundEnabled]);
 
   const { preference, setPreference: setThemePreference } = useTheme();
+
+  function onNotifications(value: boolean) {
+    setNotifications(value);
+    void updatePreference("notifications", value);
+  }
+  function onSound(value: boolean) {
+    setSound(value);
+    void updatePreference("sound", value);
+  }
 
   const notifDesc = reminderTime
     ? t("notificationsDescTime", { time: slotLabel(reminderTime) })
@@ -63,8 +103,8 @@ export function PreferencesSection({
         <Toggle
           label={t("notifications")}
           description={notifDesc}
-          checked={prefs.notifications}
-          onCheckedChange={(v) => setPreference("notifications", v)}
+          checked={notifications}
+          onCheckedChange={onNotifications}
         />
       </div>
 
@@ -72,8 +112,8 @@ export function PreferencesSection({
         <Toggle
           label={t("sound")}
           description={t("soundDesc")}
-          checked={prefs.sound}
-          onCheckedChange={(v) => setPreference("sound", v)}
+          checked={sound}
+          onCheckedChange={onSound}
         />
       </div>
 
