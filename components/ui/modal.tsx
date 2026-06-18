@@ -1,6 +1,7 @@
 "use client";
 
 import * as Dialog from "@radix-ui/react-dialog";
+import { useTranslations } from "next-intl";
 import { type ReactNode, type RefObject, useEffect, useRef } from "react";
 
 import { cn } from "@/lib/cn";
@@ -80,6 +81,7 @@ function Chrome({
 }: Pick<ModalProps, "title" | "description" | "children" | "footer"> & {
   dragHandle?: boolean;
 }) {
+  const t = useTranslations("Common");
   return (
     // `main` (display:contents, so layout is unchanged) gives the open modal
     // the page's single main landmark while the real page <main> is inert
@@ -107,7 +109,7 @@ function Chrome({
             ) : null}
           </div>
           <Dialog.Close asChild>
-            <IconButton label="Close" size="sm">
+            <IconButton label={t("close")} size="sm">
               <CloseIcon className="h-4 w-4" />
             </IconButton>
           </Dialog.Close>

@@ -405,5 +405,8 @@
   "Push": {
     "reminderTitle": "Votre pas du jour",
     "reminderBody": "Un petit défi en néerlandais vous attend."
+  },
+  "Common": {
+    "close": "Fermer"
   }
 }

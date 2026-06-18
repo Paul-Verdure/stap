@@ -405,5 +405,8 @@
   "Push": {
     "reminderTitle": "Your daily step",
     "reminderBody": "A small Dutch challenge is waiting for you."
+  },
+  "Common": {
+    "close": "Close"
   }
 }
