@@ -2,7 +2,7 @@
 /// <reference lib="webworker" />
 import { defaultCache } from "@serwist/turbopack/worker";
 import type { PrecacheEntry, SerwistGlobalConfig } from "serwist";
-import { Serwist } from "serwist";
+import { NetworkFirst, Serwist } from "serwist";
 
 // The precache manifest is injected at build time by createSerwistRoute
 // (esbuild `define` replaces self.__SW_MANIFEST).
@@ -19,7 +19,22 @@ const serwist = new Serwist({
   skipWaiting: true,
   clientsClaim: true,
   navigationPreload: true,
-  runtimeCaching: defaultCache,
+  runtimeCaching: [
+    {
+      // Cache page navigations so the last-seen screens — notably today's
+      // challenge — render offline. NetworkFirst keeps them fresh online and
+      // falls back to the cached copy when the network is gone; the document
+      // fallback below only shows ~offline when nothing is cached yet.
+      matcher({ request }) {
+        return request.mode === "navigate";
+      },
+      handler: new NetworkFirst({
+        cacheName: "stap-pages",
+        networkTimeoutSeconds: 3,
+      }),
+    },
+    ...defaultCache,
+  ],
   fallbacks: {
     entries: [
       {
