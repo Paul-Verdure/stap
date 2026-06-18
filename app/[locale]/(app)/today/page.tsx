@@ -177,7 +177,7 @@ export default async function TodayPage({
           related.length > 0 && (
             <section className="flex flex-col gap-3">
               <SectionRule>{t("vocabHead")}</SectionRule>
-              <VocScroll>
+              <VocScroll label={t("vocabHead")}>
                 {related.map((p) => (
                   <VocCard
                     key={p.id}
