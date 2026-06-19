@@ -17,8 +17,10 @@ import fr from "@/messages/fr.json";
    dormant. Reminders are non-judgmental ("waiting", never "missed") and deep
    link to the user's localized /today. Expired subscriptions (404/410) are
    pruned. Cadence: DAILY every day, THREE_PER_WEEK on Mon/Wed/Fri; OWN_PACE
-   never (its reminderTime is null). Reminder slots are whole hours, so a
-   matching of the current UTC hour is enough for an hourly cron.
+   never (its reminderTime is null). The cron runs once a day (Vercel Hobby
+   allows only daily crons), so every due user is reminded at that single run
+   regardless of their chosen reminderTime slot — honoring the exact slot needs
+   a more frequent scheduler (v2 / Vercel Pro), see docs/roadmap-and-deployment.
 =========================================================================== */
 
 const MESSAGES = { en, fr } as const;
@@ -84,25 +86,27 @@ async function sendToSubscriptions(
 }
 
 /**
- * Send the daily reminder to every user who is due in the current UTC hour:
- * opted in, with a reminder slot this hour, due by their cadence, not already
- * done today, and with at least one subscription. Returns send/prune counts.
+ * Send the daily reminder to every user due today: opted in, due by their
+ * cadence (DAILY, or THREE_PER_WEEK on Mon/Wed/Fri), not already done today,
+ * and with at least one subscription. Meant to be called by the once-a-day
+ * cron. Returns send/prune counts.
  */
 export async function sendDueReminders(
   now: Date = new Date(),
 ): Promise<{ sent: number; pruned: number; users: number }> {
   if (!ensureConfigured()) return { sent: 0, pruned: 0, users: 0 };
 
-  const hh = String(now.getUTCHours()).padStart(2, "0");
   const day = now.getUTCDay(); // 0 = Sunday … 6 = Saturday
   const isMwf = day === 1 || day === 3 || day === 5;
   const today = dateOnlyUTC(now);
 
+  // The cron fires once a day, so every opted-in user due by cadence is sent
+  // at this single run (no per-hour slot match). notificationsEnabled implies a
+  // reminder was set; OWN_PACE is excluded by the frequency filter.
   const users = await db.user.findMany({
     where: {
       deletedAt: null,
       notificationsEnabled: true,
-      reminderTime: { startsWith: `${hh}:` },
       frequency: isMwf
         ? { in: [ChallengeFrequency.DAILY, ChallengeFrequency.THREE_PER_WEEK] }
         : ChallengeFrequency.DAILY,

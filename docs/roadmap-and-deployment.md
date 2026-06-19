@@ -54,6 +54,12 @@ Cleanups and decisions left open at G9 close. None block a deploy unless noted.
   English-only. It is a dev primitives showcase, so this is optional.
 
 ### Push robustness (post-v1 hardening)
+- **Per-slot delivery time**: on the **Hobby** daily cron, every due user is
+  reminded at the single 08:00 UTC run regardless of their chosen slot
+  (08:00 / 12:00 / 18:00). Honoring the exact slot needs a more frequent
+  scheduler — Vercel **Pro** (restore an hourly cron + the per-hour filter that
+  was removed in `lib/push-sender.ts`), or an external scheduler hitting
+  `/api/cron/reminders` hourly with the Bearer secret.
 - **Timezones**: reminder slots are matched in **UTC** (a documented
   simplification in `lib/date.ts`). Real per-user timezones would make the
   reminder fire at the user's local time.
@@ -125,10 +131,15 @@ live only in your local `.env` (gitignored) — never commit secrets.
 5. **VAPID / push.** Confirm the three VAPID vars are set and `VAPID_SUBJECT` is
    a real contact. The client subscribes with the public key; the server signs
    sends with the private key.
-6. **Cron.** `vercel.json` declares the hourly reminder cron
-   (`/api/cron/reminders`, `0 * * * *`). Vercel schedules it automatically and
-   calls it with `Authorization: Bearer $CRON_SECRET`, so `CRON_SECRET` must be
-   set. The endpoint no-ops if the VAPID keys are missing.
+6. **Cron.** `vercel.json` declares the reminder cron
+   (`/api/cron/reminders`, `0 8 * * *` — **once a day at 08:00 UTC**, because
+   Vercel **Hobby** allows only daily crons). Vercel schedules it automatically
+   and calls it with `Authorization: Bearer $CRON_SECRET`, so `CRON_SECRET` must
+   be set. The endpoint no-ops if the VAPID keys are missing. On a daily cron the
+   sender reminds **every** due user at that single run, so a user's chosen slot
+   (08:00 / 12:00 / 18:00) is not honored for delivery — see the per-slot note in
+   §2. To honor exact slots, run the endpoint more frequently (Vercel Pro hourly
+   cron, or an external scheduler hitting it with the Bearer secret).
 7. **Deploy** (push to `main` or trigger from the Vercel dashboard).
 
 ### 3.4 Post-deploy verification
