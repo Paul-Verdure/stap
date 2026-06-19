@@ -93,6 +93,18 @@ model User {
   reminderTime String?             @map("reminder_time")
   onboardedAt  DateTime?           @map("onboarded_at")
 
+  // Client preference toggles (G9 — replaces the G8 localStorage store).
+  // Nullable so existing rows need no backfill default; the UI falls back to
+  // the opt-out default (true) when null. notificationsEnabled gates whether a
+  // Web Push subscription is kept active (see PushSubscription).
+  notificationsEnabled Boolean? @map("notifications_enabled")
+  soundEnabled         Boolean? @map("sound_enabled")
+
+  // Soft-delete tombstone (G9). Null = active; non-null = the account was
+  // deleted and must be filtered out of every authenticated read. Wiring the
+  // destructive action that sets this is a security stop (handled separately).
+  deletedAt DateTime? @map("deleted_at")
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -102,6 +114,8 @@ model User {
   dailyActivities DailyActivity[]
   seasonalReviews SeasonalReview[]
   lifeContexts    UserLifeContext[]
+  gamePlays       GamePlay[]
+  pushSubscriptions PushSubscription[]
 
   @@map("users")
 }
@@ -295,6 +309,44 @@ model DailyActivity {
 
   @@unique([userId, date])
   @@map("daily_activities")
+}
+
+// Records which of the day's three games (match / fill / listen) the user has
+// played. The "played" pills are a daily, ephemeral signal — pruned to the
+// current day, like the rhythm. Replaces the G7 localStorage workaround
+// (lib/game-progress.ts). `gameId` mirrors the GameId union (no enum so the
+// game catalog can grow without a migration).
+model GamePlay {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id") @db.Uuid
+  date      DateTime @db.Date
+  gameId    String   @map("game_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date, gameId])
+  @@map("game_plays")
+}
+
+// One Web Push subscription per browser/device (G9). The daily-reminder sender
+// looks these up by user and POSTs an encrypted payload to `endpoint` using the
+// stored `p256dh`/`auth` keys and the server VAPID key pair. A user may have
+// several devices; a stale endpoint (410/404 on send) is pruned by the sender.
+model PushSubscription {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id") @db.Uuid
+  endpoint  String   @unique
+  // Browser-supplied encryption material from the PushSubscription JSON.
+  p256dh    String
+  auth      String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("push_subscriptions")
 }
 
 // Quarterly retrospective. `summary` is a generated stats snapshot.

@@ -12,7 +12,7 @@ import { RecapBlock, RecapRow } from "@/components/games/recap-block";
 import { Cta } from "@/components/ui/button";
 import { Nl } from "@/components/ui/typography";
 import { Link } from "@/i18n/navigation";
-import { markGamePlayed } from "@/lib/game-progress";
+import { markGamePlayed } from "@/lib/game-plays-actions";
 import type { ListenOption, ListenRound } from "@/lib/game-content";
 
 /* ===========================================================================
@@ -28,10 +28,8 @@ import type { ListenOption, ListenRound } from "@/lib/game-content";
 =========================================================================== */
 export function ListenGame({
   rounds,
-  todayIso,
 }: {
   rounds: ListenRound[];
-  todayIso: string;
 }) {
   const t = useTranslations("Games");
 
@@ -52,7 +50,7 @@ export function ListenGame({
     setWrongWords([]);
     if (isLast) {
       setDone(true);
-      markGamePlayed(todayIso, "listen");
+      void markGamePlayed("listen");
       setStatus(t("listen.allDone"));
     } else {
       setRoundIndex(roundIndex + 1);

@@ -22,10 +22,27 @@ export function VocCard({ nl, meaning }: { nl: string; meaning: string }) {
   );
 }
 
-/* Horizontal, scroll-snapping row of VocCards. */
-export function VocScroll({ children }: { children: React.ReactNode }) {
+/* Horizontal, scroll-snapping row of VocCards. Focusable + labelled so a
+   keyboard user can scroll it (axe scrollable-region-focusable); the global
+   :focus-visible rule supplies the amber ring. `label` is the localized
+   section heading. */
+export function VocScroll({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
-    <div className="-mx-5 flex snap-x gap-3 overflow-x-auto px-5 pb-1">
+    // A scrollable region must be keyboard-focusable so a keyboard user can
+    // scroll it (axe scrollable-region-focusable). role="group" + aria-label
+    // name it; the global :focus-visible rule supplies the amber ring.
+    // jsx-a11y's no-noninteractive-tabindex does not recognise this valid
+    // pattern, hence the scoped disable on the tabIndex line below.
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+    <div role="group" aria-label={label} tabIndex={0}
+      className="-mx-5 flex snap-x gap-3 overflow-x-auto px-5 pb-1"
+    >
       {children}
     </div>
   );

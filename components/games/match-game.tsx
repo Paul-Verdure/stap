@@ -9,7 +9,7 @@ import { Cta } from "@/components/ui/button";
 import { Nl } from "@/components/ui/typography";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
-import { markGamePlayed } from "@/lib/game-progress";
+import { markGamePlayed } from "@/lib/game-plays-actions";
 import type { MatchPair, MatchTile } from "@/lib/game-content";
 import { gameRoute, nextGameId } from "@/lib/games";
 
@@ -25,13 +25,10 @@ import { gameRoute, nextGameId } from "@/lib/games";
 export function MatchGame({
   pairs,
   tiles,
-  todayIso,
 }: {
   /** The pairs in canonical order — the source for the end recap. */
   pairs: MatchPair[];
   tiles: MatchTile[];
-  /** UTC day key for the per-day played marker. */
-  todayIso: string;
 }) {
   const t = useTranslations("Games");
 
@@ -58,7 +55,7 @@ export function MatchGame({
       setMatched(next);
       setSelected(null);
       setStatus(t("match.matched"));
-      if (next.length === total) markGamePlayed(todayIso, "match");
+      if (next.length === total) void markGamePlayed("match");
     } else {
       // Wrong pairing — no penalty, just clear the selection.
       setSelected(null);

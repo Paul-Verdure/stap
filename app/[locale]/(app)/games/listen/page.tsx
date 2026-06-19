@@ -64,7 +64,7 @@ export default async function ListenPage({
       })}
       closeLabel={t("close")}
     >
-      <ListenGame rounds={rounds} todayIso={todayIso} />
+      <ListenGame rounds={rounds} />
     </GameShell>
   );
 }

@@ -401,5 +401,12 @@
     "kicker": "Stap",
     "title": "Offline",
     "body": "No internet connection. Reconnect to keep learning."
+  },
+  "Push": {
+    "reminderTitle": "Your daily step",
+    "reminderBody": "A small Dutch challenge is waiting for you."
+  },
+  "Common": {
+    "close": "Close"
   }
 }
