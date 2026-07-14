@@ -47,7 +47,12 @@ export default async function TodayPage({
     redirect(`/${locale}/onboarding`);
   }
 
-  const rhythm = await getWeekRhythm(profile.id);
+  // The rhythm and the challenge are independent — fetch them in parallel
+  // (each is at least one DB round-trip through the pooler).
+  const [rhythm, challenge] = await Promise.all([
+    getWeekRhythm(profile.id),
+    getTodayChallenge(profile),
+  ]);
   const name = profile.displayName ?? "";
 
   const appBar = (
@@ -62,7 +67,6 @@ export default async function TodayPage({
     />
   );
 
-  const challenge = await getTodayChallenge(profile);
   if (!challenge) {
     return (
       <>

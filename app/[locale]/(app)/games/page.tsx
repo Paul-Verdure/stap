@@ -29,7 +29,13 @@ export default async function GamesPage({
     redirect(`/${locale}/onboarding`);
   }
 
-  const challenge = await getTodayChallenge(profile);
+  // Fetched in parallel: the played set is only rendered when the challenge
+  // is DONE, but paying one small extra query on the locked state is cheaper
+  // than serializing the two round-trips on the common path.
+  const [challenge, played] = await Promise.all([
+    getTodayChallenge(profile),
+    getPlayedGamesToday(profile.id),
+  ]);
 
   // The games replay the day, so they open only once today's challenge is
   // DONE; otherwise the locked state guards the tab (SKIPPED is not a step).
@@ -58,7 +64,7 @@ export default async function GamesPage({
 
         <section className="flex flex-col gap-3">
           <Helper>{t("pickAny")}</Helper>
-          <GameCardList played={await getPlayedGamesToday(profile.id)} />
+          <GameCardList played={played} />
         </section>
 
         <ReviewWiderLink />
