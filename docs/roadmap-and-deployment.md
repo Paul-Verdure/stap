@@ -71,10 +71,6 @@ Cleanups and decisions left open at G9 close. None block a deploy unless noted.
 - **Custom install affordance**: no in-app `beforeinstallprompt` "Install" button
   (the native browser install works). Add one for extra polish if wanted.
 
-### Housekeeping
-- `docs/migration-debt.md` can be **deleted** — every item it tracked was
-  resolved in G9 (the quarantine lifted and all four migrations landed).
-
 ---
 
 ## 3. Deployment procedure
