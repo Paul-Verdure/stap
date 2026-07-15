@@ -4,8 +4,10 @@ import { sendDueReminders } from "@/lib/push-sender";
 
 // Daily-reminder cron endpoint. The proxy matcher excludes /api, so there is
 // no locale rewrite or auth gate here — it is protected by CRON_SECRET. Vercel
-// Cron (see vercel.json) calls it hourly with `Authorization: Bearer
-// ${CRON_SECRET}`; sendDueReminders no-ops if the VAPID keys are unset.
+// Cron (see vercel.json) calls it once per reminder slot (08:00/12:00/18:00
+// UTC — the Hobby plan caps each cron job at one run/day, so one hourly job
+// became three daily ones) with `Authorization: Bearer ${CRON_SECRET}`;
+// sendDueReminders no-ops if the VAPID keys are unset.
 export async function GET(request: NextRequest) {
   const secret = process.env.CRON_SECRET;
   if (!secret || request.headers.get("authorization") !== `Bearer ${secret}`) {
