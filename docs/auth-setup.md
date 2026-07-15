@@ -105,3 +105,47 @@ Subject line: `Your Stap sign-in link · Votre lien de connexion Stap`
 If the link errors, check: redirect allow-list covers `/auth/confirm`, the
 template uses `token_hash` (not `ConfirmationURL`), and the OTP has not
 expired.
+
+## 5. Asymmetric JWT signing keys (performance, optional but recommended)
+
+> **✅ Done 2026-07-15.** The project was rotated to an ECC (ES256) signing
+> key: the JWKS endpoint publishes an EC P-256 key and fresh access tokens
+> carry `alg: ES256`. `getClaims()` now verifies locally. The steps below are
+> kept as the runbook for a future environment (e.g. a separate prod project).
+
+The app's auth checks (`getCurrentUser` in `lib/auth/user.ts`, the session
+gate in `lib/supabase/middleware.ts`) use `supabase.auth.getClaims()`. On a
+project still using the legacy **symmetric** JWT secret (HS256 — the default),
+`getClaims()` transparently falls back to a network call to the auth server on
+every request, identical to the old `getUser()` behavior — so the app works
+correctly either way, with no code changes needed.
+
+Switching the project to an **asymmetric** signing key (ECC, recommended)
+lets `getClaims()` verify the JWT signature locally via WebCrypto instead,
+with the public key (JWKS) cached for 10 minutes. Since the auth check runs on
+**every** matched request in the proxy — including link prefetches — this
+removes what was the single largest source of navigation latency in the app.
+
+**This is a dashboard-only change and must be done by a project admin — not
+something the app's code can do.**
+
+1. **Authentication → JWT Keys** (or **Sign In / Providers → JWT Settings**,
+   depending on the dashboard version) in the Supabase project.
+2. Rotate the signing key to an **ECC (ES256)** asymmetric key. Supabase's
+   rotation is designed to be non-disruptive: existing sessions signed with
+   the old symmetric secret keep validating until they naturally expire
+   (default access-token lifetime is short, so this resolves within about an
+   hour), while new tokens are signed with the new key.
+3. No code change or redeploy is required — `getClaims()` already prefers the
+   asymmetric path automatically. Verify by checking the JWT header of a
+   fresh access token (`alg` should read `ES256`, not `HS256`) — the Supabase
+   dashboard's session inspector or `jwt.io` on a copied token both work.
+4. **Trade-off to know before switching:** local verification only checks the
+   JWT signature and expiry — it does **not** re-check the live user record
+   on every request, so a ban or a forced session revocation propagates only
+   once the current access token expires (not instantly, unlike `getUser()`).
+   This app's own soft-delete / access checks are enforced separately at the
+   database layer (`deletedAt` filters), so this trade-off is standard for
+   JWT-based auth and does not weaken those checks — it only affects the
+   window before an out-of-band revocation is reflected in the middleware
+   gate.
