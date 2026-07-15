@@ -1,3 +1,5 @@
+import { cache } from "react";
+
 import type { RhythmDay, RhythmState } from "@/components/ui/rhythm";
 import { getCurrentUser } from "@/lib/auth/user";
 import { dateOnlyUTC, hashToInt, isoDate, lastNDatesUTC, subDaysUTC } from "@/lib/date";
@@ -46,8 +48,12 @@ export type UserProfile = {
   contextSlugs: string[];
 };
 
-/** Load the authenticated user's onboarding profile, or null. */
-export async function getUserProfile(): Promise<UserProfile | null> {
+/**
+ * Load the authenticated user's onboarding profile, or null.
+ * Cached per render pass (React.cache) — the layout and the page both need
+ * it, and it costs an auth check plus a DB read.
+ */
+export const getUserProfile = cache(async (): Promise<UserProfile | null> => {
   const user = await getCurrentUser();
   if (!user) return null;
 
@@ -70,7 +76,7 @@ export async function getUserProfile(): Promise<UserProfile | null> {
     level: row.level,
     contextSlugs: row.lifeContexts.map((c) => c.lifeContext.slug),
   };
-}
+});
 
 /** Levels at or below the given one (e.g. A2 -> A0, A1, A2). */
 function eligibleLevels(level: Level): Level[] {

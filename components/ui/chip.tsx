@@ -33,8 +33,8 @@ export function Chip({
       <button
         type="button"
         className={cn(
-          "inline-flex items-center gap-1.5 rounded-md border-dashed-ink bg-transparent px-3 py-2 text-body text-muted",
-          "hover:text-foreground",
+          "inline-flex touch-manipulation items-center gap-1.5 rounded-md border-dashed-ink bg-transparent px-3 py-2 text-body text-muted",
+          "hover:text-foreground active:opacity-70",
           className,
         )}
         {...props}
@@ -50,7 +50,7 @@ export function Chip({
       type="button"
       aria-pressed={selected}
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-md px-3 py-2 text-body",
+        "inline-flex touch-manipulation items-center gap-1.5 rounded-md px-3 py-2 text-body active:opacity-70",
         selected
           ? "border-[1.5px] border-hero-border bg-hero-bg text-hero-fg"
           : "border-structural bg-surface text-foreground",
@@ -86,7 +86,7 @@ export function TimeSlot({
       aria-pressed={selected}
       disabled={disabled}
       className={cn(
-        "inline-flex items-center justify-center rounded-md px-4 py-3 text-body font-medium",
+        "inline-flex touch-manipulation items-center justify-center rounded-md px-4 py-3 text-body font-medium active:opacity-70",
         selected
           ? "border-[1.5px] border-hero-border bg-hero-bg text-hero-fg"
           : "border-structural bg-surface text-foreground",

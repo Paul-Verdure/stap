@@ -36,10 +36,14 @@ export default async function ProfilePage({
   const identity = await getProfileIdentity();
   if (!identity) redirect(`/${locale}/onboarding`);
 
-  const journey = await getJourneyPreview();
-  const setup = await getSetupData();
-  const lifeContexts = await getLifeContextOptions(locale);
-  const preferences = await getPreferences();
+  // Independent reads — fetch in parallel (getCurrentUser is request-cached,
+  // so the auth check is shared; each getter still costs a DB round-trip).
+  const [journey, setup, lifeContexts, preferences] = await Promise.all([
+    getJourneyPreview(),
+    getSetupData(),
+    getLifeContextOptions(locale),
+    getPreferences(),
+  ]);
 
   return (
     <>

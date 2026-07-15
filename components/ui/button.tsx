@@ -55,12 +55,16 @@ export function Cta({
 }: CtaProps) {
   const isFull = fullWidth ?? variant === "commitment";
   const classes = cn(
-    "inline-flex items-center justify-center gap-2 rounded-md font-display font-semibold select-none",
+    // touch-manipulation removes the double-tap-to-zoom delay on touch
+    // screens; active:opacity gives an immediate pressed state (opacity-only
+    // feedback — the design forbids decorative motion and the palette is
+    // frozen, so no pressed color exists).
+    "inline-flex touch-manipulation items-center justify-center gap-2 rounded-md font-display font-semibold select-none",
     SIZE[size],
     disabled
       ? // Disabled = dashed outline, no fill (per design).
         "border-dashed-ink bg-transparent text-muted cursor-not-allowed"
-      : VARIANT[variant],
+      : cn(VARIANT[variant], "active:opacity-70"),
     isFull && "w-full",
     className,
   );
@@ -101,7 +105,7 @@ export function SecondaryLink({
   children: ReactNode;
 } & ButtonHTMLAttributes<HTMLButtonElement>) {
   const classes = cn(
-    "text-body text-foreground underline decoration-dashed decoration-1 underline-offset-4 hover:text-muted",
+    "touch-manipulation text-body text-foreground underline decoration-dashed decoration-1 underline-offset-4 hover:text-muted active:opacity-70",
     className,
   );
   if (asChild) {
@@ -140,7 +144,7 @@ export function IconButton({
   children: ReactNode;
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "aria-label">) {
   const classes = cn(
-    "inline-grid shrink-0 place-items-center rounded-full text-foreground",
+    "inline-grid touch-manipulation shrink-0 place-items-center rounded-full text-foreground active:opacity-70",
     size === "sm" ? "h-9 w-9" : "h-11 w-11", // 36 / 44px
     variant === "outline" ? "border-structural bg-surface" : "bg-transparent",
     className,

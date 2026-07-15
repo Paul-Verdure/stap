@@ -54,12 +54,6 @@ Cleanups and decisions left open at G9 close. None block a deploy unless noted.
   English-only. It is a dev primitives showcase, so this is optional.
 
 ### Push robustness (post-v1 hardening)
-- **Per-slot delivery time**: on the **Hobby** daily cron, every due user is
-  reminded at the single 08:00 UTC run regardless of their chosen slot
-  (08:00 / 12:00 / 18:00). Honoring the exact slot needs a more frequent
-  scheduler — Vercel **Pro** (restore an hourly cron + the per-hour filter that
-  was removed in `lib/push-sender.ts`), or an external scheduler hitting
-  `/api/cron/reminders` hourly with the Bearer secret.
 - **Timezones**: reminder slots are matched in **UTC** (a documented
   simplification in `lib/date.ts`). Real per-user timezones would make the
   reminder fire at the user's local time.
@@ -71,16 +65,12 @@ Cleanups and decisions left open at G9 close. None block a deploy unless noted.
 - **Custom install affordance**: no in-app `beforeinstallprompt` "Install" button
   (the native browser install works). Add one for extra polish if wanted.
 
-### Housekeeping
-- `docs/migration-debt.md` can be **deleted** — every item it tracked was
-  resolved in G9 (the quarantine lifted and all four migrations landed).
-
 ---
 
 ## 3. Deployment procedure
 
 **Stack:** Next.js 16 (App Router) on **Vercel**, Postgres on **Supabase**,
-Serwist service worker, Web Push (VAPID), hourly Vercel Cron.
+Serwist service worker, Web Push (VAPID), Vercel Cron (three daily jobs).
 
 ### 3.1 Prerequisites
 - The repo on GitHub (the `feat/phase-g9-polish` branch is pushed; merge to
@@ -131,15 +121,15 @@ live only in your local `.env` (gitignored) — never commit secrets.
 5. **VAPID / push.** Confirm the three VAPID vars are set and `VAPID_SUBJECT` is
    a real contact. The client subscribes with the public key; the server signs
    sends with the private key.
-6. **Cron.** `vercel.json` declares the reminder cron
-   (`/api/cron/reminders`, `0 8 * * *` — **once a day at 08:00 UTC**, because
-   Vercel **Hobby** allows only daily crons). Vercel schedules it automatically
-   and calls it with `Authorization: Bearer $CRON_SECRET`, so `CRON_SECRET` must
-   be set. The endpoint no-ops if the VAPID keys are missing. On a daily cron the
-   sender reminds **every** due user at that single run, so a user's chosen slot
-   (08:00 / 12:00 / 18:00) is not honored for delivery — see the per-slot note in
-   §2. To honor exact slots, run the endpoint more frequently (Vercel Pro hourly
-   cron, or an external scheduler hitting it with the Bearer secret).
+6. **Cron.** `vercel.json` declares three daily reminder crons
+   (`/api/cron/reminders` at `0 8/12/18 * * *` UTC — one per
+   `REMINDER_SLOTS` value; the Hobby plan caps each cron job at one run/day,
+   so a single hourly job isn't allowed, but multiple daily jobs are). Vercel
+   schedules them automatically and calls them with
+   `Authorization: Bearer $CRON_SECRET`, so `CRON_SECRET` must be set. The
+   endpoint no-ops if the VAPID keys are missing. Each run only reminds users
+   whose chosen slot matches that hour, so exact per-slot delivery is honored
+   without needing Vercel Pro.
 7. **Deploy** (push to `main` or trigger from the Vercel dashboard).
 
 ### 3.4 Post-deploy verification
