@@ -4,6 +4,7 @@ import type { RhythmDay, RhythmState } from "@/components/ui/rhythm";
 import { getCurrentUser } from "@/lib/auth/user";
 import { dateOnlyUTC, hashToInt, isoDate, lastNDatesUTC, subDaysUTC } from "@/lib/date";
 import { db } from "@/lib/db";
+import { localize } from "@/lib/localize";
 
 /* ===========================================================================
    Daily-challenge selection + weekly rhythm (G4).
@@ -122,6 +123,27 @@ export async function selectPhraseForDay(
 export type TodayChallenge = NonNullable<
   Awaited<ReturnType<typeof getTodayChallenge>>
 >;
+
+/**
+ * The localized name of the first life context the phrase shares with the
+ * user — the "where to use it" line on the challenge card. Undefined when the
+ * phrase carries none of the user's contexts (only reachable for a phrase
+ * surfaced outside the daily selection).
+ */
+export function userContextName(
+  phrase: {
+    lifeContexts: {
+      lifeContext: { slug: string; nameEn: string; nameFr: string };
+    }[];
+  },
+  contextSlugs: string[],
+  locale: string,
+): string | undefined {
+  const ctx = phrase.lifeContexts.find((lc) =>
+    contextSlugs.includes(lc.lifeContext.slug),
+  )?.lifeContext;
+  return ctx ? localize(ctx, "name", locale) : undefined;
+}
 
 /** Find-or-create today's challenge for a profile (includes the phrase). */
 export async function getTodayChallenge(profile: UserProfile) {

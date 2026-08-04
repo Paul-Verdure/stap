@@ -9,6 +9,7 @@ import {
   getUserProfile,
 } from "@/lib/challenge";
 import { dateOnlyUTC, isoDate } from "@/lib/date";
+import { localize } from "@/lib/localize";
 import { buildListenRounds, type ListenSource } from "@/lib/game-content";
 import { gamePosition, GAME_IDS } from "@/lib/games";
 
@@ -24,7 +25,6 @@ export default async function ListenPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("Games");
-  const fr = locale === "fr";
 
   const profile = await getUserProfile();
   if (!profile) redirect(`/${locale}/onboarding`);
@@ -38,13 +38,13 @@ export default async function ListenPage({
     {
       id: phrase.id,
       nl: phrase.textNl,
-      meaning: fr ? phrase.meaningFr : phrase.meaningEn,
+      meaning: localize(phrase, "meaning", locale),
       audioPath: phrase.audioUrl,
     },
     ...related.map((p) => ({
       id: p.id,
       nl: p.textNl,
-      meaning: fr ? p.meaningFr : p.meaningEn,
+      meaning: localize(p, "meaning", locale),
       audioPath: p.audioUrl,
     })),
   ];

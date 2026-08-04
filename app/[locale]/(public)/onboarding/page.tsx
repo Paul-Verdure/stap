@@ -4,6 +4,7 @@ import { setRequestLocale } from "next-intl/server";
 import { OnboardingFlow } from "@/components/onboarding/onboarding-flow";
 import { getCurrentUser } from "@/lib/auth/user";
 import { db } from "@/lib/db";
+import { localize } from "@/lib/localize";
 
 // Public new-user flow (whitelisted in middleware): it starts pre-auth at the
 // language screen and only signs the user in at the end (collect-then-sign-up).
@@ -35,7 +36,7 @@ export default async function OnboardingPage({
   });
   const lifeContexts = rows.map((r) => ({
     slug: r.slug,
-    name: locale === "fr" ? r.nameFr : r.nameEn,
+    name: localize(r, "name", locale),
   }));
 
   return (

@@ -9,6 +9,7 @@ import {
   getUserProfile,
 } from "@/lib/challenge";
 import { dateOnlyUTC, isoDate } from "@/lib/date";
+import { localize } from "@/lib/localize";
 import { buildFillRounds, type MatchPair } from "@/lib/game-content";
 import { gamePosition, GAME_IDS } from "@/lib/games";
 
@@ -23,7 +24,6 @@ export default async function FillPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("Games");
-  const fr = locale === "fr";
 
   const profile = await getUserProfile();
   if (!profile) redirect(`/${locale}/onboarding`);
@@ -35,11 +35,15 @@ export default async function FillPage({
   // Five neighbours give three rounds plus a comfortable distractor pool.
   const related = await getRelatedPhrases(phrase.id, 5);
   const phrases: MatchPair[] = [
-    { id: phrase.id, nl: phrase.textNl, meaning: fr ? phrase.meaningFr : phrase.meaningEn },
+    {
+      id: phrase.id,
+      nl: phrase.textNl,
+      meaning: localize(phrase, "meaning", locale),
+    },
     ...related.map((p) => ({
       id: p.id,
       nl: p.textNl,
-      meaning: fr ? p.meaningFr : p.meaningEn,
+      meaning: localize(p, "meaning", locale),
     })),
   ];
 
