@@ -11,13 +11,17 @@
 // The coverage thresholds are not arbitrary — each mirrors a runtime rule in
 // lib/challenge.ts or lib/game-content.ts, noted at its definition below.
 import {
+  bandLevels,
+  MIN_BAND_CONTEXT_POOL,
+  REPEAT_WINDOW_DAYS,
+} from "../lib/challenge-config";
+import {
   LEVELS,
   loadAudioSlugs,
   loadLifeContexts,
   loadPhrases,
   loadThemes,
   REGISTERS,
-  type Level,
   type SourcedPhrase,
 } from "./catalog-source";
 
@@ -26,13 +30,9 @@ import {
 /** Phase H target: every advertised level carries a full catalog. */
 const MIN_PER_LEVEL = 40;
 
-/**
- * Worst case a real user can hit: their level band crossed with a SINGLE
- * selected life context. Must comfortably clear REPEAT_WINDOW_DAYS in
- * lib/challenge.ts, or the anti-repeat window empties and the fallback starts
- * serving the same phrase twice.
- */
-const MIN_BAND_CONTEXT_POOL = 20;
+// The pool floor and the band rule are imported, not restated: they are the
+// runtime's own numbers, so raising REPEAT_WINDOW_DAYS automatically raises
+// the bar this lint enforces rather than silently invalidating it.
 
 /**
  * getRelatedPhrases() is called with limit up to 5 (games/fill, games/listen),
@@ -61,12 +61,6 @@ function integrity(condition: boolean, message: string) {
 
 function coverage(condition: boolean, message: string) {
   if (!condition) coverageErrors.push(message);
-}
-
-/** Levels visible to a user at `level` — mirrors bandLevels() in lib/challenge.ts. */
-function bandLevels(level: Level): Level[] {
-  const i = LEVELS.indexOf(level);
-  return LEVELS.slice(Math.max(0, i - 1), i + 1);
 }
 
 /* --- Checks -------------------------------------------------------------- */
@@ -204,7 +198,7 @@ function checkCoverage(phrases: SourcedPhrase[], lifeSlugs: Set<string>) {
       coverage(
         pool.length >= MIN_BAND_CONTEXT_POOL,
         `${level} + "${ctx}" only: pool of ${pool.length}, needs ` +
-          `${MIN_BAND_CONTEXT_POOL} to outlast the anti-repeat window`,
+          `${MIN_BAND_CONTEXT_POOL} to outlast the ${REPEAT_WINDOW_DAYS}-day anti-repeat window`,
       );
     }
 

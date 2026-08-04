@@ -13,9 +13,11 @@ export const SEED_DIR = path.join(HERE, "..", "prisma", "seed-data");
 export const PHRASE_DIR = path.join(SEED_DIR, "phrases");
 export const AUDIO_DIR = path.join(SEED_DIR, "audio");
 
-/** Levels in ascending order — mirrors the `Level` enum and lib/challenge.ts. */
-export const LEVELS = ["A0", "A1", "A2", "B1", "B2"] as const;
-export type Level = (typeof LEVELS)[number];
+// The ladder is defined once, next to the selection rule that consumes it.
+// Imported (not just re-exported) because loadPhrases below walks it.
+import { LEVELS, type Level } from "../lib/challenge-config";
+
+export { LEVELS, type Level };
 
 export const REGISTERS = ["INFORMAL", "NEUTRAL", "FORMAL"] as const;
 export type Register = (typeof REGISTERS)[number];
