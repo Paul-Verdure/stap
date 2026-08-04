@@ -1,57 +1,30 @@
 // Catalog seed — `pnpm db:seed`.
-// Reads the three JSON sources in prisma/seed-data/ and idempotently
-// populates the shared catalog: themes, life contexts, phrases, plus the
-// two M2M join tables (phrase_themes, phrase_life_contexts). The JSON is
-// authoritative — re-running fully resyncs.
+// Reads the JSON sources in prisma/seed-data/ and idempotently populates the
+// shared catalog: themes, life contexts, phrases, plus the two M2M join tables
+// (phrase_themes, phrase_life_contexts). The JSON is authoritative —
+// re-running fully resyncs.
+//
+// Phrases are split one file per level (phrases/a0.json … b2.json) so a
+// content pull request stays reviewable; the loader concatenates them in level
+// order. Run `pnpm content:check` before seeding — it validates the same files
+// without touching the database.
 //
 // Runs through Prisma (server role) which bypasses RLS by design.
 // dotenv/config: a standalone tsx script does not auto-load .env.
 import "dotenv/config";
 
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-
 import { db } from "../lib/db";
-
-const HERE = path.dirname(fileURLToPath(import.meta.url));
-const SEED_DIR = path.join(HERE, "..", "prisma", "seed-data");
-
-type LocalizedCatalog = {
-  slug: string;
-  nameEn: string;
-  nameFr: string;
-  descriptionEn: string;
-  descriptionFr: string;
-};
-
-type PhraseSeed = {
-  slug: string;
-  textNl: string;
-  ipa: string;
-  level: "A0" | "A1" | "A2" | "B1" | "B2";
-  phoneticEn: string;
-  phoneticFr: string;
-  meaningEn: string;
-  meaningFr: string;
-  themes: string[];
-  lifeContexts: string[];
-};
-
-function loadJson<T>(name: string): T {
-  const file = path.join(SEED_DIR, name);
-  if (!fs.existsSync(file)) {
-    throw new Error(
-      `Seed file missing: ${path.relative(process.cwd(), file)}`,
-    );
-  }
-  return JSON.parse(fs.readFileSync(file, "utf8")) as T;
-}
+import {
+  LEVELS,
+  loadLifeContexts,
+  loadPhrases,
+  loadThemes,
+} from "./catalog-source";
 
 async function main() {
-  const themes = loadJson<LocalizedCatalog[]>("themes.json");
-  const lifeContexts = loadJson<LocalizedCatalog[]>("life-contexts.json");
-  const phrases = loadJson<PhraseSeed[]>("phrases.json");
+  const themes = loadThemes();
+  const lifeContexts = loadLifeContexts();
+  const phrases = loadPhrases();
 
   // Referential-integrity pre-check: fail fast with a clear error rather
   // than mid-loop with a confusing Prisma error.
@@ -126,10 +99,20 @@ async function main() {
       textNl: p.textNl,
       ipa: p.ipa,
       level: p.level,
+      register: p.register ?? "NEUTRAL",
       phoneticEn: p.phoneticEn,
       phoneticFr: p.phoneticFr,
       meaningEn: p.meaningEn,
       meaningFr: p.meaningFr,
+      situationEn: p.situationEn,
+      situationFr: p.situationFr,
+      tipsEn: p.tipsEn,
+      tipsFr: p.tipsFr,
+      // Absent in the JSON means "no reply for this phrase" — write nulls so
+      // removing a reply from the source clears it in the database too.
+      replyNl: p.replyNl ?? null,
+      replyMeaningEn: p.replyMeaningEn ?? null,
+      replyMeaningFr: p.replyMeaningFr ?? null,
     };
     const phrase = await db.phrase.upsert({
       where: { slug: p.slug },
@@ -163,10 +146,15 @@ async function main() {
     }
   }
 
+  const perLevel = LEVELS.map(
+    (l) => `${l}:${phrases.filter((p) => p.level === l).length}`,
+  ).join("  ");
+
   console.log("Seed complete:");
   console.log(`  themes              : ${themes.length}`);
   console.log(`  life contexts       : ${lifeContexts.length}`);
   console.log(`  phrases             : ${phrases.length}`);
+  console.log(`  by level            : ${perLevel}`);
   console.log(`  phrase-theme links  : ${totalThemeLinks}`);
   console.log(`  phrase-life links   : ${totalLifeLinks}`);
 }

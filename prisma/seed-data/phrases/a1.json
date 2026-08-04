@@ -1,0 +1,196 @@
+[
+  {
+    "slug": "tot-morgen",
+    "textNl": "Tot morgen",
+    "ipa": "tɔt ˈmɔrɣə",
+    "level": "A1",
+    "register": "NEUTRAL",
+    "phoneticEn": "tot MOR-khun",
+    "phoneticFr": "tot MOR-kheun",
+    "meaningEn": "See you tomorrow",
+    "meaningFr": "À demain",
+    "situationEn": "Leaving someone you will see again the next day — a colleague at the end of the day, a teacher at pick-up. It says goodbye and books the next meeting in one move.",
+    "situationFr": "Vous quittez quelqu'un que vous reverrez demain — un collègue en fin de journée, une maîtresse à la sortie. La formule dit au revoir et fixe le prochain rendez-vous d'un seul coup.",
+    "tipsEn": [
+      "Morgen means both 'morning' and 'tomorrow'; tot fixes the meaning here as tomorrow.",
+      "The same pattern builds the rest: tot straks (see you shortly), tot vrijdag, tot volgende week."
+    ],
+    "tipsFr": [
+      "Morgen signifie à la fois « matin » et « demain » ; ici, tot fixe le sens sur demain.",
+      "Le même moule fabrique tout le reste : tot straks (à tout à l'heure), tot vrijdag, tot volgende week."
+    ],
+    "replyNl": "Tot morgen, slaap lekker!",
+    "replyMeaningEn": "See you tomorrow, sleep well!",
+    "replyMeaningFr": "À demain, dors bien !",
+    "themes": ["greetings", "time-appointments"],
+    "lifeContexts": ["office", "daycare-school", "neighbors"]
+  },
+  {
+    "slug": "ik-heet-sara",
+    "textNl": "Ik heet Sara",
+    "ipa": "ɪk ˈɦeːt ˈsaːraː",
+    "level": "A1",
+    "register": "NEUTRAL",
+    "phoneticEn": "ik HAYT SAH-rah",
+    "phoneticFr": "ik HÉT SA-ra",
+    "meaningEn": "My name is Sara",
+    "meaningFr": "Je m'appelle Sara",
+    "situationEn": "A first meeting today — a new colleague, another parent, someone at the club. Introduce yourself in Dutch before the conversation settles into English.",
+    "situationFr": "Une première rencontre aujourd'hui — un nouveau collègue, un autre parent, quelqu'un au club. Présentez-vous en néerlandais avant que la conversation ne bascule en anglais.",
+    "tipsEn": [
+      "Swap in your own first name — the pattern is ik heet + name.",
+      "Heet is 'am called', not 'is hot' (that's het is heet). Same spelling, different world.",
+      "Ik ben + name works just as well and is slightly more casual."
+    ],
+    "tipsFr": [
+      "Mettez votre prénom à la place — le moule est ik heet + prénom.",
+      "Heet veut dire « m'appelle », pas « chaud » (ça, c'est het is heet). Même graphie, tout autre sens.",
+      "Ik ben + prénom marche aussi bien et fait légèrement plus décontracté."
+    ],
+    "replyNl": "Aangenaam, ik ben Tom.",
+    "replyMeaningEn": "Nice to meet you, I'm Tom.",
+    "replyMeaningFr": "Enchanté, moi c'est Tom.",
+    "themes": ["daily-life"],
+    "lifeContexts": ["office", "neighbors", "daycare-school", "administration", "leisure-sports"]
+  },
+  {
+    "slug": "hoe-heet-je",
+    "textNl": "Hoe heet je?",
+    "ipa": "ˈɦu ˈɦeːt jə",
+    "level": "A1",
+    "register": "INFORMAL",
+    "phoneticEn": "HOO HAYT yuh",
+    "phoneticFr": "HOU HÉT ye",
+    "meaningEn": "What's your name?",
+    "meaningFr": "Comment tu t'appelles ?",
+    "situationEn": "You have crossed the same person several times without ever asking. A child at the playground, a regular at the club — today, ask.",
+    "situationFr": "Vous croisez la même personne depuis un moment sans jamais avoir demandé. Un enfant au parc, un habitué du club — aujourd'hui, demandez.",
+    "tipsEn": [
+      "Hoe is 'how', so the Dutch literally ask 'how are you called'.",
+      "The je form suits children, peers and casual settings; at a counter it becomes hoe heet u?",
+      "Give your own name first — it makes the question an exchange rather than an interrogation."
+    ],
+    "tipsFr": [
+      "Hoe veut dire « comment » : le néerlandais demande littéralement « comment es-tu appelé ».",
+      "La forme je convient aux enfants, aux pairs et aux situations détendues ; au guichet, ce sera hoe heet u ?",
+      "Donnez votre prénom d'abord — la question devient un échange plutôt qu'un interrogatoire."
+    ],
+    "replyNl": "Ik heet Lisa, en jij?",
+    "replyMeaningEn": "My name is Lisa, and you?",
+    "replyMeaningFr": "Moi c'est Lisa, et toi ?",
+    "themes": ["daily-life"],
+    "lifeContexts": ["friends", "neighbors", "leisure-sports", "daycare-school"]
+  },
+  {
+    "slug": "hoe-gaat-het",
+    "textNl": "Hoe gaat het?",
+    "ipa": "ˈɦu ˈɣaːt ət",
+    "level": "A1",
+    "register": "NEUTRAL",
+    "phoneticEn": "HOO khaht ut",
+    "phoneticFr": "HOU khate ut",
+    "meaningEn": "How are you?",
+    "meaningFr": "Comment ça va ?",
+    "situationEn": "Straight after your hallo today, keep going one line further. This is the question that turns a greeting into an actual exchange.",
+    "situationFr": "Juste après votre hallo aujourd'hui, poussez d'une ligne. C'est la question qui transforme une salutation en véritable échange.",
+    "tipsEn": [
+      "Het shrinks to a mumbled 'ut' — HOO khaht ut, run together.",
+      "Unlike the English 'how are you', a Dutch speaker may genuinely answer. Leave room for it.",
+      "Hoe gaat het met je? is the fuller, warmer version."
+    ],
+    "tipsFr": [
+      "Het se réduit à un « ut » avalé — HOU khate ut, d'un seul tenant.",
+      "Contrairement au « how are you » anglais, un néerlandophone peut répondre pour de vrai. Laissez-lui la place.",
+      "Hoe gaat het met je ? est la version plus complète et plus chaleureuse."
+    ],
+    "replyNl": "Goed, en met jou?",
+    "replyMeaningEn": "Good, and you?",
+    "replyMeaningFr": "Bien, et toi ?",
+    "themes": ["greetings", "small-talk"],
+    "lifeContexts": ["office", "neighbors", "friends", "family", "daycare-school"]
+  },
+  {
+    "slug": "goed-dank-je",
+    "textNl": "Goed, dank je",
+    "ipa": "ˈɣut dɑŋk jə",
+    "level": "A1",
+    "register": "INFORMAL",
+    "phoneticEn": "khoot, dank yuh",
+    "phoneticFr": "khoute, dank ye",
+    "meaningEn": "Good, thanks",
+    "meaningFr": "Bien, merci",
+    "situationEn": "Someone asks you hoe gaat het today. Instead of freezing or switching to English, have the answer already loaded.",
+    "situationFr": "On vous demande hoe gaat het aujourd'hui. Plutôt que de vous figer ou de basculer en anglais, ayez la réponse déjà prête.",
+    "tipsEn": [
+      "Goed ends on a t sound, not a d — khoot.",
+      "Bouncing the question back with en met jou? is what keeps the exchange alive.",
+      "Het gaat wel is the honest, lukewarm version when goed would be a lie."
+    ],
+    "tipsFr": [
+      "Goed finit sur un t, pas un d — khoute.",
+      "Renvoyer la question avec en met jou ? est ce qui maintient l'échange en vie.",
+      "Het gaat wel est la version honnête et mitigée quand goed serait un mensonge."
+    ],
+    "replyNl": "Fijn om te horen!",
+    "replyMeaningEn": "Glad to hear it!",
+    "replyMeaningFr": "Content de l'entendre !",
+    "themes": ["daily-life", "politeness"],
+    "lifeContexts": ["office", "neighbors", "friends", "family", "daycare-school"]
+  },
+  {
+    "slug": "een-water-graag",
+    "textNl": "Een water, graag",
+    "ipa": "ən ˈʋaːtər ˈɣraːx",
+    "level": "A1",
+    "register": "NEUTRAL",
+    "phoneticEn": "un VAH-tur, khrahkh",
+    "phoneticFr": "eun VA-teur, khrarkh",
+    "meaningEn": "A water, please",
+    "meaningFr": "Une eau, s'il te plaît",
+    "situationEn": "At a café, a canteen or the clubhouse bar today. Order the simplest thing on the list in Dutch — the whole order is three words.",
+    "situationFr": "Au café, à la cantine ou au bar du club aujourd'hui. Commandez la chose la plus simple de la carte en néerlandais — trois mots suffisent.",
+    "tipsEn": [
+      "Graag is the compact 'please' for orders — shorter and more natural here than alsjeblieft.",
+      "Here een is the article 'a', said as a weak 'un' — nothing like the number één.",
+      "This frame takes anything: een koffie graag, twee biertjes graag."
+    ],
+    "tipsFr": [
+      "Graag est le « s'il vous plaît » compact des commandes — plus court et plus naturel ici qu'alsjeblieft.",
+      "Ici een est l'article « une », prononcé « eun » atone — rien à voir avec le chiffre één.",
+      "Le moule accepte tout : een koffie graag, twee biertjes graag."
+    ],
+    "replyNl": "Komt eraan!",
+    "replyMeaningEn": "Coming right up!",
+    "replyMeaningFr": "Ça arrive !",
+    "themes": ["food-drink", "politeness"],
+    "lifeContexts": ["shops", "leisure-sports"]
+  },
+  {
+    "slug": "smakelijk",
+    "textNl": "Smakelijk",
+    "ipa": "ˈsmaːkələk",
+    "level": "A1",
+    "register": "NEUTRAL",
+    "phoneticEn": "SMAH-kuh-luk",
+    "phoneticFr": "SMA-ke-leuk",
+    "meaningEn": "Enjoy your meal",
+    "meaningFr": "Bon appétit",
+    "situationEn": "Lunchtime today — you pass a colleague at their desk with a sandwich, or sit down with others. One word covers the whole table.",
+    "situationFr": "À l'heure du déjeuner — vous passez devant un collègue avec son sandwich, ou vous vous attablez avec d'autres. Un seul mot pour toute la table.",
+    "tipsEn": [
+      "Stress on the first syllable, and the ending collapses to a mumbled -luk.",
+      "Eet smakelijk is the full form; the single word is what people actually say.",
+      "Said on arrival at the table, not after — unlike a compliment on the food."
+    ],
+    "tipsFr": [
+      "L'accent est sur la première syllabe, et la finale s'écrase en « -leuk » avalé.",
+      "Eet smakelijk est la forme complète ; c'est le mot seul qu'on entend vraiment.",
+      "Se dit en arrivant à table, pas après — contrairement à un compliment sur le repas."
+    ],
+    "replyNl": "Dank je, jij ook!",
+    "replyMeaningEn": "Thanks, you too!",
+    "replyMeaningFr": "Merci, toi aussi !",
+    "themes": ["food-drink", "politeness"],
+    "lifeContexts": ["family", "friends", "office", "leisure-sports"]
+  }
+]

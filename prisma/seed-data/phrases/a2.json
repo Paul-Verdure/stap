@@ -1,0 +1,30 @@
+[
+  {
+    "slug": "mag-ik-een-koffie-alsjeblieft",
+    "textNl": "Mag ik een koffie, alsjeblieft?",
+    "ipa": "ˈmɑx ɪk ən ˈkɔfi ɑlʃəˈbliːft",
+    "level": "A2",
+    "register": "INFORMAL",
+    "phoneticEn": "makh ik un KOF-ee, al-shuh-BLEEFT",
+    "phoneticFr": "makh ik eun KO-fi, al-che-BLIFT",
+    "meaningEn": "Can I have a coffee, please?",
+    "meaningFr": "Je peux avoir un café, s'il te plaît ?",
+    "situationEn": "At the café or the clubhouse today. Rather than naming the item and pointing, ask the full question — and be ready for the follow-up about milk.",
+    "situationFr": "Au café ou au club-house aujourd'hui. Plutôt que de nommer l'article en pointant du doigt, posez la question entière — et attendez-vous à la relance sur le lait.",
+    "tipsEn": [
+      "Mag ik is 'may I' — the polite request frame that takes any noun after it.",
+      "The g of mag is the scraped Dutch sound, and it hardens to kh at the end of the word.",
+      "With staff you don't know, mag ik ... alstublieft keeps it in the u register."
+    ],
+    "tipsFr": [
+      "Mag ik, c'est « puis-je » — le moule poli de la demande, qui accepte n'importe quel nom derrière.",
+      "Le g de mag est le son raclé néerlandais, et il durcit en kh en fin de mot.",
+      "Avec un personnel que vous ne connaissez pas, mag ik ... alstublieft garde le registre du vouvoiement."
+    ],
+    "replyNl": "Ja hoor, met melk erbij?",
+    "replyMeaningEn": "Sure, with milk?",
+    "replyMeaningFr": "Bien sûr, avec du lait ?",
+    "themes": ["food-drink", "politeness"],
+    "lifeContexts": ["shops", "leisure-sports"]
+  }
+]

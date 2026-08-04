@@ -7,8 +7,13 @@ import { LockedState } from "@/components/games/locked-state";
 import { ReviewWiderLink } from "@/components/games/review-wider-link";
 import { TopBar } from "@/components/layout/top-bar";
 import { Helper } from "@/components/ui/typography";
-import { getTodayChallenge, getUserProfile } from "@/lib/challenge";
+import {
+  getTodayChallenge,
+  getUserProfile,
+  userContextName,
+} from "@/lib/challenge";
 import { getPlayedGamesToday } from "@/lib/game-plays";
+import { localize } from "@/lib/localize";
 
 // Games hub (G7.1) — the warm recap of the day. Renders only when today's
 // challenge is DONE (the games replay something the user actually did);
@@ -21,8 +26,6 @@ export default async function GamesPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("Games");
-  const fr = locale === "fr";
-
   const profile = await getUserProfile();
   if (!profile) {
     // The (app) layout already gates non-onboarded users; this is defensive.
@@ -44,9 +47,7 @@ export default async function GamesPage({
   }
 
   const { phrase } = challenge;
-  const ctx = phrase.lifeContexts.find((lc) =>
-    profile.contextSlugs.includes(lc.lifeContext.slug),
-  )?.lifeContext;
+  const contextName = userContextName(phrase, profile.contextSlugs, locale);
 
   return (
     <>
@@ -58,8 +59,8 @@ export default async function GamesPage({
         <ContextBanner
           eyebrow={t("contextEyebrow")}
           nl={phrase.textNl}
-          translation={fr ? phrase.meaningFr : phrase.meaningEn}
-          context={ctx ? (fr ? ctx.nameFr : ctx.nameEn) : undefined}
+          translation={localize(phrase, "meaning", locale)}
+          context={contextName}
         />
 
         <section className="flex flex-col gap-3">

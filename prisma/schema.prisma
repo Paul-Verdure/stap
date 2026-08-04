@@ -72,6 +72,15 @@ enum ChallengeFrequency {
   OWN_PACE
 }
 
+// Social register of a phrase — the je/u distinction is a real learner trap
+// from A2 up, so it is surfaced as a tag rather than left implicit in the
+// Dutch. NEUTRAL means the phrase works either way.
+enum Register {
+  INFORMAL
+  NEUTRAL
+  FORMAL
+}
+
 // --- User ------------------------------------------------------------------
 
 // Mirror of Supabase auth.users. `id` equals auth.users.id and is populated
@@ -151,6 +160,32 @@ model Phrase {
   phoneticFr String   @map("phonetic_fr")
   meaningEn  String   @map("meaning_en")
   meaningFr  String   @map("meaning_fr")
+
+  // --- Pedagogical payload (Phase H) --------------------------------------
+  // What makes a challenge a challenge rather than a flashcard. Before H these
+  // were product-wide i18n strings (Prepare.situationBody, tip1..3), identical
+  // for every phrase; they are per-phrase content now.
+
+  // The concrete moment to look out for, second person, one or two sentences.
+  situationEn String @map("situation_en")
+  situationFr String @map("situation_fr")
+
+  // Two or three tips tied to THIS phrase (a sound to watch, a register trap,
+  // a gesture that carries the meaning if the words fail).
+  tipsEn String[] @map("tips_en")
+  tipsFr String[] @map("tips_fr")
+
+  // What the other person is likely to say back — the difference between
+  // reciting a phrase and surviving an exchange. Optional (not every phrase
+  // invites a reply), but all-or-nothing: a DB CHECK constraint added in the
+  // phrase_pedagogy_not_null migration forbids a half-filled trio.
+  replyNl        String? @map("reply_nl")
+  replyMeaningEn String? @map("reply_meaning_en")
+  replyMeaningFr String? @map("reply_meaning_fr")
+
+  // Not localized: a property of the Dutch, not an aid for the reader.
+  register Register @default(NEUTRAL)
+
   createdAt  DateTime @default(now()) @map("created_at")
   updatedAt  DateTime @updatedAt @map("updated_at")
 

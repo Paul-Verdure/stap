@@ -13,7 +13,9 @@ import {
   getRelatedPhrases,
   getTodayChallenge,
   getUserProfile,
+  userContextName,
 } from "@/lib/challenge";
+import { localize } from "@/lib/localize";
 
 // Preparation — single scrollable screen, sticky commitment CTA, no bottom nav
 // (focus mode). Sections: hero recap, the situation, key words, the sentence,
@@ -28,7 +30,6 @@ export default async function PreparePage({
   setRequestLocale(locale);
   const t = await getTranslations("Prepare");
   const nav = await getTranslations("Nav");
-  const fr = locale === "fr";
 
   const profile = await getUserProfile();
   if (!profile) redirect(`/${locale}/onboarding`);
@@ -37,14 +38,21 @@ export default async function PreparePage({
   if (!challenge) redirect(`/${locale}/today`);
 
   const { phrase } = challenge;
-  const meaning = fr ? phrase.meaningFr : phrase.meaningEn;
-  const ctx = phrase.lifeContexts.find((lc) =>
-    profile.contextSlugs.includes(lc.lifeContext.slug),
-  )?.lifeContext;
-  const contextName = ctx ? (fr ? ctx.nameFr : ctx.nameEn) : undefined;
+  const meaning = localize(phrase, "meaning", locale);
+  const contextName = userContextName(phrase, profile.contextSlugs, locale);
 
   const keyWords = await getRelatedPhrases(phrase.id);
-  const tips = [t("tip1"), t("tip2"), t("tip3")];
+  // Situation and tips are per-phrase catalog content (Phase H), not the
+  // product-wide placeholder copy they used to be.
+  const situation = localize(phrase, "situation", locale);
+  const tips = localize(phrase, "tips", locale);
+  // The reply trio is all-or-nothing in the database (phrases_reply_complete),
+  // so requiring both halves here costs nothing and keeps the types honest.
+  const replyMeaning = localize(phrase, "replyMeaning", locale);
+  const reply =
+    phrase.replyNl && replyMeaning
+      ? { nl: phrase.replyNl, meaning: replyMeaning }
+      : null;
 
   return (
     <>
@@ -60,13 +68,18 @@ export default async function PreparePage({
             translation={meaning}
           />
 
-          {/* The situation — light generic narrative + meta tags. */}
+          {/* The situation — the phrase's own scenario + meta tags. */}
           <section className="flex flex-col gap-3">
             <SectionHead title={t("situationTitle")} nl="de situatie" />
-            <Helper>{t("situationBody")}</Helper>
+            <Helper>{situation}</Helper>
             <div className="flex flex-wrap gap-2">
               <Tag tone="amber">{phrase.level}</Tag>
               {contextName ? <Tag>{contextName}</Tag> : null}
+              {/* NEUTRAL is the default and says nothing useful — only the
+                  je/u commitment is worth a tag. */}
+              {phrase.register !== "NEUTRAL" ? (
+                <Tag>{t(`register.${phrase.register}`)}</Tag>
+              ) : null}
             </div>
           </section>
 
@@ -79,7 +92,7 @@ export default async function PreparePage({
                   <VocItem
                     key={p.id}
                     nl={p.textNl}
-                    meaning={fr ? p.meaningFr : p.meaningEn}
+                    meaning={localize(p, "meaning", locale)}
                     audioPath={p.audioUrl}
                   />
                 ))}
@@ -92,11 +105,20 @@ export default async function PreparePage({
             <SectionHead title={t("sentenceTitle")} nl="de zin" />
             <PhraseCard
               nl={phrase.textNl}
-              phonetic={fr ? phrase.phoneticFr : phrase.phoneticEn}
+              phonetic={localize(phrase, "phonetic", locale)}
               meaning={meaning}
               audioPath={phrase.audioUrl}
             />
           </section>
+
+          {/* What comes back — knowing the likely answer is what keeps the
+              exchange from stalling after the rehearsed line. */}
+          {reply && (
+            <section className="flex flex-col gap-2">
+              <SectionHead title={t("replyTitle")} nl="het antwoord" />
+              <VocItem nl={reply.nl} meaning={reply.meaning} />
+            </section>
+          )}
 
           {/* Tips — native collapsible (keyboard + AT friendly). */}
           <section>

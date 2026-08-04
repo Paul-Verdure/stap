@@ -1,0 +1,445 @@
+[
+  {
+    "slug": "hallo",
+    "textNl": "Hallo",
+    "ipa": "ˈɦɑloː",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "HAH-loh",
+    "phoneticFr": "HA-lo",
+    "meaningEn": "Hello",
+    "meaningFr": "Salut",
+    "situationEn": "Someone crosses your path today — a colleague in the corridor, a neighbour at the letterboxes. Get in first with a Dutch hallo, before English takes the conversation over.",
+    "situationFr": "Quelqu'un croise votre route aujourd'hui — un collègue dans le couloir, un voisin aux boîtes aux lettres. Lancez le hallo néerlandais en premier, avant que l'anglais ne prenne le dessus.",
+    "tipsEn": [
+      "Breathe the h out — HAH-loh, not the French 'allo'.",
+      "It works at any hour and with anyone, so it is the safe pick when you hesitate between goedemorgen and goedemiddag."
+    ],
+    "tipsFr": [
+      "Soufflez le h — HA-lo, pas le « allô » français.",
+      "Ça marche à toute heure et avec tout le monde : c'est la valeur sûre quand vous hésitez entre goedemorgen et goedemiddag."
+    ],
+    "replyNl": "Hallo, alles goed?",
+    "replyMeaningEn": "Hello, everything all right?",
+    "replyMeaningFr": "Salut, tout va bien ?",
+    "themes": ["greetings"],
+    "lifeContexts": ["office", "neighbors", "shops", "friends", "daycare-school", "leisure-sports"]
+  },
+  {
+    "slug": "hoi",
+    "textNl": "Hoi",
+    "ipa": "ɦɔi",
+    "level": "A0",
+    "register": "INFORMAL",
+    "phoneticEn": "HOY",
+    "phoneticFr": "HOÏ",
+    "meaningEn": "Hi",
+    "meaningFr": "Coucou",
+    "situationEn": "With someone you already know a little — a neighbour you cross daily, a parent at the school gate. Hoi is the warm, unbuttoned version of hallo.",
+    "situationFr": "Avec quelqu'un que vous connaissez déjà un peu — un voisin croisé tous les jours, un parent devant l'école. Hoi, c'est la version chaleureuse et décontractée de hallo.",
+    "tipsEn": [
+      "One syllable, said quickly — HOY, rhyming with English 'boy'.",
+      "Keep it for people you'd address as je. To your landlord or at a counter, hallo is safer."
+    ],
+    "tipsFr": [
+      "Une syllabe, dite vite — HOÏ, comme dans « boy » en anglais.",
+      "Réservez-le aux personnes que vous tutoieriez. Au guichet ou avec votre propriétaire, hallo est plus sûr."
+    ],
+    "replyNl": "Hoi! Alles goed?",
+    "replyMeaningEn": "Hi! All good?",
+    "replyMeaningFr": "Coucou ! Ça va ?",
+    "themes": ["greetings"],
+    "lifeContexts": ["friends", "family", "neighbors", "leisure-sports"]
+  },
+  {
+    "slug": "goedemorgen",
+    "textNl": "Goedemorgen",
+    "ipa": "ˌɣudəˈmɔrɣə",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "khoo-duh-MOR-khun",
+    "phoneticFr": "khou-de-MOR-kheun",
+    "meaningEn": "Good morning",
+    "meaningFr": "Bonjour (le matin)",
+    "situationEn": "The first person you meet today before noon — at the bakery, walking into the office, dropping the kids off. Open with the time of day rather than a bare hallo.",
+    "situationFr": "La première personne que vous croisez ce matin — à la boulangerie, en arrivant au bureau, en déposant les enfants. Ouvrez avec le moment de la journée plutôt qu'un simple hallo.",
+    "tipsEn": [
+      "Two throaty g's, front and back — that scraped kh sound is the whole word's difficulty.",
+      "Dutch mornings end early: switch to goedemiddag from noon, not from two o'clock.",
+      "In a hurry, Dutch speakers clip it to 'morgen' — that is normal, not lazy."
+    ],
+    "tipsFr": [
+      "Deux g raclés, au début et à la fin — c'est là toute la difficulté du mot.",
+      "La matinée néerlandaise finit tôt : passez à goedemiddag dès midi, pas à quatorze heures.",
+      "Pressés, les néerlandophones abrègent en « morgen » — c'est normal, pas négligé."
+    ],
+    "replyNl": "Goedemorgen! Lekker geslapen?",
+    "replyMeaningEn": "Good morning! Did you sleep well?",
+    "replyMeaningFr": "Bonjour ! Bien dormi ?",
+    "themes": ["greetings"],
+    "lifeContexts": ["office", "shops", "neighbors", "daycare-school"]
+  },
+  {
+    "slug": "goedemiddag",
+    "textNl": "Goedemiddag",
+    "ipa": "ˌɣudəˈmɪdɑx",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "khoo-duh-MID-akh",
+    "phoneticFr": "khou-de-MI-dakh",
+    "meaningEn": "Good afternoon",
+    "meaningFr": "Bonjour (l'après-midi)",
+    "situationEn": "An afternoon errand — the counter at the town hall, the pharmacy, a shop. Greeting before stating your business is expected here, and skipping it reads as brusque.",
+    "situationFr": "Une course de l'après-midi — le guichet de la mairie, la pharmacie, un magasin. Saluer avant d'exposer sa demande est attendu ici ; s'en passer paraît brusque.",
+    "tipsEn": [
+      "Stress lands on MID — khoo-duh-MID-akh.",
+      "This is the neutral, slightly formal opener for counters and shops, where hoi would be too familiar."
+    ],
+    "tipsFr": [
+      "L'accent tombe sur MI — khou-de-MI-dakh.",
+      "C'est l'ouverture neutre, un peu formelle, pour les guichets et les magasins, où hoi serait trop familier."
+    ],
+    "replyNl": "Goedemiddag, kan ik u helpen?",
+    "replyMeaningEn": "Good afternoon, can I help you?",
+    "replyMeaningFr": "Bonjour, je peux vous aider ?",
+    "themes": ["greetings"],
+    "lifeContexts": ["office", "shops", "administration", "neighbors"]
+  },
+  {
+    "slug": "goedenavond",
+    "textNl": "Goedenavond",
+    "ipa": "ˌɣudəˈnaːvɔnt",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "khoo-duh-NAH-vont",
+    "phoneticFr": "khou-de-NA-vonte",
+    "meaningEn": "Good evening",
+    "meaningFr": "Bonsoir",
+    "situationEn": "An evening arrival — the late supermarket run, a restaurant, the sports club after work. Use it from around six, when the shops start emptying.",
+    "situationFr": "Une arrivée en soirée — les courses tardives, un restaurant, le club de sport après le travail. À partir de dix-huit heures environ, quand les magasins se vident.",
+    "tipsEn": [
+      "The final d is said as a t — NAH-vont.",
+      "Goedenavond is the greeting; welterusten is what you say when someone is going to bed. They are not interchangeable."
+    ],
+    "tipsFr": [
+      "Le d final se prononce t — NA-vonte.",
+      "Goedenavond est la salutation ; welterusten se dit à quelqu'un qui va se coucher. Les deux ne sont pas interchangeables."
+    ],
+    "replyNl": "Goedenavond, zegt u het maar.",
+    "replyMeaningEn": "Good evening, what can I get you?",
+    "replyMeaningFr": "Bonsoir, je vous écoute.",
+    "themes": ["greetings"],
+    "lifeContexts": ["shops", "neighbors", "leisure-sports", "friends"]
+  },
+  {
+    "slug": "tot-ziens",
+    "textNl": "Tot ziens",
+    "ipa": "tɔt ˈziːns",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "tot ZEENS",
+    "phoneticFr": "tot ZINSS",
+    "meaningEn": "Goodbye",
+    "meaningFr": "Au revoir",
+    "situationEn": "Leaving a shop, a counter or a meeting today. Rather than drifting out in silence, close the exchange the way it was opened.",
+    "situationFr": "En quittant un magasin, un guichet ou une réunion aujourd'hui. Plutôt que de sortir en silence, fermez l'échange comme il a été ouvert.",
+    "tipsEn": [
+      "Literally 'until seeing' — the z buzzes, unlike the French s in 'sens'.",
+      "Neutral to polite: right for shopkeepers and officials, a bit stiff between close friends."
+    ],
+    "tipsFr": [
+      "Littéralement « jusqu'à se voir » — le z vibre, contrairement au s français.",
+      "Neutre à poli : parfait pour les commerçants et les guichets, un peu guindé entre amis proches."
+    ],
+    "replyNl": "Tot ziens, fijne dag nog!",
+    "replyMeaningEn": "Goodbye, have a good day!",
+    "replyMeaningFr": "Au revoir, bonne journée !",
+    "themes": ["greetings"],
+    "lifeContexts": ["office", "shops", "administration", "neighbors", "daycare-school"]
+  },
+  {
+    "slug": "doei",
+    "textNl": "Doei",
+    "ipa": "dui",
+    "level": "A0",
+    "register": "INFORMAL",
+    "phoneticEn": "DOO-y",
+    "phoneticFr": "DOUÏ",
+    "meaningEn": "Bye",
+    "meaningFr": "Salut (en partant)",
+    "situationEn": "Parting from someone familiar — a neighbour, a teammate, a parent you chat with. Doei is the everyday goodbye you will hear far more than tot ziens.",
+    "situationFr": "Vous quittez quelqu'un de familier — un voisin, un coéquipier, un parent avec qui vous discutez. Doei est l'au revoir du quotidien, bien plus fréquent que tot ziens.",
+    "tipsEn": [
+      "One gliding syllable, DOO-y — the oe is the vowel of English 'boot'.",
+      "Doubling it up, doei doei, sounds friendlier still and is very common."
+    ],
+    "tipsFr": [
+      "Une syllabe glissée, DOUÏ — le oe est le son du « ou » français.",
+      "Doublé, doei doei, c'est encore plus chaleureux — et très courant."
+    ],
+    "replyNl": "Doei, tot de volgende keer!",
+    "replyMeaningEn": "Bye, see you next time!",
+    "replyMeaningFr": "Salut, à la prochaine !",
+    "themes": ["greetings"],
+    "lifeContexts": ["friends", "family", "neighbors", "leisure-sports"]
+  },
+  {
+    "slug": "dank-je-wel",
+    "textNl": "Dank je wel",
+    "ipa": "ˌdɑŋk jə ˈʋɛl",
+    "level": "A0",
+    "register": "INFORMAL",
+    "phoneticEn": "dank yuh VEL",
+    "phoneticFr": "dank ye VÈL",
+    "meaningEn": "Thank you",
+    "meaningFr": "Merci",
+    "situationEn": "The next time someone hands you something, holds a door or answers a question today. Three words, and they land better than a reflexive English thanks.",
+    "situationFr": "La prochaine fois qu'on vous tend quelque chose, qu'on vous tient la porte ou qu'on répond à votre question. Trois mots, et l'effet est bien meilleur qu'un « thanks » réflexe.",
+    "tipsEn": [
+      "The w in wel is a soft Dutch v, between the French v and w — VEL.",
+      "The je form is for people you're on first-name terms with; at a counter, use dank u wel.",
+      "Shortening it to dank je is perfectly normal in passing."
+    ],
+    "tipsFr": [
+      "Le w de wel est un v néerlandais adouci, entre le v et le w français — VÈL.",
+      "La forme je s'emploie avec ceux que vous tutoyez ; au guichet, dites dank u wel.",
+      "Raccourcir en dank je est tout à fait normal quand on passe."
+    ],
+    "replyNl": "Graag gedaan!",
+    "replyMeaningEn": "You're welcome!",
+    "replyMeaningFr": "Avec plaisir !",
+    "themes": ["politeness"],
+    "lifeContexts": ["office", "shops", "neighbors", "friends", "family", "daycare-school", "leisure-sports", "administration"]
+  },
+  {
+    "slug": "dank-u-wel",
+    "textNl": "Dank u wel",
+    "ipa": "ˌdɑŋk y ˈʋɛl",
+    "level": "A0",
+    "register": "FORMAL",
+    "phoneticEn": "dank oo VEL",
+    "phoneticFr": "dank u VÈL",
+    "meaningEn": "Thank you (formal)",
+    "meaningFr": "Merci (vouvoiement)",
+    "situationEn": "At a counter today — the town hall, the pharmacy, a bank. The u form marks the distance the situation expects, and Dutch speakers do notice which one you pick.",
+    "situationFr": "À un guichet aujourd'hui — mairie, pharmacie, banque. La forme u marque la distance attendue par la situation, et les néerlandophones remarquent laquelle vous choisissez.",
+    "tipsEn": [
+      "The u is the tight rounded vowel of French 'tu', not an English 'oo'.",
+      "Use it with officials, older strangers and anyone who addressed you with u first.",
+      "Overshooting into formality is far safer than the reverse — nobody is offended by dank u wel."
+    ],
+    "tipsFr": [
+      "Le u est le u fermé du français « tu », pas un « ou » anglais.",
+      "À employer avec les guichets, les inconnus plus âgés et quiconque vous a vouvoyé en premier.",
+      "Trop de formalité est bien moins risqué que l'inverse — personne ne s'offusque d'un dank u wel."
+    ],
+    "replyNl": "Geen dank!",
+    "replyMeaningEn": "Not at all!",
+    "replyMeaningFr": "Je vous en prie !",
+    "themes": ["politeness"],
+    "lifeContexts": ["administration", "shops", "office"]
+  },
+  {
+    "slug": "alsjeblieft",
+    "textNl": "Alsjeblieft",
+    "ipa": "ɑlʃəˈbliːft",
+    "level": "A0",
+    "register": "INFORMAL",
+    "phoneticEn": "al-shuh-BLEEFT",
+    "phoneticFr": "al-che-BLIFT",
+    "meaningEn": "Please / here you go",
+    "meaningFr": "S'il te plaît / tiens",
+    "situationEn": "Hand something over today — the salt at the table, a document to a colleague, change to a cashier — and say alsjeblieft as it leaves your hand.",
+    "situationFr": "Tendez quelque chose aujourd'hui — le sel à table, un document à un collègue, la monnaie à une caissière — et dites alsjeblieft au moment où l'objet quitte votre main.",
+    "tipsEn": [
+      "One word does two jobs: 'please' when you ask, 'here you go' when you give. Context decides.",
+      "The sj is an English sh sound — al-shuh-BLEEFT.",
+      "The u version is alstublieft; keep alsjeblieft for people you address as je."
+    ],
+    "tipsFr": [
+      "Un seul mot pour deux emplois : « s'il te plaît » quand on demande, « tiens » quand on donne. Le contexte tranche.",
+      "Le sj se dit comme le « ch » français — al-che-BLIFT.",
+      "La version vouvoyée est alstublieft ; gardez alsjeblieft pour ceux que vous tutoyez."
+    ],
+    "replyNl": "Dank je wel!",
+    "replyMeaningEn": "Thank you!",
+    "replyMeaningFr": "Merci !",
+    "themes": ["politeness"],
+    "lifeContexts": ["shops", "family", "friends", "office", "daycare-school", "leisure-sports"]
+  },
+  {
+    "slug": "sorry",
+    "textNl": "Sorry",
+    "ipa": "ˈsɔri",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "SOR-ee",
+    "phoneticFr": "SO-ri",
+    "meaningEn": "Sorry",
+    "meaningFr": "Désolé",
+    "situationEn": "You brush past someone in a narrow aisle, arrive a couple of minutes late, or mishear a question. Borrowed from English, but fully Dutch in use — and the easiest first word to place.",
+    "situationFr": "Vous frôlez quelqu'un dans une allée étroite, arrivez avec deux minutes de retard, ou comprenez une question de travers. Emprunté à l'anglais mais pleinement néerlandais à l'usage — et le mot le plus facile à placer en premier.",
+    "tipsEn": [
+      "Say it with a short Dutch o, closer to SOR-ee than the English 'sah-ree'.",
+      "Rising intonation turns it into 'pardon?' when you haven't caught something.",
+      "For something you actually regret, sorry is light — het spijt me carries real weight."
+    ],
+    "tipsFr": [
+      "Prononcez un o bref à la néerlandaise, plus proche de SO-ri que du « sah-ri » anglais.",
+      "Avec une intonation montante, il devient « pardon ? » quand vous n'avez pas saisi.",
+      "Pour un vrai regret, sorry est léger — het spijt me a bien plus de poids."
+    ],
+    "replyNl": "Geeft niet, hoor!",
+    "replyMeaningEn": "No harm done!",
+    "replyMeaningFr": "Ce n'est rien, allez !",
+    "themes": ["politeness"],
+    "lifeContexts": ["office", "shops", "neighbors", "friends", "family", "administration", "daycare-school", "leisure-sports"]
+  },
+  {
+    "slug": "pardon",
+    "textNl": "Pardon",
+    "ipa": "pɑrˈdɔn",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "par-DON",
+    "phoneticFr": "par-DONNE",
+    "meaningEn": "Excuse me",
+    "meaningFr": "Pardon",
+    "situationEn": "You need to get past someone blocking an aisle or a bike path, or to open a question to a stranger. Pardon does the clearing before the sentence.",
+    "situationFr": "Il faut passer devant quelqu'un qui bloque une allée ou une piste cyclable, ou aborder un inconnu. Pardon dégage le terrain avant la phrase.",
+    "tipsEn": [
+      "The n is fully pronounced — par-DON, with no French nasal.",
+      "For getting past, Dutch speakers often prefer mag ik er even langs? — pardon on its own can sound clipped."
+    ],
+    "tipsFr": [
+      "Le n se prononce entièrement — par-DONNE, sans la nasale française.",
+      "Pour se frayer un passage, les néerlandophones préfèrent souvent mag ik er even langs ? — pardon seul peut sembler sec."
+    ],
+    "replyNl": "Ja hoor, gaat uw gang.",
+    "replyMeaningEn": "Of course, go ahead.",
+    "replyMeaningFr": "Bien sûr, allez-y.",
+    "themes": ["politeness"],
+    "lifeContexts": ["shops", "administration", "office", "leisure-sports"]
+  },
+  {
+    "slug": "ja",
+    "textNl": "Ja",
+    "ipa": "jaː",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "YAH",
+    "phoneticFr": "YA",
+    "meaningEn": "Yes",
+    "meaningFr": "Oui",
+    "situationEn": "Someone asks you a closed question today — bag needed, receipt wanted, everything all right. Answer in Dutch instead of nodding, even if the rest of the exchange stays English.",
+    "situationFr": "On vous pose une question fermée aujourd'hui — un sac, un ticket, tout va bien. Répondez en néerlandais plutôt que d'un hochement de tête, même si le reste de l'échange reste en anglais.",
+    "tipsEn": [
+      "A long, open ah — YAH, never the French 'ya' cut short.",
+      "Ja hoor is a warmer, more willing yes; plain ja alone can sound flat.",
+      "A doubled ja ja often means 'yeah, yeah, I've heard' — not agreement."
+    ],
+    "tipsFr": [
+      "Un a long et ouvert — YA, jamais coupé court.",
+      "Ja hoor est un oui plus chaleureux, plus volontiers ; ja seul peut paraître plat.",
+      "Un ja ja redoublé veut souvent dire « oui oui, j'ai compris » — pas un accord."
+    ],
+    "themes": ["daily-life"],
+    "lifeContexts": ["office", "shops", "neighbors", "friends", "family", "administration", "daycare-school", "leisure-sports"]
+  },
+  {
+    "slug": "nee",
+    "textNl": "Nee",
+    "ipa": "neː",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "NAY",
+    "phoneticFr": "NÉ",
+    "meaningEn": "No",
+    "meaningFr": "Non",
+    "situationEn": "A cashier offers a bag, someone offers a refill, a colleague asks whether you need help. Declining in Dutch is a smaller step than accepting, and just as useful.",
+    "situationFr": "Une caissière propose un sac, on vous ressert, un collègue demande si vous avez besoin d'aide. Refuser en néerlandais est un pas plus petit qu'accepter, et tout aussi utile.",
+    "tipsEn": [
+      "A long closing vowel — NAY, drifting towards 'ay' at the end.",
+      "Bare nee is blunt; nee hoor or nee, dank je softens it to something friendly.",
+      "Nee joh is the surprised 'no way!' — useful to recognise, easy to overuse."
+    ],
+    "tipsFr": [
+      "Une voyelle longue et fermante — NÉ, qui glisse vers « éï » à la fin.",
+      "Un nee nu est sec ; nee hoor ou nee, dank je le rend amical.",
+      "Nee joh est le « non, sans blague ! » de surprise — utile à reconnaître, facile à surutiliser."
+    ],
+    "themes": ["daily-life"],
+    "lifeContexts": ["office", "shops", "neighbors", "friends", "family", "administration", "daycare-school", "leisure-sports"]
+  },
+  {
+    "slug": "een",
+    "textNl": "één",
+    "ipa": "eːn",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "AYN",
+    "phoneticFr": "ÉNE",
+    "meaningEn": "One",
+    "meaningFr": "Un",
+    "situationEn": "At the bakery or the market counter, when they ask how many. Answer with the Dutch number instead of holding up a finger.",
+    "situationFr": "À la boulangerie ou au marché, quand on vous demande combien. Répondez avec le chiffre néerlandais plutôt qu'en levant un doigt.",
+    "tipsEn": [
+      "The two accents are not decoration: één is the number, een without them is the article 'a'.",
+      "Long closed vowel — AYN, the same sound as in nee.",
+      "In speech the accents are heard as extra stress, so lean on the word a little."
+    ],
+    "tipsFr": [
+      "Les deux accents ne sont pas décoratifs : één est le chiffre, een sans accents est l'article « un ».",
+      "Voyelle longue et fermée — ÉNE, le même son que dans nee.",
+      "À l'oral les accents s'entendent comme une insistance : appuyez un peu sur le mot."
+    ],
+    "themes": ["numbers"],
+    "lifeContexts": ["shops", "leisure-sports", "family", "daycare-school"]
+  },
+  {
+    "slug": "twee",
+    "textNl": "twee",
+    "ipa": "tʋeː",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "TVAY",
+    "phoneticFr": "TVÉ",
+    "meaningEn": "Two",
+    "meaningFr": "Deux",
+    "situationEn": "Ordering for two today — two coffees, two tickets, two of whatever is on the counter. The number is the whole answer.",
+    "situationFr": "Commander pour deux aujourd'hui — deux cafés, deux tickets, deux de ce qu'il y a sur le comptoir. Le chiffre suffit comme réponse.",
+    "tipsEn": [
+      "The tw is a t followed by the soft Dutch w — TVAY, not the English 'tw' of 'twin'.",
+      "Twee and drie are the two you'll need most at a counter; they're worth over-rehearsing."
+    ],
+    "tipsFr": [
+      "Le tw est un t suivi du w néerlandais adouci — TVÉ, pas le « tw » anglais de « twin ».",
+      "Twee et drie sont les deux chiffres les plus utiles au comptoir : ça vaut la peine de les sur-répéter."
+    ],
+    "themes": ["numbers"],
+    "lifeContexts": ["shops", "leisure-sports", "family", "daycare-school"]
+  },
+  {
+    "slug": "drie",
+    "textNl": "drie",
+    "ipa": "driː",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "DREE",
+    "phoneticFr": "DRI",
+    "meaningEn": "Three",
+    "meaningFr": "Trois",
+    "situationEn": "Buying for the household — three rolls, three tickets, three portions. Say the number out loud rather than pointing at the display.",
+    "situationFr": "Des achats pour la maisonnée — trois petits pains, trois tickets, trois parts. Dites le chiffre à voix haute plutôt que de pointer la vitrine.",
+    "tipsEn": [
+      "The Dutch r before a vowel is rolled or tapped, not swallowed as in English.",
+      "Long ee as in 'see' — DREE."
+    ],
+    "tipsFr": [
+      "Le r néerlandais devant une voyelle est roulé ou battu, pas escamoté.",
+      "Le ie est long comme dans « ici » — DRI."
+    ],
+    "themes": ["numbers"],
+    "lifeContexts": ["shops", "leisure-sports", "family", "daycare-school"]
+  }
+]
