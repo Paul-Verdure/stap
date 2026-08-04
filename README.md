@@ -5,9 +5,17 @@ A Dutch-learning Progressive Web App. Step by step — _stap voor stap_.
 The UI is available in **English** (default) and **French**; the learning
 target language is **Dutch** only.
 
-> Status: technical scaffolding. No business data model or product UI yet —
-> the foundations (framework, design system, database, auth, PWA, i18n) are
-> in place.
+One real-life challenge a day: a Dutch phrase to actually say to someone,
+with the situation to look out for, what to watch in your pronunciation, and
+what the other person is likely to say back. No streaks, no scores — a missed
+day is "missed", never "failed".
+
+> Status: feature-complete for v1. Onboarding, the daily challenge and its
+> preparation/validation flow, the journal, three micro-games, the profile,
+> Web Push reminders and the PWA shell are all in place, on a catalog of 226
+> reviewed phrases across five levels. See
+> [docs/roadmap-and-deployment.md](docs/roadmap-and-deployment.md) for what is
+> deliberately deferred to v2 (notably catalog audio).
 
 ## Stack
 
@@ -88,20 +96,32 @@ Supabase dashboard ("Connect" → Prisma / ORMs).
 ```
 app/
   [locale]/            Localized routes (/en, /fr)
-    layout.tsx         Root layout: <html lang>, fonts, providers
-    page.tsx           Home (placeholder)
+    (app)/             Authenticated shell: today/, journal/, games/, profile/
+    (public)/          onboarding/, login/, legal/
     ~offline/          PWA offline fallback page
+  api/cron/reminders/  Daily Web Push sender (Vercel Cron)
+  auth/confirm/        Magic-link target: verifies the OTP, sets the session
   manifest.ts          Web app manifest
   sw.ts                Service worker (Serwist)
   serwist/[path]/      Route handler that bundles & serves the SW
   globals.css          Tailwind v4 + design tokens
-components/            ui/ + layout/ (empty for now)
+components/            ui/, layout/, challenge/, games/, onboarding/, profile/
 i18n/                  routing.ts, request.ts, navigation.ts
 lib/
+  challenge.ts         Daily-challenge selection + weekly rhythm
+  challenge-config.ts  Level band, repeat window, derived pool floor (ADR 0002)
+  localize.ts          The localized-column accessor required by ADR 0001
   db.ts                Prisma client singleton (pg driver adapter)
   supabase/            client.ts (browser), server.ts (RSC), middleware.ts
 messages/              en.json, fr.json
-prisma/schema.prisma   Datasource + generator only (no models yet)
+prisma/
+  schema.prisma        Business models (see ADR 0001 for localized columns)
+  migrations/          Includes hand-written RLS and CHECK constraints
+  seed-data/           Catalog sources: themes, life contexts, phrases/<level>.json
+scripts/
+  catalog-source.ts    Shared reader for the seed JSON
+  content-check.ts     Catalog lint (`pnpm content:check`)
+  db-seed.ts           Idempotent catalog sync
 proxy.ts               Next 16 middleware: next-intl + Supabase session
 types/                 Shared TypeScript types
 ```
@@ -117,11 +137,34 @@ types/                 Shared TypeScript types
   independently of the Next bundler, so **Turbopack is kept for both dev and
   build** (no `--webpack`). The SW is served from a route handler at
   `/serwist/sw.js`; the offline fallback is `/en/~offline`.
+- **The catalog**: phrases live in `prisma/seed-data/phrases/<level>.json`, one
+  file per level so a content pull request stays reviewable. `pnpm db:seed` is
+  idempotent and treats the JSON as authoritative — re-running fully resyncs,
+  including the tag join tables. Slugs are append-only: `Challenge.phraseId` is
+  `onDelete: Restrict`, so a phrase someone has already been served can be
+  edited or re-tagged but never removed.
+- **Challenge selection**: a user is served their own level plus the one below
+  (ADR 0002), intersected with their chosen life contexts, then narrowed to
+  avoid recent phrases and yesterday's theme. Each narrowing falls back rather
+  than leaving a user with nothing. `pnpm content:check` validates the sources
+  without a database and enforces the volume the rule needs — it imports the
+  runtime's own constants from `lib/challenge-config.ts` so the thresholds
+  cannot drift from the behaviour they protect.
 - **i18n**: `next-intl` with an always-prefixed `[locale]` segment and
   browser/cookie locale detection. The middleware lives in `proxy.ts`
   (Next 16 renamed `middleware.ts` → `proxy.ts`); next-intl runs first to
   resolve the locale, then Supabase refreshes the session onto the same
   response so neither the locale nor the session is lost.
+
+## Decisions
+
+Architecture decisions with lasting consequences are recorded in
+`docs/decisions/`:
+
+| ADR | Decision |
+| --- | --- |
+| [0001](docs/decisions/0001-i18n-db-strategy.md) | Localized catalog fields use one column per locale (`_en` / `_fr`), read through the `localize()` accessor. |
+| [0002](docs/decisions/0002-daily-challenge-level-band.md) | The daily challenge is drawn from a sliding two-level band, not from everything at or below the user's level. |
 
 ## Connecting Supabase
 
