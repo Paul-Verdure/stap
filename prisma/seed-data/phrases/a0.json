@@ -441,5 +441,684 @@
     ],
     "themes": ["numbers"],
     "lifeContexts": ["shops", "leisure-sports", "family", "daycare-school"]
+  },
+  {
+    "slug": "fijne-dag",
+    "textNl": "Fijne dag!",
+    "ipa": "ˈfɛinə ˈdɑx",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "FAY-nuh DAKH",
+    "phoneticFr": "FÈÏ-ne DAKH",
+    "meaningEn": "Have a good day!",
+    "meaningFr": "Bonne journée !",
+    "situationEn": "Leaving a shop, a counter, a doorstep. Two words that close an exchange warmly instead of letting it trail off.",
+    "situationFr": "Vous quittez un magasin, un guichet, un pas de porte. Deux mots qui referment l'échange chaleureusement au lieu de le laisser s'éteindre.",
+    "tipsEn": [
+      "Fijne takes an -e because it sits directly before the noun; fijn alone would be wrong here.",
+      "The whole family works the same: fijne avond, fijn weekend, fijne vakantie."
+    ],
+    "tipsFr": [
+      "Fijne prend un -e parce qu'il précède directement le nom ; fijn seul serait incorrect ici.",
+      "Toute la famille fonctionne pareil : fijne avond, fijn weekend, fijne vakantie."
+    ],
+    "replyNl": "Dank u, u ook!",
+    "replyMeaningEn": "Thank you, you too!",
+    "replyMeaningFr": "Merci, vous aussi !",
+    "themes": ["greetings", "politeness"],
+    "lifeContexts": ["shops", "administration", "office", "neighbors", "daycare-school"]
+  },
+  {
+    "slug": "prettige-avond",
+    "textNl": "Prettige avond!",
+    "ipa": "ˈprɛtəɣə ˈaːvɔnt",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "PRE-tuh-khuh AH-vont",
+    "phoneticFr": "PRÈ-te-khe A-vonte",
+    "meaningEn": "Have a good evening!",
+    "meaningFr": "Bonne soirée !",
+    "situationEn": "Leaving somewhere after about six — the shop, the office, a neighbour's door. It marks the time of day, which Dutch likes to do.",
+    "situationFr": "Vous partez après dix-huit heures environ — du magasin, du bureau, de chez un voisin. La formule marque le moment de la journée, ce que le néerlandais aime faire.",
+    "tipsEn": [
+      "Prettig and fijn are interchangeable here; prettig sounds a shade more formal.",
+      "Three syllables with the stress on the first: PRE-tuh-khuh."
+    ],
+    "tipsFr": [
+      "Prettig et fijn sont interchangeables ici ; prettig sonne un rien plus formel.",
+      "Trois syllabes, accent sur la première : PRÈ-te-khe."
+    ],
+    "replyNl": "Dank je, jij ook!",
+    "replyMeaningEn": "Thanks, you too!",
+    "replyMeaningFr": "Merci, toi aussi !",
+    "themes": ["greetings"],
+    "lifeContexts": ["shops", "office", "neighbors", "friends", "leisure-sports"]
+  },
+  {
+    "slug": "tot-zo",
+    "textNl": "Tot zo!",
+    "ipa": "tɔt ˈzoː",
+    "level": "A0",
+    "register": "INFORMAL",
+    "phoneticEn": "tot ZOH",
+    "phoneticFr": "tot ZÔ",
+    "meaningEn": "See you in a minute!",
+    "meaningFr": "À tout de suite !",
+    "situationEn": "Stepping away for a moment — to the kitchen, to another room, out for two minutes. The shortest goodbye Dutch has.",
+    "situationFr": "Vous vous absentez un instant — la cuisine, une autre pièce, deux minutes dehors. Le plus court des au revoir néerlandais.",
+    "tipsEn": [
+      "Zo means 'in a moment' here, not 'so'. It is one of the busiest little words in Dutch.",
+      "Tot zo is minutes; tot straks is later today. Don't swap them."
+    ],
+    "tipsFr": [
+      "Zo signifie ici « dans un instant », pas « ainsi ». C'est l'un des petits mots les plus sollicités du néerlandais.",
+      "Tot zo, c'est dans quelques minutes ; tot straks, plus tard dans la journée. Ne les intervertissez pas."
+    ],
+    "replyNl": "Tot zo!",
+    "replyMeaningEn": "See you in a bit!",
+    "replyMeaningFr": "À tout de suite !",
+    "themes": ["greetings"],
+    "lifeContexts": ["office", "family", "friends", "neighbors", "leisure-sports"]
+  },
+  {
+    "slug": "dag-mevrouw",
+    "textNl": "Dag mevrouw",
+    "ipa": "ˈdɑx məˈvrɑu",
+    "level": "A0",
+    "register": "FORMAL",
+    "phoneticEn": "DAKH muh-VROW",
+    "phoneticFr": "DAKH me-VRAOU",
+    "meaningEn": "Hello, madam",
+    "meaningFr": "Bonjour madame",
+    "situationEn": "Arriving at a counter, a reception, a doctor's desk. Adding mevrouw to your hello is the small formality Dutch counters still expect.",
+    "situationFr": "Vous arrivez à un guichet, un accueil, un secrétariat médical. Ajouter mevrouw à votre bonjour est la petite formalité que les guichets néerlandais attendent encore.",
+    "tipsEn": [
+      "Dag works as both hello and goodbye — the tone and the moment decide which.",
+      "The ou of mevrouw is the 'ow' of English 'cow'.",
+      "Mevrouw is used for any adult woman; there is no Dutch equivalent of the miss/madam split."
+    ],
+    "tipsFr": [
+      "Dag sert de bonjour comme d'au revoir — le ton et le moment tranchent.",
+      "Le ou de mevrouw se dit « aou », comme dans « miaou ».",
+      "Mevrouw s'emploie pour toute femme adulte ; le néerlandais ne distingue pas mademoiselle et madame."
+    ],
+    "replyNl": "Dag, zegt u het maar.",
+    "replyMeaningEn": "Hello — how can I help?",
+    "replyMeaningFr": "Bonjour — je vous écoute.",
+    "themes": ["greetings", "politeness"],
+    "lifeContexts": ["administration", "shops", "office", "daycare-school", "neighbors"]
+  },
+  {
+    "slug": "dag-meneer",
+    "textNl": "Dag meneer",
+    "ipa": "ˈdɑx məˈneːr",
+    "level": "A0",
+    "register": "FORMAL",
+    "phoneticEn": "DAKH muh-NAYR",
+    "phoneticFr": "DAKH me-NÉR",
+    "meaningEn": "Hello, sir",
+    "meaningFr": "Bonjour monsieur",
+    "situationEn": "The same counter, the other half of the pair. Worth having both ready so you don't hesitate at the moment you need one.",
+    "situationFr": "Le même guichet, l'autre moitié de la paire. À avoir toutes les deux sous la main pour ne pas hésiter au moment voulu.",
+    "tipsEn": [
+      "Stress on the last syllable: muh-NAYR.",
+      "Meneer and mevrouw are also how you'd address someone whose name you don't know.",
+      "Dutch drops these faster than French does — once you're on first names, stop using them."
+    ],
+    "tipsFr": [
+      "Accent sur la dernière syllabe : me-NÉR.",
+      "Meneer et mevrouw servent aussi à interpeller quelqu'un dont on ignore le nom.",
+      "Le néerlandais les abandonne plus vite que le français — dès qu'on se dit le prénom, on arrête."
+    ],
+    "replyNl": "Goedemiddag, komt u binnen.",
+    "replyMeaningEn": "Good afternoon, do come in.",
+    "replyMeaningFr": "Bonjour, entrez donc.",
+    "themes": ["greetings", "politeness"],
+    "lifeContexts": ["administration", "shops", "office", "neighbors", "family"]
+  },
+  {
+    "slug": "hoi-allemaal",
+    "textNl": "Hoi allemaal!",
+    "ipa": "ɦɔi ˈɑləmaːl",
+    "level": "A0",
+    "register": "INFORMAL",
+    "phoneticEn": "HOY AH-luh-mahl",
+    "phoneticFr": "HOÏ A-le-mal",
+    "meaningEn": "Hi everyone!",
+    "meaningFr": "Salut tout le monde !",
+    "situationEn": "Walking into a room where several people are already there — the team, the club, a friend's kitchen. One greeting covers the whole group.",
+    "situationFr": "Vous entrez dans une pièce où plusieurs personnes sont déjà là — l'équipe, le club, la cuisine d'un ami. Une seule salutation couvre tout le groupe.",
+    "tipsEn": [
+      "Allemaal means 'all of you' and saves you greeting six people one by one.",
+      "Three syllables, stress on the first: AH-luh-mahl.",
+      "For a formal room, goedemorgen allemaal works just as well."
+    ],
+    "tipsFr": [
+      "Allemaal signifie « vous tous » et vous évite de saluer six personnes une par une.",
+      "Trois syllabes, accent sur la première : A-le-mal.",
+      "Dans un cadre formel, goedemorgen allemaal fonctionne tout aussi bien."
+    ],
+    "replyNl": "Hoi! Kom erbij zitten.",
+    "replyMeaningEn": "Hi! Come and sit with us.",
+    "replyMeaningFr": "Salut ! Viens t'asseoir avec nous.",
+    "themes": ["greetings"],
+    "lifeContexts": ["office", "friends", "leisure-sports", "family", "daycare-school"]
+  },
+  {
+    "slug": "graag-gedaan",
+    "textNl": "Graag gedaan",
+    "ipa": "ˈɣraːx ɣəˈdaːn",
+    "level": "A0",
+    "register": "INFORMAL",
+    "phoneticEn": "khrahkh khuh-DAHN",
+    "phoneticFr": "khrarkh khe-DANE",
+    "meaningEn": "You're welcome",
+    "meaningFr": "Avec plaisir",
+    "situationEn": "Someone thanks you today — for holding a door, passing something, answering a question. Answering in Dutch completes the exchange instead of leaving it half-finished.",
+    "situationFr": "On vous remercie aujourd'hui — pour une porte tenue, un objet passé, une question résolue. Répondre en néerlandais boucle l'échange au lieu de le laisser en suspens.",
+    "tipsEn": [
+      "Literally 'gladly done'. Two scraped g's back to back — the whole difficulty of the phrase.",
+      "Geen dank is the slightly more formal alternative."
+    ],
+    "tipsFr": [
+      "Littéralement « fait volontiers ». Deux g raclés à la suite — toute la difficulté de la formule.",
+      "Geen dank en est l'alternative un peu plus formelle."
+    ],
+    "themes": ["politeness"],
+    "lifeContexts": ["office", "shops", "neighbors", "friends", "family", "daycare-school"]
+  },
+  {
+    "slug": "geen-dank",
+    "textNl": "Geen dank",
+    "ipa": "ɣeːn ˈdɑŋk",
+    "level": "A0",
+    "register": "FORMAL",
+    "phoneticEn": "khayn DANK",
+    "phoneticFr": "khéne DANK",
+    "meaningEn": "Not at all",
+    "meaningFr": "Je vous en prie",
+    "situationEn": "The u-register answer to a thank you — at a counter, with an older stranger, at a formal desk. Two words, and they fit anywhere polite.",
+    "situationFr": "La réponse en vouvoiement à un merci — à un guichet, avec un inconnu plus âgé, à un bureau formel. Deux mots qui vont partout où il faut de la tenue.",
+    "tipsEn": [
+      "Geen negates a noun, so it pairs with dank: literally 'no thanks needed'.",
+      "The nk of dank is one nasal cluster — DANK, without a separate k breath."
+    ],
+    "tipsFr": [
+      "Geen porte la négation sur un nom, d'où son emploi avec dank : littéralement « pas de remerciement nécessaire ».",
+      "Le nk de dank forme un seul groupe nasal — DANK, sans souffle de k détaché."
+    ],
+    "themes": ["politeness"],
+    "lifeContexts": ["administration", "shops", "office", "neighbors", "family"]
+  },
+  {
+    "slug": "geen-probleem",
+    "textNl": "Geen probleem",
+    "ipa": "ɣeːn proːˈbleːm",
+    "level": "A0",
+    "register": "INFORMAL",
+    "phoneticEn": "khayn pro-BLAYM",
+    "phoneticFr": "khéne pro-BLÉM",
+    "meaningEn": "No problem",
+    "meaningFr": "Pas de souci",
+    "situationEn": "Someone apologises to you — for being late, for bumping you, for asking twice. Waving it off in Dutch is easy and immediately friendly.",
+    "situationFr": "On s'excuse auprès de vous — d'un retard, d'un choc, d'une question répétée. Balayer ça en néerlandais est facile et immédiatement chaleureux.",
+    "tipsEn": [
+      "Stress on the last syllable: pro-BLAYM.",
+      "Geeft niet is the more native-sounding alternative and just as easy."
+    ],
+    "tipsFr": [
+      "Accent sur la dernière syllabe : pro-BLÉM.",
+      "Geeft niet est l'alternative qui sonne plus native, et tout aussi simple."
+    ],
+    "themes": ["politeness"],
+    "lifeContexts": ["office", "friends", "neighbors", "family", "leisure-sports", "shops"]
+  },
+  {
+    "slug": "neem-me-niet-kwalijk",
+    "textNl": "Neem me niet kwalijk",
+    "ipa": "ˈneːm mə ˈnit ˈkʋaːlək",
+    "level": "A0",
+    "register": "FORMAL",
+    "phoneticEn": "NAYM muh neet KVAH-luk",
+    "phoneticFr": "NÉM me nite KVA-leuk",
+    "meaningEn": "Do excuse me",
+    "meaningFr": "Excusez-moi",
+    "situationEn": "Interrupting someone properly, or apologising for something that mattered. It carries more weight than sorry and is worth having ready.",
+    "situationFr": "Vous interrompez quelqu'un pour de bon, ou vous vous excusez de quelque chose qui comptait. La formule pèse plus qu'un sorry et vaut la peine d'être prête.",
+    "tipsEn": [
+      "A fixed block — learn all four words together and don't take it apart.",
+      "The kw is k plus the soft Dutch w: KVAH-luk.",
+      "Heavier than sorry, lighter than het spijt me. It sits neatly between them."
+    ],
+    "tipsFr": [
+      "Un bloc figé — apprenez les quatre mots ensemble et ne les démontez pas.",
+      "Le kw est un k suivi du w néerlandais adouci : KVA-leuk.",
+      "Plus lourd que sorry, plus léger que het spijt me. Il se place exactement entre les deux."
+    ],
+    "replyNl": "Geeft niet, zegt u het maar.",
+    "replyMeaningEn": "That's all right — go ahead.",
+    "replyMeaningFr": "Ce n'est rien — je vous écoute.",
+    "themes": ["politeness"],
+    "lifeContexts": ["administration", "office", "shops", "neighbors", "daycare-school"]
+  },
+  {
+    "slug": "sorry-mijn-fout",
+    "textNl": "Sorry, mijn fout",
+    "ipa": "ˈsɔri mɛin ˈfɑut",
+    "level": "A0",
+    "register": "INFORMAL",
+    "phoneticEn": "SOR-ee, mayn FOWT",
+    "phoneticFr": "SO-ri, mèïn FAOUTE",
+    "meaningEn": "Sorry, my mistake",
+    "meaningFr": "Désolé, c'est ma faute",
+    "situationEn": "You got something wrong — a name, a time, a door. Owning it in two words is normal here and closes the matter immediately.",
+    "situationFr": "Vous vous êtes trompé — de prénom, d'heure, de porte. L'assumer en deux mots est normal ici et clôt l'affaire sur-le-champ.",
+    "tipsEn": [
+      "No verb needed: sorry plus the noun does the whole job.",
+      "The ou of fout is the 'ow' of 'cow', the same as in mevrouw.",
+      "Dutch prefers a quick admission to a long apology. Say it and move on."
+    ],
+    "tipsFr": [
+      "Aucun verbe nécessaire : sorry plus le nom suffisent.",
+      "Le ou de fout se dit « aou », comme dans mevrouw.",
+      "Le néerlandais préfère un aveu rapide à une longue excuse. Dites-le et passez à autre chose."
+    ],
+    "replyNl": "Geen probleem, kan gebeuren.",
+    "replyMeaningEn": "No problem, these things happen.",
+    "replyMeaningFr": "Pas de souci, ça arrive.",
+    "themes": ["politeness"],
+    "lifeContexts": ["office", "friends", "neighbors", "family", "daycare-school", "administration"]
+  },
+  {
+    "slug": "ja-graag",
+    "textNl": "Ja, graag",
+    "ipa": "jaː ˈɣraːx",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "YAH, khrahkh",
+    "phoneticFr": "YA, khrarkh",
+    "meaningEn": "Yes please",
+    "meaningFr": "Oui, volontiers",
+    "situationEn": "Accepting an offer — a coffee, a bag, a lift. Two words that make a bare ja sound warm instead of blunt.",
+    "situationFr": "Vous acceptez une proposition — un café, un sac, qu'on vous dépose. Deux mots qui rendent chaleureux un ja qui serait sec tout seul.",
+    "tipsEn": [
+      "Graag is the Dutch 'please' for accepting; alsjeblieft is for asking.",
+      "The scraped g at both ends of graag is the sound to practise here."
+    ],
+    "tipsFr": [
+      "Graag est le « s'il vous plaît » de l'acceptation ; alsjeblieft, celui de la demande.",
+      "Le g raclé aux deux extrémités de graag est le son à travailler ici."
+    ],
+    "replyNl": "Komt eraan!",
+    "replyMeaningEn": "Coming right up!",
+    "replyMeaningFr": "Ça arrive !",
+    "themes": ["politeness", "daily-life"],
+    "lifeContexts": ["shops", "office", "friends", "family", "leisure-sports", "neighbors"]
+  },
+  {
+    "slug": "nee-dank-je",
+    "textNl": "Nee, dank je",
+    "ipa": "neː ˈdɑŋk jə",
+    "level": "A0",
+    "register": "INFORMAL",
+    "phoneticEn": "NAY, dank yuh",
+    "phoneticFr": "NÉ, dank ye",
+    "meaningEn": "No thanks",
+    "meaningFr": "Non merci",
+    "situationEn": "Declining a bag at the till, a refill, a second helping. This is the polite refusal you'll use more than almost any other phrase.",
+    "situationFr": "Vous refusez un sac à la caisse, qu'on vous resserve, une deuxième part. C'est le refus poli que vous emploierez plus que presque toute autre formule.",
+    "tipsEn": [
+      "The thanks is what makes it polite — a bare nee sounds abrupt in Dutch.",
+      "At a counter with a stranger, nee, dank u is the safer register."
+    ],
+    "tipsFr": [
+      "C'est le merci qui rend le refus poli — un nee seul sonne abrupt en néerlandais.",
+      "À un guichet avec un inconnu, nee, dank u est le registre plus sûr."
+    ],
+    "replyNl": "Prima, dat is dan alles?",
+    "replyMeaningEn": "Fine — that's everything, then?",
+    "replyMeaningFr": "Très bien — ce sera tout, alors ?",
+    "themes": ["politeness", "daily-life"],
+    "lifeContexts": ["shops", "family", "friends", "office", "administration", "leisure-sports"]
+  },
+  {
+    "slug": "ik-ook",
+    "textNl": "Ik ook",
+    "ipa": "ɪk ˈoːk",
+    "level": "A0",
+    "register": "INFORMAL",
+    "phoneticEn": "ik OHK",
+    "phoneticFr": "ik ÔK",
+    "meaningEn": "Me too",
+    "meaningFr": "Moi aussi",
+    "situationEn": "Someone says something you agree with — they're tired, they like the coffee, they're going that way. Two words keep you in the conversation.",
+    "situationFr": "Quelqu'un dit quelque chose que vous partagez — il est fatigué, il aime le café, il va dans la même direction. Deux mots vous gardent dans la conversation.",
+    "tipsEn": [
+      "Ook comes after the pronoun, never before: ik ook, never ook ik in this sense.",
+      "The oo is a long closed vowel, roughly the 'oh' of 'boat'."
+    ],
+    "tipsFr": [
+      "Ook se place après le pronom, jamais avant : ik ook, jamais ook ik dans ce sens.",
+      "Le oo est une voyelle longue et fermée, à peu près le « ô » de « côte »."
+    ],
+    "replyNl": "Kijk aan, wij tweeën dan!",
+    "replyMeaningEn": "There you go — the two of us then!",
+    "replyMeaningFr": "Eh bien voilà — tous les deux alors !",
+    "themes": ["daily-life"],
+    "lifeContexts": ["friends", "office", "family", "neighbors", "leisure-sports", "daycare-school"]
+  },
+  {
+    "slug": "ik-ook-niet",
+    "textNl": "Ik ook niet",
+    "ipa": "ɪk ˈoːk ˈnit",
+    "level": "A0",
+    "register": "INFORMAL",
+    "phoneticEn": "ik OHK neet",
+    "phoneticFr": "ik ÔK nite",
+    "meaningEn": "Me neither",
+    "meaningFr": "Moi non plus",
+    "situationEn": "Someone says they don't know, don't have time, don't like something. The negative twin of ik ook, and just as useful.",
+    "situationFr": "Quelqu'un dit qu'il ne sait pas, n'a pas le temps, n'aime pas. Le jumeau négatif d'ik ook, et tout aussi utile.",
+    "tipsEn": [
+      "Dutch keeps ook and adds niet at the end — there is no single word for 'neither'.",
+      "The order is fixed: ik ook niet, never ik niet ook."
+    ],
+    "tipsFr": [
+      "Le néerlandais garde ook et ajoute niet à la fin — il n'existe pas de mot unique pour « non plus ».",
+      "L'ordre est figé : ik ook niet, jamais ik niet ook."
+    ],
+    "replyNl": "We zijn dus met z'n tweeën.",
+    "replyMeaningEn": "So that makes two of us.",
+    "replyMeaningFr": "Ça fait deux, alors.",
+    "themes": ["daily-life"],
+    "lifeContexts": ["friends", "office", "family", "neighbors", "daycare-school", "administration"]
+  },
+  {
+    "slug": "geen-idee",
+    "textNl": "Geen idee",
+    "ipa": "ɣeːn iˈdeː",
+    "level": "A0",
+    "register": "INFORMAL",
+    "phoneticEn": "khayn ee-DAY",
+    "phoneticFr": "khéne i-DÉ",
+    "meaningEn": "No idea",
+    "meaningFr": "Aucune idée",
+    "situationEn": "Someone asks you something you genuinely can't answer. Shorter than a full sentence, and completely natural in Dutch.",
+    "situationFr": "On vous demande quelque chose que vous ignorez vraiment. Plus court qu'une phrase entière, et parfaitement naturel en néerlandais.",
+    "tipsEn": [
+      "Stress on the last syllable: ee-DAY.",
+      "Casual — with a stranger at a counter, ik weet het niet is the safer choice."
+    ],
+    "tipsFr": [
+      "Accent sur la dernière syllabe : i-DÉ.",
+      "Familier — avec un inconnu à un guichet, ik weet het niet est le choix plus sûr."
+    ],
+    "replyNl": "Geeft niet, ik zoek het wel op.",
+    "replyMeaningEn": "Never mind, I'll look it up.",
+    "replyMeaningFr": "Ce n'est rien, je vais chercher.",
+    "themes": ["daily-life"],
+    "lifeContexts": ["friends", "office", "family", "neighbors", "leisure-sports"]
+  },
+  {
+    "slug": "dat-klopt",
+    "textNl": "Dat klopt",
+    "ipa": "dɑt ˈklɔpt",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "dat KLOPT",
+    "phoneticFr": "date KLOPT",
+    "meaningEn": "That's right",
+    "meaningFr": "C'est exact",
+    "situationEn": "Someone repeats back your name, your address, your order. Confirming in Dutch is a tiny step, and it is one you'll take several times a week.",
+    "situationFr": "On vous répète votre nom, votre adresse, votre commande. Confirmer en néerlandais est un tout petit pas — que vous ferez plusieurs fois par semaine.",
+    "tipsEn": [
+      "Kloppen means 'to be correct' here, and also 'to knock'. Context separates them.",
+      "The negative is just as useful: dat klopt niet.",
+      "You will hear this constantly at counters — recognising it matters as much as saying it."
+    ],
+    "tipsFr": [
+      "Kloppen signifie ici « être exact », et aussi « frapper à la porte ». Le contexte tranche.",
+      "Le négatif est tout aussi utile : dat klopt niet.",
+      "Vous l'entendrez sans cesse aux guichets — le reconnaître compte autant que le dire."
+    ],
+    "replyNl": "Mooi, dan noteer ik het zo.",
+    "replyMeaningEn": "Good, I'll note it down like that.",
+    "replyMeaningFr": "Parfait, je le note ainsi.",
+    "themes": ["daily-life"],
+    "lifeContexts": ["administration", "shops", "office", "daycare-school", "neighbors"]
+  },
+  {
+    "slug": "tien-euro",
+    "textNl": "Tien euro",
+    "ipa": "ˈtin ˈøːroː",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "TEEN UH-roh",
+    "phoneticFr": "TINE EU-ro",
+    "meaningEn": "Ten euros",
+    "meaningFr": "Dix euros",
+    "situationEn": "Saying or checking a price — at a stall, splitting a bill, paying a neighbour back. The amount out loud, in Dutch.",
+    "situationFr": "Vous annoncez ou vérifiez un prix — sur un étal, en partageant une addition, en remboursant un voisin. Le montant à voix haute, en néerlandais.",
+    "tipsEn": [
+      "Euro stays singular after a number: tien euro, never tien euro's for a price.",
+      "The eu of euro is the rounded vowel of French 'peu'."
+    ],
+    "tipsFr": [
+      "Euro reste au singulier après un chiffre : tien euro, jamais tien euro's pour un prix.",
+      "Le eu d'euro est exactement celui de « peu »."
+    ],
+    "replyNl": "Alsjeblieft, precies genoeg.",
+    "replyMeaningEn": "Here you go — exactly right.",
+    "replyMeaningFr": "Tiens, c'est juste.",
+    "themes": ["numbers"],
+    "lifeContexts": ["shops", "friends", "leisure-sports", "administration", "family"]
+  },
+  {
+    "slug": "nummer-vier",
+    "textNl": "Nummer vier",
+    "ipa": "ˈnʏmər ˈvir",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "NUH-mur FEER",
+    "phoneticFr": "NEU-meur FIR",
+    "meaningEn": "Number four",
+    "meaningFr": "Numéro quatre",
+    "situationEn": "Waiting your turn at a counter with a ticket, or naming a house number. Dutch queues run on numbers called out loud.",
+    "situationFr": "Vous attendez votre tour à un guichet avec un ticket, ou vous donnez un numéro de maison. Les files néerlandaises fonctionnent aux numéros appelés à voix haute.",
+    "tipsEn": [
+      "Nummer takes a short u, close to the 'u' in English 'butter'.",
+      "Listen for your number rather than watching the screen — it is faster and it is practice."
+    ],
+    "tipsFr": [
+      "Nummer prend un u bref, proche du « eu » de « peur ».",
+      "Écoutez votre numéro plutôt que de fixer l'écran — c'est plus rapide et ça fait travailler l'oreille."
+    ],
+    "replyNl": "Nummer vier, komt u maar!",
+    "replyMeaningEn": "Number four, come on through!",
+    "replyMeaningFr": "Numéro quatre, à vous !",
+    "themes": ["numbers"],
+    "lifeContexts": ["administration", "shops", "leisure-sports", "office", "daycare-school"]
+  },
+  {
+    "slug": "twee-alsjeblieft",
+    "textNl": "Twee, alsjeblieft",
+    "ipa": "ˈtʋeː ɑlʃəˈbliːft",
+    "level": "A0",
+    "register": "INFORMAL",
+    "phoneticEn": "TVAY, al-shuh-BLEEFT",
+    "phoneticFr": "TVÉ, al-che-BLIFT",
+    "meaningEn": "Two, please",
+    "meaningFr": "Deux, s'il te plaît",
+    "situationEn": "At the bakery or the market, when they ask how many. The number plus the please is a complete, correct answer.",
+    "situationFr": "À la boulangerie ou au marché, quand on vous demande combien. Le chiffre plus la formule de politesse font une réponse complète et correcte.",
+    "tipsEn": [
+      "You do not need to repeat the item — the number alone is normal here.",
+      "With staff you don't know, twee, alstublieft keeps it in the u register."
+    ],
+    "tipsFr": [
+      "Inutile de répéter l'article — le chiffre seul est normal ici.",
+      "Avec un personnel que vous ne connaissez pas, twee, alstublieft garde le vouvoiement."
+    ],
+    "replyNl": "Twee stuks, alsjeblieft.",
+    "replyMeaningEn": "Two of them, here you go.",
+    "replyMeaningFr": "Deux pièces, voilà.",
+    "themes": ["numbers", "politeness"],
+    "lifeContexts": ["shops", "leisure-sports", "family", "friends", "daycare-school"]
+  },
+  {
+    "slug": "twee-koffie-graag",
+    "textNl": "Twee koffie, graag",
+    "ipa": "ˈtʋeː ˈkɔfi ˈɣraːx",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "TVAY KOF-ee, khrahkh",
+    "phoneticFr": "TVÉ KO-fi, khrarkh",
+    "meaningEn": "Two coffees, please",
+    "meaningFr": "Deux cafés, s'il vous plaît",
+    "situationEn": "Ordering for you and someone else. Three words, no verb, and it is exactly how Dutch people order.",
+    "situationFr": "Vous commandez pour vous et quelqu'un d'autre. Trois mots, aucun verbe, et c'est exactement ainsi que commandent les Néerlandais.",
+    "tipsEn": [
+      "Koffie stays singular after a number when ordering — twee koffie, not twee koffies.",
+      "Graag at the end is the compact 'please' of orders."
+    ],
+    "tipsFr": [
+      "Koffie reste au singulier après un chiffre dans une commande — twee koffie, pas twee koffies.",
+      "Graag en fin de phrase est le « s'il vous plaît » compact des commandes."
+    ],
+    "replyNl": "Komt eraan, blijft u hier zitten?",
+    "replyMeaningEn": "Coming up — are you staying here?",
+    "replyMeaningFr": "Ça arrive — vous restez ici ?",
+    "themes": ["food-drink", "numbers"],
+    "lifeContexts": ["shops", "office", "leisure-sports", "friends", "family"]
+  },
+  {
+    "slug": "een-broodje-graag",
+    "textNl": "Een broodje, graag",
+    "ipa": "ən ˈbroːcə ˈɣraːx",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "un BROH-chuh, khrahkh",
+    "phoneticFr": "eun BRÔ-tche, khrarkh",
+    "meaningEn": "A roll, please",
+    "meaningFr": "Un petit pain, s'il vous plaît",
+    "situationEn": "The lunch counter, the bakery, the station kiosk. A broodje is the Dutch lunch, and this is how you get one.",
+    "situationFr": "Le comptoir du midi, la boulangerie, le kiosque de gare. Le broodje est le déjeuner néerlandais, et voici comment en obtenir un.",
+    "tipsEn": [
+      "Broodje is the diminutive of brood — the -tje ending you'll meet everywhere, said 'chuh'.",
+      "A broodje is a filled roll, not a slice of bread. Expect to be asked what goes on it."
+    ],
+    "tipsFr": [
+      "Broodje est le diminutif de brood — la terminaison -tje qu'on croise partout, prononcée « tche ».",
+      "Un broodje est un petit pain garni, pas une tranche. Attendez-vous à ce qu'on demande la garniture."
+    ],
+    "replyNl": "Met kaas of met ham?",
+    "replyMeaningEn": "With cheese or with ham?",
+    "replyMeaningFr": "Au fromage ou au jambon ?",
+    "themes": ["food-drink"],
+    "lifeContexts": ["shops", "office", "leisure-sports", "daycare-school", "family"]
+  },
+  {
+    "slug": "een-glas-water",
+    "textNl": "Een glas water",
+    "ipa": "ən ˈɣlɑs ˈʋaːtər",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "un KHLAS VAH-tur",
+    "phoneticFr": "eun KHLASS VA-teur",
+    "meaningEn": "A glass of water",
+    "meaningFr": "Un verre d'eau",
+    "situationEn": "At a café, at someone's table, at the doctor's. The simplest thing you can ask for, and free almost everywhere.",
+    "situationFr": "Au café, chez quelqu'un, chez le médecin. La chose la plus simple à demander, et gratuite presque partout.",
+    "tipsEn": [
+      "Dutch says glas water with no 'of' — the two nouns just sit together.",
+      "The gl of glas starts on the scraped Dutch g, which makes it harder than it looks."
+    ],
+    "tipsFr": [
+      "Le néerlandais dit glas water sans « de » — les deux noms se juxtaposent simplement.",
+      "Le gl de glas démarre sur le g raclé néerlandais, ce qui le rend plus dur qu'il n'y paraît."
+    ],
+    "replyNl": "Zeker, ik breng het zo.",
+    "replyMeaningEn": "Sure, I'll bring it over.",
+    "replyMeaningFr": "Bien sûr, je l'apporte tout de suite.",
+    "themes": ["food-drink"],
+    "lifeContexts": ["shops", "leisure-sports", "family", "friends", "administration"]
+  },
+  {
+    "slug": "met-melk-graag",
+    "textNl": "Met melk, graag",
+    "ipa": "mɛt ˈmɛlk ˈɣraːx",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "met MELK, khrahkh",
+    "phoneticFr": "mète MÈLK, khrarkh",
+    "meaningEn": "With milk, please",
+    "meaningFr": "Avec du lait, s'il vous plaît",
+    "situationEn": "The follow-up question after you order coffee or tea. Having the answer ready is what stops the exchange from switching to English.",
+    "situationFr": "La question qui suit une commande de café ou de thé. Avoir la réponse prête est ce qui empêche l'échange de basculer en anglais.",
+    "tipsEn": [
+      "Met takes no article before an uncountable: met melk, met suiker.",
+      "The opposite is zonder — the pair covers most counter questions."
+    ],
+    "tipsFr": [
+      "Met ne prend pas d'article devant un indénombrable : met melk, met suiker.",
+      "Son contraire est zonder — la paire couvre l'essentiel des questions de comptoir."
+    ],
+    "replyNl": "Alsjeblieft, met een beetje melk.",
+    "replyMeaningEn": "Here you go — with a little milk.",
+    "replyMeaningFr": "Voilà — avec un peu de lait.",
+    "themes": ["food-drink"],
+    "lifeContexts": ["shops", "office", "family", "friends", "leisure-sports"]
+  },
+  {
+    "slug": "zonder-suiker",
+    "textNl": "Zonder suiker",
+    "ipa": "ˈzɔndər ˈsœykər",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "ZON-dur SOY-kur",
+    "phoneticFr": "ZON-deur SOEÏ-keur",
+    "meaningEn": "Without sugar",
+    "meaningFr": "Sans sucre",
+    "situationEn": "The other half of the same question. Two words that let you get your drink the way you actually want it.",
+    "situationFr": "L'autre moitié de la même question. Deux mots pour obtenir votre boisson comme vous la voulez vraiment.",
+    "tipsEn": [
+      "Zonder is 'without' and needs no article after it.",
+      "The ui of suiker is the Dutch-only diphthong — round your lips and aim between 'ow' and 'uh'."
+    ],
+    "tipsFr": [
+      "Zonder signifie « sans » et n'appelle aucun article derrière.",
+      "Le ui de suiker est la diphtongue propre au néerlandais — arrondissez les lèvres, visez entre « eu » et « aïe »."
+    ],
+    "replyNl": "Prima, zonder suiker dus.",
+    "replyMeaningEn": "Fine — without sugar then.",
+    "replyMeaningFr": "Parfait — sans sucre, donc.",
+    "themes": ["food-drink"],
+    "lifeContexts": ["shops", "office", "family", "friends", "leisure-sports"]
+  },
+  {
+    "slug": "een-thee-graag",
+    "textNl": "Een thee, graag",
+    "ipa": "ən ˈteː ˈɣraːx",
+    "level": "A0",
+    "register": "NEUTRAL",
+    "phoneticEn": "un TAY, khrahkh",
+    "phoneticFr": "eun TÉ, khrarkh",
+    "meaningEn": "A tea, please",
+    "meaningFr": "Un thé, s'il vous plaît",
+    "situationEn": "The easiest order there is. If a Dutch coffee counter has ever made you hesitate, this is the phrase to start with.",
+    "situationFr": "La commande la plus facile qui soit. Si un comptoir néerlandais vous a déjà fait hésiter, c'est par cette phrase qu'il faut commencer.",
+    "tipsEn": [
+      "The th of thee is a plain t — Dutch has no English 'th' sound at all.",
+      "Expect to be offered a box of tea bags to choose from; welke smaak? means 'which flavour?'"
+    ],
+    "tipsFr": [
+      "Le th de thee est un t simple — le néerlandais n'a pas du tout le « th » anglais.",
+      "On vous tendra sans doute une boîte de sachets ; welke smaak ? veut dire « quel parfum ? »"
+    ],
+    "replyNl": "Welke smaak wilt u?",
+    "replyMeaningEn": "Which flavour would you like?",
+    "replyMeaningFr": "Quel parfum souhaitez-vous ?",
+    "themes": ["food-drink"],
+    "lifeContexts": ["shops", "office", "leisure-sports", "friends", "administration"]
   }
 ]
