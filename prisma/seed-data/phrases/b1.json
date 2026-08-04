@@ -1,1 +1,1346 @@
-[]
+[
+  {
+    "slug": "u-spreekt-met-ik-bel-over-mijn-afspraak",
+    "textNl": "U spreekt met Sara, ik bel over mijn afspraak.",
+    "ipa": "y ˈspreːkt mɛt ˈsaːraː ɪk ˈbɛl ˈoːvər mɛin ˈɑfspraːk",
+    "level": "B1",
+    "register": "FORMAL",
+    "phoneticEn": "oo SPRAYKT met SAH-rah, ik BEL OH-vur mayn AF-sprahk",
+    "phoneticFr": "u SPRÉKT mète SA-ra, ik BÈL Ô-veur mèïn AF-sprak",
+    "meaningEn": "This is Sara speaking, I'm calling about my appointment.",
+    "meaningFr": "Sara à l'appareil, j'appelle au sujet de mon rendez-vous.",
+    "situationEn": "The phone call you have been putting off. Dutch calls open with a fixed formula, and having it ready buys you the seconds you need to find the rest.",
+    "situationFr": "L'appel que vous repoussez depuis des jours. Un appel néerlandais s'ouvre par une formule figée : l'avoir prête vous achète les secondes nécessaires pour trouver la suite.",
+    "tipsEn": [
+      "U spreekt met ... is literally 'you are speaking with' — the standard way to announce yourself, not a translation of 'this is'.",
+      "Say why you're calling in the same breath; Dutch phone manners favour getting to the point immediately.",
+      "The person answering will usually give their own name first — listen for it and use it back."
+    ],
+    "tipsFr": [
+      "U spreekt met ... signifie littéralement « vous parlez avec » — la façon standard de s'annoncer, pas une traduction de « c'est ».",
+      "Dites pourquoi vous appelez dans la même phrase ; l'étiquette téléphonique néerlandaise préfère qu'on aille droit au but.",
+      "La personne qui décroche donnera d'abord son propre nom — écoutez-le et réutilisez-le."
+    ],
+    "replyNl": "Dag mevrouw, waar gaat het precies over?",
+    "replyMeaningEn": "Hello, what exactly is it regarding?",
+    "replyMeaningFr": "Bonjour madame, de quoi s'agit-il exactement ?",
+    "themes": ["time-appointments", "politeness"],
+    "lifeContexts": ["administration", "office", "daycare-school", "family"]
+  },
+  {
+    "slug": "kunt-u-mij-doorverbinden",
+    "textNl": "Kunt u mij doorverbinden met de administratie?",
+    "ipa": "ˈkʏnt y ˈmɛi ˈdoːrvərbɪndə mɛt də ɑtminɪˈstraːtsi",
+    "level": "B1",
+    "register": "FORMAL",
+    "phoneticEn": "kunt oo may DOHR-vur-bin-dun met duh ad-mee-nee-STRAHT-see",
+    "phoneticFr": "kunt u mèï DOR-veur-bine-de mète de ad-mi-ni-STRAT-si",
+    "meaningEn": "Could you put me through to the admin office?",
+    "meaningFr": "Pouvez-vous me passer le service administratif ?",
+    "situationEn": "You reached a switchboard, not the person you need. Ask to be transferred instead of hanging up and starting the whole call again tomorrow.",
+    "situationFr": "Vous êtes tombé sur un standard, pas sur la bonne personne. Demandez le transfert plutôt que de raccrocher et de tout recommencer demain.",
+    "tipsEn": [
+      "Doorverbinden is separable, but after a modal it stays whole and goes to the end.",
+      "If they ask waarmee kan ik u helpen?, name the department rather than the problem.",
+      "Een moment, ik verbind u door is what you'll hear back — recognise it and wait."
+    ],
+    "tipsFr": [
+      "Doorverbinden est séparable, mais après un modal il reste entier et part à la fin.",
+      "Si l'on vous demande waarmee kan ik u helpen ?, nommez le service plutôt que le problème.",
+      "Een moment, ik verbind u door est ce qu'on vous répondra — reconnaissez-le et patientez."
+    ],
+    "replyNl": "Een moment, ik verbind u door.",
+    "replyMeaningEn": "One moment, I'll transfer you.",
+    "replyMeaningFr": "Un instant, je vous transfère.",
+    "themes": ["politeness", "money-admin"],
+    "lifeContexts": ["administration", "office", "daycare-school", "shops"]
+  },
+  {
+    "slug": "ik-bel-om-mijn-afspraak-te-verzetten",
+    "textNl": "Ik bel om mijn afspraak te verzetten naar volgende week.",
+    "ipa": "ɪk ˈbɛl ɔm mɛin ˈɑfspraːk tə vərˈzɛtə naːr ˈvɔlɣəndə ˈʋeːk",
+    "level": "B1",
+    "register": "FORMAL",
+    "phoneticEn": "ik BEL om mayn AF-sprahk tuh vur-ZET-un nahr VOL-khun-duh VAYK",
+    "phoneticFr": "ik BÈL om mèïn AF-sprak te veur-ZÈ-te nar VOL-kheun-de VÉK",
+    "meaningEn": "I'm calling to move my appointment to next week.",
+    "meaningFr": "J'appelle pour déplacer mon rendez-vous à la semaine prochaine.",
+    "situationEn": "Something clashed. Cancelling late is genuinely frowned on here and often billed, so make the call as soon as you know.",
+    "situationFr": "Un conflit d'agenda. Annuler au dernier moment est mal vu ici, et souvent facturé : appelez dès que vous le savez.",
+    "tipsEn": [
+      "Om ... te + infinitive is the 'in order to' frame, with the verb parked at the end.",
+      "Verzetten is to move an appointment; afzeggen is to cancel it outright. The difference matters on the phone.",
+      "Offer an alternative slot yourself — it turns a cancellation into a reschedule."
+    ],
+    "tipsFr": [
+      "Om ... te + infinitif est le moule du but, avec le verbe garé à la fin.",
+      "Verzetten, c'est déplacer un rendez-vous ; afzeggen, l'annuler purement. La nuance compte au téléphone.",
+      "Proposez vous-même un autre créneau — l'annulation devient un report."
+    ],
+    "replyNl": "Dat kan, welke dag komt u beter uit?",
+    "replyMeaningEn": "That's possible, which day suits you better?",
+    "replyMeaningFr": "C'est possible, quel jour vous arrangerait mieux ?",
+    "themes": ["time-appointments", "health-body"],
+    "lifeContexts": ["administration", "office", "family", "daycare-school"]
+  },
+  {
+    "slug": "zou-u-een-boodschap-kunnen-doorgeven",
+    "textNl": "Zou u een boodschap kunnen doorgeven?",
+    "ipa": "ˈzɑu y ən ˈboːtsxɑp ˈkʏnə ˈdoːrɣeːvə",
+    "level": "B1",
+    "register": "FORMAL",
+    "phoneticEn": "ZOW oo un BOHT-skhap KUH-nun DOHR-khay-vun",
+    "phoneticFr": "ZAOU u eun BÔTE-skhap KEU-ne DOR-khé-ve",
+    "meaningEn": "Would you be able to pass on a message?",
+    "meaningFr": "Pourriez-vous transmettre un message ?",
+    "situationEn": "The person you need is out. Leaving a message in Dutch is what stops the matter from waiting another week for your call.",
+    "situationFr": "La personne cherchée est absente. Laisser un message en néerlandais évite que le dossier attende encore une semaine votre prochain appel.",
+    "tipsEn": [
+      "Zou u ... kunnen is the most polite request frame Dutch has — two conditionals stacked.",
+      "Boodschap means both 'message' and 'grocery shopping' — boodschappen doen is the shopping.",
+      "Follow with your name and number slowly; spell your surname if it isn't Dutch."
+    ],
+    "tipsFr": [
+      "Zou u ... kunnen est le moule de demande le plus poli du néerlandais — deux conditionnels empilés.",
+      "Boodschap signifie à la fois « message » et « courses » — boodschappen doen, c'est faire les courses.",
+      "Enchaînez avec votre nom et votre numéro, lentement ; épelez votre patronyme s'il n'est pas néerlandais."
+    ],
+    "replyNl": "Zeker, ik geef het aan haar door.",
+    "replyMeaningEn": "Certainly, I'll pass it on to her.",
+    "replyMeaningFr": "Bien sûr, je le lui transmets.",
+    "themes": ["politeness", "work-collaboration"],
+    "lifeContexts": ["office", "administration", "daycare-school", "neighbors"]
+  },
+  {
+    "slug": "ik-probeer-u-al-dagen-te-bereiken",
+    "textNl": "Ik probeer u al een paar dagen te bereiken.",
+    "ipa": "ɪk proːˈbeːr y ɑl ən ˈpaːr ˈdaːɣə tə bəˈrɛikə",
+    "level": "B1",
+    "register": "FORMAL",
+    "phoneticEn": "ik pro-BAYR oo al un pahr DAH-khun tuh buh-RAY-kun",
+    "phoneticFr": "ik pro-BÉR u al eun par DA-kheun te be-RÈÏ-ke",
+    "meaningEn": "I've been trying to reach you for a few days.",
+    "meaningFr": "J'essaie de vous joindre depuis quelques jours.",
+    "situationEn": "Chasing something that has gone quiet. Stating the delay factually, without heat, is what gets Dutch organisations to move.",
+    "situationFr": "Vous relancez un dossier resté sans réponse. Énoncer le délai factuellement, sans agacement, est ce qui fait bouger les organisations néerlandaises.",
+    "tipsEn": [
+      "Al plus a duration is how Dutch says 'for' in an ongoing sense — and the verb stays present.",
+      "Proberen takes te + infinitive, both pushed to the end of the clause.",
+      "Keep it factual: irritation in the voice tends to close doors here rather than open them."
+    ],
+    "tipsFr": [
+      "Al suivi d'une durée est la façon néerlandaise de dire « depuis » pour une action en cours — et le verbe reste au présent.",
+      "Proberen exige te + infinitif, les deux rejetés en fin de proposition.",
+      "Restez factuel : l'irritation dans la voix ferme plus de portes qu'elle n'en ouvre ici."
+    ],
+    "replyNl": "Wat vervelend, ik zoek het meteen voor u uit.",
+    "replyMeaningEn": "How annoying, I'll look into it right away.",
+    "replyMeaningFr": "C'est ennuyeux, je regarde ça tout de suite.",
+    "themes": ["money-admin", "politeness"],
+    "lifeContexts": ["administration", "office", "family", "shops"]
+  },
+  {
+    "slug": "wat-ik-bedoel-is-dat",
+    "textNl": "Wat ik bedoel is dat het zo sneller gaat.",
+    "ipa": "ʋɑt ɪk bəˈdul ɪs dɑt ət zoː ˈsnɛlər ˈɣaːt",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "vat ik buh-DOOL is dat ut zo SNEL-ur khaht",
+    "phoneticFr": "vate ik be-DOUL iss date ut zo SNÈ-leur khate",
+    "meaningEn": "What I mean is that it's quicker this way.",
+    "meaningFr": "Ce que je veux dire, c'est que c'est plus rapide comme ça.",
+    "situationEn": "Your first attempt didn't land. Instead of repeating it louder, reframe — this is the sentence that buys you a second run at the idea.",
+    "situationFr": "Votre première formulation n'est pas passée. Plutôt que de répéter plus fort, reformulez — c'est la phrase qui vous offre une seconde tentative.",
+    "tipsEn": [
+      "Dat opens a subordinate clause and sends its verb to the very end: ... sneller gaat.",
+      "Bedoelen is 'to mean' as a speaker; betekenen is what a word means. Don't swap them.",
+      "Naming that you're rephrasing keeps people listening instead of politely switching to English."
+    ],
+    "tipsFr": [
+      "Dat ouvre une subordonnée et rejette son verbe tout à la fin : ... sneller gaat.",
+      "Bedoelen, c'est « vouloir dire » en tant que locuteur ; betekenen, c'est ce que signifie un mot. Ne les intervertissez pas.",
+      "Annoncer que vous reformulez garde l'attention au lieu de faire basculer poliment en anglais."
+    ],
+    "replyNl": "Ah, nu snap ik je.",
+    "replyMeaningEn": "Ah, now I follow you.",
+    "replyMeaningFr": "Ah, maintenant je te suis.",
+    "themes": ["work-collaboration", "daily-life"],
+    "lifeContexts": ["office", "neighbors", "friends", "daycare-school"]
+  },
+  {
+    "slug": "met-andere-woorden",
+    "textNl": "Met andere woorden: we beginnen opnieuw.",
+    "ipa": "mɛt ˈɑndərə ˈʋoːrdə ʋə bəˈɣɪnə ɔpˈniu",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "met AN-duh-ruh VOHR-dun, vuh buh-KHI-nun op-NEEW",
+    "phoneticFr": "mète AN-de-re VOR-de, ve be-KHI-ne op-NIOU",
+    "meaningEn": "In other words: we're starting over.",
+    "meaningFr": "Autrement dit : on recommence.",
+    "situationEn": "Summarising back what you just heard, to check you got it. It is the cheapest way to confirm understanding without asking anyone to repeat.",
+    "situationFr": "Vous reformulez ce que vous venez d'entendre, pour vérifier. C'est la façon la moins coûteuse de confirmer sans demander de répéter.",
+    "tipsEn": [
+      "Summarising back is a genuine comprehension tool — you find out you misheard before it costs you.",
+      "Opnieuw is 'anew'; weer is simply 'again'. The first implies from the start.",
+      "The eu of opnieuw is a glide — op-NEEW, ending on a w."
+    ],
+    "tipsFr": [
+      "Reformuler est un vrai outil de compréhension — vous découvrez que vous aviez mal entendu avant que ça ne coûte cher.",
+      "Opnieuw veut dire « à nouveau depuis le début » ; weer signifie simplement « encore ».",
+      "Le ieuw finit sur une glissade — op-NIOU, terminé par un w."
+    ],
+    "replyNl": "Precies, dat bedoel ik.",
+    "replyMeaningEn": "Exactly, that's what I mean.",
+    "replyMeaningFr": "Exactement, c'est ce que je veux dire.",
+    "themes": ["work-collaboration", "daily-life"],
+    "lifeContexts": ["office", "administration", "friends", "neighbors"]
+  },
+  {
+    "slug": "als-ik-het-goed-begrijp",
+    "textNl": "Als ik het goed begrijp, moet ik eerst een formulier invullen.",
+    "ipa": "ɑls ɪk ət ˈɣut bəˈɣrɛip mut ɪk ˈeːrst ən fɔrmyˈlir ˈɪnvʏlə",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "als ik ut khoot buh-KHRAYP, moot ik AYRST un for-moo-LEER IN-vuh-lun",
+    "phoneticFr": "alss ik ut khoute be-KHRÈÏP, moute ik ÉRST eun for-mu-LIR INE-veu-le",
+    "meaningEn": "If I understand correctly, I have to fill in a form first.",
+    "meaningFr": "Si je comprends bien, je dois d'abord remplir un formulaire.",
+    "situationEn": "At the counter, after a long explanation you half-followed. Repeat the one thing you must do and let them correct you — far better than nodding.",
+    "situationFr": "Au guichet, après une longue explication à moitié suivie. Répétez la seule chose à faire et laissez-les corriger — bien mieux qu'un hochement de tête.",
+    "tipsEn": [
+      "Als opens the sentence, so the main clause inverts: moet ik, not ik moet. This is the rule that catches everyone.",
+      "Invullen is separable and lands at the end after a modal, whole.",
+      "Being wrong out loud here is cheap; being wrong silently costs you a second trip."
+    ],
+    "tipsFr": [
+      "Als ouvre la phrase, donc la principale s'inverse : moet ik, pas ik moet. C'est la règle qui piège tout le monde.",
+      "Invullen est séparable et atterrit entier à la fin après un modal.",
+      "Se tromper à voix haute ici ne coûte rien ; se tromper en silence coûte un second déplacement."
+    ],
+    "replyNl": "Klopt, en dan sturen wij u een bevestiging.",
+    "replyMeaningEn": "Correct, and then we'll send you a confirmation.",
+    "replyMeaningFr": "C'est ça, et ensuite nous vous envoyons une confirmation.",
+    "themes": ["money-admin", "daily-life"],
+    "lifeContexts": ["administration", "office", "shops", "family"]
+  },
+  {
+    "slug": "klopt-het-dat",
+    "textNl": "Klopt het dat de afspraak verzet is?",
+    "ipa": "ˈklɔpt ət dɑt də ˈɑfspraːk vərˈzɛt ɪs",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "KLOPT ut dat duh AF-sprahk vur-ZET is",
+    "phoneticFr": "KLOPT ut date de AF-sprak veur-ZÈTE iss",
+    "meaningEn": "Is it right that the appointment has been moved?",
+    "meaningFr": "C'est bien vrai que le rendez-vous a été déplacé ?",
+    "situationEn": "Checking a rumour or a half-read email before acting on it. Kloppen is the verb Dutch reaches for whenever something needs confirming.",
+    "situationFr": "Vérifier une rumeur ou un mail lu en diagonale avant d'agir. Kloppen est le verbe que le néerlandais dégaine dès qu'il faut confirmer.",
+    "tipsEn": [
+      "Kloppen means 'to be correct' here — and also 'to knock'. Context separates them cleanly.",
+      "Dat again sends the verb to the end: ... verzet is.",
+      "Dat klopt is the answer you want; dat klopt niet is the one you need to hear."
+    ],
+    "tipsFr": [
+      "Kloppen signifie ici « être exact » — et aussi « frapper à la porte ». Le contexte les sépare sans peine.",
+      "Encore dat, qui rejette le verbe à la fin : ... verzet is.",
+      "Dat klopt est la réponse espérée ; dat klopt niet est celle qu'il faut entendre."
+    ],
+    "replyNl": "Dat klopt, hij staat nu op donderdag.",
+    "replyMeaningEn": "That's right, it's on Thursday now.",
+    "replyMeaningFr": "C'est exact, il est maintenant jeudi.",
+    "themes": ["time-appointments", "work-collaboration"],
+    "lifeContexts": ["office", "daycare-school", "administration", "leisure-sports"]
+  },
+  {
+    "slug": "zoals-ik-het-zie",
+    "textNl": "Zoals ik het zie, hebben we twee opties.",
+    "ipa": "zoːˈɑls ɪk ət ˈzi ˈɦɛbə ʋə ˈtʋeː ˈɔptsis",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "zo-ALS ik ut ZEE, HEB-un vuh tvay OP-sees",
+    "phoneticFr": "zo-ALSS ik ut ZI, HÈ-be ve tvé OP-siss",
+    "meaningEn": "The way I see it, we have two options.",
+    "meaningFr": "Tel que je le vois, on a deux options.",
+    "situationEn": "Framing a decision instead of waiting for someone else to. Dutch meetings expect you to put a position on the table, not just react to one.",
+    "situationFr": "Vous cadrez la décision au lieu d'attendre qu'un autre le fasse. Une réunion néerlandaise attend que vous posiez une position, pas seulement que vous réagissiez.",
+    "tipsEn": [
+      "The fronted clause forces inversion again: hebben we, not we hebben.",
+      "Zoals ik het zie marks it as your view — useful when you're not certain and don't want to sound so.",
+      "Naming the number of options first makes the rest of the sentence easy to follow."
+    ],
+    "tipsFr": [
+      "La proposition placée en tête impose de nouveau l'inversion : hebben we, pas we hebben.",
+      "Zoals ik het zie signale que c'est votre lecture — utile quand vous n'êtes pas certain et ne voulez pas en avoir l'air.",
+      "Annoncer d'abord le nombre d'options rend la suite facile à suivre."
+    ],
+    "replyNl": "Vertel, welke twee?",
+    "replyMeaningEn": "Go on, which two?",
+    "replyMeaningFr": "Vas-y, lesquelles ?",
+    "themes": ["opinions-preferences", "work-collaboration"],
+    "lifeContexts": ["office", "friends", "administration", "neighbors"]
+  },
+  {
+    "slug": "zullen-we-een-compromis-zoeken",
+    "textNl": "Zullen we een compromis zoeken?",
+    "ipa": "ˈzʏlə ʋə ən kɔmproːˈmɪs ˈzukə",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "ZUH-lun vuh un kom-pro-MIS ZOO-kun",
+    "phoneticFr": "ZEU-le ve eun kom-pro-MISS ZOU-ke",
+    "meaningEn": "Shall we look for a compromise?",
+    "meaningFr": "On cherche un compromis ?",
+    "situationEn": "A discussion that has stalled — at work, with a neighbour, over a shared arrangement. Naming the compromise as the goal is a very Dutch move.",
+    "situationFr": "Une discussion qui patine — au travail, avec un voisin, sur une organisation commune. Nommer le compromis comme objectif est un réflexe très néerlandais.",
+    "tipsEn": [
+      "The Dutch polder model is real: consensus-seeking is the expected path, not a sign of weakness.",
+      "Compromis takes the stress on the last syllable and keeps a French-ish shape.",
+      "Er samen uitkomen ('come out of it together') is the warmer alternative phrasing."
+    ],
+    "tipsFr": [
+      "Le modèle du polder est bien réel : rechercher le consensus est la voie attendue, pas un aveu de faiblesse.",
+      "Compromis porte l'accent sur la dernière syllabe et garde une allure française.",
+      "Er samen uitkomen (« s'en sortir ensemble ») est la variante plus chaleureuse."
+    ],
+    "replyNl": "Lijkt me goed, waar zit voor jou de pijn?",
+    "replyMeaningEn": "Sounds good — where's the sticking point for you?",
+    "replyMeaningFr": "Ça me va — où ça coince pour toi ?",
+    "themes": ["work-collaboration", "opinions-preferences"],
+    "lifeContexts": ["office", "neighbors", "administration", "family"]
+  },
+  {
+    "slug": "ik-zou-graag-meer-tijd-krijgen",
+    "textNl": "Ik zou graag meer tijd krijgen voor dit project.",
+    "ipa": "ɪk ˈzɑu ˈɣraːx ˈmeːr ˈtɛit ˈkrɛiɣə voːr dɪt proːˈjɛkt",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "ik ZOW khrahkh mayr TAYT KRAY-khun fohr dit pro-YEKT",
+    "phoneticFr": "ik ZAOU khrarkh mér TÈÏTE KRÈÏ-kheun for dite pro-YÈKT",
+    "meaningEn": "I'd like to get more time for this project.",
+    "meaningFr": "J'aimerais avoir plus de temps pour ce projet.",
+    "situationEn": "Asking for room before the deadline bites rather than apologising after. Early and specific is what a Dutch manager will respect.",
+    "situationFr": "Demander de la marge avant que l'échéance ne morde, plutôt que de s'excuser après. Tôt et précis, c'est ce qu'un manager néerlandais respectera.",
+    "tipsEn": [
+      "Ik zou graag ... is the conditional wish frame; the infinitive parks at the end.",
+      "The j of project is a y sound — pro-YEKT, not the French or English pronunciation.",
+      "Bring a proposed new date with you; an open request invites an open no."
+    ],
+    "tipsFr": [
+      "Ik zou graag ... est le moule du souhait au conditionnel ; l'infinitif se gare à la fin.",
+      "Le j de project se dit y — pro-YÈKT, ni à la française ni à l'anglaise.",
+      "Venez avec une nouvelle date en tête ; une demande ouverte appelle un non ouvert."
+    ],
+    "replyNl": "Hoeveel tijd heb je nodig, denk je?",
+    "replyMeaningEn": "How much time do you reckon you need?",
+    "replyMeaningFr": "Il te faudrait combien de temps, à ton avis ?",
+    "themes": ["work-collaboration", "time-appointments"],
+    "lifeContexts": ["office", "administration", "leisure-sports", "friends"]
+  },
+  {
+    "slug": "daar-kan-ik-mee-leven",
+    "textNl": "Daar kan ik mee leven.",
+    "ipa": "ˈdaːr kɑn ɪk ˈmeː ˈleːvə",
+    "level": "B1",
+    "register": "INFORMAL",
+    "phoneticEn": "DAHR kan ik may LAY-vun",
+    "phoneticFr": "DAR kan ik mé LÉ-ve",
+    "meaningEn": "I can live with that.",
+    "meaningFr": "Je peux vivre avec.",
+    "situationEn": "Closing a negotiation that landed somewhere imperfect but workable. It accepts without pretending to be delighted, which is exactly the Dutch register.",
+    "situationFr": "Vous clôturez une négociation arrivée à un point imparfait mais viable. La phrase accepte sans feindre l'enthousiasme — exactement le registre néerlandais.",
+    "tipsEn": [
+      "The er/daar cluster splits here: daar ... mee wraps around the rest of the clause.",
+      "This is honest agreement, not enthusiasm. Dutch has little patience for overstated delight.",
+      "Prima and akkoord are the shorter cousins when you simply want to close."
+    ],
+    "tipsFr": [
+      "Le groupe daar ... mee se scinde ici et encadre le reste de la proposition.",
+      "C'est un accord honnête, pas de l'enthousiasme. Le néerlandais goûte peu la joie surjouée.",
+      "Prima et akkoord sont les cousins plus courts quand vous voulez simplement conclure."
+    ],
+    "replyNl": "Mooi, dan spreken we dat af.",
+    "replyMeaningEn": "Good, let's settle on that then.",
+    "replyMeaningFr": "Très bien, on acte ça alors.",
+    "themes": ["opinions-preferences", "work-collaboration"],
+    "lifeContexts": ["office", "neighbors", "friends", "family"]
+  },
+  {
+    "slug": "ik-stel-voor-dat-we-het-opsplitsen",
+    "textNl": "Ik stel voor dat we het opsplitsen.",
+    "ipa": "ɪk ˈstɛl ˈvoːr dɑt ʋə ət ˈɔpsplɪtsə",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "ik STEL fohr dat vuh ut OP-split-sun",
+    "phoneticFr": "ik STÈL for date ve ut OP-split-se",
+    "meaningEn": "I suggest we split it up.",
+    "meaningFr": "Je propose qu'on le découpe.",
+    "situationEn": "The task is too big and everyone is circling it. Putting a concrete proposal on the table moves a Dutch meeting faster than more discussion.",
+    "situationFr": "La tâche est trop grosse et tout le monde tourne autour. Poser une proposition concrète fait avancer une réunion néerlandaise plus vite qu'une discussion de plus.",
+    "tipsEn": [
+      "Voorstellen is separable: voor breaks off and ik stel ... voor wraps the sentence.",
+      "It also means 'to introduce oneself' — mag ik me even voorstellen?",
+      "Dat + subordinate clause again, verb at the end: ... opsplitsen."
+    ],
+    "tipsFr": [
+      "Voorstellen est séparable : voor se détache et ik stel ... voor encadre la phrase.",
+      "Il signifie aussi « se présenter » — mag ik me even voorstellen ?",
+      "Encore dat + subordonnée, verbe à la fin : ... opsplitsen."
+    ],
+    "replyNl": "Goed idee, wie pakt welk deel?",
+    "replyMeaningEn": "Good idea — who takes which part?",
+    "replyMeaningFr": "Bonne idée — qui prend quelle partie ?",
+    "themes": ["work-collaboration"],
+    "lifeContexts": ["office", "leisure-sports", "family", "daycare-school"]
+  },
+  {
+    "slug": "wat-als-we-het-anders-aanpakken",
+    "textNl": "Wat als we het anders aanpakken?",
+    "ipa": "ʋɑt ɑls ʋə ət ˈɑndərs ˈaːnpɑkə",
+    "level": "B1",
+    "register": "INFORMAL",
+    "phoneticEn": "vat als vuh ut AN-durs AHN-pah-kun",
+    "phoneticFr": "vate alss ve ut AN-deurss ANE-pa-ke",
+    "meaningEn": "What if we tackle it differently?",
+    "meaningFr": "Et si on s'y prenait autrement ?",
+    "situationEn": "Opening a door without attacking the current plan. A hypothetical is the gentlest way to disagree in a room that has already decided.",
+    "situationFr": "Ouvrir une porte sans attaquer le plan en cours. L'hypothèse est la façon la plus douce d'exprimer un désaccord dans une salle qui a déjà tranché.",
+    "tipsEn": [
+      "Wat als ...? needs no conditional verb in Dutch — the present carries the hypothesis.",
+      "Aanpakken is 'to tackle, to approach a task'; the aan splits off in a main clause.",
+      "Pair it with a concrete alternative, or it reads as vague criticism."
+    ],
+    "tipsFr": [
+      "Wat als ... ? n'exige aucun conditionnel en néerlandais — le présent porte l'hypothèse.",
+      "Aanpakken, c'est « s'y prendre, aborder une tâche » ; le aan se détache en proposition principale.",
+      "Accompagnez-le d'une alternative concrète, sinon ça passe pour une critique vague."
+    ],
+    "replyNl": "Zeg het maar, ik sta ervoor open.",
+    "replyMeaningEn": "Go ahead, I'm open to it.",
+    "replyMeaningFr": "Vas-y, je suis ouvert.",
+    "themes": ["work-collaboration", "opinions-preferences"],
+    "lifeContexts": ["office", "friends", "leisure-sports", "neighbors"]
+  },
+  {
+    "slug": "dat-valt-buiten-mijn-takenpakket",
+    "textNl": "Dat valt eigenlijk buiten mijn takenpakket.",
+    "ipa": "dɑt ˈvɑlt ˈɛiɣələk ˈbœytə mɛin ˈtaːkəpɑkɛt",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "dat FALT AY-khun-luk BOY-tun mayn TAH-kun-pah-ket",
+    "phoneticFr": "date FALTE ÈÏ-kheun-leuk BOEÏ-te mèïn TA-keun-pa-kète",
+    "meaningEn": "That actually falls outside my remit.",
+    "meaningFr": "Ça sort en fait de mes attributions.",
+    "situationEn": "Being handed something that isn't yours. Saying so plainly is normal here; absorbing it silently is what builds resentment nobody can see.",
+    "situationFr": "On vous refile quelque chose qui n'est pas à vous. Le dire clairement est normal ici ; l'absorber en silence construit une rancœur que personne ne voit.",
+    "tipsEn": [
+      "Eigenlijk ('actually') is the Dutch hedge of choice — it softens without retracting.",
+      "Takenpakket is a compound: taken (tasks) + pakket (package). Dutch builds nouns this way constantly.",
+      "Follow with who it does belong to; a bare refusal is where directness tips into unhelpfulness."
+    ],
+    "tipsFr": [
+      "Eigenlijk (« en fait ») est l'atténuateur favori du néerlandais — il adoucit sans retirer.",
+      "Takenpakket est un composé : taken (tâches) + pakket (paquet). Le néerlandais fabrique ses noms ainsi en permanence.",
+      "Enchaînez sur la personne à qui ça revient ; un refus sec est le point où la franchise devient inutile."
+    ],
+    "replyNl": "Je hebt gelijk, ik leg het bij het juiste team neer.",
+    "replyMeaningEn": "You're right, I'll take it to the right team.",
+    "replyMeaningFr": "Tu as raison, je le porte à la bonne équipe.",
+    "themes": ["work-collaboration", "opinions-preferences"],
+    "lifeContexts": ["office", "administration", "leisure-sports", "daycare-school"]
+  },
+  {
+    "slug": "kunnen-we-hier-later-op-terugkomen",
+    "textNl": "Kunnen we hier volgende week op terugkomen?",
+    "ipa": "ˈkʏnə ʋə ˈɦir ˈvɔlɣəndə ˈʋeːk ɔp təˈrʏxkoːmə",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "KUH-nun vuh heer VOL-khun-duh VAYK op tuh-RUKH-koh-mun",
+    "phoneticFr": "KEU-ne ve hir VOL-kheun-de VÉK op te-REUKH-ko-me",
+    "meaningEn": "Can we come back to this next week?",
+    "meaningFr": "On peut y revenir la semaine prochaine ?",
+    "situationEn": "Parking a topic that is eating the meeting. Naming when you'll return to it is what makes this a decision rather than an evasion.",
+    "situationFr": "Vous garez un sujet qui dévore la réunion. Nommer le moment du retour transforme l'esquive en décision.",
+    "tipsEn": [
+      "Hier ... op is another split pronominal cluster — the op travels to the end with the verb.",
+      "Terugkomen op is 'to return to a topic'; terugkomen alone is to come back physically.",
+      "Always attach a when. Parking something without a date is how it disappears."
+    ],
+    "tipsFr": [
+      "Hier ... op est encore un groupe pronominal scindé — le op voyage jusqu'à la fin avec le verbe.",
+      "Terugkomen op, c'est « revenir sur un sujet » ; terugkomen seul, c'est revenir physiquement.",
+      "Attachez toujours une échéance. Garer un sujet sans date, c'est le faire disparaître."
+    ],
+    "replyNl": "Prima, ik zet het op de agenda.",
+    "replyMeaningEn": "Fine, I'll put it on the agenda.",
+    "replyMeaningFr": "Parfait, je le mets à l'ordre du jour.",
+    "themes": ["work-collaboration", "time-appointments"],
+    "lifeContexts": ["office", "administration", "leisure-sports", "neighbors"]
+  },
+  {
+    "slug": "ik-zoek-het-voor-je-uit",
+    "textNl": "Ik zoek het even voor je uit.",
+    "ipa": "ɪk ˈzuk ət ˈeːvə voːr jə ˈœyt",
+    "level": "B1",
+    "register": "INFORMAL",
+    "phoneticEn": "ik ZOOK ut AY-vun fohr yuh OYT",
+    "phoneticFr": "ik ZOUK ut É-ve for ye OEÏTE",
+    "meaningEn": "I'll look into it for you.",
+    "meaningFr": "Je me renseigne pour toi.",
+    "situationEn": "Taking something on when you don't have the answer yet. Offering to find out is worth more than an uncertain answer given confidently.",
+    "situationFr": "Vous prenez quelque chose en charge sans avoir la réponse. Proposer de se renseigner vaut mieux qu'une réponse incertaine assénée avec aplomb.",
+    "tipsEn": [
+      "Uitzoeken is separable and the uit lands at the very end, after everything else.",
+      "The little even again — it makes the favour sound light rather than laborious.",
+      "Say when you'll come back with it, or the offer quietly expires."
+    ],
+    "tipsFr": [
+      "Uitzoeken est séparable et le uit atterrit tout à la fin, après le reste.",
+      "Encore le petit even — il fait passer le service pour léger plutôt que laborieux.",
+      "Dites quand vous reviendrez avec la réponse, sinon l'offre expire en silence."
+    ],
+    "replyNl": "Fijn, laat maar weten wat je vindt.",
+    "replyMeaningEn": "Great, let me know what you find.",
+    "replyMeaningFr": "Super, dis-moi ce que tu trouves.",
+    "themes": ["work-collaboration", "politeness"],
+    "lifeContexts": ["office", "neighbors", "friends", "daycare-school"]
+  },
+  {
+    "slug": "ik-heb-bezwaar-gemaakt",
+    "textNl": "Ik heb bezwaar gemaakt tegen de beslissing.",
+    "ipa": "ɪk ˈɦɛp bəˈzʋaːr ɣəˈmaːkt ˈteːɣə də bəˈslɪsɪŋ",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "ik HEP buh-ZVAHR khuh-MAHKT TAY-khun duh buh-SLI-sing",
+    "phoneticFr": "ik HÈP be-ZVAR khe-MAKTE TÉ-kheun de be-SLI-singue",
+    "meaningEn": "I've lodged an objection against the decision.",
+    "meaningFr": "J'ai déposé une réclamation contre la décision.",
+    "situationEn": "Dutch administration runs on deadlines, and bezwaar is the formal word that starts the clock. Knowing it is the difference between a route and a dead end.",
+    "situationFr": "L'administration néerlandaise tourne aux délais, et bezwaar est le mot formel qui déclenche le compteur. Le connaître, c'est la différence entre une voie de recours et une impasse.",
+    "tipsEn": [
+      "Bezwaar maken is a fixed pair — the noun and verb travel together.",
+      "There is usually a six-week window (bezwaartermijn) printed on the letter itself.",
+      "The perfect splits again: heb ... gemaakt, participle at the end."
+    ],
+    "tipsFr": [
+      "Bezwaar maken est un couple figé — le nom et le verbe voyagent ensemble.",
+      "Il y a en général un délai de six semaines (bezwaartermijn) imprimé sur la lettre elle-même.",
+      "Le parfait se scinde encore : heb ... gemaakt, participe à la fin."
+    ],
+    "replyNl": "Heeft u de ontvangstbevestiging al binnen?",
+    "replyMeaningEn": "Have you received the acknowledgement yet?",
+    "replyMeaningFr": "Avez-vous déjà reçu l'accusé de réception ?",
+    "themes": ["money-admin"],
+    "lifeContexts": ["administration", "family", "neighbors", "office"]
+  },
+  {
+    "slug": "kunt-u-uitleggen-waarop-dit-gebaseerd-is",
+    "textNl": "Kunt u uitleggen waarop dit bedrag gebaseerd is?",
+    "ipa": "ˈkʏnt y ˈœytlɛɣə ʋaːˈrɔp dɪt bəˈdrɑx ɣəbaːˈzeːrt ɪs",
+    "level": "B1",
+    "register": "FORMAL",
+    "phoneticEn": "kunt oo OYT-le-khun vah-ROP dit buh-DRAKH khuh-bah-ZAYRT is",
+    "phoneticFr": "kunt u OEÏTE-lè-kheun va-ROP dite be-DRAKH khe-ba-ZÉRT iss",
+    "meaningEn": "Could you explain what this amount is based on?",
+    "meaningFr": "Pouvez-vous expliquer sur quoi ce montant est calculé ?",
+    "situationEn": "A bill or an assessment that doesn't match what you expected. Asking for the basis is a normal request here, not a confrontation.",
+    "situationFr": "Une facture ou un avis d'imposition qui ne correspond pas à vos attentes. Demander le fondement du calcul est une requête normale ici, pas une confrontation.",
+    "tipsEn": [
+      "Waarop fuses waar + op — Dutch does this instead of op wat for things.",
+      "The embedded question sends is to the very end: ... gebaseerd is.",
+      "Ask for it in writing (op papier) if the answer arrives too fast to follow."
+    ],
+    "tipsFr": [
+      "Waarop fusionne waar + op — le néerlandais fait cela plutôt que op wat pour les choses.",
+      "La question enchâssée rejette is tout à la fin : ... gebaseerd is.",
+      "Demandez-le par écrit (op papier) si la réponse arrive trop vite pour être suivie."
+    ],
+    "replyNl": "Zeker, dat staat in de bijlage toegelicht.",
+    "replyMeaningEn": "Certainly, it's explained in the annex.",
+    "replyMeaningFr": "Bien sûr, c'est détaillé en annexe.",
+    "themes": ["money-admin"],
+    "lifeContexts": ["administration", "shops", "office", "family"]
+  },
+  {
+    "slug": "volgens-het-contract",
+    "textNl": "Volgens het contract is de verhuurder hiervoor verantwoordelijk.",
+    "ipa": "ˈvɔlɣəns ət kɔnˈtrɑkt ɪs də vərˈɦyrdər ˈɦirvoːr vərɑntˈʋoːrdələk",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "VOL-khuns ut kon-TRAKT is duh vur-HUUR-dur HEER-fohr vur-ant-VOHR-duh-luk",
+    "phoneticFr": "VOL-kheunss ut kon-TRAKTE iss de veur-HUR-deur HIR-for veur-ante-VOR-de-leuk",
+    "meaningEn": "According to the contract, the landlord is responsible for this.",
+    "meaningFr": "Selon le contrat, c'est le propriétaire qui en est responsable.",
+    "situationEn": "A repair nobody wants to pay for. Pointing at the contract rather than at the person keeps the conversation about the document.",
+    "situationFr": "Une réparation que personne ne veut payer. Pointer le contrat plutôt que la personne garde la discussion sur le document.",
+    "tipsEn": [
+      "Volgens opens the sentence, so the verb inverts: is de verhuurder.",
+      "Verhuurder is the one who rents out; huurder is the tenant. One syllable apart, opposite roles.",
+      "Hiervoor is hier + voor: 'for this'. The same fusion you've met with daarmee and ervan."
+    ],
+    "tipsFr": [
+      "Volgens ouvre la phrase, donc le verbe s'inverse : is de verhuurder.",
+      "Verhuurder est le bailleur ; huurder, le locataire. Une syllabe d'écart, des rôles opposés.",
+      "Hiervoor, c'est hier + voor : « pour ceci ». La même fusion que daarmee et ervan."
+    ],
+    "replyNl": "Dan zet ik dat zo op papier voor u.",
+    "replyMeaningEn": "Then I'll put that in writing for you.",
+    "replyMeaningFr": "Alors je vous mets ça par écrit.",
+    "themes": ["home-housing", "money-admin"],
+    "lifeContexts": ["administration", "neighbors", "family", "office"]
+  },
+  {
+    "slug": "er-ontbreekt-iets-op-het-formulier",
+    "textNl": "Ik heb het formulier ingevuld, maar er ontbreekt iets.",
+    "ipa": "ɪk ˈɦɛp ət fɔrmyˈlir ˈɪnɣəvʏlt maːr ɛr ɔntˈbreːkt ˈits",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "ik HEP ut for-moo-LEER IN-khuh-vult, mahr air ont-BRAYKT eets",
+    "phoneticFr": "ik HÈP ut for-mu-LIR INE-khe-veulte, mar èr ont-BRÉKT itss",
+    "meaningEn": "I filled in the form, but something is missing.",
+    "meaningFr": "J'ai rempli le formulaire, mais il manque quelque chose.",
+    "situationEn": "At the desk with a form that won't be accepted. Say what you did and where it stalled — that pair is what gets you helped rather than sent away.",
+    "situationFr": "Au guichet avec un formulaire qui ne passe pas. Dites ce que vous avez fait et où ça coince — c'est ce duo qui vous fait aider plutôt que renvoyer.",
+    "tipsEn": [
+      "Separable verbs put ge- inside in the participle: in-ge-vuld, exactly like op-ge-haald.",
+      "Ontbreken is 'to be missing' — the thing missing is the subject, so er carries the sentence.",
+      "Bring everything you have, including the envelope: Dutch counters ask for the reference number."
+    ],
+    "tipsFr": [
+      "Les verbes séparables insèrent ge- au milieu du participe : in-ge-vuld, exactement comme op-ge-haald.",
+      "Ontbreken signifie « manquer » — c'est la chose manquante qui est sujet, d'où le er porteur.",
+      "Apportez tout ce que vous avez, enveloppe comprise : les guichets néerlandais demandent le numéro de référence."
+    ],
+    "replyNl": "Laat maar zien, dan vullen we het samen aan.",
+    "replyMeaningEn": "Show me, we'll complete it together.",
+    "replyMeaningFr": "Montrez-moi, on va le compléter ensemble.",
+    "themes": ["money-admin", "politeness"],
+    "lifeContexts": ["administration", "daycare-school", "shops", "family"]
+  },
+  {
+    "slug": "ik-wacht-al-drie-weken-op-antwoord",
+    "textNl": "Ik wacht al drie weken op antwoord.",
+    "ipa": "ɪk ˈʋɑxt ɑl ˈdri ˈʋeːkə ɔp ˈɑntʋoːrt",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "ik VAKHT al dree VAY-kun op ANT-vohrt",
+    "phoneticFr": "ik VAKHT al dri VÉ-ke op ANTE-vorte",
+    "meaningEn": "I've been waiting three weeks for a reply.",
+    "meaningFr": "J'attends une réponse depuis trois semaines.",
+    "situationEn": "Following up firmly without accusing anyone. The number does the work — a specific duration is far harder to wave away than 'a long time'.",
+    "situationFr": "Relancer fermement sans accuser personne. C'est le chiffre qui travaille — une durée précise est bien plus difficile à balayer qu'« un long moment ».",
+    "tipsEn": [
+      "Wachten op — the preposition is fixed and cannot be dropped or swapped.",
+      "Present tense with al, again: Dutch does not need a perfect for something still going on.",
+      "Have your reference number ready before you say this; it is the next thing they'll ask."
+    ],
+    "tipsFr": [
+      "Wachten op — la préposition est figée, on ne peut ni l'omettre ni la changer.",
+      "Présent avec al, encore : le néerlandais n'a pas besoin d'un parfait pour ce qui dure encore.",
+      "Ayez votre numéro de dossier sous la main avant de dire ça ; c'est la question suivante."
+    ],
+    "replyNl": "Dat had niet zo lang mogen duren, ik zoek het na.",
+    "replyMeaningEn": "That shouldn't have taken so long, I'll check on it.",
+    "replyMeaningFr": "Ça n'aurait pas dû prendre si longtemps, je vérifie.",
+    "themes": ["money-admin", "time-appointments"],
+    "lifeContexts": ["administration", "office", "family", "shops"]
+  },
+  {
+    "slug": "ik-wil-een-gesprek-met-de-juf-aanvragen",
+    "textNl": "Ik wil graag een gesprek met de juf aanvragen.",
+    "ipa": "ɪk ˈʋɪl ˈɣraːx ən ɣəˈsprɛk mɛt də ˈjʏf ˈaːnvraːɣə",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "ik VIL khrahkh un khuh-SPREK met duh YUF AHN-vrah-khun",
+    "phoneticFr": "ik VIL khrarkh eun khe-SPRÈK mète de YEUF ANE-vra-khe",
+    "meaningEn": "I'd like to request a meeting with the teacher.",
+    "meaningFr": "Je voudrais demander un entretien avec la maîtresse.",
+    "situationEn": "Something at school needs discussing and the playground isn't the place. Dutch schools expect parents to ask directly rather than wait for the scheduled evening.",
+    "situationFr": "Un sujet scolaire mérite un vrai échange, et la cour de récré n'est pas l'endroit. Les écoles néerlandaises attendent que les parents demandent directement, sans attendre la réunion prévue.",
+    "tipsEn": [
+      "Juf is the everyday word for a primary teacher; meester is her male counterpart.",
+      "Aanvragen is separable but stays whole at the end after willen.",
+      "Say roughly what it's about when you ask — it lets them prepare and shortens the meeting."
+    ],
+    "tipsFr": [
+      "Juf est le mot courant pour une institutrice ; meester en est le pendant masculin.",
+      "Aanvragen est séparable mais reste entier à la fin après willen.",
+      "Dites en gros de quoi il s'agit en demandant — ça leur permet de préparer et raccourcit l'entretien."
+    ],
+    "replyNl": "Natuurlijk, schikt donderdag na schooltijd?",
+    "replyMeaningEn": "Of course, does Thursday after school suit?",
+    "replyMeaningFr": "Bien sûr, jeudi après l'école, ça vous va ?",
+    "themes": ["time-appointments", "politeness"],
+    "lifeContexts": ["daycare-school", "family", "administration", "neighbors"]
+  },
+  {
+    "slug": "hoe-gaat-het-op-school-met-hem",
+    "textNl": "Hoe gaat het op school eigenlijk met hem?",
+    "ipa": "ˈɦu ˈɣaːt ət ɔp ˈsxoːl ˈɛiɣələk mɛt ˈɦɛm",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "hoo khaht ut op SKHOHL AY-khun-luk met HEM",
+    "phoneticFr": "hou khate ut op SKHÔL ÈÏ-kheun-leuk mète HÈME",
+    "meaningEn": "How is he actually getting on at school?",
+    "meaningFr": "Comment ça se passe à l'école pour lui, au fond ?",
+    "situationEn": "At pick-up, when you have thirty seconds with the teacher. An open question gets you the real answer; a yes/no question gets you a nod.",
+    "situationFr": "À la sortie, quand vous avez trente secondes avec la maîtresse. Une question ouverte obtient la vraie réponse ; une question fermée obtient un hochement de tête.",
+    "tipsEn": [
+      "The sch of school is s + the scraped kh — never the English 'sk'.",
+      "Eigenlijk placed mid-sentence signals you want the honest version, not the polite one.",
+      "Dutch teachers answer directly; brace for the actual answer rather than reassurance."
+    ],
+    "tipsFr": [
+      "Le sch de school est un s + le kh raclé — jamais le « sk » anglais.",
+      "Eigenlijk placé au milieu signale que vous voulez la version honnête, pas la polie.",
+      "Les enseignants néerlandais répondent franchement ; préparez-vous à la vraie réponse plutôt qu'à des paroles rassurantes."
+    ],
+    "replyNl": "Prima hoor, hij komt steeds beter mee.",
+    "replyMeaningEn": "Really well — he's keeping up better and better.",
+    "replyMeaningFr": "Très bien — il suit de mieux en mieux.",
+    "themes": ["small-talk", "daily-life"],
+    "lifeContexts": ["daycare-school", "family", "neighbors", "friends"]
+  },
+  {
+    "slug": "ze-vindt-rekenen-best-lastig",
+    "textNl": "Ze vindt rekenen best lastig, maar ze oefent hard.",
+    "ipa": "zə ˈvɪnt ˈreːkənə bɛst ˈlɑstəx maːr zə ˈufənt ˈɦɑrt",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "zuh FINT RAY-kuh-nun best LAS-tukh, mahr zuh OO-funt HART",
+    "phoneticFr": "ze FINTE RÉ-ke-ne bèsste LAS-teukh, mar ze OU-feunte HARTE",
+    "meaningEn": "She finds maths quite hard, but she's practising a lot.",
+    "meaningFr": "Elle trouve le calcul assez difficile, mais elle s'entraîne beaucoup.",
+    "situationEn": "In the parent-teacher meeting, giving your side of the picture. Naming the difficulty and the effort in one sentence is what a Dutch teacher wants to hear.",
+    "situationFr": "En entretien avec l'enseignant, pour donner votre part du tableau. Nommer la difficulté et l'effort dans la même phrase est ce qu'un enseignant néerlandais attend.",
+    "tipsEn": [
+      "Rekenen is arithmetic as a school subject; wiskunde is maths higher up.",
+      "Best before an adjective means 'quite, rather' — it has nothing to do with 'best'.",
+      "Verbs used as nouns keep their infinitive form: rekenen, lezen, zwemmen."
+    ],
+    "tipsFr": [
+      "Rekenen désigne le calcul comme matière ; wiskunde, les maths plus tard dans la scolarité.",
+      "Best devant un adjectif signifie « assez, plutôt » — rien à voir avec « le meilleur ».",
+      "Les verbes employés comme noms gardent leur infinitif : rekenen, lezen, zwemmen."
+    ],
+    "replyNl": "Dat merken wij ook, we houden het in de gaten.",
+    "replyMeaningEn": "We notice that too — we'll keep an eye on it.",
+    "replyMeaningFr": "Nous le remarquons aussi — nous gardons un œil dessus.",
+    "themes": ["opinions-preferences", "daily-life"],
+    "lifeContexts": ["daycare-school", "family", "neighbors", "friends"]
+  },
+  {
+    "slug": "mag-hij-na-school-bij-een-vriendje-spelen",
+    "textNl": "Mag hij na school bij een vriendje spelen?",
+    "ipa": "ˈmɑx ɦɛi naː ˈsxoːl bɛi ən ˈvrincə ˈspeːlə",
+    "level": "B1",
+    "register": "INFORMAL",
+    "phoneticEn": "makh hay nah SKHOHL bay un VREEN-chuh SPAY-lun",
+    "phoneticFr": "makh hèï na SKHÔL bèï eun VRINE-tche SPÉ-le",
+    "meaningEn": "Can he go and play at a friend's after school?",
+    "meaningFr": "Il peut aller jouer chez un copain après l'école ?",
+    "situationEn": "Arranging a playdate with another parent at the gate. These thirty-second exchanges are how parent networks actually form here.",
+    "situationFr": "Vous calez un après-midi de jeu avec un autre parent devant l'école. Ces échanges de trente secondes sont ce qui tisse vraiment les réseaux de parents ici.",
+    "tipsEn": [
+      "Vriendje is the diminutive of vriend and is what children are always called — the -tje ending again.",
+      "Bij someone means at their home; naar someone means heading there.",
+      "Spelen goes to the end after the modal mag, as always."
+    ],
+    "tipsFr": [
+      "Vriendje est le diminutif de vriend, et c'est ainsi qu'on parle toujours des enfants — encore la finale -tje.",
+      "Bij quelqu'un veut dire chez lui ; naar quelqu'un, en route vers chez lui.",
+      "Spelen part à la fin après le modal mag, comme toujours."
+    ],
+    "replyNl": "Leuk, ik breng hem straks wel thuis.",
+    "replyMeaningEn": "Lovely, I'll drop him home later.",
+    "replyMeaningFr": "Avec plaisir, je le ramènerai tout à l'heure.",
+    "themes": ["time-appointments", "small-talk"],
+    "lifeContexts": ["daycare-school", "family", "neighbors", "friends"]
+  },
+  {
+    "slug": "ik-haal-hem-vandaag-wat-later-op",
+    "textNl": "Ik haal hem vandaag wat later op.",
+    "ipa": "ɪk ˈɦaːl ɦɛm vɑnˈdaːx ʋɑt ˈlaːtər ˈɔp",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "ik HAHL hem van-DAKH vat LAH-tur OP",
+    "phoneticFr": "ik HAL hème van-DAKH vate LA-teur OP",
+    "meaningEn": "I'll pick him up a bit later today.",
+    "meaningFr": "Je viendrai le chercher un peu plus tard aujourd'hui.",
+    "situationEn": "Warning the daycare before it becomes a problem. Dutch childcare charges for late collection, so the message is practical as well as polite.",
+    "situationFr": "Prévenir la crèche avant que ça ne devienne un problème. Les structures néerlandaises facturent les retards : le message est autant pratique que poli.",
+    "tipsEn": [
+      "Ophalen splits in a main clause: ik haal ... op, with op right at the end.",
+      "The same verb covers collecting bins, parcels and children — context does the rest.",
+      "Give a time if you have one; wat later invites a follow-up question."
+    ],
+    "tipsFr": [
+      "Ophalen se scinde en proposition principale : ik haal ... op, avec op tout à la fin.",
+      "Le même verbe couvre les poubelles, les colis et les enfants — le contexte fait le reste.",
+      "Donnez une heure si vous en avez une ; wat later appelle une question de suivi."
+    ],
+    "replyNl": "Geen probleem, tot hoe laat ongeveer?",
+    "replyMeaningEn": "No problem — until roughly what time?",
+    "replyMeaningFr": "Pas de souci — jusqu'à quelle heure environ ?",
+    "themes": ["time-appointments", "daily-life"],
+    "lifeContexts": ["daycare-school", "family", "office", "neighbors"]
+  },
+  {
+    "slug": "ik-heb-er-al-een-tijdje-last-van",
+    "textNl": "Ik heb er al een tijdje last van.",
+    "ipa": "ɪk ˈɦɛp ər ɑl ən ˈtɛicə ˈlɑst fɑn",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "ik HEP ur al un TAY-chuh LAST fan",
+    "phoneticFr": "ik HÈP ur al eun TÈÏ-tche LASTE fane",
+    "meaningEn": "It's been bothering me for a while now.",
+    "meaningFr": "Ça me gêne depuis un certain temps.",
+    "situationEn": "At the GP, where the first question is always how long. Dutch doctors are conservative — the duration is what moves them from wait-and-see to action.",
+    "situationFr": "Chez le généraliste, dont la première question est toujours « depuis quand ». Les médecins néerlandais sont prudents — c'est la durée qui les fait passer de l'observation à l'action.",
+    "tipsEn": [
+      "Last hebben van is the fixed way to say something troubles you — no direct verb exists.",
+      "The er ... van cluster wraps the clause, exactly like daar ... mee.",
+      "Tijdje is the diminutive of tijd: 'a little while', vaguer than a number on purpose."
+    ],
+    "tipsFr": [
+      "Last hebben van est la tournure figée pour « être gêné par » — aucun verbe direct n'existe.",
+      "Le groupe er ... van encadre la proposition, exactement comme daar ... mee.",
+      "Tijdje est le diminutif de tijd : « un petit moment », volontairement plus flou qu'un chiffre."
+    ],
+    "replyNl": "Sinds wanneer precies, denkt u?",
+    "replyMeaningEn": "Since exactly when, would you say?",
+    "replyMeaningFr": "Depuis quand exactement, diriez-vous ?",
+    "themes": ["health-body"],
+    "lifeContexts": ["family", "office", "administration", "friends"]
+  },
+  {
+    "slug": "de-klachten-zijn-erger-geworden",
+    "textNl": "De klachten zijn de laatste weken erger geworden.",
+    "ipa": "də ˈklɑxtə zɛin də ˈlaːtstə ˈʋeːkə ˈɛrɣər ɣəˈʋɔrdə",
+    "level": "B1",
+    "register": "FORMAL",
+    "phoneticEn": "duh KLAKH-tun zayn duh LAHT-stuh VAY-kun AIR-khur khuh-VOR-dun",
+    "phoneticFr": "de KLAKH-te zèïne de LATE-ste VÉ-ke ÈR-kheur khe-VOR-de",
+    "meaningEn": "The symptoms have got worse over the last few weeks.",
+    "meaningFr": "Les symptômes se sont aggravés ces dernières semaines.",
+    "situationEn": "The sentence that changes a Dutch GP's mind. Describing a trend rather than a snapshot is what justifies a referral or a test.",
+    "situationFr": "La phrase qui fait changer d'avis un généraliste néerlandais. Décrire une évolution plutôt qu'un instantané est ce qui justifie un examen ou une orientation.",
+    "tipsEn": [
+      "Klachten is the medical word for symptoms or complaints — not a complaint you file.",
+      "Worden takes zijn in the perfect, not hebben: zijn ... geworden.",
+      "Erger is the comparative of erg; ergst is the superlative."
+    ],
+    "tipsFr": [
+      "Klachten est le mot médical pour les symptômes — pas une réclamation qu'on dépose.",
+      "Worden se conjugue avec zijn au parfait, pas hebben : zijn ... geworden.",
+      "Erger est le comparatif de erg ; ergst en est le superlatif."
+    ],
+    "replyNl": "Dan verwijs ik u door naar de specialist.",
+    "replyMeaningEn": "Then I'll refer you to the specialist.",
+    "replyMeaningFr": "Alors je vous oriente vers le spécialiste.",
+    "themes": ["health-body", "time-appointments"],
+    "lifeContexts": ["administration", "family", "office", "shops"]
+  },
+  {
+    "slug": "ik-zou-graag-een-tweede-mening",
+    "textNl": "Ik zou graag een tweede mening willen.",
+    "ipa": "ɪk ˈzɑu ˈɣraːx ən ˈtʋeːdə ˈmeːnɪŋ ˈʋɪlə",
+    "level": "B1",
+    "register": "FORMAL",
+    "phoneticEn": "ik ZOW khrahkh un TVAY-duh MAY-ning VI-lun",
+    "phoneticFr": "ik ZAOU khrarkh eun TVÉ-de MÉ-ningue VI-le",
+    "meaningEn": "I'd like to get a second opinion.",
+    "meaningFr": "J'aimerais avoir un deuxième avis.",
+    "situationEn": "When the answer you got doesn't sit right. Asking is your right here and does not offend — but it does need saying out loud.",
+    "situationFr": "Quand la réponse reçue ne vous convainc pas. Le demander est un droit ici et ne vexe personne — mais il faut le formuler à voix haute.",
+    "tipsEn": [
+      "Tweede mening is the Dutch phrase; second opinion is also understood but sounds imported.",
+      "Zou ... willen doubles the politeness — it is a wish, not a demand.",
+      "Ordinals: eerste, tweede, derde. Only the first three are irregular."
+    ],
+    "tipsFr": [
+      "Tweede mening est la formule néerlandaise ; second opinion se comprend aussi mais sonne emprunté.",
+      "Zou ... willen double la politesse — c'est un souhait, pas une exigence.",
+      "Ordinaux : eerste, tweede, derde. Seuls les trois premiers sont irréguliers."
+    ],
+    "replyNl": "Dat is uw goed recht, ik regel de verwijzing.",
+    "replyMeaningEn": "That's your right — I'll arrange the referral.",
+    "replyMeaningFr": "C'est votre droit — j'organise l'orientation.",
+    "themes": ["health-body", "opinions-preferences"],
+    "lifeContexts": ["administration", "family", "office", "neighbors"]
+  },
+  {
+    "slug": "eerlijk-gezegd-viel-het-me-tegen",
+    "textNl": "Eerlijk gezegd viel het me een beetje tegen.",
+    "ipa": "ˈeːrlək ɣəˈzɛxt ˈvil ət mə ən ˈbeːcə ˈteːɣə",
+    "level": "B1",
+    "register": "INFORMAL",
+    "phoneticEn": "AYR-luk khuh-ZEKHT feel ut muh un BAY-chuh TAY-khun",
+    "phoneticFr": "ÉR-leuk khe-ZÈKHT fil ut me eun BÉ-tche TÉ-kheun",
+    "meaningEn": "Honestly, it was a bit of a letdown.",
+    "meaningFr": "Franchement, ça m'a un peu déçu.",
+    "situationEn": "Giving a real opinion about a film, a restaurant, an event. Dutch friends would rather have your honest verdict than a polite one.",
+    "situationFr": "Donner un vrai avis sur un film, un restaurant, un événement. Vos amis néerlandais préfèrent votre verdict honnête à un verdict poli.",
+    "tipsEn": [
+      "Tegenvallen is 'to disappoint by falling short'; meevallen is its opposite — better than feared.",
+      "This pair has no clean English or French equivalent and is used constantly.",
+      "Eerlijk gezegd at the front inverts the verb: viel het, not het viel."
+    ],
+    "tipsFr": [
+      "Tegenvallen, c'est « décevoir en étant en deçà » ; meevallen est son contraire — mieux que redouté.",
+      "Ce couple n'a pas d'équivalent net en français et sert en permanence.",
+      "Eerlijk gezegd en tête provoque l'inversion : viel het, pas het viel."
+    ],
+    "replyNl": "O ja? Ik vond het juist wel meevallen.",
+    "replyMeaningEn": "Really? I actually thought it wasn't bad.",
+    "replyMeaningFr": "Ah bon ? Moi je l'ai plutôt trouvé pas mal.",
+    "themes": ["opinions-preferences", "small-talk"],
+    "lifeContexts": ["friends", "office", "family", "leisure-sports"]
+  },
+  {
+    "slug": "zo-had-ik-er-nog-nooit-over-nagedacht",
+    "textNl": "Zo had ik er nog nooit over nagedacht.",
+    "ipa": "zoː ɦɑt ɪk ər nɔx ˈnoːit ˈoːvər ˈnaːɣədɑxt",
+    "level": "B1",
+    "register": "INFORMAL",
+    "phoneticEn": "zo hat ik ur nokh NOH-yt OH-vur NAH-khuh-dakht",
+    "phoneticFr": "zo hate ik ur nokh NÔ-ïte Ô-veur NA-khe-dakhte",
+    "meaningEn": "I'd never thought about it that way.",
+    "meaningFr": "Je n'avais jamais vu ça comme ça.",
+    "situationEn": "Someone shifts your view mid-conversation. Saying so keeps the exchange alive and costs nothing — it is the opposite of losing an argument.",
+    "situationFr": "Quelqu'un déplace votre point de vue en pleine conversation. Le dire garde l'échange vivant et ne coûte rien — c'est l'inverse de perdre un débat.",
+    "tipsEn": [
+      "This is the pluperfect: had + participle, one step further back than the perfect.",
+      "Nadenken over is the fixed pair for thinking something over; the over cannot be dropped.",
+      "Zo at the front inverts again — had ik, not ik had."
+    ],
+    "tipsFr": [
+      "C'est le plus-que-parfait : had + participe, un cran plus loin que le parfait.",
+      "Nadenken over est le couple figé pour « réfléchir à » ; le over ne saute pas.",
+      "Zo en tête impose encore l'inversion — had ik, pas ik had."
+    ],
+    "replyNl": "Toch? Ik vind het wel een interessante invalshoek.",
+    "replyMeaningEn": "Right? I think it's an interesting angle.",
+    "replyMeaningFr": "N'est-ce pas ? Je trouve l'angle intéressant.",
+    "themes": ["opinions-preferences", "small-talk"],
+    "lifeContexts": ["friends", "office", "neighbors", "leisure-sports"]
+  },
+  {
+    "slug": "het-hangt-ervan-af",
+    "textNl": "Het hangt ervan af hoe druk het wordt.",
+    "ipa": "ət ˈɦɑŋt ərˈvɑn ˈɑf ˈɦu ˈdrʏk ət ˈʋɔrt",
+    "level": "B1",
+    "register": "INFORMAL",
+    "phoneticEn": "ut HANGT ur-VAN AF hoo DRUK ut vort",
+    "phoneticFr": "ut HANGT ur-VANE AF hou DREUK ut vorte",
+    "meaningEn": "It depends how busy it gets.",
+    "meaningFr": "Ça dépend du monde qu'il y aura.",
+    "situationEn": "An honest maybe, with the condition attached. Dutch planning culture prefers a conditional answer to a soft yes you'll later retract.",
+    "situationFr": "Un peut-être honnête, avec sa condition. La culture de planification néerlandaise préfère une réponse conditionnelle à un oui mou que vous retirerez ensuite.",
+    "tipsEn": [
+      "Afhangen van splits into hangt ... af with the ervan cluster in between — three moving parts.",
+      "Always say what it depends on; a bare het hangt ervan af sounds evasive.",
+      "Druk means busy for both places and people: het is druk, ik heb het druk."
+    ],
+    "tipsFr": [
+      "Afhangen van se scinde en hangt ... af avec le groupe ervan au milieu — trois pièces mobiles.",
+      "Dites toujours de quoi ça dépend ; un het hangt ervan af seul sonne évasif.",
+      "Druk qualifie autant les lieux que les gens : het is druk, ik heb het druk."
+    ],
+    "replyNl": "Laat je het weten zodra je het weet?",
+    "replyMeaningEn": "Will you let me know as soon as you do?",
+    "replyMeaningFr": "Tu me dis dès que tu sais ?",
+    "themes": ["opinions-preferences", "time-appointments"],
+    "lifeContexts": ["friends", "office", "leisure-sports", "family"]
+  },
+  {
+    "slug": "ik-twijfel-nog-of-ik-meega",
+    "textNl": "Ik twijfel nog of ik meega.",
+    "ipa": "ɪk ˈtʋɛifəl nɔx ɔf ɪk ˈmeːɣaː",
+    "level": "B1",
+    "register": "INFORMAL",
+    "phoneticEn": "ik TVAY-ful nokh of ik MAY-khah",
+    "phoneticFr": "ik TVÈÏ-feul nokh of ik MÉ-kha",
+    "meaningEn": "I'm still not sure whether I'll come along.",
+    "meaningFr": "J'hésite encore à venir.",
+    "situationEn": "Answering an invitation truthfully when you genuinely don't know. Far better than a yes you'll cancel — Dutch diaries treat a yes as binding.",
+    "situationFr": "Répondre honnêtement à une invitation quand vous ne savez vraiment pas. Bien mieux qu'un oui que vous annulerez — un agenda néerlandais tient un oui pour un engagement.",
+    "tipsEn": [
+      "Of here means 'whether', not 'or' — and it sends the verb to the end: ... of ik meega.",
+      "Meegaan is separable, but in the subordinate clause it stays glued together.",
+      "Add when you'll decide; open-ended doubt is what irritates people, not the doubt itself."
+    ],
+    "tipsFr": [
+      "Of signifie ici « si » (interrogatif), pas « ou » — et il rejette le verbe à la fin : ... of ik meega.",
+      "Meegaan est séparable, mais dans la subordonnée il reste soudé.",
+      "Ajoutez quand vous trancherez ; c'est le doute sans échéance qui agace, pas le doute."
+    ],
+    "replyNl": "Geen stress, laat het uiterlijk vrijdag weten.",
+    "replyMeaningEn": "No stress, just let me know by Friday.",
+    "replyMeaningFr": "Pas de pression, dis-moi d'ici vendredi.",
+    "themes": ["opinions-preferences", "time-appointments"],
+    "lifeContexts": ["friends", "leisure-sports", "office", "family"]
+  },
+  {
+    "slug": "we-hadden-het-net-over-jou",
+    "textNl": "We hadden het net nog over jou!",
+    "ipa": "ʋə ˈɦɑdə ət ˈnɛt nɔx ˈoːvər ˈjɑu",
+    "level": "B1",
+    "register": "INFORMAL",
+    "phoneticEn": "vuh HAH-dun ut net nokh OH-vur YOW",
+    "phoneticFr": "ve HA-de ut nète nokh Ô-veur YAOU",
+    "meaningEn": "We were just talking about you!",
+    "meaningFr": "On parlait justement de toi !",
+    "situationEn": "Someone walks in on a conversation they were part of. Warm, slightly teasing, and it pulls them straight into the group.",
+    "situationFr": "Quelqu'un arrive au milieu d'une conversation qui le concernait. Chaleureux, légèrement taquin, et ça l'intègre immédiatement au groupe.",
+    "tipsEn": [
+      "Het hebben over is the fixed cluster for 'to talk about' — praten over exists but this is what people say.",
+      "Net means 'just now'; net nog stretches it to 'only a moment ago'.",
+      "Stressed jou rather than je is what makes it land as a warm surprise."
+    ],
+    "tipsFr": [
+      "Het hebben over est le bloc figé pour « parler de » — praten over existe, mais c'est celui-ci qu'on entend.",
+      "Net signifie « à l'instant » ; net nog l'étire en « il y a un instant à peine ».",
+      "Le jou accentué plutôt que je est ce qui en fait une bonne surprise."
+    ],
+    "replyNl": "Alleen goede dingen, hoop ik?",
+    "replyMeaningEn": "Only good things, I hope?",
+    "replyMeaningFr": "Que du bien, j'espère ?",
+    "themes": ["small-talk"],
+    "lifeContexts": ["office", "friends", "leisure-sports", "neighbors", "daycare-school"]
+  },
+  {
+    "slug": "fijn-dat-je-het-aankaart",
+    "textNl": "Fijn dat je het aankaart, daar heb ik ook last van.",
+    "ipa": "ˈfɛin dɑt jə ət ˈaːnkaːrt ˈdaːr ˈɦɛp ɪk ˈoːk ˈlɑst fɑn",
+    "level": "B1",
+    "register": "INFORMAL",
+    "phoneticEn": "FAYN dat yuh ut AHN-kahrt, dahr hep ik ohk LAST fan",
+    "phoneticFr": "FÈÏNE date ye ut ANE-karte, dar hèp ik ôk LASTE fane",
+    "meaningEn": "Glad you're raising it — it bothers me too.",
+    "meaningFr": "Content que tu en parles — ça me gêne aussi.",
+    "situationEn": "Backing a colleague or neighbour who has just named an awkward problem. Agreeing out loud is what stops it being one person's complaint.",
+    "situationFr": "Soutenir un collègue ou un voisin qui vient de nommer un problème inconfortable. L'accord exprimé est ce qui empêche que ça reste la plainte d'une seule personne.",
+    "tipsEn": [
+      "Aankaarten is 'to raise an issue' — the separable aan stays attached inside the dat clause.",
+      "Daar ... van again, wrapped around heb ik ook last.",
+      "Fijn dat ... is a warm, extremely common opener for agreeing with someone."
+    ],
+    "tipsFr": [
+      "Aankaarten, c'est « soulever un sujet » — le aan séparable reste attaché dans la subordonnée en dat.",
+      "Encore daar ... van, enroulé autour de heb ik ook last.",
+      "Fijn dat ... est une entrée en matière chaleureuse et extrêmement courante pour abonder."
+    ],
+    "replyNl": "Zullen we het samen aankaarten dan?",
+    "replyMeaningEn": "Shall we raise it together then?",
+    "replyMeaningFr": "On en parle ensemble alors ?",
+    "themes": ["work-collaboration", "opinions-preferences"],
+    "lifeContexts": ["office", "neighbors", "daycare-school", "leisure-sports"]
+  },
+  {
+    "slug": "voor-mij-hoeft-het-niet-zo-nodig",
+    "textNl": "Voor mij hoeft het niet zo nodig.",
+    "ipa": "voːr ˈmɛi ˈɦuft ət ˈnit zoː ˈnoːdəx",
+    "level": "B1",
+    "register": "INFORMAL",
+    "phoneticEn": "fohr may HOOFT ut neet zo NOH-dukh",
+    "phoneticFr": "for mèï HOUFT ut nite zo NÔ-deukh",
+    "meaningEn": "I'm not fussed about it, personally.",
+    "meaningFr": "Personnellement, ça ne me manquera pas.",
+    "situationEn": "A group is deciding and you genuinely don't mind. This is how Dutch says it without pretending to be enthusiastic or difficult.",
+    "situationFr": "Un groupe décide et ça vous est vraiment égal. Voilà comment le néerlandais le dit sans feindre l'enthousiasme ni faire la fine bouche.",
+    "tipsEn": [
+      "Hoeven is the 'need' verb that only appears in the negative; niet hoeven is 'not to have to'.",
+      "Niet zo nodig is a set understatement — it stays friendly where a flat nee would not.",
+      "Fronting voor mij inverts the verb: hoeft het."
+    ],
+    "tipsFr": [
+      "Hoeven est le verbe de nécessité qui n'apparaît qu'au négatif ; niet hoeven, c'est « ne pas avoir à ».",
+      "Niet zo nodig est une litote figée — elle reste amicale là où un nee sec ne le serait pas.",
+      "Placer voor mij en tête inverse le verbe : hoeft het."
+    ],
+    "replyNl": "Oké, dan slaan we het over.",
+    "replyMeaningEn": "OK, we'll skip it then.",
+    "replyMeaningFr": "D'accord, on laisse tomber alors.",
+    "themes": ["opinions-preferences", "small-talk"],
+    "lifeContexts": ["friends", "office", "family", "leisure-sports"]
+  },
+  {
+    "slug": "ik-neem-het-op-me",
+    "textNl": "Ik neem het op me om dat uit te zoeken.",
+    "ipa": "ɪk ˈneːm ət ɔp mə ɔm dɑt ˈœyt tə ˈzukə",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "ik NAYM ut op muh om dat OYT tuh ZOO-kun",
+    "phoneticFr": "ik NÉM ut op me om date OEÏTE te ZOU-ke",
+    "meaningEn": "I'll take it on myself to find that out.",
+    "meaningFr": "Je me charge de me renseigner là-dessus.",
+    "situationEn": "Claiming an action at the end of a meeting. Dutch meetings close by naming who does what — volunteering explicitly is how you stay visible.",
+    "situationFr": "Vous prenez une action en fin de réunion. Une réunion néerlandaise se clôt en nommant qui fait quoi — se porter volontaire explicitement est ce qui vous rend visible.",
+    "tipsEn": [
+      "Op zich nemen is the fixed phrase for taking responsibility; the me changes with the person.",
+      "Om ... te wraps a separable verb around the te: uit te zoeken, not te uitzoeken.",
+      "Say by when, or the action drifts to whoever chases it."
+    ],
+    "tipsFr": [
+      "Op zich nemen est la formule figée pour endosser une responsabilité ; le me varie selon la personne.",
+      "Om ... te enroule un verbe séparable autour du te : uit te zoeken, pas te uitzoeken.",
+      "Dites pour quand, sinon l'action glisse vers celui qui relancera."
+    ],
+    "replyNl": "Top, dan noteer ik jou erbij.",
+    "replyMeaningEn": "Great, I'll note you down for it.",
+    "replyMeaningFr": "Super, je te note dessus.",
+    "themes": ["work-collaboration"],
+    "lifeContexts": ["office", "leisure-sports", "daycare-school", "administration"]
+  },
+  {
+    "slug": "ik-hoor-het-graag-zodra-u-meer-weet",
+    "textNl": "Ik hoor het graag zodra u meer weet.",
+    "ipa": "ɪk ˈɦoːr ət ˈɣraːx zoːˈdraː y ˈmeːr ˈʋeːt",
+    "level": "B1",
+    "register": "FORMAL",
+    "phoneticEn": "ik HOHR ut khrahkh zo-DRAH oo mayr VAYT",
+    "phoneticFr": "ik HOR ut khrarkh zo-DRA u mér VÉTE",
+    "meaningEn": "I'd like to hear as soon as you know more.",
+    "meaningFr": "Je serais heureux d'avoir de vos nouvelles dès que vous en saurez plus.",
+    "situationEn": "Closing a call or an email so the ball stays visibly in their court. Polite, but it sets an expectation rather than trailing off.",
+    "situationFr": "Clore un appel ou un mail pour que la balle reste visiblement dans leur camp. Poli, mais ça pose une attente au lieu de s'éteindre.",
+    "tipsEn": [
+      "Zodra ('as soon as') opens a subordinate clause — the verb weet goes to the end.",
+      "Ik hoor het graag is warmer than ik verwacht antwoord and just as clear.",
+      "In writing, this is the standard sign-off before met vriendelijke groet."
+    ],
+    "tipsFr": [
+      "Zodra (« dès que ») ouvre une subordonnée — le verbe weet part à la fin.",
+      "Ik hoor het graag est plus chaleureux que ik verwacht antwoord, et tout aussi clair.",
+      "À l'écrit, c'est la formule de clôture standard avant met vriendelijke groet."
+    ],
+    "replyNl": "Doe ik, u hoort uiterlijk maandag van mij.",
+    "replyMeaningEn": "Will do — you'll hear from me by Monday at the latest.",
+    "replyMeaningFr": "Entendu — vous aurez de mes nouvelles lundi au plus tard.",
+    "themes": ["politeness", "work-collaboration"],
+    "lifeContexts": ["administration", "office", "shops", "family"]
+  },
+  {
+    "slug": "ik-zal-het-even-toelichten",
+    "textNl": "Ik zal het even kort toelichten.",
+    "ipa": "ɪk ˈzɑl ət ˈeːvə ˈkɔrt ˈtulɪxtə",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "ik ZAL ut AY-vun kort TOO-likh-tun",
+    "phoneticFr": "ik ZAL ut É-ve korte TOU-likh-te",
+    "meaningEn": "Let me explain it briefly.",
+    "meaningFr": "Je vais l'expliquer brièvement.",
+    "situationEn": "Taking the floor before the room fills the silence for you. Announcing that you'll be brief is what earns you the thirty seconds.",
+    "situationFr": "Vous prenez la parole avant que la salle ne comble le silence à votre place. Annoncer que vous serez bref est ce qui vous vaut les trente secondes.",
+    "tipsEn": [
+      "Toelichten is 'to elucidate' — more precise than uitleggen and standard in meetings.",
+      "Zullen here is a plain announcement of intent, not a future tense to worry about.",
+      "Kort is a promise. Keep it, and people will give you the floor again."
+    ],
+    "tipsFr": [
+      "Toelichten, c'est « éclairer, préciser » — plus précis qu'uitleggen et standard en réunion.",
+      "Zullen est ici une simple annonce d'intention, pas un futur dont il faut se soucier.",
+      "Kort est une promesse. Tenez-la, et on vous redonnera la parole."
+    ],
+    "replyNl": "Ga je gang, we luisteren.",
+    "replyMeaningEn": "Go ahead, we're listening.",
+    "replyMeaningFr": "Vas-y, on t'écoute.",
+    "themes": ["work-collaboration", "politeness"],
+    "lifeContexts": ["office", "administration", "leisure-sports", "daycare-school"]
+  },
+  {
+    "slug": "zal-ik-anders-even-meelopen",
+    "textNl": "Zal ik anders even met je meelopen?",
+    "ipa": "ˈzɑl ɪk ˈɑndərs ˈeːvə mɛt jə ˈmeːloːpə",
+    "level": "B1",
+    "register": "INFORMAL",
+    "phoneticEn": "zal ik AN-durs AY-vun met yuh MAY-loh-pun",
+    "phoneticFr": "zal ik AN-deurss É-ve mète ye MÉ-lo-pe",
+    "meaningEn": "Shall I walk you over there?",
+    "meaningFr": "Je t'accompagne, si tu veux ?",
+    "situationEn": "Someone is lost, or new, or carrying too much. Offering rather than explaining directions is the small kindness that gets remembered.",
+    "situationFr": "Quelqu'un est perdu, nouveau, ou trop chargé. Proposer d'accompagner plutôt que d'expliquer le chemin est la petite attention dont on se souvient.",
+    "tipsEn": [
+      "Zal ik ...? is how Dutch offers help — a question, not a statement of intent.",
+      "Anders here softens the offer to 'otherwise, if you like'; it is not 'differently'.",
+      "Meelopen is separable but stays whole at the end of the question."
+    ],
+    "tipsFr": [
+      "Zal ik ... ? est la façon néerlandaise de proposer son aide — une question, pas une déclaration.",
+      "Anders adoucit ici l'offre en « sinon, si tu veux » ; ce n'est pas « autrement ».",
+      "Meelopen est séparable mais reste entier à la fin de la question."
+    ],
+    "replyNl": "Graag, ik weet de weg nog niet zo goed.",
+    "replyMeaningEn": "Yes please, I don't know the way that well yet.",
+    "replyMeaningFr": "Volontiers, je ne connais pas encore bien le chemin.",
+    "themes": ["politeness", "directions-transport"],
+    "lifeContexts": ["office", "daycare-school", "neighbors", "leisure-sports"]
+  },
+  {
+    "slug": "we-zijn-er-bijna",
+    "textNl": "We zijn er bijna, nog twee straten verder.",
+    "ipa": "ʋə ˈzɛin ər ˈbɛinaː nɔx ˈtʋeː ˈstraːtə ˈvɛrdər",
+    "level": "B1",
+    "register": "INFORMAL",
+    "phoneticEn": "vuh ZAYN ur BAY-nah, nokh tvay STRAH-tun FER-dur",
+    "phoneticFr": "ve ZÈÏNE ur BÈÏ-na, nokh tvé STRA-te FÈR-deur",
+    "meaningEn": "We're almost there, two more streets along.",
+    "meaningFr": "On y est presque, encore deux rues.",
+    "situationEn": "Guiding someone — a visitor, a child, a colleague. Giving the remaining distance rather than a bare 'nearly' is what keeps people walking.",
+    "situationFr": "Vous guidez quelqu'un — un visiteur, un enfant, un collègue. Donner la distance restante plutôt qu'un « presque » vague est ce qui fait avancer les gens.",
+    "tipsEn": [
+      "Er is doing the work of 'there' — we zijn bijna on its own is incomplete.",
+      "Nog before a quantity means 'still, more to go': nog twee, nog vijf minuten.",
+      "Straten is the plural of straat; the long aa shortens when the syllable opens."
+    ],
+    "tipsFr": [
+      "Er porte le sens de « là » — we zijn bijna tout seul est incomplet.",
+      "Nog devant une quantité signifie « encore » : nog twee, nog vijf minuten.",
+      "Straten est le pluriel de straat ; le aa long se raccourcit quand la syllabe s'ouvre."
+    ],
+    "replyNl": "Gelukkig, mijn tas wordt zwaar.",
+    "replyMeaningEn": "Good — my bag's getting heavy.",
+    "replyMeaningFr": "Tant mieux, mon sac devient lourd.",
+    "themes": ["directions-transport", "small-talk"],
+    "lifeContexts": ["friends", "family", "leisure-sports", "daycare-school"]
+  },
+  {
+    "slug": "ik-moet-overstappen-in-utrecht",
+    "textNl": "Ik moet in Utrecht overstappen, geloof ik.",
+    "ipa": "ɪk ˈmut ɪn ˈytrɛxt ˈoːvərstɑpə ɣəˈloːf ɪk",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "ik MOOT in OO-trekht OH-vur-stah-pun, khuh-LOHF ik",
+    "phoneticFr": "ik MOUTE ine U-trèkht Ô-veur-sta-pe, khe-LÔF ik",
+    "meaningEn": "I have to change at Utrecht, I think.",
+    "meaningFr": "Je dois changer à Utrecht, je crois.",
+    "situationEn": "Checking your route out loud with a fellow passenger or a conductor. Adding geloof ik invites a correction, which is exactly what you want.",
+    "situationFr": "Vous vérifiez votre trajet à voix haute avec un voisin de siège ou un contrôleur. Ajouter geloof ik appelle une correction — précisément ce que vous cherchez.",
+    "tipsEn": [
+      "Geloof ik tacked on the end is the Dutch hedge for 'I think' — informal and extremely common.",
+      "Overstappen is the transport verb for changing trains, trams or buses.",
+      "The ch of Utrecht is the scraped sound again, not a k."
+    ],
+    "tipsFr": [
+      "Geloof ik ajouté en fin de phrase est l'atténuateur néerlandais pour « je crois » — informel et très courant.",
+      "Overstappen est le verbe des correspondances, train, tram ou bus.",
+      "Le ch d'Utrecht est encore le son raclé, pas un k."
+    ],
+    "replyNl": "Klopt, en dan spoor elf richting Nijmegen.",
+    "replyMeaningEn": "That's right, then platform eleven towards Nijmegen.",
+    "replyMeaningFr": "C'est ça, puis voie onze direction Nimègue.",
+    "themes": ["directions-transport", "time-appointments"],
+    "lifeContexts": ["office", "friends", "administration", "leisure-sports"]
+  },
+  {
+    "slug": "zullen-we-samen-koken",
+    "textNl": "Zullen we vanavond samen koken?",
+    "ipa": "ˈzʏlə ʋə vɑnˈaːvɔnt ˈsaːmə ˈkoːkə",
+    "level": "B1",
+    "register": "INFORMAL",
+    "phoneticEn": "ZUH-lun vuh van-AH-vont SAH-mun KOH-kun",
+    "phoneticFr": "ZEU-le ve van-A-vonte SA-me KÔ-ke",
+    "meaningEn": "Shall we cook together tonight?",
+    "meaningFr": "On cuisine ensemble ce soir ?",
+    "situationEn": "At home or with friends, proposing rather than waiting. Dutch evenings get planned early, so the invitation works better than an open question.",
+    "situationFr": "À la maison ou entre amis, proposer au lieu d'attendre. Les soirées néerlandaises se planifient tôt : l'invitation fonctionne mieux qu'une question ouverte.",
+    "tipsEn": [
+      "Vanavond, vanmiddag, vanochtend — Dutch fuses van + the part of day into one word.",
+      "Samen is 'together'; the verb koken goes to the end after zullen.",
+      "Eten koken is to cook a meal; koken alone also means water boiling."
+    ],
+    "tipsFr": [
+      "Vanavond, vanmiddag, vanochtend — le néerlandais soude van et le moment de la journée en un mot.",
+      "Samen signifie « ensemble » ; le verbe koken part à la fin après zullen.",
+      "Eten koken, c'est préparer un repas ; koken seul veut aussi dire « bouillir »."
+    ],
+    "replyNl": "Leuk, ik haal onderweg wat groenten.",
+    "replyMeaningEn": "Lovely, I'll grab some veg on the way.",
+    "replyMeaningFr": "Avec plaisir, je prends des légumes en chemin.",
+    "themes": ["food-drink", "time-appointments"],
+    "lifeContexts": ["family", "friends", "neighbors", "leisure-sports"]
+  },
+  {
+    "slug": "ik-ben-allergisch-voor-noten",
+    "textNl": "Ik ben allergisch voor noten, kan dat eruit?",
+    "ipa": "ɪk ˈbɛn ɑˈlɛrɣis voːr ˈnoːtə kɑn dɑt ərˈœyt",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "ik ben ah-LER-khees fohr NOH-tun, kan dat ur-OYT",
+    "phoneticFr": "ik bène a-LÈR-khiss for NÔ-te, kan date ur-OEÏTE",
+    "meaningEn": "I'm allergic to nuts — can that be left out?",
+    "meaningFr": "Je suis allergique aux noix — c'est possible sans ?",
+    "situationEn": "Ordering, or being cooked for. This is the one sentence where getting the Dutch right genuinely matters more than sounding fluent.",
+    "situationFr": "Vous commandez, ou l'on cuisine pour vous. C'est la seule phrase où dire le néerlandais juste compte vraiment plus que de paraître fluide.",
+    "tipsEn": [
+      "Allergisch voor — the preposition is voor, never aan or tegen.",
+      "Eruit is er + uit: 'out of it'. Kan dat eruit? is the practical follow-up.",
+      "Noten covers nuts broadly; pinda is peanut specifically, and the two are listed separately here."
+    ],
+    "tipsFr": [
+      "Allergisch voor — la préposition est voor, jamais aan ni tegen.",
+      "Eruit, c'est er + uit : « en dehors ». Kan dat eruit ? est la relance pratique.",
+      "Noten désigne les fruits à coque en général ; pinda, c'est l'arachide, et les deux sont listés séparément ici."
+    ],
+    "replyNl": "Zeker, ik geef het door aan de keuken.",
+    "replyMeaningEn": "Certainly, I'll tell the kitchen.",
+    "replyMeaningFr": "Bien sûr, je préviens la cuisine.",
+    "themes": ["food-drink", "health-body"],
+    "lifeContexts": ["shops", "friends", "family", "daycare-school"]
+  },
+  {
+    "slug": "zou-je-dat-voor-me-willen-checken",
+    "textNl": "Zou je dat voor me willen nakijken?",
+    "ipa": "ˈzɑu jə dɑt voːr mə ˈʋɪlə ˈnaːkɛikə",
+    "level": "B1",
+    "register": "INFORMAL",
+    "phoneticEn": "ZOW yuh dat fohr muh VI-lun NAH-kay-kun",
+    "phoneticFr": "ZAOU ye date for me VI-le NA-kèï-ke",
+    "meaningEn": "Would you mind checking that over for me?",
+    "meaningFr": "Tu pourrais me relire ça ?",
+    "situationEn": "Asking a colleague to look over something before it goes out. Asking early is normal here — sending unchecked work is what raises eyebrows.",
+    "situationFr": "Demander à un collègue de relire avant l'envoi. Demander tôt est normal ici — c'est envoyer sans relecture qui fait lever les sourcils.",
+    "tipsEn": [
+      "Zou je ... willen is the polite je-form request — softer than kun je without being stiff.",
+      "Nakijken is to check or proofread; controleren is its more formal cousin.",
+      "Two infinitives stack at the end: willen nakijken, in that order."
+    ],
+    "tipsFr": [
+      "Zou je ... willen est la demande polie en tutoiement — plus douce que kun je sans être guindée.",
+      "Nakijken, c'est vérifier ou relire ; controleren en est le cousin plus formel.",
+      "Deux infinitifs s'empilent à la fin : willen nakijken, dans cet ordre."
+    ],
+    "replyNl": "Stuur maar door, ik kijk er vanmiddag naar.",
+    "replyMeaningEn": "Send it over, I'll look at it this afternoon.",
+    "replyMeaningFr": "Envoie, je regarde ça cet après-midi.",
+    "themes": ["work-collaboration", "politeness"],
+    "lifeContexts": ["office", "daycare-school", "friends", "administration"]
+  },
+  {
+    "slug": "het-is-me-niet-helemaal-duidelijk",
+    "textNl": "Het is me nog niet helemaal duidelijk.",
+    "ipa": "ət ɪs mə nɔx ˈnit ˈɦeːləmaːl ˈdœydələk",
+    "level": "B1",
+    "register": "NEUTRAL",
+    "phoneticEn": "ut is muh nokh neet HAY-luh-mahl DOY-duh-luk",
+    "phoneticFr": "ut iss me nokh nite HÉ-le-mal DOEÏ-de-leuk",
+    "meaningEn": "It's still not entirely clear to me.",
+    "meaningFr": "Ce n'est pas encore tout à fait clair pour moi.",
+    "situationEn": "The honest halfway position: you caught some of it, not all. Saying so precisely gets you a targeted answer instead of the whole explanation again.",
+    "situationFr": "La position honnête à mi-chemin : vous avez saisi une partie, pas tout. Le dire précisément vous vaut une réponse ciblée plutôt que toute l'explication à refaire.",
+    "tipsEn": [
+      "Duidelijk is one of the most-used adjectives in Dutch working life — clear, unambiguous.",
+      "Helemaal ('entirely') is what turns a blunt no into a precise partial.",
+      "Name the part that's unclear next; that is what makes this useful rather than merely polite."
+    ],
+    "tipsFr": [
+      "Duidelijk est l'un des adjectifs les plus employés dans la vie professionnelle néerlandaise — clair, sans ambiguïté.",
+      "Helemaal (« tout à fait ») est ce qui transforme un non brut en un partiel précis.",
+      "Nommez ensuite la partie obscure ; c'est ce qui rend la phrase utile et pas seulement polie."
+    ],
+    "replyNl": "Welk stuk precies? Dan pak ik dat eruit.",
+    "replyMeaningEn": "Which bit exactly? I'll take that part.",
+    "replyMeaningFr": "Quelle partie exactement ? Je reprends celle-là.",
+    "themes": ["work-collaboration", "daily-life"],
+    "lifeContexts": ["office", "administration", "daycare-school", "shops"]
+  }
+]
