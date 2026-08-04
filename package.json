@@ -9,6 +9,7 @@
     "lint": "eslint",
     "postinstall": "prisma generate",
     "db:generate": "prisma generate",
+    "content:check": "tsx scripts/content-check.ts",
     "db:ping": "tsx scripts/db-ping.ts",
     "db:seed": "tsx scripts/db-seed.ts",
     "db:sync-audio": "tsx scripts/db-sync-audio.ts",

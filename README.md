@@ -76,6 +76,8 @@ Supabase dashboard ("Connect" → Prisma / ORMs).
 | `pnpm build` | Production build (Turbopack) |
 | `pnpm start` | Serve the production build |
 | `pnpm lint` | ESLint |
+| `pnpm content:check` | Validate the seed catalog (add `--strict` to enforce coverage) |
+| `pnpm db:seed` | Sync the catalog from `prisma/seed-data/` |
 | `pnpm db:generate` | Generate the Prisma client |
 | `pnpm db:migrate` | Run a dev migration |
 | `pnpm db:push` | Push the schema without a migration |
