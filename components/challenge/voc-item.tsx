@@ -12,7 +12,8 @@ export function VocItem({
 }: {
   nl: string;
   meaning: string;
-  audioPath: string | null | undefined;
+  /** Omitted for rows with no clip of their own (e.g. the likely reply). */
+  audioPath?: string | null;
 }) {
   return (
     <div className="flex items-center justify-between gap-3 rounded-md border-structural bg-surface px-4 py-3">

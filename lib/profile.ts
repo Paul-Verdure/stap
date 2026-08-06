@@ -5,6 +5,7 @@ import { getWeekRhythm } from "@/lib/challenge";
 import { startOfMonthUTC } from "@/lib/date";
 import { db } from "@/lib/db";
 import { ChallengeState } from "@/lib/generated/prisma/enums";
+import { localize } from "@/lib/localize";
 import type { DutchLevel, Frequency } from "@/lib/onboarding";
 
 /* ===========================================================================
@@ -154,6 +155,6 @@ export async function getLifeContextOptions(
   });
   return rows.map((r) => ({
     slug: r.slug,
-    name: locale === "fr" ? r.nameFr : r.nameEn,
+    name: localize(r, "name", locale),
   }));
 }

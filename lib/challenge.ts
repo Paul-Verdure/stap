@@ -2,28 +2,37 @@ import { cache } from "react";
 
 import type { RhythmDay, RhythmState } from "@/components/ui/rhythm";
 import { getCurrentUser } from "@/lib/auth/user";
+import {
+  bandLevels,
+  REPEAT_WINDOW_DAYS,
+  type Level,
+} from "@/lib/challenge-config";
 import { dateOnlyUTC, hashToInt, isoDate, lastNDatesUTC, subDaysUTC } from "@/lib/date";
 import { db } from "@/lib/db";
+import { localize } from "@/lib/localize";
 
 /* ===========================================================================
-   Daily-challenge selection + weekly rhythm (G4).
+   Daily-challenge selection + weekly rhythm (G4, revised in H).
    ---------------------------------------------------------------------------
-   Selection rule (decided in G4): eligible phrases are at or below the user's
-   level AND share at least one of the user's life contexts. The phrase for a
-   day is picked deterministically from that pool by hash(userId + date), and
-   phrases used in the last REPEAT_WINDOW_DAYS are avoided (unless that would
-   empty the pool). Prisma connects as the table owner; every query is scoped
-   to the user's id.
+   Selection rule: eligible phrases sit in the user's LEVEL BAND (their level
+   plus the one below, see bandLevels) AND share at least one of the user's
+   life contexts. From that pool the day's phrase is picked deterministically
+   by hash(userId + date), after two guarded narrowings — phrases seen in the
+   last REPEAT_WINDOW_DAYS, then phrases sharing yesterday's theme. Each
+   narrowing is skipped if it would empty the pool, so selection always
+   returns something. Prisma connects as the table owner; every query is
+   scoped to the user's id.
+
+   The band replaced an "at or below" rule in phase H. That rule made the
+   catalog work against itself: every phrase added at A0 diluted what a B2
+   user saw, so filling the beginner levels measurably degraded the advanced
+   ones (a B2 profile was being served 87% content below its level).
 
    The per-day Challenge row is created lazily on first read (find-or-create on
    the (userId, date) unique). State transitions (PREPARED / DONE) are written
    by the preparation + validation flows in G5; G4 only renders from state.
 =========================================================================== */
 
-const LEVELS = ["A0", "A1", "A2", "B1", "B2"] as const;
-type Level = (typeof LEVELS)[number];
-
-const REPEAT_WINDOW_DAYS = 14;
 const RHYTHM_DAYS = 7;
 
 // Challenge reads include the phrase plus its life contexts (with localized
@@ -78,10 +87,16 @@ export const getUserProfile = cache(async (): Promise<UserProfile | null> => {
   };
 });
 
-/** Levels at or below the given one (e.g. A2 -> A0, A1, A2). */
-function eligibleLevels(level: Level): Level[] {
-  const max = LEVELS.indexOf(level);
-  return LEVELS.filter((_, i) => i <= max);
+/**
+ * Narrow `pool` by `keep`, unless that would empty it.
+ *
+ * Every filter in the selection chain is a preference, never a constraint: the
+ * user must get a challenge today even when the catalog cannot honour all of
+ * them at once.
+ */
+function narrow<T>(pool: T[], keep: (item: T) => boolean): T[] {
+  const narrowed = pool.filter(keep);
+  return narrowed.length > 0 ? narrowed : pool;
 }
 
 /**
@@ -96,24 +111,45 @@ export async function selectPhraseForDay(
 ): Promise<string | null> {
   const eligible = await db.phrase.findMany({
     where: {
-      level: { in: eligibleLevels(level) },
+      level: { in: bandLevels(level) },
       ...(contextSlugs.length
         ? { lifeContexts: { some: { lifeContext: { slug: { in: contextSlugs } } } } }
         : {}),
     },
-    select: { id: true },
+    // Themes come along for the rotation below — one query, not two.
+    select: { id: true, themes: { select: { themeId: true } } },
     orderBy: { id: "asc" }, // stable order for the deterministic pick
   });
   if (eligible.length === 0) return null;
 
+  // One read covers both narrowings: the repeat window and yesterday's themes.
   const recent = await db.challenge.findMany({
     where: { userId, date: { gte: subDaysUTC(date, REPEAT_WINDOW_DAYS), lt: date } },
-    select: { phraseId: true },
+    select: { phraseId: true, date: true },
   });
   const recentIds = new Set(recent.map((r) => r.phraseId));
 
-  let pool = eligible.filter((p) => !recentIds.has(p.id));
-  if (pool.length === 0) pool = eligible; // window exhausted -> allow a repeat
+  const yesterdayIso = isoDate(subDaysUTC(date, 1));
+  const yesterdayPhraseId = recent.find(
+    (r) => isoDate(r.date) === yesterdayIso,
+  )?.phraseId;
+  // Yesterday's phrase may sit outside today's pool (the user can change level
+  // or contexts), so its themes are read directly rather than looked up above.
+  const yesterdayThemes = new Set(
+    yesterdayPhraseId
+      ? (
+          await db.phraseTheme.findMany({
+            where: { phraseId: yesterdayPhraseId },
+            select: { themeId: true },
+          })
+        ).map((t) => t.themeId)
+      : [],
+  );
+
+  let pool = narrow(eligible, (p) => !recentIds.has(p.id));
+  // Theme rotation: two greetings in a row reads as a catalog that has run
+  // out, even when it hasn't.
+  pool = narrow(pool, (p) => !p.themes.some((t) => yesterdayThemes.has(t.themeId)));
 
   const index = hashToInt(`${userId}:${isoDate(date)}`) % pool.length;
   return pool[index].id;
@@ -122,6 +158,27 @@ export async function selectPhraseForDay(
 export type TodayChallenge = NonNullable<
   Awaited<ReturnType<typeof getTodayChallenge>>
 >;
+
+/**
+ * The localized name of the first life context the phrase shares with the
+ * user — the "where to use it" line on the challenge card. Undefined when the
+ * phrase carries none of the user's contexts (only reachable for a phrase
+ * surfaced outside the daily selection).
+ */
+export function userContextName(
+  phrase: {
+    lifeContexts: {
+      lifeContext: { slug: string; nameEn: string; nameFr: string };
+    }[];
+  },
+  contextSlugs: string[],
+  locale: string,
+): string | undefined {
+  const ctx = phrase.lifeContexts.find((lc) =>
+    contextSlugs.includes(lc.lifeContext.slug),
+  )?.lifeContext;
+  return ctx ? localize(ctx, "name", locale) : undefined;
+}
 
 /** Find-or-create today's challenge for a profile (includes the phrase). */
 export async function getTodayChallenge(profile: UserProfile) {
@@ -152,19 +209,28 @@ export async function getTodayChallenge(profile: UserProfile) {
 
 /**
  * Up to `limit` catalog phrases sharing a theme with the challenge phrase
- * (excluding it) — the Home vocabulary preview. Deterministic order.
+ * (excluding it) — the Home vocabulary preview, the preparation key words, and
+ * the distractor pool for all three games. Deterministic order.
+ *
+ * Neighbours are kept inside the challenge phrase's own level band. Without
+ * that, a B2 challenge pulls A0 phrases into its key words and offers them as
+ * game distractors, which makes every round trivially guessable and undoes the
+ * band applied to the challenge itself.
  */
 export async function getRelatedPhrases(phraseId: string, limit = 4) {
-  const themes = await db.phraseTheme.findMany({
-    where: { phraseId },
-    select: { themeId: true },
+  const phrase = await db.phrase.findUnique({
+    where: { id: phraseId },
+    select: { level: true, themes: { select: { themeId: true } } },
   });
-  const themeIds = themes.map((t) => t.themeId);
+  if (!phrase) return [];
+
+  const themeIds = phrase.themes.map((t) => t.themeId);
   if (themeIds.length === 0) return [];
 
   return db.phrase.findMany({
     where: {
       id: { not: phraseId },
+      level: { in: bandLevels(phrase.level) },
       themes: { some: { themeId: { in: themeIds } } },
     },
     orderBy: { id: "asc" },

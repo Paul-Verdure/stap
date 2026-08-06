@@ -1,6 +1,7 @@
 import type { UserProfile } from "@/lib/challenge";
 import { isoDate, startOfMonthUTC, startOfWeekUTC, subDaysUTC } from "@/lib/date";
 import { db } from "@/lib/db";
+import { localize } from "@/lib/localize";
 import {
   matchesJournalFilters,
   type JournalFacet,
@@ -72,7 +73,6 @@ export async function getJournalEntries(
     orderBy: { challenge: { date: "desc" } },
   });
 
-  const fr = locale === "fr";
   const userContexts = new Set(profile.contextSlugs);
 
   return rows.map((row) => {
@@ -91,8 +91,8 @@ export async function getJournalEntries(
             ? "missed"
             : "at-ease", // AT_EASE or (defensively) no feeling
       textNl: challenge.phrase.textNl,
-      meaning: fr ? challenge.phrase.meaningFr : challenge.phrase.meaningEn,
-      contexts: contexts.map((c) => (fr ? c.nameFr : c.nameEn)),
+      meaning: localize(challenge.phrase, "meaning", locale),
+      contexts: contexts.map((c) => localize(c, "name", locale)),
       contextSlugs: contexts.map((c) => c.slug),
       body: row.body,
       heardWords: row.heardWords,
@@ -116,10 +116,7 @@ export async function getUserContextOptions(
     select: { slug: true, nameEn: true, nameFr: true },
     orderBy: { slug: "asc" },
   });
-  return rows.map((r) => ({
-    slug: r.slug,
-    name: locale === "fr" ? r.nameFr : r.nameEn,
-  }));
+  return rows.map((r) => ({ slug: r.slug, name: localize(r, "name", locale) }));
 }
 
 /** The serializable slice of an entry the filter predicate runs on. */

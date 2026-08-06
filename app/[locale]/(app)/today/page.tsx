@@ -22,7 +22,9 @@ import {
   getTodayChallenge,
   getUserProfile,
   getWeekRhythm,
+  userContextName,
 } from "@/lib/challenge";
+import { localize } from "@/lib/localize";
 
 // Home / daily challenge — one route, three states driven by the DB:
 //   PENDING  -> State 1 "to do"
@@ -39,7 +41,6 @@ export default async function TodayPage({
   setRequestLocale(locale);
   const t = await getTranslations("Today");
   const format = await getFormatter();
-  const fr = locale === "fr";
 
   const profile = await getUserProfile();
   if (!profile) {
@@ -80,11 +81,8 @@ export default async function TodayPage({
   }
 
   const { phrase } = challenge;
-  const meaning = fr ? phrase.meaningFr : phrase.meaningEn;
-  const ctx = phrase.lifeContexts.find((lc) =>
-    profile.contextSlugs.includes(lc.lifeContext.slug),
-  )?.lifeContext;
-  const contextName = ctx ? (fr ? ctx.nameFr : ctx.nameEn) : undefined;
+  const meaning = localize(phrase, "meaning", locale);
+  const contextName = userContextName(phrase, profile.contextSlugs, locale);
 
   const isDone = challenge.state === "DONE";
   const isPrepared = challenge.state === "PREPARED";
@@ -186,7 +184,7 @@ export default async function TodayPage({
                   <VocCard
                     key={p.id}
                     nl={p.textNl}
-                    meaning={fr ? p.meaningFr : p.meaningEn}
+                    meaning={localize(p, "meaning", locale)}
                   />
                 ))}
               </VocScroll>

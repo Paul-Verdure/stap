@@ -33,5 +33,61 @@
     "nameFr": "Nombres",
     "descriptionEn": "Cardinal numbers used for counting, prices, and quantities.",
     "descriptionFr": "Nombres cardinaux pour compter, payer et indiquer des quantités."
+  },
+  {
+    "slug": "small-talk",
+    "nameEn": "Small talk",
+    "nameFr": "Papotage",
+    "descriptionEn": "Weather, weekends, and the low-stakes exchanges that fill a corridor or a queue.",
+    "descriptionFr": "Météo, week-end et petits échanges sans enjeu qui meublent un couloir ou une file."
+  },
+  {
+    "slug": "time-appointments",
+    "nameEn": "Time & appointments",
+    "nameFr": "Heure & rendez-vous",
+    "descriptionEn": "Telling the time, agreeing on a moment, making and moving appointments.",
+    "descriptionFr": "Dire l'heure, convenir d'un moment, prendre et déplacer un rendez-vous."
+  },
+  {
+    "slug": "directions-transport",
+    "nameEn": "Getting around",
+    "nameFr": "Se déplacer",
+    "descriptionEn": "Asking the way, buying a ticket, and coping with trains, bikes and stops.",
+    "descriptionFr": "Demander son chemin, acheter un billet et gérer trains, vélos et arrêts."
+  },
+  {
+    "slug": "home-housing",
+    "nameEn": "Home & housing",
+    "nameFr": "Logement",
+    "descriptionEn": "The building, the landlord, the bins, the repairs — living somewhere in Dutch.",
+    "descriptionFr": "L'immeuble, le propriétaire, les poubelles, les réparations — habiter en néerlandais."
+  },
+  {
+    "slug": "health-body",
+    "nameEn": "Health & body",
+    "nameFr": "Santé & corps",
+    "descriptionEn": "Saying what hurts, booking a doctor, and handling the pharmacy counter.",
+    "descriptionFr": "Dire où on a mal, prendre rendez-vous chez le médecin, gérer le comptoir de la pharmacie."
+  },
+  {
+    "slug": "work-collaboration",
+    "nameEn": "Working together",
+    "nameFr": "Travailler ensemble",
+    "descriptionEn": "Meetings, deadlines, asking for help and pushing back at work.",
+    "descriptionFr": "Réunions, délais, demander de l'aide et savoir dire non au travail."
+  },
+  {
+    "slug": "money-admin",
+    "nameEn": "Money & paperwork",
+    "nameFr": "Argent & démarches",
+    "descriptionEn": "Paying, invoices, forms, and the counters where Dutch is unavoidable.",
+    "descriptionFr": "Payer, factures, formulaires et les guichets où le néerlandais est incontournable."
+  },
+  {
+    "slug": "opinions-preferences",
+    "nameEn": "Opinions & preferences",
+    "nameFr": "Avis & préférences",
+    "descriptionEn": "Saying what you think, what you'd rather do, and disagreeing without friction.",
+    "descriptionFr": "Dire ce qu'on pense, ce qu'on préfère, et ne pas être d'accord sans crisper."
   }
 ]

@@ -4,7 +4,12 @@ import { redirect } from "next/navigation";
 import { ChallengeCard } from "@/components/challenge/challenge-card";
 import { ValidateForm } from "@/components/challenge/validate-form";
 import { TopBar } from "@/components/layout/top-bar";
-import { getTodayChallenge, getUserProfile } from "@/lib/challenge";
+import {
+  getTodayChallenge,
+  getUserProfile,
+  userContextName,
+} from "@/lib/challenge";
+import { localize } from "@/lib/localize";
 
 // Validation main screen ("Tell me") — focus mode, no bottom nav. The recap is
 // rendered here (server) and handed to the client form, which owns the feeling
@@ -20,8 +25,6 @@ export default async function ValidatePage({
   const t = await getTranslations("Validate");
   const nav = await getTranslations("Nav");
   const prep = await getTranslations("Prepare");
-  const fr = locale === "fr";
-
   const profile = await getUserProfile();
   if (!profile) redirect(`/${locale}/onboarding`);
 
@@ -29,11 +32,8 @@ export default async function ValidatePage({
   if (!challenge) redirect(`/${locale}/today`);
 
   const { phrase } = challenge;
-  const meaning = fr ? phrase.meaningFr : phrase.meaningEn;
-  const ctx = phrase.lifeContexts.find((lc) =>
-    profile.contextSlugs.includes(lc.lifeContext.slug),
-  )?.lifeContext;
-  const contextName = ctx ? (fr ? ctx.nameFr : ctx.nameEn) : undefined;
+  const meaning = localize(phrase, "meaning", locale);
+  const contextName = userContextName(phrase, profile.contextSlugs, locale);
 
   const recap = (
     <ChallengeCard
