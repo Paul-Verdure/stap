@@ -144,8 +144,9 @@ something the app's code can do.**
    JWT signature and expiry — it does **not** re-check the live user record
    on every request, so a ban or a forced session revocation propagates only
    once the current access token expires (not instantly, unlike `getUser()`).
-   This app's own soft-delete / access checks are enforced separately at the
-   database layer (`deletedAt` filters), so this trade-off is standard for
-   JWT-based auth and does not weaken those checks — it only affects the
-   window before an out-of-band revocation is reflected in the middleware
-   gate.
+   Account deletion is the case that matters here: it removes every row the
+   user owns (ADR 0003), so a token minted before the delete still passes the
+   middleware gate until it expires, but it resolves to an id with no rows —
+   reads return nothing and writes fail on the foreign key. The window before
+   an out-of-band revocation reaches the gate is therefore the whole of the
+   exposure, and there is nothing left to read during it.

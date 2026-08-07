@@ -102,7 +102,6 @@ export async function sendDueReminders(
 
   const users = await db.user.findMany({
     where: {
-      deletedAt: null,
       notificationsEnabled: true,
       reminderTime: { startsWith: `${hh}:` },
       frequency: isMwf

@@ -88,9 +88,14 @@ the failure case, and the modal renders only an error state.
   key, so the account cannot be resurrected or read — but the middleware will
   let such a request through. Accepted as inherent to local verification; the
   alternative is a database round trip on every request.
-- **`users.deleted_at` is now never written.** `push-sender` still filters on
-  it, harmlessly. It is kept as the hook a grace-period delete would need, but
-  it guarantees nothing today and the schema comment says so.
+- **A grace-period delete would need a new migration.** `users.deleted_at`,
+  added in G9 for the soft-delete path, was dropped along with the
+  `deleted_at IS NULL` filter in the reminder sender: with a hard delete
+  nothing ever writes it, and no row ever held a value. Keeping it was the
+  more misleading option — a tombstone column plus a query honouring it reads
+  as an enforced guarantee that does not exist, and the schema is the first
+  place a reader looks for data semantics. Re-adding a nullable column costs
+  one migration, so the asymmetry favours removing it now.
 
 ### Rejected alternatives
 
