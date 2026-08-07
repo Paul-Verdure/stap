@@ -17,8 +17,19 @@ import { SpeakerIcon } from "./icons";
    A11y: the speaker glyph is decorative; the accessible name comes from the
    `srLabel` rendered in an sr-only span — pass the Dutch phrase wrapped in
    <Nl> so screen readers pronounce it in Dutch (an aria-label string could
-   not carry lang="nl"). Playback wiring (Phase F audio) lands in G5/G7;
-   here the button forwards onClick.
+   not carry lang="nl"). Playback wiring lives in AudioButton; here the
+   button forwards onClick.
+
+   Touch affordances match IconButton, the equivalent round control. They were
+   missing until a report of the button "not reacting" on a phone:
+
+   - `active:opacity-70` is the only press feedback a touch device gets. There
+     is no cursor and no hover, so without it a tap looks identical to a tap
+     that missed — which is indistinguishable from a dead button when the
+     audio is also inaudible (an iPhone's ringer switch mutes HTMLAudioElement).
+   - `touch-manipulation` stops the browser reserving the tap for double-tap
+     zoom. Replaying is the natural gesture on a pronunciation button, and on
+     the 32px word disc a quick second tap otherwise zooms the page.
 =========================================================================== */
 
 type ListenScale = "word" | "sentence" | "disc";
@@ -45,7 +56,9 @@ export function ListenButton({
     <button
       type="button"
       className={cn(
-        "surface-hero inline-grid shrink-0 place-items-center rounded-full text-accent",
+        // A disabled button never matches :active, so the dimmed state the
+        // caller applies for a missing clip is unaffected by the press style.
+        "surface-hero inline-grid touch-manipulation shrink-0 place-items-center rounded-full text-accent active:opacity-70",
         s.circle,
         className,
       )}
