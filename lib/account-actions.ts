@@ -1,18 +1,26 @@
 "use server";
 
+import { redirect } from "next/navigation";
+
+import { getLocale } from "next-intl/server";
+
 import { getCurrentUser } from "@/lib/auth/user";
 import { db } from "@/lib/db";
+import { createAdminClient } from "@/lib/supabase/admin";
+import { createClient } from "@/lib/supabase/server";
 
 /* ===========================================================================
-   Account actions (G8, step 5).
+   Account actions.
    ---------------------------------------------------------------------------
-   exportMyData: the RGPD "export my data" path (decision 3) — a READ-ONLY
+   exportMyData: the RGPD "export my data" path (G8, decision 3) — a READ-ONLY
    server action scoped to the authenticated user's id (Prisma bypasses RLS,
    so the scope is enforced here). Returns the user's profile, journal and
    challenge history as a plain JSON-serializable object; the client turns it
    into a downloadable file. It never touches another user's rows and writes
-   nothing. Account DELETION is deliberately NOT here — it is the step-7
-   security stop (stubbed, no service-role secret).
+   nothing.
+
+   deleteAccount: the irreversible counterpart. Stubbed from G8 until the
+   semantics were settled; see ADR 0003 for why it hard-deletes.
 =========================================================================== */
 
 export type ExportResult =
@@ -50,22 +58,42 @@ export type AccountExport = {
   }[];
 };
 
-export type DeleteResult = { status: "stubbed" } | { status: "error" };
+// Only the failure path returns: a successful delete redirects instead.
+export type DeleteResult = { status: "error" };
 
 /**
- * Account deletion — STUBBED (G8 security stop, decision 2). The real flow
- * would call the Supabase admin API with the SERVICE-ROLE secret to delete the
- * auth user, then cascade the DB rows. That secret and the irreversible delete
- * are deliberately NOT wired here, so this NEVER deletes anything and stays
- * safe on the shared seed user. It only confirms a session and returns a
- * "stubbed" marker the UI surfaces honestly. Do not implement the real delete
- * without the user's explicit go-ahead and the service-role secret.
+ * Account deletion — irreversible hard delete (ADR 0003).
+ *
+ * Deletes the **auth identity**, never the mirror row directly: the
+ * `on_auth_user_deleted` trigger (migration `auth_user_sync`) removes
+ * `public.users`, and every user-owned relation cascades from there —
+ * challenges, journal entries, vocabulary cards, daily activities, seasonal
+ * reviews, life-context links, game plays, push subscriptions. Deleting the
+ * Prisma row instead would leave the auth identity behind, and the next magic
+ * link would silently recreate an empty account.
+ *
+ * The service-role client is required here (the admin API is the only way to
+ * remove an auth user) and is server-only — see lib/supabase/admin.ts.
  */
 export async function deleteAccount(): Promise<DeleteResult> {
   const user = await getCurrentUser();
   if (!user) return { status: "error" };
-  // Intentionally a no-op: nothing is deleted.
-  return { status: "stubbed" };
+
+  const locale = await getLocale();
+
+  const admin = createAdminClient();
+  const { error } = await admin.auth.admin.deleteUser(user.id);
+  if (error) return { status: "error" };
+
+  // Clear the session cookies. `scope: "local"` skips the server-side logout
+  // call, which would fail anyway now that the identity is gone — the point is
+  // to drop the JWT, which stays signature-valid until it expires even though
+  // it no longer resolves to a row.
+  const supabase = await createClient();
+  await supabase.auth.signOut({ scope: "local" });
+
+  // Outside any try/catch: redirect() signals by throwing.
+  redirect(`/${locale}/login?deleted=1`);
 }
 
 export async function exportMyData(): Promise<ExportResult> {

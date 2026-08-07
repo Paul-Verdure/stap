@@ -16,7 +16,11 @@
     "sentTitle": "Vérifiez votre boîte mail",
     "sentBody": "Nous vous avons envoyé un lien magique. Ouvrez-le sur cet appareil pour vous connecter.",
     "error": "Une erreur s'est produite. Réessayez.",
-    "back": "Revenir au début"
+    "back": "Revenir au début",
+    "deleted": {
+      "title": "Votre compte a été supprimé",
+      "body": "Tout ce qui y était rattaché a été effacé. Vous êtes le bienvenu quand vous voulez — vous reconnecter ouvrira un nouveau compte."
+    }
   },
   "Onboarding": {
     "progress": "Étape {current} sur {total}",
@@ -364,7 +368,7 @@
         "confirm": "Supprimer définitivement",
         "deleting": "Suppression…",
         "cancel": "Annuler",
-        "stubbed": "La suppression de compte n'est pas encore activée — rien n'a été modifié."
+        "error": "Nous n'avons pas pu supprimer votre compte. Rien n'a été modifié — réessayez."
       }
     },
     "footer": {

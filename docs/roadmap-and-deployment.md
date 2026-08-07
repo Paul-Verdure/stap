@@ -30,15 +30,13 @@ placeholder). The data models and routes exist; the experiences do not yet.
 Cleanups and decisions left open at G9 close. None block a deploy unless noted.
 
 ### Security / data
-- **Account deletion is still stubbed.** The `users.deleted_at` column landed
-  in G9 (soft-delete path is schema-ready), but `deleteAccount` in
-  `lib/account-actions.ts` is a no-op. Wiring it is a **security stop** — choose
-  one and implement deliberately:
-  - *Soft-delete*: set `deleted_at = now()` and filter it out of every
-    authenticated read (reversible, no service-role secret needed).
-  - *Hard-delete*: Supabase admin API + service-role key + DB cascade (needs the
-    secret; no migration).
-  - Never run the real delete on the shared seed user `g2-shell-test@example.com`.
+- ~~**Account deletion is still stubbed.**~~ **Done.** `deleteAccount` performs
+  a real hard delete via the Supabase admin API; the `on_auth_user_deleted`
+  trigger and the `onDelete: Cascade` relations remove everything the user
+  owns. See [decisions/0003-account-deletion.md](decisions/0003-account-deletion.md).
+  `SUPABASE_SERVICE_ROLE_KEY` is now load-bearing in production — without it
+  the action fails closed (the UI reports an error and nothing is deleted).
+  Never run it on the shared seed user `g2-shell-test@example.com`.
 - **Legal pages are gated behind auth.** `PUBLIC_PATHS` in
   `lib/supabase/middleware.ts` does not include `/legal`, so terms / privacy /
   notice require a session even though they are public SSG content. Add `/legal`
