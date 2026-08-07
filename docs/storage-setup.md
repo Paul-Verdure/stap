@@ -12,16 +12,18 @@ audio. A future `avatars` bucket will follow when the profile UI lands.
 ```
      Google Cloud TTS                       Supabase Storage
             │                             bucket: phrase-audio
-  pnpm audio:generate                     path:   <slug>.mp3
-            ▼                                       ▲
-            local mp3                               │
+  pnpm audio:generate                     paths:  <slug>.mp3
+            ▼                                     replies/<slug>.mp3
+            local mp3                               ▲
 prisma/seed-data/audio/<slug>.mp3   ──►─────────────┤
+prisma/seed-data/audio/replies/…    ──►─────────────┤
             (committed to git)                      │ public read
                                                     │ /storage/v1/object/public/...
                 pnpm db:sync-audio  ────────────────┤
                   (service role,                    │
                    upsert: true,                    │
-                   sets phrases.audio_url)          │
+                   sets audio_url +                 │
+                   reply_audio_url)                 │
                                                     │
             Server / Client Component  ◄────────────┘
             phraseAudioUrl("hallo.mp3")
@@ -79,12 +81,12 @@ After 1-2:
    pnpm db:sync-audio
    ```
 
-   Expected output:
+   Expected output (one clip present, no replies yet):
 
    ```
    Audio sync complete:
-     uploaded                : 1
-     phrases audio_url set   : 1
+     phrase  uploaded   1, audioUrl set   1
+     reply   uploaded   0, replyAudioUrl set   0
      skipped (no matching slug): 0
    ```
 

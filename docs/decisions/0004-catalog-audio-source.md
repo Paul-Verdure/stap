@@ -75,13 +75,41 @@ point of a pronunciation reference.
 A reduced rate for A0/A1 was rejected for the same reason: the clip is the
 model of how the phrase actually sounds.
 
+### Replies are voiced too, keyed by the owning phrase
+
+218 of the 226 phrases carry a likely reply. Those are voiced as a second
+family, `replies/<phrase-slug>.mp3`, in the same bucket and the same voice.
+
+Voicing them was not the original scope, and it became necessary *because* the
+phrases were voiced. Before, every listen button on the preparation screen was
+dead, so the reply's dead button was invisible. Once the phrase and its key
+words played, the reply was the one grey disc on a screen of live ones — which
+reads as a broken app rather than an unfinished one. This is the same failure
+the coverage ratchet exists to prevent, one level down: inside a phrase rather
+than inside a level. The lint could not have caught it, because a reply is not
+a row.
+
+They are keyed by the **owning phrase's slug**, not by the reply text or a
+content hash, because a reply is not an addressable catalog entity — it has no
+slug of its own. A few phrases share an identical reply string and are
+therefore synthesized twice; that costs a few tens of kilobytes and keeps
+generation, sync and lint a straight slug lookup in all three places.
+
+`phrases.reply_audio_url` is deliberately **not** part of the all-or-nothing
+reply trio enforced by the `phrases_reply_complete` CHECK. The trio is authored
+content that must be complete or absent; the audio is *generated from* it, so a
+reply legitimately exists for the interval between writing it and running the
+generator. Folding the column into the CHECK would make adding a reply a
+two-step migration dance for no benefit.
+
 ### Pipeline
 
 Generation and upload are two commands on purpose:
 
 ```
-pnpm audio:generate   →  prisma/seed-data/audio/<slug>.mp3  (committed, reviewed)
-pnpm db:sync-audio    →  bucket + phrases.audio_url
+pnpm audio:generate   →  prisma/seed-data/audio/<slug>.mp3          (committed)
+                      →  prisma/seed-data/audio/replies/<slug>.mp3  (committed)
+pnpm db:sync-audio    →  bucket + phrases.audio_url / reply_audio_url
 ```
 
 The clips are reviewed in a pull request before they reach the bucket.
@@ -106,7 +134,9 @@ runtime and it never reaches the client.
   about $0.24 and a minute. This is what makes the choice reversible.
 - **The licence is clean for a public repo**, which was the constraint that
   eliminated the best-sounding option.
-- **Cost is not a factor**: 226 phrases is roughly 8,000 characters.
+- **Cost is not a factor**: 444 clips is roughly 16,000 characters.
+- **The reply is now audible**, which is the half of an exchange a learner
+  actually has to parse in the wild. Reciting a line is the easy part.
 
 ### Negative / accepted trade-offs
 
@@ -138,6 +168,7 @@ runtime and it never reaches the client.
 
 ## Scope
 
-This ADR governs how catalog phrase audio is produced and encoded. It does not
-govern the storage and read path (see `docs/storage-setup.md`), the offline
-caching rule in `app/sw.ts`, or any future user-recorded audio.
+This ADR governs how catalog audio — phrases and replies — is produced,
+keyed and encoded. It does not govern the storage and read path (see
+`docs/storage-setup.md`), the offline caching rule in `app/sw.ts`, or any
+future user-recorded audio.

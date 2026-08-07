@@ -49,9 +49,16 @@ export default async function PreparePage({
   // The reply trio is all-or-nothing in the database (phrases_reply_complete),
   // so requiring both halves here costs nothing and keeps the types honest.
   const replyMeaning = localize(phrase, "replyMeaning", locale);
+  // audioUrl is deliberately NOT part of that requirement: the text is
+  // authored and the clip is generated from it, so a reply can legitimately
+  // exist for a moment before its audio does.
   const reply =
     phrase.replyNl && replyMeaning
-      ? { nl: phrase.replyNl, meaning: replyMeaning }
+      ? {
+          nl: phrase.replyNl,
+          meaning: replyMeaning,
+          audioPath: phrase.replyAudioUrl,
+        }
       : null;
 
   return (
@@ -116,7 +123,11 @@ export default async function PreparePage({
           {reply && (
             <section className="flex flex-col gap-2">
               <SectionHead title={t("replyTitle")} nl="het antwoord" />
-              <VocItem nl={reply.nl} meaning={reply.meaning} />
+              <VocItem
+                nl={reply.nl}
+                meaning={reply.meaning}
+                audioPath={reply.audioPath}
+              />
             </section>
           )}
 

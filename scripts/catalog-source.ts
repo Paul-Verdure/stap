@@ -13,6 +13,15 @@ export const SEED_DIR = path.join(HERE, "..", "prisma", "seed-data");
 export const PHRASE_DIR = path.join(SEED_DIR, "phrases");
 export const AUDIO_DIR = path.join(SEED_DIR, "audio");
 
+/**
+ * Reply clips live in a subdirectory rather than alongside the phrase clips,
+ * and are keyed by the *owning phrase's* slug. A reply is not an addressable
+ * catalog entity — it has no slug of its own — so `replies/<phrase-slug>.mp3`
+ * is what makes it findable. The nesting also keeps loadAudioSlugs() honest:
+ * it filters for `.mp3`, so a directory never counts as a phrase clip.
+ */
+export const REPLY_AUDIO_DIR = path.join(AUDIO_DIR, "replies");
+
 // The ladder is defined once, next to the selection rule that consumes it.
 // Imported (not just re-exported) because loadPhrases below walks it.
 import { LEVELS, type Level } from "../lib/challenge-config";
@@ -88,10 +97,23 @@ export function loadPhrases(): SourcedPhrase[] {
  * reflects what a sync would actually produce — reported, never enforced.
  */
 export function loadAudioSlugs(): Set<string> {
-  if (!fs.existsSync(AUDIO_DIR)) return new Set();
+  return mp3Basenames(AUDIO_DIR);
+}
+
+/**
+ * Phrase slugs whose *reply* has a local clip in
+ * prisma/seed-data/audio/replies/. Same convention, same reporting: the file
+ * is named after the phrase that owns the reply, not after the reply text.
+ */
+export function loadReplyAudioSlugs(): Set<string> {
+  return mp3Basenames(REPLY_AUDIO_DIR);
+}
+
+function mp3Basenames(dir: string): Set<string> {
+  if (!fs.existsSync(dir)) return new Set();
   return new Set(
     fs
-      .readdirSync(AUDIO_DIR)
+      .readdirSync(dir)
       .filter((f) => f.toLowerCase().endsWith(".mp3"))
       .map((f) => f.slice(0, -".mp3".length)),
   );

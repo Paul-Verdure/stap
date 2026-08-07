@@ -12,7 +12,7 @@ export function VocItem({
 }: {
   nl: string;
   meaning: string;
-  /** Omitted for rows with no clip of their own (e.g. the likely reply). */
+  /** Null until the row's clip is generated; AudioButton then dims the disc. */
   audioPath?: string | null;
 }) {
   return (

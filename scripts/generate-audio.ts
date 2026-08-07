@@ -1,9 +1,15 @@
 // Catalog audio generation — `pnpm audio:generate`.
 //
-// Synthesizes one <slug>.mp3 per catalog phrase into prisma/seed-data/audio/,
-// which `pnpm db:sync-audio` then uploads to Supabase Storage. Generation and
-// upload are deliberately two steps: the clips are committed to git and
-// reviewed in a pull request before they ever reach the bucket.
+// Synthesizes two families of clip into prisma/seed-data/audio/, which
+// `pnpm db:sync-audio` then uploads to Supabase Storage:
+//
+//   <slug>.mp3          the phrase itself
+//   replies/<slug>.mp3  what the other person is likely to say back
+//
+// Both are named after the phrase's slug: a reply has no slug of its own, so
+// the owning phrase is what makes it addressable. Generation and upload are
+// deliberately two steps: the clips are committed to git and reviewed in a
+// pull request before they ever reach the bucket.
 //
 // Engine: Google Cloud Text-to-Speech, via the REST endpoint and a plain API
 // key. See docs/decisions/0004-catalog-audio-source.md for why Google over
@@ -24,6 +30,7 @@
 //   pnpm audio:generate                 # generate what is missing
 //   pnpm audio:generate --force         # regenerate everything
 //   pnpm audio:generate --limit 5       # sample a handful first
+//   pnpm audio:generate --only-replies  # one family only
 //   pnpm audio:generate --list-voices   # show the available nl-NL voices
 import "dotenv/config";
 
@@ -31,7 +38,7 @@ import { spawn } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 
-import { AUDIO_DIR, loadPhrases, type SourcedPhrase } from "./catalog-source";
+import { AUDIO_DIR, loadPhrases, REPLY_AUDIO_DIR } from "./catalog-source";
 
 const API_ROOT = "https://texttospeech.googleapis.com/v1";
 const LANGUAGE_CODE = "nl-NL";
@@ -62,6 +69,15 @@ const listVoices = args.includes("--list-voices");
 const limitFlag = args.indexOf("--limit");
 const limit =
   limitFlag !== -1 ? Number.parseInt(args[limitFlag + 1] ?? "", 10) : NaN;
+/** Narrow a run to one family, e.g. after adding replies to an existing catalog. */
+const only = args.includes("--only-replies")
+  ? "replies"
+  : args.includes("--only-phrases")
+    ? "phrases"
+    : "both";
+
+/** One file to synthesize. `label` is only for the progress line. */
+type Clip = { text: string; file: string; label: string };
 
 function apiKey(): string {
   const key = process.env.GOOGLE_TTS_API_KEY;
@@ -93,8 +109,13 @@ async function fetchVoices(): Promise<Voice[]> {
 
 /**
  * One phrase to LINEAR16 WAV bytes. Retries on 429 and 5xx with a backoff:
- * a rate-limit partway through 226 phrases should slow the run down, not
+ * a rate-limit partway through the catalog should slow the run down, not
  * abort it and leave the directory half-populated.
+ *
+ * The backoff runs to ~30s over 6 attempts because the quota that actually
+ * bites is per *minute* — a run of a few hundred clips will hit it, and a
+ * retry ladder topping out in single-digit seconds just fails six times fast.
+ * `Retry-After` wins when the server sends it.
  */
 async function synthesize(text: string, voice: string): Promise<Buffer> {
   const body = JSON.stringify({
@@ -116,10 +137,14 @@ async function synthesize(text: string, voice: string): Promise<Buffer> {
     }
 
     const retriable = res.status === 429 || res.status >= 500;
-    if (!retriable || attempt >= 4) {
+    if (!retriable || attempt >= 5) {
       throw new Error(`${res.status} ${res.statusText}: ${await res.text()}`);
     }
-    await new Promise((r) => setTimeout(r, 2 ** attempt * 500));
+    const retryAfter = Number(res.headers.get("retry-after"));
+    const waitMs = Number.isFinite(retryAfter) && retryAfter > 0
+      ? retryAfter * 1000
+      : 2 ** attempt * 1000;
+    await new Promise((r) => setTimeout(r, waitMs));
   }
 }
 
@@ -201,25 +226,48 @@ async function main() {
   }
 
   fs.mkdirSync(AUDIO_DIR, { recursive: true });
+  fs.mkdirSync(REPLY_AUDIO_DIR, { recursive: true });
 
-  let phrases: SourcedPhrase[] = loadPhrases();
-  const total = phrases.length;
+  const catalog = loadPhrases();
 
-  if (!force) {
-    phrases = phrases.filter(
-      (p) => !fs.existsSync(path.join(AUDIO_DIR, `${p.slug}.mp3`)),
-    );
-  }
-  if (Number.isFinite(limit)) phrases = phrases.slice(0, limit);
+  // Both families are keyed by the phrase slug. A handful of phrases share an
+  // identical reply string; they are synthesized once each rather than
+  // deduplicated, because a clip addressed by its owning phrase is what keeps
+  // db-sync-audio and content-check a straight slug lookup. The cost is a few
+  // duplicate files worth some tens of kilobytes.
+  const all: Clip[] = [
+    ...(only === "replies"
+      ? []
+      : catalog.map((p) => ({
+          text: p.textNl,
+          file: path.join(AUDIO_DIR, `${p.slug}.mp3`),
+          label: p.slug,
+        }))),
+    ...(only === "phrases"
+      ? []
+      : catalog
+          .filter((p) => p.replyNl)
+          .map((p) => ({
+            text: p.replyNl!,
+            file: path.join(REPLY_AUDIO_DIR, `${p.slug}.mp3`),
+            label: `replies/${p.slug}`,
+          }))),
+  ];
+
+  let clips = force ? all : all.filter((c) => !fs.existsSync(c.file));
+  if (Number.isFinite(limit)) clips = clips.slice(0, limit);
 
   console.log(`Voice   : ${voice}`);
-  console.log(`Catalog : ${total} phrases`);
   console.log(
-    `To do   : ${phrases.length}` +
+    `Catalog : ${catalog.length} phrases, ` +
+      `${catalog.filter((p) => p.replyNl).length} with a reply`,
+  );
+  console.log(
+    `To do   : ${clips.length} of ${all.length}` +
       (force ? " (--force: regenerating all)" : " (missing only)"),
   );
 
-  if (phrases.length === 0) {
+  if (clips.length === 0) {
     console.log("\nNothing to generate. Use --force to rebuild.");
     return;
   }
@@ -230,28 +278,27 @@ async function main() {
   let done = 0;
   let bytes = 0;
 
-  await pool(phrases, async (phrase) => {
-    const outFile = path.join(AUDIO_DIR, `${phrase.slug}.mp3`);
+  await pool(clips, async (clip) => {
     try {
-      const wav = await synthesize(phrase.textNl, voice);
-      await encode(wav, outFile);
+      const wav = await synthesize(clip.text, voice);
+      await encode(wav, clip.file);
 
-      const size = fs.statSync(outFile).size;
+      const size = fs.statSync(clip.file).size;
       bytes += size;
       if (size > SIZE_BUDGET_BYTES) {
-        oversized.push(`${phrase.slug} (${Math.round(size / 1024)} KB)`);
+        oversized.push(`${clip.label} (${Math.round(size / 1024)} KB)`);
       }
       done++;
-      // A 226-phrase run is long enough that silence looks like a hang.
+      // A 400-clip run is long enough that silence looks like a hang.
       console.log(
-        `  ${String(done).padStart(3)}/${phrases.length}  ` +
-          `${phrase.slug.padEnd(38)}${String(Math.round(size / 1024)).padStart(3)} KB`,
+        `  ${String(done).padStart(3)}/${clips.length}  ` +
+          `${clip.label.padEnd(46)}${String(Math.round(size / 1024)).padStart(3)} KB`,
       );
     } catch (err) {
-      // Keep going: one bad phrase should not cost the whole run. The file is
+      // Keep going: one bad clip should not cost the whole run. The file is
       // removed so a re-run retries it rather than treating it as done.
-      fs.rmSync(outFile, { force: true });
-      failures.push(`${phrase.slug}: ${err instanceof Error ? err.message : err}`);
+      fs.rmSync(clip.file, { force: true });
+      failures.push(`${clip.label}: ${err instanceof Error ? err.message : err}`);
     }
   });
 
