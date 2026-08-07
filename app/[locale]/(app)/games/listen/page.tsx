@@ -14,9 +14,10 @@ import { buildListenRounds, type ListenSource } from "@/lib/game-content";
 import { gamePosition, GAME_IDS } from "@/lib/games";
 
 // Game C — "A sharp ear" (Listen). Reachable only when today's challenge is
-// DONE. Variants come from the day's phrase + its same-theme neighbours. The
-// phrases keep their audio path (null across the catalog today → the game's
-// honest degraded state).
+// DONE. Variants come from the day's phrase + its same-theme neighbours, each
+// carrying its audio path. The catalog is fully voiced, so the game plays for
+// real; the degraded state it still carries is the fallback for a phrase added
+// without a clip, which content:check now blocks.
 export default async function ListenPage({
   params,
 }: {
