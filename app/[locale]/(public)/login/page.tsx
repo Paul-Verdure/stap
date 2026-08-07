@@ -1,5 +1,8 @@
+import { Suspense } from "react";
+
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import { DeletedNotice } from "./deleted-notice";
 import { LoginForm } from "./login-form";
 import { Link } from "@/i18n/navigation";
 import { SecondaryLink } from "@/components/ui/button";
@@ -23,6 +26,11 @@ export default async function LoginPage({
         <Eyebrow>Stap</Eyebrow>
         <Question>{t("title")}</Question>
         <Helper>{t("subtitle")}</Helper>
+        {/* Suspense keeps the surrounding shell prerendered — the notice
+            reads the query string, so only it renders on the client. */}
+        <Suspense fallback={null}>
+          <DeletedNotice />
+        </Suspense>
         <LoginForm />
         <SecondaryLink asChild className="self-center">
           <Link href="/">{t("back")}</Link>

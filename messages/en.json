@@ -16,7 +16,11 @@
     "sentTitle": "Check your inbox",
     "sentBody": "We've sent you a magic link. Open it on this device to sign in.",
     "error": "Something went wrong. Please try again.",
-    "back": "Back to start"
+    "back": "Back to start",
+    "deleted": {
+      "title": "Your account is gone",
+      "body": "Everything tied to it has been deleted. You're welcome back any time — signing in again starts a fresh account."
+    }
   },
   "Onboarding": {
     "progress": "Step {current} of {total}",
@@ -364,7 +368,7 @@
         "confirm": "Delete permanently",
         "deleting": "Deleting…",
         "cancel": "Cancel",
-        "stubbed": "Account deletion isn't enabled yet — nothing was changed."
+        "error": "We couldn't delete your account. Nothing was changed — please try again."
       }
     },
     "footer": {

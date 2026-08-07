@@ -109,9 +109,11 @@ model User {
   notificationsEnabled Boolean? @map("notifications_enabled")
   soundEnabled         Boolean? @map("sound_enabled")
 
-  // Soft-delete tombstone (G9). Null = active; non-null = the account was
-  // deleted and must be filtered out of every authenticated read. Wiring the
-  // destructive action that sets this is a security stop (handled separately).
+  // Soft-delete tombstone (G9). Currently **never written**: ADR 0003 settled
+  // account deletion as a hard delete, so a removed account leaves no row to
+  // mark. Kept because `push-sender` already honours it and it is the hook a
+  // future grace-period delete would need — but read it as "unused", not as a
+  // guarantee that deleted accounts are filtered out anywhere else.
   deletedAt DateTime? @map("deleted_at")
 
   createdAt DateTime @default(now()) @map("created_at")

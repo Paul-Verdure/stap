@@ -12,14 +12,15 @@ import { cn } from "@/lib/cn";
 import { deleteAccount } from "@/lib/account-actions";
 
 /* ===========================================================================
-   DeleteAccountRow (G8, step 7) — the destructive "Delete my account" entry +
-   its confirm modal. Palette-clean (amber + ink, never red). The confirm input
-   requires the localized word (DELETE / SUPPRIMER); the safe path (Cancel) is
-   the loud, solid-ink button while "Delete permanently" stays a quiet, dashed
-   control until the word matches exactly.
+   DeleteAccountRow — the destructive "Delete my account" entry + its confirm
+   modal. Palette-clean (amber + ink, never red). The confirm input requires
+   the localized word (DELETE / SUPPRIMER); the safe path (Cancel) is the loud,
+   solid-ink button while "Delete permanently" stays a quiet, dashed control
+   until the word matches exactly.
 
-   SECURITY STOP: the destructive call is STUBBED (decision 2). No service-role
-   secret is handled and nothing irreversible runs — see lib/account-actions.ts.
+   The action behind it is a real, irreversible hard delete (ADR 0003). On
+   success it never returns — the server action redirects to the login screen —
+   so the only state to render here is the failure path.
 =========================================================================== */
 
 const DELETE_BTN =
@@ -29,7 +30,7 @@ export function DeleteAccountRow() {
   const t = useTranslations("Profile.account.delete");
   const [open, setOpen] = useState(false);
   const [typed, setTyped] = useState("");
-  const [stubbed, setStubbed] = useState(false);
+  const [failed, setFailed] = useState(false);
   const [pending, startTransition] = useTransition();
 
   const word = t("word");
@@ -37,16 +38,16 @@ export function DeleteAccountRow() {
 
   const reset = () => {
     setTyped("");
-    setStubbed(false);
+    setFailed(false);
   };
 
   const handleDelete = () => {
     if (!matches) return;
     startTransition(async () => {
+      // A successful delete redirects, so reaching the next line at all means
+      // the account is still there.
       const res = await deleteAccount();
-      // Stubbed: nothing is deleted. Surface that honestly instead of
-      // pretending the account is gone.
-      setStubbed(res.status === "stubbed");
+      setFailed(res.status === "error");
     });
   };
 
@@ -112,9 +113,11 @@ export function DeleteAccountRow() {
           spellCheck={false}
         />
 
-        {stubbed ? (
-          <p role="status" className="text-helper text-muted">
-            {t("stubbed")}
+        {failed ? (
+          // Error copy stays muted ink on beige — no semantic red in the
+          // palette.
+          <p role="alert" className="text-helper text-muted">
+            {t("error")}
           </p>
         ) : null}
       </div>
