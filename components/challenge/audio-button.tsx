@@ -29,10 +29,32 @@ export function AudioButton({
 
   const play = () => {
     if (!url) return;
-    if (!audioRef.current) audioRef.current = new Audio(url);
-    audioRef.current.currentTime = 0;
-    void audioRef.current.play().catch(() => {
-      // Autoplay/network failure is non-fatal; the user can retry.
+
+    let audio = audioRef.current;
+    if (!audio) {
+      audio = new Audio(url);
+      audioRef.current = audio;
+    }
+
+    // Rewind only once there is media to rewind. Assigning currentTime while
+    // readyState is HAVE_NOTHING throws InvalidStateError on WebKit, and it
+    // throws *synchronously* — outside the play() promise below — so on a
+    // first tap it would kill the handler before playback ever started. A
+    // fresh element already starts at 0, so there is nothing to lose.
+    if (audio.readyState > 0) {
+      try {
+        audio.currentTime = 0;
+      } catch {
+        // Not seekable yet; play() below still starts from the beginning.
+      }
+    }
+
+    void audio.play().catch((err: unknown) => {
+      // Non-fatal — the user can retry. But do not swallow it silently: this
+      // is the only signal available when playback fails on a device we
+      // cannot attach a debugger to, and "nothing happens" is exactly the
+      // report this button generates.
+      console.warn(`[audio] playback failed for ${url}:`, err);
     });
   };
 
