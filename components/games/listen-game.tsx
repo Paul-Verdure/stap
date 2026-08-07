@@ -20,11 +20,11 @@ import type { ListenOption, ListenRound } from "@/lib/game-content";
    offers three close Dutch variants. The last game, so the end CTA inverts:
    "Back to games" is primary, "Replay" is secondary.
 
-   Audio is degraded honestly: the whole catalog's clips are still null, so
-   the disc renders disabled with an "audio coming soon" caption AND the
+   The catalog is fully voiced, so the disc plays and the game is a real
+   listening exercise. The degraded branch is kept for a phrase that has no
+   clip: the disc renders disabled with an "audio coming soon" caption AND the
    round shows the meaning as a fallback clue, keeping the game answerable
-   rather than trapping the player. Once audio is synced the disc plays and
-   the clue falls away. No score, no penalty, free retry throughout.
+   rather than trapping the player. No score, no penalty, free retry throughout.
 =========================================================================== */
 export function ListenGame({
   rounds,

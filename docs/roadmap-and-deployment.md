@@ -17,7 +17,7 @@ placeholder). The data models and routes exist; the experiences do not yet.
 | **Seasonal review** | Profile "My season" card → "Coming in v2" modal; `SeasonalReview` model exists | Quarterly retrospective: generate a stats snapshot per `(user, year, quarter)` and render it as a review screen. |
 | **Detailed rhythm view** | Profile "My rhythm" card → "Coming in v2" modal | A richer weekly/seasonal rhythm visualisation beyond the 7-day preview row. |
 | **This week's vocabulary** | `/games/review` — stub; home "review link" | A spaced-exposure review of the `VocabularyCard`s the user has met this week. |
-| **Catalog audio playback** | `ListenButton`s render but `audioUrl` is null everywhere | Sync the phrase audio (there is a `db:sync-audio` script) so the listen games and pronunciation buttons actually play. This is what makes Stap the "primary pronunciation tool"; it also enables offline audio caching. |
+| **Catalog audio playback** | **Shipped.** 226 phrase clips + 218 reply clips, Google TTS `nl-NL-Chirp3-HD-Achernar` (ADR 0004), live in the bucket and cached offline by `app/sw.ts`. Verified in the browser: the pronunciation buttons play and the Listen game runs its real, non-degraded branch. | Nothing outstanding. Regeneration is `pnpm audio:generate --force`; `content:check --strict` blocks any new phrase shipped without its clip. A future revisit would be human recordings over TTS. |
 
 > Product invariants still apply to all of the above: no streaks, amber-only
 > palette, "Missed" never "Failed", Dutch always `lang="nl"`. See the Phase G

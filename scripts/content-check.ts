@@ -20,6 +20,7 @@ import {
   loadAudioSlugs,
   loadLifeContexts,
   loadPhrases,
+  loadReplyAudioSlugs,
   loadThemes,
   REGISTERS,
   type SourcedPhrase,
@@ -169,13 +170,63 @@ function checkIntegrity(
   }
 }
 
-function checkCoverage(phrases: SourcedPhrase[], lifeSlugs: Set<string>) {
+/**
+ * Audio is a ratchet, not a percentage floor: a population that has *any* clip
+ * must have them all.
+ *
+ * The reason is what each state does to a learner. Nothing voiced is the
+ * honest degraded state the UI is already built for — AudioButton renders
+ * disabled and dimmed, and the Listen game swaps the disc for a meaning clue.
+ * *Partly* voiced is the actively bad one: the same button plays or sits dead
+ * depending on which phrase the day happened to pick, which reads as broken
+ * rather than unfinished.
+ *
+ * So this passes at 0 and at 100, fails in between, and — once the catalog is
+ * voiced — becomes a permanent block on adding content without its clip.
+ */
+function audioRatchet(
+  label: string,
+  population: SourcedPhrase[],
+  clips: Set<string>,
+  noun: string,
+) {
+  if (population.length === 0) return;
+  const voiced = population.filter((p) => clips.has(p.slug));
+  if (voiced.length === 0 || voiced.length === population.length) return;
+
+  const missing = population.filter((p) => !clips.has(p.slug)).map((p) => p.slug);
+  coverage(
+    false,
+    `${label}: ${voiced.length}/${population.length} ${noun} have audio — ` +
+      `finish them or remove the clips, a half-voiced set reads as broken ` +
+      `(missing: ${missing.slice(0, 3).join(", ")}` +
+      `${missing.length > 3 ? `, +${missing.length - 3} more` : ""})`,
+  );
+}
+
+function checkCoverage(
+  phrases: SourcedPhrase[],
+  lifeSlugs: Set<string>,
+  audioSlugs: Set<string>,
+  replyAudioSlugs: Set<string>,
+) {
   for (const level of LEVELS) {
     const atLevel = phrases.filter((p) => p.level === level);
 
     coverage(
       atLevel.length >= MIN_PER_LEVEL,
       `${level}: ${atLevel.length} phrases, needs ${MIN_PER_LEVEL}`,
+    );
+
+    audioRatchet(`${level}`, atLevel, audioSlugs, "phrases");
+
+    // Replies are voiced too, and ratcheted on their own population: only the
+    // phrases that actually carry a reply can have a reply clip.
+    audioRatchet(
+      `${level} replies`,
+      atLevel.filter((p) => p.replyNl),
+      replyAudioSlugs,
+      "replies",
     );
 
     if (atLevel.length > 0) {
@@ -221,6 +272,7 @@ function printCoverageTable(
   phrases: SourcedPhrase[],
   lifeSlugs: Set<string>,
   audioSlugs: Set<string>,
+  replyAudioSlugs: Set<string>,
 ) {
   const pad = (s: string, n: number) => s.padEnd(n);
   const num = (n: number, n2: number) => String(n).padStart(n2);
@@ -228,7 +280,7 @@ function printCoverageTable(
   console.log("\nCoverage by level");
   console.log(
     `  ${pad("level", 7)}${pad("phrases", 9)}${pad("multi-word", 12)}` +
-      `${pad("worst pool", 12)}audio`,
+      `${pad("worst pool", 12)}${pad("audio", 8)}reply audio`,
   );
 
   for (const level of LEVELS) {
@@ -255,16 +307,25 @@ function printCoverageTable(
       ? `${Math.round((withAudio / atLevel.length) * 100)}%`
       : "—";
 
+    // Replies are a subset: the denominator is the phrases that carry one.
+    const withReply = atLevel.filter((p) => p.replyNl);
+    const replyVoiced = withReply.filter((p) => replyAudioSlugs.has(p.slug));
+    const replyPct = withReply.length
+      ? `${Math.round((replyVoiced.length / withReply.length) * 100)}% of ${withReply.length}`
+      : "—";
+
     console.log(
       `  ${pad(level, 7)}${pad(`${num(atLevel.length, 3)}/${MIN_PER_LEVEL}`, 9)}` +
-        `${pad(pct, 12)}${pad(`${num(worst, 3)}/${MIN_BAND_CONTEXT_POOL}`, 12)}${audioPct}`,
+        `${pad(pct, 12)}${pad(`${num(worst, 3)}/${MIN_BAND_CONTEXT_POOL}`, 12)}` +
+        `${pad(audioPct, 8)}${replyPct}`,
     );
   }
 
-  // Audio is tracked, never enforced: the clips are a separate chantier and
-  // audio_url is null for the whole catalog today (see docs/roadmap).
+  // The percentage itself is informational — what is enforced is that a level
+  // is not left partway, so 0% and 100% both pass and 60% does not.
   console.log(
-    "\n  Audio coverage is informational — syncing clips is a separate chantier.",
+    "\n  Audio: each set must be either fully voiced or not voiced at all.\n" +
+      "  Reply audio counts only the phrases that carry a reply.",
   );
 }
 
@@ -280,8 +341,11 @@ function main() {
   const themeSlugs = new Set(themes.map((t) => t.slug));
   const lifeSlugs = new Set(lifeContexts.map((l) => l.slug));
 
+  const audioSlugs = loadAudioSlugs();
+  const replyAudioSlugs = loadReplyAudioSlugs();
+
   checkIntegrity(phrases, themeSlugs, lifeSlugs);
-  checkCoverage(phrases, lifeSlugs);
+  checkCoverage(phrases, lifeSlugs, audioSlugs, replyAudioSlugs);
 
   console.log(
     `Checked ${phrases.length} phrases, ${themes.length} themes, ` +
@@ -293,7 +357,7 @@ function main() {
     for (const e of integrityErrors) console.error(`  ✗ ${e}`);
   }
 
-  printCoverageTable(phrases, lifeSlugs, loadAudioSlugs());
+  printCoverageTable(phrases, lifeSlugs, audioSlugs, replyAudioSlugs);
 
   if (coverageErrors.length) {
     const label = strict ? "error" : "gap";

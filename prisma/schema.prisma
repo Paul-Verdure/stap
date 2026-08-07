@@ -178,6 +178,14 @@ model Phrase {
   replyMeaningEn String? @map("reply_meaning_en")
   replyMeaningFr String? @map("reply_meaning_fr")
 
+  // Storage path of the reply's clip, under the `replies/` prefix of the same
+  // bucket (e.g. "replies/hallo.mp3"). Deliberately NOT part of the
+  // all-or-nothing reply trio above: the text is authored content and the
+  // audio is generated from it, so a reply legitimately exists for a moment
+  // before its clip does. Keyed by the owning phrase's slug rather than by the
+  // reply text, because a reply is not an addressable catalog entity.
+  replyAudioUrl String? @map("reply_audio_url")
+
   // Not localized: a property of the Dutch, not an aid for the reader.
   register Register @default(NEUTRAL)
 

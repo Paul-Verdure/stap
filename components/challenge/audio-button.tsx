@@ -9,8 +9,8 @@ import { phraseAudioUrl } from "@/lib/storage/phrase-audio";
 /* ===========================================================================
    AudioButton (G5) — wires the G1 ListenButton to actual playback. Audio is
    Stap's primary pronunciation tool. `audioPath` is the phrase's storage path
-   (phrases.audio_url); it is converted to a public URL. When no clip is synced
-   yet (the common case until the catalog audio is uploaded) the button is
+   (phrases.audio_url); it is converted to a public URL. The catalog is fully
+   voiced, so this normally plays; when a phrase has no clip the button is
    disabled and dimmed rather than silently doing nothing.
 =========================================================================== */
 export function AudioButton({
