@@ -383,11 +383,213 @@
     }
   },
   "Legal": {
-    "back": "Retour au profil",
-    "placeholder": "Cette page est en cours de finalisation et apparaîtra ici bientôt.",
-    "terms": { "title": "Conditions d'utilisation" },
-    "privacy": { "title": "Politique de confidentialité" },
-    "notice": { "title": "Mentions légales" }
+    "backToProfile": "Retour au profil",
+    "backToStart": "Retour à l'accueil",
+    "updated": "Dernière mise à jour le {date}",
+    "contactLine": "Une question sur tout ça ? Écrivez à {email}.",
+    "terms": {
+      "title": "Conditions d'utilisation",
+      "intro": "Stap est un projet personnel et non commercial réalisé par {publisher}. Ces conditions disent ce que vous pouvez en attendre, et ce qu'il attend de vous. Elles sont courtes volontairement.",
+      "sections": [
+        {
+          "heading": "Ce qu'est Stap",
+          "paragraphs": [
+            "Stap vous donne chaque jour une phrase néerlandaise à dire pour de vrai à quelqu'un, avec la situation à guetter et ce que votre interlocuteur risque de répondre. C'est un projet à côté, gratuit, sans société derrière et sans rien à vendre.",
+            "Ce n'est pas une formation certifiante et cela ne délivre aucun diplôme. Considérez-le comme de l'entraînement, pas comme un enseignement sur lequel vous appuyer."
+          ]
+        },
+        {
+          "heading": "Votre compte",
+          "paragraphs": [
+            "Vous vous connectez par un lien envoyé à votre adresse e-mail — aucun mot de passe à choisir ni à perdre. Gardez l'accès à cette boîte mail : c'est le seul chemin de retour vers votre compte.",
+            "Un compte par adresse e-mail. Ce qui se passe sous votre compte relève de votre responsabilité."
+          ]
+        },
+        {
+          "heading": "Ce que vous écrivez vous appartient",
+          "paragraphs": [
+            "Vos entrées de journal, les mots que vous notez avoir entendus et ce que vous avez ressenti sur un défi vous appartiennent. Ils ne sont jamais publiés, vendus, partagés, ni utilisés pour entraîner quoi que ce soit.",
+            "{publisher} peut techniquement y accéder en tant qu'exploitant de la base de données, et ne les lit pas."
+          ]
+        },
+        {
+          "heading": "Un usage raisonnable",
+          "paragraphs": [
+            "N'essayez pas de casser l'application, de la surcharger, d'atteindre les données d'autrui ou de créer des comptes automatiquement. L'accès peut être suspendu le cas échéant. Il n'y a pas d'équipe de modération ici : la règle est simplement la bonne foi."
+          ]
+        },
+        {
+          "heading": "Le catalogue",
+          "paragraphs": [
+            "Les phrases néerlandaises, leurs traductions, les indications de prononciation et les notes pédagogiques ont été écrites pour Stap et appartiennent à {publisher}. Servez-vous-en pour apprendre autant que vous voulez ; ne les republiez pas comme jeu de données ou comme produit à vous."
+          ]
+        },
+        {
+          "heading": "Aucune garantie",
+          "paragraphs": [
+            "Stap est fourni en l'état, et selon disponibilité. Il est maintenu sur du temps libre : il peut être indisponible, il peut perdre des données, et il peut changer ou s'arrêter à tout moment, sans préavis ni compensation.",
+            "N'en faites pas l'unique refuge de quelque chose que vous seriez triste de perdre. Votre profil a un bouton d'export ; utilisez-le."
+          ]
+        },
+        {
+          "heading": "Y mettre fin",
+          "paragraphs": [
+            "Vous pouvez supprimer votre compte depuis votre profil à tout moment. La suppression est immédiate et irréversible : tout part d'un coup, et rien ne peut être restauré.",
+            "{publisher} peut de la même façon cesser de faire tourner Stap, avec autant de préavis que raisonnablement possible."
+          ]
+        },
+        {
+          "heading": "Responsabilité",
+          "paragraphs": [
+            "Dans la mesure où le droit néerlandais le permet, {publisher} n'est pas responsable des dommages résultant de l'utilisation de Stap ou de son indisponibilité. Rien ici ne limite la responsabilité en cas d'intention ou de faute lourde, et rien ici n'affecte vos droits impératifs de consommateur."
+          ]
+        },
+        {
+          "heading": "Modification de ces conditions",
+          "paragraphs": [
+            "Ces conditions peuvent évoluer. Les changements substantiels seront annoncés dans l'application, et la date ci-dessus vous dit quand elles ont été touchées pour la dernière fois."
+          ]
+        },
+        {
+          "heading": "Droit applicable",
+          "paragraphs": [
+            "Le droit néerlandais s'applique. Les litiges relèvent du tribunal compétent aux Pays-Bas, sauf si le droit de la consommation vous en ouvre un autre."
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Politique de confidentialité",
+      "intro": "Stap collecte le peu dont il a besoin pour fonctionner, le stocke dans l'UE, et ne le partage avec personne. Il n'y a ni mesure d'audience, ni traceur, ni publicité nulle part dans l'application. Ce document est court parce qu'il n'y a honnêtement pas grand-chose à décrire.",
+      "sections": [
+        {
+          "heading": "Qui est responsable",
+          "paragraphs": [
+            "{publisher} décide de ce qui est collecté et pourquoi, et est le responsable de traitement au sens du RGPD. Vous pouvez le joindre à {contactEmail}."
+          ]
+        },
+        {
+          "heading": "Ce qui est collecté",
+          "paragraphs": [
+            "Tout vient de vous — soit parce que vous l'avez saisi, soit parce que vous avez utilisé l'application :"
+          ],
+          "bullets": [
+            "votre adresse e-mail, qui est le seul moyen de vous connecter",
+            "le prénom que vous donnez pendant l'accueil",
+            "vos réponses d'accueil : votre niveau, votre rythme, votre heure de rappel et les contextes de vie choisis",
+            "la langue de l'interface, et vos préférences de son et de notifications",
+            "vos défis quotidiens, le fait de les avoir faits ou non, et ce que vous avez dit ressentir",
+            "votre journal : le texte que vous écrivez, et les mots que vous notez avoir entendus",
+            "quelles phrases vous avez rencontrées et combien de fois, pour espacer les révisions",
+            "quels jours vous avez été actif, et quel mini-jeu vous avez joué quel jour",
+            "si vous activez les rappels : un abonnement push par appareil — une adresse fournie par votre navigateur, et les clés nécessaires pour lui chiffrer une notification"
+          ]
+        },
+        {
+          "heading": "Ce qui n'est pas collecté",
+          "paragraphs": [
+            "Aucune donnée de paiement, puisque rien n'est jamais payé. Ni localisation, ni contacts, ni photos, ni carnet d'adresses, ni empreinte d'appareil. Rien de ce que vous faites n'est profilé à des fins publicitaires, puisqu'il n'y a pas de publicité."
+          ]
+        },
+        {
+          "heading": "Pourquoi, et sur quelle base",
+          "paragraphs": [
+            "Tout ce qui précède existe pour faire fonctionner le service auquel vous vous êtes inscrit. C'est la base contractuelle de l'article 6(1)(b) du RGPD.",
+            "Les rappels push font exception : ils reposent sur votre consentement, article 6(1)(a). Désactiver l'interrupteur de notifications dans votre profil le retire, et l'abonnement est supprimé."
+          ]
+        },
+        {
+          "heading": "Cookies, et ce qui reste sur votre appareil",
+          "paragraphs": [
+            "Stap dépose deux cookies, strictement nécessaires tous les deux : l'un vous garde connecté, l'autre retient la langue de votre interface. Il n'y a pas de bandeau cookies parce qu'il n'y a rien d'optionnel à accepter.",
+            "Votre navigateur conserve aussi votre thème, vos préférences et le mini-jeu joué aujourd'hui. Cela reste sur votre appareil et n'est envoyé nulle part."
+          ]
+        },
+        {
+          "heading": "Qui d'autre intervient",
+          "paragraphs": [
+            "Trois acteurs, chacun parce que l'application ne peut pas tourner sans eux :"
+          ],
+          "bullets": [
+            "Supabase — la base de données et le système de connexion. Vos données se trouvent dans un projet situé à {dbRegion}.",
+            "Vercel — héberge l'application et exécute son code serveur. Vos requêtes transitent par leur infrastructure ; rien de vous n'y est conservé au-delà de ce qu'un serveur web journalise ordinairement.",
+            "Le service push de votre navigateur (Google, Mozilla ou Apple selon le navigateur) — uniquement si vous activez les rappels, et il ne reçoit jamais qu'une notification chiffrée et l'adresse où la livrer."
+          ]
+        },
+        {
+          "heading": "Rien n'est partagé au-delà",
+          "paragraphs": [
+            "Vos données ne sont jamais vendues, jamais utilisées à des fins publicitaires, jamais remises à qui que ce soit pour ses propres finalités, et jamais utilisées pour entraîner un modèle."
+          ]
+        },
+        {
+          "heading": "Combien de temps c'est conservé",
+          "paragraphs": [
+            "Aussi longtemps que votre compte existe. Supprimer votre compte depuis votre profil efface tout d'un coup — journal, historique, vocabulaire, préférences, abonnements push, et le compte lui-même.",
+            "Cette suppression est immédiate et irréversible. Il n'y a ni délai de grâce ni copie mise de côté pour restauration : exportez d'abord si vous voulez garder quoi que ce soit."
+          ]
+        },
+        {
+          "heading": "Vos droits",
+          "paragraphs": [
+            "Le RGPD vous donne un droit d'accès, de rectification, d'effacement, de portabilité et de limitation, et un droit d'opposition au traitement.",
+            "Deux d'entre eux sont des boutons plutôt que des demandes : votre profil contient « Exporter mes données », qui vous remet tout le compte en JSON, et « Supprimer mon compte », qui l'efface sur-le-champ. Pour le reste, écrivez à {contactEmail}.",
+            "Si vous estimez que vos données sont mal traitées, vous pouvez saisir l'autorité de contrôle néerlandaise, l'Autoriteit Persoonsgegevens (autoriteitpersoonsgegevens.nl)."
+          ]
+        },
+        {
+          "heading": "Sécurité",
+          "paragraphs": [
+            "Le trafic passe en HTTPS. La connexion est sans mot de passe, donc il n'y a aucun mot de passe à fuiter. L'accès à la base est restreint à l'application, et la sécurité au niveau des lignes fait qu'une session connectée n'atteint que ses propres lignes.",
+            "Cela dit, c'est un projet personnel maintenu par une seule personne. Jugez-le en conséquence, et gardez votre propre copie de ce qui compte — le bouton d'export est là exactement pour ça."
+          ]
+        },
+        {
+          "heading": "Les enfants",
+          "paragraphs": [
+            "Stap ne s'adresse pas aux enfants de moins de 16 ans, et aucun compte n'est sciemment créé pour l'un d'eux."
+          ]
+        },
+        {
+          "heading": "Modifications",
+          "paragraphs": [
+            "Si cette politique change substantiellement, ce sera annoncé dans l'application. La date en haut reflète toujours la dernière modification."
+          ]
+        }
+      ]
+    },
+    "notice": {
+      "title": "Mentions légales",
+      "intro": "Qui publie Stap, où il tourne, et comment prendre contact.",
+      "sections": [
+        {
+          "heading": "Éditeur",
+          "paragraphs": [
+            "Stap est publié par {publisher}, personne physique, comme projet personnel et non commercial. Ce n'est pas une société immatriculée : il n'y a ni numéro de chambre de commerce ni numéro de TVA, puisque rien n'est vendu sur Stap.",
+            "Contact : {contactEmail}"
+          ]
+        },
+        {
+          "heading": "Hébergement",
+          "paragraphs": [
+            "L'application est hébergée et servie par Vercel Inc. La base de données et le système de connexion sont fournis par Supabase, dans un projet situé à {dbRegion}."
+          ]
+        },
+        {
+          "heading": "Contenu et crédits",
+          "paragraphs": [
+            "Les phrases néerlandaises, leurs traductions, les indications de prononciation et les notes pédagogiques ont été écrites pour Stap. Le design et le code sont l'œuvre de {publisher}.",
+            "L'interface utilise les polices Syne et Inter, sous leurs licences ouvertes respectives."
+          ]
+        },
+        {
+          "heading": "Signaler quelque chose",
+          "paragraphs": [
+            "Un problème de sécurité, une erreur dans le catalogue ou une demande relative aux données — tout va au même endroit : {contactEmail}. C'est une seule personne qui lit, alors soyez précis."
+          ]
+        }
+      ]
+    }
   },
   "Status": {
     "loading": "Chargement…"

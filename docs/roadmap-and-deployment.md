@@ -37,15 +37,24 @@ Cleanups and decisions left open at G9 close. None block a deploy unless noted.
   `SUPABASE_SERVICE_ROLE_KEY` is now load-bearing in production — without it
   the action fails closed (the UI reports an error and nothing is deleted).
   Never run it on the shared seed user `g2-shell-test@example.com`.
-- **Legal pages are gated behind auth.** `PUBLIC_PATHS` in
-  `lib/supabase/middleware.ts` does not include `/legal`, so terms / privacy /
-  notice require a session even though they are public SSG content. Add `/legal`
-  to the whitelist when the real copy is written (app stores and logged-out
-  users need to read the privacy policy).
+- ~~**Legal pages are gated behind auth.**~~ **Done.** `/legal` is in
+  `PUBLIC_PATHS`, so terms / privacy / notice are readable without a session.
+  The pages now render on demand rather than being prerendered: they read the
+  session to decide whether "back" goes to the profile or to the welcome
+  entry.
+- **Confirm the Vercel function region.** The database is in
+  `eu-central-1` (Frankfurt), but no `regions` key is set in `vercel.json`, so
+  functions run in Vercel's default region — US East unless the dashboard says
+  otherwise. The privacy policy is worded to claim only what is verifiable
+  (data is *stored* in the EU), but setting `"regions": ["fra1"]` would keep
+  processing in the EU too **and** cut the round trip from the function to a
+  Frankfurt database. Check the plan's region allowance before committing it.
 
 ### Content
-- **Real legal copy** for `/legal/[doc]` (terms / privacy / notice are
-  placeholder text).
+- **Fill in the publisher identity.** `lib/legal-config.ts` holds the only
+  facts the legal pages cannot derive: `publisher` and `contactEmail` are
+  still `TODO:` markers and render visibly as such on public pages. The
+  documents themselves are written.
 - **Version string**: the Profile footer shows the real package version
   (`Stap v0.1.0`). Bump it on release if desired.
 - **Localize the design-system gallery** (`/[locale]/design-system`) — currently

@@ -13,12 +13,16 @@ import { routing } from "@/i18n/routing";
 // public whitelist (paths below are matched after the locale prefix is
 // stripped). The welcome entry ("/") and the design-system gallery are public
 // portfolio surfaces; the magic-link screen ("/login") and the offline page
-// complete the list. The /auth/* machine route is bypassed earlier in proxy.
+// complete the list. "/legal" must stay public: app stores and logged-out
+// visitors have to be able to read the privacy policy without an account, and
+// a consent document behind a sign-in wall is worth nothing. The /auth/*
+// machine route is bypassed earlier in proxy.
 const PUBLIC_PATHS = [
   "/",
   "/login",
   "/onboarding",
   "/design-system",
+  "/legal",
   "/~offline",
 ];
 
