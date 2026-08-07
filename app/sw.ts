@@ -2,7 +2,14 @@
 /// <reference lib="webworker" />
 import { defaultCache } from "@serwist/turbopack/worker";
 import type { PrecacheEntry, SerwistGlobalConfig } from "serwist";
-import { NetworkFirst, Serwist } from "serwist";
+import {
+  CacheableResponsePlugin,
+  CacheFirst,
+  ExpirationPlugin,
+  NetworkFirst,
+  RangeRequestsPlugin,
+  Serwist,
+} from "serwist";
 
 // The precache manifest is injected at build time by createSerwistRoute
 // (esbuild `define` replaces self.__SW_MANIFEST).
@@ -31,6 +38,46 @@ const serwist = new Serwist({
       handler: new NetworkFirst({
         cacheName: "stap-pages",
         networkTimeoutSeconds: 3,
+      }),
+    },
+    {
+      // Catalog phrase audio, served cross-origin from Supabase Storage.
+      // serwist's defaultCache only covers same-origin Next assets, so
+      // without this rule the clips are re-fetched on every play and are
+      // simply unavailable offline — which would undercut the point of
+      // caching today's challenge pages at all.
+      //
+      // Matched on pathname rather than the Supabase origin: the bucket
+      // segment is already a stable literal in lib/storage/phrase-audio.ts,
+      // and NEXT_PUBLIC_SUPABASE_URL is not reliably inlined into the
+      // esbuild-bundled worker. Moving the bucket behind a CDN later keeps
+      // working as long as the path shape survives, which is the same
+      // assumption phraseAudioUrl() already makes.
+      matcher({ url }) {
+        return url.pathname.includes(
+          "/storage/v1/object/public/phrase-audio/",
+        );
+      },
+      handler: new CacheFirst({
+        cacheName: "stap-phrase-audio",
+        plugins: [
+          // A clip is addressed by slug and effectively immutable, so a hit
+          // should never go to the network. db:sync-audio uploads with
+          // upsert, so a replaced clip is possible — the 30-day ceiling is
+          // what bounds how long a stale one can linger.
+          new ExpirationPlugin({
+            maxEntries: 250, // 226 phrases, with headroom for the catalog to grow.
+            maxAgeSeconds: 30 * 24 * 60 * 60,
+            purgeOnQuotaError: true,
+          }),
+          // The bucket is public and CORS-enabled, so a real 200 is expected;
+          // 0 keeps an opaque response usable rather than poisoning the cache.
+          new CacheableResponsePlugin({ statuses: [0, 200] }),
+          // Safari requests media with a Range header. Without this, a range
+          // request against a fully-cached clip fails instead of being served
+          // from the stored response.
+          new RangeRequestsPlugin(),
+        ],
       }),
     },
     ...defaultCache,

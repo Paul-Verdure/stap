@@ -10,18 +10,29 @@ audio. A future `avatars` bucket will follow when the profile UI lands.
 ## Architecture recap
 
 ```
-            local mp3                       Supabase Storage
-prisma/seed-data/audio/<slug>.mp3   ──►   bucket: phrase-audio
-                                          path:   <slug>.mp3
-                                            ▲
-                pnpm db:sync-audio          │ public read
-                  (service role,            │ /storage/v1/object/public/...
-                   upsert: true,            │
-                   sets phrases.audio_url)  │
-                                            │
-            Server / Client Component  ◄────┘
+     Google Cloud TTS                       Supabase Storage
+            │                             bucket: phrase-audio
+  pnpm audio:generate                     path:   <slug>.mp3
+            ▼                                       ▲
+            local mp3                               │
+prisma/seed-data/audio/<slug>.mp3   ──►─────────────┤
+            (committed to git)                      │ public read
+                                                    │ /storage/v1/object/public/...
+                pnpm db:sync-audio  ────────────────┤
+                  (service role,                    │
+                   upsert: true,                    │
+                   sets phrases.audio_url)          │
+                                                    │
+            Server / Client Component  ◄────────────┘
             phraseAudioUrl("hallo.mp3")
+                     │
+                     └─► cached offline by app/sw.ts ("stap-phrase-audio")
 ```
+
+Producing the clips is a separate step from uploading them — see
+`prisma/seed-data/audio/README.md` for the generation workflow and
+`docs/decisions/0004-catalog-audio-source.md` for why the audio is
+synthesized rather than recorded.
 
 Bucket is **public**: catalog pronunciations have no privacy. The public
 URL pattern bypasses storage auth on reads. Writes still require the

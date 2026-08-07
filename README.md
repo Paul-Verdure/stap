@@ -166,6 +166,7 @@ Architecture decisions with lasting consequences are recorded in
 | [0001](docs/decisions/0001-i18n-db-strategy.md) | Localized catalog fields use one column per locale (`_en` / `_fr`), read through the `localize()` accessor. |
 | [0002](docs/decisions/0002-daily-challenge-level-band.md) | The daily challenge is drawn from a sliding two-level band, not from everything at or below the user's level. |
 | [0003](docs/decisions/0003-account-deletion.md) | Account deletion is an irreversible hard delete through the Supabase admin API, not a tombstone. |
+| [0004](docs/decisions/0004-catalog-audio-source.md) | Catalog audio is synthesized with Google Cloud TTS using one `nl-NL` voice throughout, not recorded and not varied by register. |
 
 ## Connecting Supabase
 

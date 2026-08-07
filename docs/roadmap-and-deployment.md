@@ -17,7 +17,7 @@ placeholder). The data models and routes exist; the experiences do not yet.
 | **Seasonal review** | Profile "My season" card → "Coming in v2" modal; `SeasonalReview` model exists | Quarterly retrospective: generate a stats snapshot per `(user, year, quarter)` and render it as a review screen. |
 | **Detailed rhythm view** | Profile "My rhythm" card → "Coming in v2" modal | A richer weekly/seasonal rhythm visualisation beyond the 7-day preview row. |
 | **This week's vocabulary** | `/games/review` — stub; home "review link" | A spaced-exposure review of the `VocabularyCard`s the user has met this week. |
-| **Catalog audio playback** | `ListenButton`s render but `audioUrl` is null everywhere | Sync the phrase audio (there is a `db:sync-audio` script) so the listen games and pronunciation buttons actually play. This is what makes Stap the "primary pronunciation tool"; it also enables offline audio caching. |
+| **Catalog audio playback** | Pipeline complete end to end — `pnpm audio:generate` (Google TTS, ADR 0004) writes the clips, `pnpm db:sync-audio` uploads them, and `app/sw.ts` caches them offline. `audioUrl` is still null everywhere: no clip has been generated yet. | Provision `GOOGLE_TTS_API_KEY`, pick the voice (`--list-voices`), generate all 226 clips and sync them. This is what makes Stap the "primary pronunciation tool". The Listen game's non-degraded branch has never run against real audio and needs verifying at that point. |
 
 > Product invariants still apply to all of the above: no streaks, amber-only
 > palette, "Missed" never "Failed", Dutch always `lang="nl"`. See the Phase G

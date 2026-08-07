@@ -10,7 +10,10 @@
 //
 // Runs through the service-role admin client (RLS bypass, storage write).
 // dotenv/config: a standalone tsx script does not auto-load .env.
+// node-websocket: Node 20 has no global WebSocket, without which merely
+// constructing the admin client throws. Must be imported before it.
 import "dotenv/config";
+import "./node-websocket";
 
 import fs from "node:fs";
 import path from "node:path";
