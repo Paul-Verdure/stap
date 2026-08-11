@@ -26,14 +26,39 @@ export function AudioButton({
 }) {
   const url = phraseAudioUrl(audioPath);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const warmedRef = useRef(false);
 
   const play = () => {
     if (!url) return;
 
     let audio = audioRef.current;
     if (!audio) {
-      audio = new Audio(url);
+      audio = new Audio();
+      // CORS mode, and it is load-bearing rather than cosmetic. A media
+      // element defaults to a *no-cors* request; the service worker can then
+      // only see an opaque response (status 0, body unreadable from script),
+      // and WebKit — every iOS browser, Brave included — ends up with nothing
+      // playable and stays silent. Chrome happens to tolerate it, which is
+      // why this only ever failed on a phone. The bucket sends
+      // `access-control-allow-origin: *`, so asking for CORS costs nothing
+      // and yields a real, readable 200.
+      audio.crossOrigin = "anonymous";
+      audio.src = url;
       audioRef.current = audio;
+    }
+
+    // Populate the offline cache with a *full* response. The element's own
+    // request is a Range request, which the runtime cache rightly refuses to
+    // store (a 206 is a fragment, not the file), so media playback alone
+    // never fills the cache. This plain fetch stores the complete 200 that
+    // RangeRequestsPlugin later slices to answer those Range requests.
+    // Fire-and-forget, once per element; the clip is a few KB and the bucket
+    // sends `cache-control: public, max-age=3600`, so it is close to free.
+    if (!warmedRef.current) {
+      warmedRef.current = true;
+      void fetch(url).catch(() => {
+        // Offline or blocked: playback below is unaffected.
+      });
     }
 
     // Rewind only once there is media to rewind. Assigning currentTime while

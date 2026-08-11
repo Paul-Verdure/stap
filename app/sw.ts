@@ -70,9 +70,16 @@ const serwist = new Serwist({
             maxAgeSeconds: 30 * 24 * 60 * 60,
             purgeOnQuotaError: true,
           }),
-          // The bucket is public and CORS-enabled, so a real 200 is expected;
-          // 0 keeps an opaque response usable rather than poisoning the cache.
-          new CacheableResponsePlugin({ statuses: [0, 200] }),
+          // 200 only — never 0. An opaque response (status 0) is exactly what
+          // poisons this cache: its body cannot be read from script, so
+          // RangeRequestsPlugin has nothing to slice and WebKit is handed an
+          // empty result. Audio is fetched in CORS mode (see AudioButton), so
+          // a genuine 200 is what arrives; anything opaque means something is
+          // wrong and is better refetched than stored.
+          //
+          // 206 is absent on purpose too: a partial response is a fragment,
+          // not the file. AudioButton warms this cache with a full request.
+          new CacheableResponsePlugin({ statuses: [200] }),
           // Safari requests media with a Range header. Without this, a range
           // request against a fully-cached clip fails instead of being served
           // from the stored response.
