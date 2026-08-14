@@ -49,14 +49,20 @@ export function RadioRow({
       value={value}
       className={cn(
         "group flex w-full items-center justify-between gap-3 rounded-lg border-structural bg-surface px-4 py-3.5 text-left text-foreground",
-        "data-[state=checked]:border-hero-border data-[state=checked]:bg-hero-bg data-[state=checked]:text-hero-fg",
+        // Checked = the inverted page, matching Chip/TimeSlot/FeelCard. The
+        // amber indicator dot already carries selection here, so this row never
+        // became unreadable the way TimeSlot did — but the surface still
+        // collapsed to 1.10:1 against its neighbours in dark mode, and the
+        // whole point of the container treatment is that a picked row is
+        // scannable without hunting for the dot.
+        "data-[state=checked]:surface-selected",
         className,
       )}
     >
       <span className="flex flex-col gap-0.5">
         <span className="font-display text-body font-semibold">{label}</span>
         {description ? (
-          <span className="text-helper text-muted group-data-[state=checked]:text-hero-muted">
+          <span className="text-helper text-muted group-data-[state=checked]:text-selected-muted">
             {description}
           </span>
         ) : null}

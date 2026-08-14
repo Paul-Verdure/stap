@@ -81,6 +81,11 @@
     },
     "reminderTitle": "Rappel quotidien",
     "reminderOff": "Désactivé",
+    "slots": {
+      "morning": { "label": "Matin", "phrase": "le matin" },
+      "midday": { "label": "Midi", "phrase": "vers midi" },
+      "evening": { "label": "Soir", "phrase": "le soir" }
+    },
     "recapName": "Prénom",
     "recapLevel": "Niveau",
     "recapContexts": "Contextes",
@@ -334,7 +339,7 @@
       "title": "Préférences",
       "notifications": "Notifications",
       "notificationsDesc": "Un petit rappel quotidien pour faire votre pas.",
-      "notificationsDescTime": "Un petit rappel quotidien, vers {time}.",
+      "notificationsDescTime": "Un petit rappel quotidien {when}.",
       "sound": "Son & audio",
       "soundDesc": "Jouer la prononciation et les sons des jeux.",
       "theme": "Apparence",

@@ -81,6 +81,11 @@
     },
     "reminderTitle": "Daily reminder",
     "reminderOff": "Off",
+    "slots": {
+      "morning": { "label": "Morning", "phrase": "in the morning" },
+      "midday": { "label": "Midday", "phrase": "around midday" },
+      "evening": { "label": "Evening", "phrase": "in the evening" }
+    },
     "recapName": "Name",
     "recapLevel": "Level",
     "recapContexts": "Contexts",
@@ -334,7 +339,7 @@
       "title": "Preferences",
       "notifications": "Notifications",
       "notificationsDesc": "A daily nudge to take your step.",
-      "notificationsDescTime": "A daily nudge, around {time}.",
+      "notificationsDescTime": "A daily nudge {when}.",
       "sound": "Sound & audio",
       "soundDesc": "Play pronunciation and game sounds.",
       "theme": "Appearance",

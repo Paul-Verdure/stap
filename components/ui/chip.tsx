@@ -8,10 +8,19 @@ import { CheckIcon, PlusIcon } from "./icons";
    Chip & TimeSlot (G1.6) — selectable pills. Presentational: the caller owns
    selection state and passes `selected` + onClick.
 
-   Selection = the HERO treatment (container-selection rule). A selected Chip
-   carries an amber check (multi-select membership); a selected RadioRow
-   carries an amber dot (single-select) — that is how multi vs single read
-   distinctly. The "add" Chip is dashed (a different action: open an input).
+   Selection = `surface-selected`, the inverted page (container-selection
+   rule). A selected Chip carries an amber check (multi-select membership); a
+   selected RadioRow carries an amber dot (single-select) — that is how multi
+   vs single read distinctly. The "add" Chip is dashed (a different action:
+   open an input).
+
+   These two used to spell the hero treatment out atomically
+   (`border-hero-border bg-hero-bg text-hero-fg`) rather than through the
+   `surface-hero` utility, which is how they survived the first sweep of this
+   bug: the hero never inverts, so in dark mode a selected control was #1A1A1A
+   on a #242220 surface — 1.10:1, no visible selection. TimeSlot was the worst
+   of the set, being the only one of these with no second cue: Chip at least
+   carried its amber check.
 =========================================================================== */
 
 type ChipProps = {
@@ -52,7 +61,7 @@ export function Chip({
       className={cn(
         "inline-flex touch-manipulation items-center gap-1.5 rounded-md px-3 py-2 text-body active:opacity-70",
         selected
-          ? "border-[1.5px] border-hero-border bg-hero-bg text-hero-fg"
+          ? "surface-selected"
           : "border-structural bg-surface text-foreground",
         className,
       )}
@@ -65,8 +74,8 @@ export function Chip({
 }
 
 /* ---------------------------------------------------------------------------
-   TimeSlot — a cell in the reminder-time grid (08:00 / 12:00 / 18:00 / Off).
-   Single-select visual: selected = hero, off = outlined, disabled = dimmed
+   TimeSlot — a cell in the reminder grid (morning / midday / evening / Off).
+   Single-select visual: selected = inverted, off = outlined, disabled = dimmed
    (used when "At my own pace" turns the reminder block off).
 --------------------------------------------------------------------------- */
 export function TimeSlot({
@@ -88,7 +97,7 @@ export function TimeSlot({
       className={cn(
         "inline-flex touch-manipulation items-center justify-center rounded-md px-4 py-3 text-body font-medium active:opacity-70",
         selected
-          ? "border-[1.5px] border-hero-border bg-hero-bg text-hero-fg"
+          ? "surface-selected"
           : "border-structural bg-surface text-foreground",
         disabled && "cursor-not-allowed opacity-40",
         className,
