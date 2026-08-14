@@ -2,7 +2,7 @@
   "Welcome": {
     "kicker": "Stap",
     "title": "Leer Nederlands",
-    "subtitle": "Technical scaffolding in place — soft brutalism design system active.",
+    "subtitle": "One Dutch phrase a day, to say to a real person. No streaks, no scores — a missed day is just missed.",
     "enter": "Enter the app",
     "haveAccount": "I already have an account"
   },
@@ -348,7 +348,6 @@
     "account": {
       "title": "Account",
       "email": "Email",
-      "password": "Change password",
       "export": "Export my data",
       "exportDesc": "Download your journal and progress as JSON.",
       "exporting": "Preparing your file…",

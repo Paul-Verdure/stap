@@ -4,17 +4,22 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { DeleteAccountRow } from "@/components/profile/delete-account-row";
-import { ChevronIcon, DownloadIcon } from "@/components/ui/icons";
+import { DownloadIcon } from "@/components/ui/icons";
 import { SectionRule } from "@/components/ui/typography";
-import { Link } from "@/i18n/navigation";
 import { exportMyData } from "@/lib/account-actions";
 import { signOut } from "@/lib/auth/actions";
 
 /* ===========================================================================
-   AccountSection (G8, step 5) — the account block: the (static) email, a link
-   into the auth flow for sign-in/security, the RGPD data export (decision 3:
-   a read-only server action whose JSON the client downloads), and sign out.
-   The "Delete my account" danger row + its modal are the step-7 security stop.
+   AccountSection (G8, step 5) — the account block: the (static) email, the
+   RGPD data export (decision 3: a read-only server action whose JSON the
+   client downloads), and sign out. The "Delete my account" danger row + its
+   modal are the step-7 security stop.
+
+   There is deliberately no "change password" row: sign-in is passwordless
+   (lib/auth/actions — a magic link verified by /auth/confirm), so there is no
+   credential for the user to rotate. The row used to exist and pointed at
+   /login, which for a signed-in user just bounced them back out to the public
+   entry page.
 =========================================================================== */
 
 const ROW =
@@ -65,12 +70,6 @@ export function AccountSection({ email }: { email: string }) {
           {email}
         </span>
       </div>
-
-      {/* Change password — routes to the auth flow (Phase C). */}
-      <Link href="/login" className={ROW}>
-        <span className="text-body font-medium">{t("password")}</span>
-        <ChevronIcon className="h-5 w-5 shrink-0 text-muted" />
-      </Link>
 
       {/* Export my data — RGPD download. */}
       <button

@@ -2,7 +2,7 @@
   "Welcome": {
     "kicker": "Stap",
     "title": "Leer Nederlands",
-    "subtitle": "Fondations techniques en place — design system « soft brutalism » actif.",
+    "subtitle": "Une phrase en néerlandais par jour, à dire à quelqu'un pour de vrai. Ni séries ni scores — un jour manqué est simplement manqué.",
     "enter": "Entrer dans l'app",
     "haveAccount": "J'ai déjà un compte"
   },
@@ -348,7 +348,6 @@
     "account": {
       "title": "Compte",
       "email": "E-mail",
-      "password": "Changer le mot de passe",
       "export": "Exporter mes données",
       "exportDesc": "Téléchargez votre journal et votre progression en JSON.",
       "exporting": "Préparation du fichier…",
