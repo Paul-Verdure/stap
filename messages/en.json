@@ -301,7 +301,6 @@
       },
       "season": {
         "title": "My season",
-        "recap": "New recap",
         "summary": "{steps, plural, one {# step} other {# steps}} · {contexts, plural, one {# context} other {# contexts}}"
       },
       "v2": {

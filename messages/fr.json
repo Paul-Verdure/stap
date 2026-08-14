@@ -120,7 +120,7 @@
     "greetingReady": "Prêt, {name} ?",
     "prepStatus": "Prépa vue",
     "resumePrep": "Reprendre la prépa",
-    "doneBanner": "Pas franchi aujourd'hui",
+    "doneBanner": "Un pas franchi aujourd'hui",
     "doneStatus": "Fait",
     "addToJournal": "Ajouter à mon journal",
     "playRecap": "Revoir la journée",
@@ -159,7 +159,7 @@
     "wordsRemove": "Retirer",
     "save": "Enregistrer dans mon journal",
     "saveError": "Échec de l'enregistrement — réessayez.",
-    "savedChip": "Pas franchi",
+    "savedChip": "Un pas enregistré",
     "savedAtEase": "Bien joué — c'était fluide.",
     "savedHesitant": "Tu l'as fait, hésitations comprises.",
     "savedMissed": "Tu t'es lancé. C'est ça, le pas.",
@@ -301,7 +301,6 @@
       },
       "season": {
         "title": "Ma saison",
-        "recap": "Nouveau récap",
         "summary": "{steps, plural, one {# pas} other {# pas}} · {contexts, plural, one {# contexte} other {# contextes}}"
       },
       "v2": {

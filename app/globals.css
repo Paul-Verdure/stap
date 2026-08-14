@@ -50,6 +50,13 @@
   --stap-hero-muted: #8a857d;   /* desaturated beige, ≥5:1 on ink            */
   --stap-hero-border: #1a1a1a;  /* same as bg in light → no visible border   */
 
+  /* Muted text ON the selected surface (see `surface-selected`). That surface
+     is the page inverted, so this inverts too: on the ink selected card it is
+     the hero's desaturated beige; in dark mode, where the selected card is
+     beige, it becomes the light theme's warm gray. No new colors — both values
+     already exist in the palette, they just swap roles.                      */
+  --stap-selected-muted: #8a857d; /* on ink   — ≥5:1                          */
+
   /* Scrim for modals */
   --stap-scrim: rgba(26, 26, 26, 0.45);
 }
@@ -74,6 +81,9 @@
      carve it out of the surrounding dark surface. */
   --stap-hero-border: #f5f0e8;
 
+  /* Selected card is beige here, so muted text on it must be dark. */
+  --stap-selected-muted: #5a5650; /* on beige — 6.4:1                         */
+
   --stap-scrim: rgba(0, 0, 0, 0.6);
 }
 
@@ -96,6 +106,7 @@
   --color-hero-fg: var(--stap-hero-fg);
   --color-hero-muted: var(--stap-hero-muted);
   --color-hero-border: var(--stap-hero-border);
+  --color-selected-muted: var(--stap-selected-muted);
   --color-scrim: var(--stap-scrim);
 
   /* Fonts (variables wired by next/font in the layout) */
@@ -175,6 +186,23 @@
   background-color: var(--color-hero-bg);
   color: var(--color-hero-fg);
   border: 1.5px solid var(--color-hero-border);
+}
+
+/* Selected treatment for a control the user has picked (feel cards, language
+   cards, match tiles). It is the page INVERTED — that is what makes a chosen
+   card read as chosen — and because both tokens flip with the theme, one rule
+   covers both.
+
+   This is deliberately NOT `surface-hero`, which it used to be. The hero is
+   invariant ink by design, so in dark mode a selected card was #1A1A1A sitting
+   on a #242220 surface with the same beige border as its unselected
+   neighbours: 1.10:1, i.e. no visible selection at all, in a game whose whole
+   mechanic is "tap one, then tap its pair". In light mode this resolves to
+   exactly the same ink-on-beige as before, so that theme is unchanged. */
+@utility surface-selected {
+  background-color: var(--color-foreground);
+  color: var(--color-background);
+  border: 1.5px solid var(--color-foreground);
 }
 
 /* ===========================================================================

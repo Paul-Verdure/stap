@@ -125,7 +125,7 @@ export function MatchGame({
                   isMatched
                     ? "border-dashed-ink bg-transparent text-muted line-through opacity-60"
                     : isSelected
-                      ? "surface-hero"
+                      ? "surface-selected"
                       : "border-structural bg-surface text-foreground",
                 )}
               >

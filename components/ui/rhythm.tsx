@@ -79,8 +79,16 @@ export function RhythmUnit({
 
   // The "ink" of the cell tracks the surface: page foreground by default,
   // hero foreground (beige) on the ink hero. Amber (missed) is invariant.
+  //
+  // Fill and border are the SAME value on purpose. `--color-hero-border` is
+  // not it: that token exists to outline the hero card against the page, and
+  // in light mode it is deliberately ink — identical to the hero background,
+  // so the card shows no outline. Borrowing it for the cells drawn *inside*
+  // that card painted ink on ink, and every empty cell vanished in light mode
+  // (an `empty` cell is nothing but its border). Only `at-ease` and `missed`,
+  // which carry a fill, survived.
   const ink = onHero ? "var(--color-hero-fg)" : "var(--color-foreground)";
-  const border = onHero ? "var(--color-hero-border)" : "var(--color-foreground)";
+  const border = ink;
 
   // Deterministic inline style. The today ring uses `outline` (not box-shadow)
   // to respect the brutalist "the only shadow is the focus ring" rule while

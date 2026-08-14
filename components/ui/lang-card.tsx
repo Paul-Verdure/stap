@@ -8,8 +8,8 @@ import { cn } from "@/lib/cn";
    ---------------------------------------------------------------------------
    The label + sublabel are each written in their OWN language and are
    INVARIANT (never translated), so the caller passes them verbatim and sets
-   `lang` so assistive tech announces them correctly. Selected = the signature
-   hero treatment (ink + amber + beige), unselected = beige surface.
+   `lang` so assistive tech announces them correctly. Selected = the inverted
+   `surface-selected` treatment, unselected = plain surface.
 =========================================================================== */
 export function LangCard({
   label,
@@ -35,7 +35,7 @@ export function LangCard({
       aria-pressed={selected}
       className={cn(
         "w-full rounded-lg border-structural p-5 text-left",
-        selected ? "surface-hero" : "bg-surface text-foreground",
+        selected ? "surface-selected" : "bg-surface text-foreground",
         className,
       )}
       {...props}
@@ -44,7 +44,7 @@ export function LangCard({
       <span
         className={cn(
           "mt-1 block text-helper",
-          selected ? "text-hero-muted" : "text-muted",
+          selected ? "text-selected-muted" : "text-muted",
         )}
       >
         {sublabel}

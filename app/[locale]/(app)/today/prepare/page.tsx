@@ -6,6 +6,7 @@ import { PhraseCard } from "@/components/challenge/phrase-card";
 import { VocItem } from "@/components/challenge/voc-item";
 import { TopBar } from "@/components/layout/top-bar";
 import { Cta } from "@/components/ui/button";
+import { ChevronIcon } from "@/components/ui/icons";
 import { Tag } from "@/components/ui/surface";
 import { Helper, Nl, SectionHead } from "@/components/ui/typography";
 import { markPrepared } from "@/lib/challenge-actions";
@@ -131,14 +132,27 @@ export default async function PreparePage({
             </section>
           )}
 
-          {/* Tips — native collapsible (keyboard + AT friendly). */}
+          {/* Tips — native collapsible (keyboard + AT friendly).
+
+              The chevron is not decoration. Any `display` other than
+              `list-item` on a <summary> suppresses the native disclosure
+              marker, and this one is a flex container — so the card rendered
+              as a heading with nothing under it and read as an empty section,
+              hiding three tips behind it. Every other block on this page is
+              expanded, so nothing else hinted that it opens. */}
           <section>
-            <details className="border-structural rounded-md bg-surface">
-              <summary className="flex cursor-pointer items-baseline gap-2 px-4 py-3">
-                <span className="font-display text-greeting">
-                  {t("tipsTitle")}
+            <details className="group border-structural rounded-md bg-surface">
+              <summary className="flex cursor-pointer items-center justify-between gap-2 px-4 py-3">
+                <span className="flex items-baseline gap-2">
+                  <span className="font-display text-greeting">
+                    {t("tipsTitle")}
+                  </span>
+                  <Nl className="text-body text-muted">tips</Nl>
                 </span>
-                <Nl className="text-body text-muted">tips</Nl>
+                <ChevronIcon
+                  aria-hidden
+                  className="h-5 w-5 shrink-0 text-muted motion-safe:transition-transform group-open:rotate-90"
+                />
               </summary>
               <ol className="flex flex-col gap-3 px-4 pb-4">
                 {tips.map((tip, i) => (
