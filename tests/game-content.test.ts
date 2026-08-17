@@ -104,14 +104,38 @@ describe("buildFillRounds", () => {
     }
   });
 
-  it("degenerates on a single-word phrase — known gap, see audit F11", () => {
-    // A one-word phrase has nothing to blank around, so the round renders an
-    // empty frame with no sentence context. Documented rather than asserted as
-    // desirable: the fix is to filter the source phrases to multi-word ones.
+  it("uses phrases with a sentence before ones without", () => {
+    // The mechanic blanks the last word, so a single-word phrase leaves an
+    // empty frame. Given a choice, every round should have something to read
+    // around the blank — here two of the four inputs are single words.
+    const mixed: MatchPair[] = [
+      pairs[1], // "één"        — single word, listed first on purpose
+      pairs[2], // "twee"       — single word
+      pairs[0], // "Dat is vijf euro."
+      { id: "p5", nl: "Ik heb twee kinderen.", meaning: "I have two children." },
+    ];
+    const rounds = buildFillRounds(mixed, "s");
+    expect(rounds).toHaveLength(3);
+    expect(rounds[0].prefix).toBe("Dat is vijf ");
+    expect(rounds[1].prefix).toBe("Ik heb twee ");
+    // Only once the sentences run out does a bare frame appear.
+    expect(rounds[2].prefix).toBe("");
+  });
+
+  it("still fills the round count when only single words are available", () => {
+    // A numbers-heavy day must not produce a one-round game: a bare frame is
+    // a worse round, but a missing round is a worse game. See audit F11.
+    const rounds = buildFillRounds([pairs[1], pairs[2], pairs[3]], "s");
+    expect(rounds).toHaveLength(3);
+    expect(rounds.every((r) => r.prefix === "")).toBe(true);
+    expect(rounds.map((r) => r.answer)).toEqual(["één", "twee", "drie"]);
+  });
+
+  it("keeps a single-word phrase solvable when it is used", () => {
     const [round] = buildFillRounds([pairs[1]], "s");
     expect(round.answer).toBe("één");
-    expect(round.prefix).toBe("");
-    expect(round.suffix).toBe("");
+    expect(round.clue).toBe("One");
+    expect(round.options.filter((o) => o.correct)).toHaveLength(1);
   });
 
   it("is deterministic per seed", () => {

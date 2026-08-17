@@ -374,8 +374,11 @@ export function OnboardingFlow({
         )}
 
         {/* Screen 6 — recap + commit (email then magic link, or direct write
-            when already authenticated). First-challenge teaser is hardcoded;
-            real selection is G4. */}
+            when already authenticated). The teaser deliberately does not name
+            a phrase: selection runs server-side once the profile exists, from
+            the level band intersected with these contexts, so anything named
+            here would be a guess. It used to promise "Greet a colleague in
+            Dutch" and then serve whatever the selector actually picked. */}
         {state.step === 6 && (
           <>
             <Question>{tt(TITLE_KEY[6])}</Question>
