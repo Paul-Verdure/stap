@@ -114,8 +114,10 @@ export function buildFillRounds(
 /* ---------------------------------------------------------------------------
    Game C — "A sharp ear" (Listen). Each round plays one phrase; the player
    picks it from three close Dutch variants. The phrase keeps its audio path
-   so the disc can play it (currently null for the whole catalog — the game
-   renders an honest degraded state, see the listen game component).
+   so the disc can play it. The catalog has been fully voiced since 2026-08-07,
+   so this normally plays; `audioPath` stays nullable because a phrase can
+   legitimately exist for a moment before its clip does, and the game keeps its
+   degraded state for that case rather than assuming sound.
 --------------------------------------------------------------------------- */
 
 export type ListenSource = {

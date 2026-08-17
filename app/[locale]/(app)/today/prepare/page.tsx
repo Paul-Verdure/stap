@@ -20,8 +20,9 @@ import { localize } from "@/lib/localize";
 
 // Preparation — single scrollable screen, sticky commitment CTA, no bottom nav
 // (focus mode). Sections: hero recap, the situation, key words, the sentence,
-// and collapsible tips. Audio is wired (disabled until clips are synced). The
-// commit write lands in G5.3.
+// the likely reply, and collapsible tips. Every one of those carries audio: the
+// catalog is fully voiced, and a button is disabled only where a clip is
+// genuinely absent.
 export default async function PreparePage({
   params,
 }: {

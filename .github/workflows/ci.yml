@@ -1,0 +1,56 @@
+name: CI
+
+# Every check here runs without secrets: no database, no Supabase project, no
+# network. That is deliberate — it means a fork or a pull request from anywhere
+# gets the same green tick, and nothing in CI can touch real user data.
+#
+# `pnpm build` is NOT run here. The build needs the Supabase env vars and
+# regenerates the Prisma client against a real schema, so it belongs to the
+# Vercel deployment rather than to this workflow, which would otherwise need
+# production credentials to prove very little.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# A new push to the same branch supersedes the run in flight.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      # postinstall runs `prisma generate`, which reads schema.prisma and never
+      # connects — verified to succeed with DATABASE_URL and DIRECT_URL unset.
+      # It has to run: the generated client is gitignored, and the typecheck
+      # below resolves lib/db.ts through it.
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      # Validates the seed catalog and enforces the volume the daily-challenge
+      # level band needs (ADR 0002). Reads the JSON sources, not the database.
+      - name: Check catalog
+        run: pnpm content:check
+
+      - name: Test
+        run: pnpm test
