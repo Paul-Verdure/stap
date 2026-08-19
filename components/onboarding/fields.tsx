@@ -1,6 +1,6 @@
 "use client";
 
-import { useFormatter, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 
 import { Chip, TimeSlot } from "@/components/ui/chip";
 import { RadioGroup, RadioRow } from "@/components/ui/radio-group";
@@ -11,8 +11,10 @@ import {
   LEVELS,
   MAX_CONTEXTS,
   REMINDER_SLOTS,
+  REMINDER_SLOT_KEYS,
   type DutchLevel,
   type Frequency,
+  type ReminderSlot,
 } from "@/lib/onboarding";
 
 /* ===========================================================================
@@ -26,13 +28,29 @@ import {
 
 export type LifeContextOption = { slug: string; name: string };
 
-/** Render an "HH:mm" slot in the active locale's clock (12h en / 24h fr). */
+/* Slot naming. A stored slot is a UTC hour (see REMINDER_SLOTS), so it must
+   never be rendered as a clock time: doing so promised "8:00 AM" and delivered
+   10:00 Dutch time in summer. Both hooks map the slot to a time-of-day word,
+   which stays true across the DST hour the fixed cron cannot track.
+
+   Two forms, because one string cannot be both a chip and part of a sentence
+   in English and French at once: `label` is the standalone chip ("Morning"),
+   `phrase` is the in-sentence form ("in the morning" / "le matin"). */
+
+/** Standalone name for a slot — chips, recap rows. */
 export function useSlotLabel() {
-  const format = useFormatter();
-  return (hhmm: string) => {
-    const [h, m] = hhmm.split(":").map(Number);
-    return format.dateTime(new Date(2000, 0, 1, h, m), "time");
-  };
+  const t = useTranslations("Onboarding.slots");
+  const tt = t as unknown as (key: string) => string;
+  return (slot: string) =>
+    tt(`${REMINDER_SLOT_KEYS[slot as ReminderSlot] ?? "morning"}.label`);
+}
+
+/** In-sentence form for a slot — "A daily nudge in the morning." */
+export function useSlotPhrase() {
+  const t = useTranslations("Onboarding.slots");
+  const tt = t as unknown as (key: string) => string;
+  return (slot: string) =>
+    tt(`${REMINDER_SLOT_KEYS[slot as ReminderSlot] ?? "morning"}.phrase`);
 }
 
 /* ---------------------------------------------------------------------------

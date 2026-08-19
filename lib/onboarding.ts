@@ -16,8 +16,33 @@ export type Frequency = "DAILY" | "THREE_PER_WEEK" | "OWN_PACE";
    Profile "My setup" editors, and the server-side write validation. */
 export const LEVELS: DutchLevel[] = ["A0", "A1", "A2", "B1", "B2"];
 export const FREQUENCIES: Frequency[] = ["DAILY", "THREE_PER_WEEK", "OWN_PACE"];
-/** Canonical 24h reminder slots (the only persisted non-null reminder values). */
-export const REMINDER_SLOTS = ["08:00", "12:00", "18:00"] as const;
+/* Reminder slots.
+
+   The stored value is the **UTC hour the cron fires at**, not a time anyone is
+   shown. That is forced by the sender: `sendDueReminders` selects users whose
+   `reminderTime` starts with the current UTC hour (lib/push-sender.ts), so the
+   slot value and the cron schedule in vercel.json are the same number by
+   construction — change one and you must change the other, or the query
+   matches nobody and reminders stop silently.
+
+   These three land at 08:00 / 12:00 / 18:00 in the Netherlands in summer, and
+   an hour earlier in winter. That hour of drift is why the UI names slots in
+   words (morning / midday / evening) rather than claiming a clock time: with
+   crons pinned to UTC and one plan-capped run per slot per day, a precise
+   local time is not something the app can honestly promise. Serving arbitrary
+   timezones at a chosen local hour needs an hourly cron — a hosting decision,
+   not a code one. See docs/audit-2026-08-13.md (F7). */
+export const REMINDER_SLOTS = ["06:00", "10:00", "16:00"] as const;
+
+export type ReminderSlot = (typeof REMINDER_SLOTS)[number];
+
+/** Time-of-day key each slot is presented as. Drives the message catalog. */
+export const REMINDER_SLOT_KEYS: Record<ReminderSlot, string> = {
+  "06:00": "morning",
+  "10:00": "midday",
+  "16:00": "evening",
+};
+
 export const MAX_CONTEXTS = 4;
 
 export type OnboardingState = {

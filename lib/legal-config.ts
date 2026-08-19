@@ -9,16 +9,21 @@
    Anything still marked TODO renders visibly as "TODO: …" on a public page.
    That is deliberate — an unfinished legal notice should be embarrassing, not
    invisible. Fill these in before the pages go live.
+
+   `publisher` and `contactEmail` were filled on 2026-08-14. Keep the guarantee
+   that made them fillable: never let a value here degrade to an empty string,
+   because an empty publisher reads as a finished page that names nobody, which
+   is worse than a visible TODO.
 =========================================================================== */
 
 import type { Locale } from "@/i18n/routing";
 
 export const LEGAL = {
   /** Publisher shown in the legal notice and named as data controller. */
-  publisher: "TODO: publisher name",
+  publisher: "Paul Verdure",
 
   /** Contact address for questions, privacy requests and security reports. */
-  contactEmail: "TODO: contact email",
+  contactEmail: "paul.verdure@gmail.com",
 
   /**
    * Region of the Supabase project holding the database and auth records.
@@ -33,7 +38,7 @@ export const LEGAL = {
   },
 
   /** Date the documents were last substantively changed, ISO 8601. */
-  updatedAt: "2026-08-07",
+  updatedAt: "2026-08-14",
 } as const;
 
 /** Tokens the legal copy may reference, resolved once per render. */

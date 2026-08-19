@@ -2,7 +2,7 @@
   "Welcome": {
     "kicker": "Stap",
     "title": "Leer Nederlands",
-    "subtitle": "Technical scaffolding in place — soft brutalism design system active.",
+    "subtitle": "One Dutch phrase a day, to say to a real person. No streaks, no scores — a missed day is just missed.",
     "enter": "Enter the app",
     "haveAccount": "I already have an account"
   },
@@ -81,12 +81,17 @@
     },
     "reminderTitle": "Daily reminder",
     "reminderOff": "Off",
+    "slots": {
+      "morning": { "label": "Morning", "phrase": "in the morning" },
+      "midday": { "label": "Midday", "phrase": "around midday" },
+      "evening": { "label": "Evening", "phrase": "in the evening" }
+    },
     "recapName": "Name",
     "recapLevel": "Level",
     "recapContexts": "Contexts",
     "recapRhythm": "Rhythm",
     "teaserTitle": "Your first step",
-    "teaserBody": "Greet a colleague in Dutch.",
+    "teaserBody": "A phrase is waiting, picked for where you'll actually use it.",
     "emailLabel": "Email address",
     "emailPlaceholder": "you@example.com",
     "emailHelper": "We'll send a magic link to finish — no password to remember.",
@@ -301,7 +306,6 @@
       },
       "season": {
         "title": "My season",
-        "recap": "New recap",
         "summary": "{steps, plural, one {# step} other {# steps}} · {contexts, plural, one {# context} other {# contexts}}"
       },
       "v2": {
@@ -335,7 +339,7 @@
       "title": "Preferences",
       "notifications": "Notifications",
       "notificationsDesc": "A daily nudge to take your step.",
-      "notificationsDescTime": "A daily nudge, around {time}.",
+      "notificationsDescTime": "A daily nudge {when}.",
       "sound": "Sound & audio",
       "soundDesc": "Play pronunciation and game sounds.",
       "theme": "Appearance",
@@ -348,7 +352,6 @@
     "account": {
       "title": "Account",
       "email": "Email",
-      "password": "Change password",
       "export": "Export my data",
       "exportDesc": "Download your journal and progress as JSON.",
       "exporting": "Preparing your file…",

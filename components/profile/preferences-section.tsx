@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 
-import { useSlotLabel } from "@/components/onboarding/fields";
+import { useSlotPhrase } from "@/components/onboarding/fields";
 import { useTheme } from "@/components/system/theme-provider";
 import { RadioGroup, RadioRow } from "@/components/ui/radio-group";
 import { Toggle } from "@/components/ui/toggle";
@@ -37,7 +37,7 @@ export function PreferencesSection({
   soundEnabled: boolean | null;
 }) {
   const t = useTranslations("Profile.preferences");
-  const slotLabel = useSlotLabel();
+  const slotPhrase = useSlotPhrase();
   const themeLabelId = useId();
 
   // Optimistic local state; the server action revalidates the page, so a
@@ -108,7 +108,7 @@ export function PreferencesSection({
   }
 
   const notifDesc = reminderTime
-    ? t("notificationsDescTime", { time: slotLabel(reminderTime) })
+    ? t("notificationsDescTime", { when: slotPhrase(reminderTime) })
     : t("notificationsDesc");
 
   const themeOptions: { value: ThemePreference; key: string }[] = [

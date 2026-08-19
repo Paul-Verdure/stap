@@ -13,9 +13,13 @@ day is "missed", never "failed".
 > Status: feature-complete for v1. Onboarding, the daily challenge and its
 > preparation/validation flow, the journal, three micro-games, the profile,
 > Web Push reminders and the PWA shell are all in place, on a catalog of 226
-> reviewed phrases across five levels. See
+> reviewed phrases across five levels — every one of them voiced, along with
+> the 218 replies. See
 > [docs/roadmap-and-deployment.md](docs/roadmap-and-deployment.md) for what is
-> deliberately deferred to v2 (notably catalog audio).
+> deliberately deferred to v2 (the journal entry detail, the seasonal recap and
+> the weekly vocabulary review), and
+> [docs/audit-2026-08-13.md](docs/audit-2026-08-13.md) for a readiness audit
+> and the plan it produced.
 
 ## Stack
 
@@ -84,6 +88,8 @@ Supabase dashboard ("Connect" → Prisma / ORMs).
 | `pnpm build` | Production build (Turbopack) |
 | `pnpm start` | Serve the production build |
 | `pnpm lint` | ESLint |
+| `pnpm typecheck` | `tsc --noEmit` |
+| `pnpm test` | Unit tests (Vitest) — `pnpm test:watch` to iterate |
 | `pnpm content:check` | Validate the seed catalog (add `--strict` to enforce coverage) |
 | `pnpm db:seed` | Sync the catalog from `prisma/seed-data/` |
 | `pnpm db:generate` | Generate the Prisma client |
@@ -122,6 +128,7 @@ scripts/
   catalog-source.ts    Shared reader for the seed JSON
   content-check.ts     Catalog lint (`pnpm content:check`)
   db-seed.ts           Idempotent catalog sync
+tests/                 Vitest unit suite (pure logic; no DB, no network)
 proxy.ts               Next 16 middleware: next-intl + Supabase session
 types/                 Shared TypeScript types
 ```
@@ -155,6 +162,47 @@ types/                 Shared TypeScript types
   (Next 16 renamed `middleware.ts` → `proxy.ts`); next-intl runs first to
   resolve the locale, then Supabase refreshes the session onto the same
   response so neither the locale nor the session is lost.
+
+## Tests and CI
+
+`pnpm test` runs a small Vitest suite over the pure logic — no database, no
+network, no Next runtime — so it stays fast and needs no secrets. The scope is
+deliberate: it targets the rules that already had a written rationale, so the
+tests read as the decision rather than as a restatement of the code.
+
+- `tests/challenge-config.test.ts` — the sliding level band (ADR 0002) and the
+  derived pool floor.
+- `tests/localize.test.ts` — the ADR 0001 accessor and its English fallback.
+- `tests/date.test.ts` — the UTC day/week boundaries the whole cadence rests on.
+- `tests/game-content.test.ts` — deterministic seeding, so a refresh cannot
+  reshuffle a board mid-game.
+- `tests/theme-contrast.test.ts` — the palette's contrast contract, checked in
+  **both** themes.
+- `tests/selection-treatment.test.ts` — a source guard: the invariant ink hero
+  must never be used to mean "selected", because it cannot invert and so
+  disappears in dark mode.
+
+Those last two exist because of a specific failure: three invisible-state
+defects shipped and all of them passed axe, which compares text to its own
+background and never a selected control to an unselected one. They are the
+regression guard for a bug class that automated a11y testing does not cover.
+
+CI (`.github/workflows/ci.yml`) runs typecheck, lint, the catalog check and the
+tests on every push and pull request. It runs **without secrets** on purpose,
+so a fork gets the same green tick and nothing in CI can reach real user data;
+`pnpm build` is left to Vercel, which has the environment for it.
+
+There is no end-to-end suite yet. It is the obvious next step and the reason it
+has not happened is honest rather than accidental: it needs a disposable
+database and a way past the magic link, which is a decision about test
+infrastructure rather than a missing afternoon.
+
+## The design system, live
+
+`/en/design-system` renders the primitives, tokens and type ramp as a real
+page. It is public and ships in production — worth knowing it is there, since
+nothing in the app links to it. It is English-only and aimed at reviewers
+rather than learners.
 
 ## Decisions
 

@@ -42,13 +42,18 @@ Cleanups and decisions left open at G9 close. None block a deploy unless noted.
   The pages now render on demand rather than being prerendered: they read the
   session to decide whether "back" goes to the profile or to the welcome
   entry.
-- **Confirm the Vercel function region.** The database is in
-  `eu-central-1` (Frankfurt), but no `regions` key is set in `vercel.json`, so
-  functions run in Vercel's default region — US East unless the dashboard says
-  otherwise. The privacy policy is worded to claim only what is verifiable
-  (data is *stored* in the EU), but setting `"regions": ["fra1"]` would keep
-  processing in the EU too **and** cut the round trip from the function to a
-  Frankfurt database. Check the plan's region allowance before committing it.
+- ~~**Confirm the Vercel function region.**~~ **Set, pending one check on the
+  next deploy.** `vercel.json` now carries `"regions": ["fra1"]`, so functions
+  run in Frankfurt alongside the `eu-central-1` database instead of Vercel's
+  US East default. That keeps processing in the EU — not only storage, which
+  is all the privacy policy claimed — and removes a transatlantic round trip
+  from every query.
+
+  A single region is available on every plan (only *multi*-region is a paid
+  feature), so this should apply as written. It cannot be verified from the
+  repository, though: **confirm on the next deploy** that the build log and
+  the function list show `fra1` rather than `iad1`, and check the dashboard's
+  own region setting, which can override `vercel.json`.
 
 ### Content
 - **Fill in the publisher identity.** `lib/legal-config.ts` holds the only

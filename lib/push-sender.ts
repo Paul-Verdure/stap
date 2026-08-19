@@ -19,8 +19,17 @@ import fr from "@/messages/fr.json";
    pruned. Cadence: DAILY every day, THREE_PER_WEEK on Mon/Wed/Fri; OWN_PACE
    never (its reminderTime is null). Reminder slots are whole hours, so
    matching the current UTC hour is enough — vercel.json triggers this route
-   once per slot (08:00/12:00/18:00 UTC) rather than hourly (Vercel Hobby caps
+   once per slot (06:00/10:00/16:00 UTC) rather than hourly (Vercel Hobby caps
    each cron job at one run/day, but allows multiple jobs).
+
+   THE COUPLING: `reminderTime` stores the UTC hour this route runs at, so the
+   slot values in lib/onboarding.ts and the cron schedules in vercel.json are
+   the same three numbers. They must be changed together. Moving one alone does
+   not fail loudly — the query below simply matches nobody, at every firing,
+   and reminders stop with no error anywhere. The slots were 08/12/18 until
+   2026-08-14; they moved so the send lands in the Dutch morning, midday and
+   evening instead of two hours late, and the UI stopped naming a clock time it
+   could not honour. See docs/audit-2026-08-13.md (F7).
 =========================================================================== */
 
 const MESSAGES = { en, fr } as const;

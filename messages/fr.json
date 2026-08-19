@@ -2,7 +2,7 @@
   "Welcome": {
     "kicker": "Stap",
     "title": "Leer Nederlands",
-    "subtitle": "Fondations techniques en place — design system « soft brutalism » actif.",
+    "subtitle": "Une phrase en néerlandais par jour, à dire à quelqu'un pour de vrai. Ni séries ni scores — un jour manqué est simplement manqué.",
     "enter": "Entrer dans l'app",
     "haveAccount": "J'ai déjà un compte"
   },
@@ -81,12 +81,17 @@
     },
     "reminderTitle": "Rappel quotidien",
     "reminderOff": "Désactivé",
+    "slots": {
+      "morning": { "label": "Matin", "phrase": "le matin" },
+      "midday": { "label": "Midi", "phrase": "vers midi" },
+      "evening": { "label": "Soir", "phrase": "le soir" }
+    },
     "recapName": "Prénom",
     "recapLevel": "Niveau",
     "recapContexts": "Contextes",
     "recapRhythm": "Rythme",
     "teaserTitle": "Votre premier pas",
-    "teaserBody": "Saluer un collègue en néerlandais.",
+    "teaserBody": "Une phrase vous attend, choisie pour là où vous l'utiliserez vraiment.",
     "emailLabel": "Adresse e-mail",
     "emailPlaceholder": "vous@exemple.com",
     "emailHelper": "On vous envoie un lien magique pour terminer — aucun mot de passe.",
@@ -120,7 +125,7 @@
     "greetingReady": "Prêt, {name} ?",
     "prepStatus": "Prépa vue",
     "resumePrep": "Reprendre la prépa",
-    "doneBanner": "Pas franchi aujourd'hui",
+    "doneBanner": "Un pas franchi aujourd'hui",
     "doneStatus": "Fait",
     "addToJournal": "Ajouter à mon journal",
     "playRecap": "Revoir la journée",
@@ -159,7 +164,7 @@
     "wordsRemove": "Retirer",
     "save": "Enregistrer dans mon journal",
     "saveError": "Échec de l'enregistrement — réessayez.",
-    "savedChip": "Pas franchi",
+    "savedChip": "Un pas enregistré",
     "savedAtEase": "Bien joué — c'était fluide.",
     "savedHesitant": "Tu l'as fait, hésitations comprises.",
     "savedMissed": "Tu t'es lancé. C'est ça, le pas.",
@@ -301,7 +306,6 @@
       },
       "season": {
         "title": "Ma saison",
-        "recap": "Nouveau récap",
         "summary": "{steps, plural, one {# pas} other {# pas}} · {contexts, plural, one {# contexte} other {# contextes}}"
       },
       "v2": {
@@ -335,7 +339,7 @@
       "title": "Préférences",
       "notifications": "Notifications",
       "notificationsDesc": "Un petit rappel quotidien pour faire votre pas.",
-      "notificationsDescTime": "Un petit rappel quotidien, vers {time}.",
+      "notificationsDescTime": "Un petit rappel quotidien {when}.",
       "sound": "Son & audio",
       "soundDesc": "Jouer la prononciation et les sons des jeux.",
       "theme": "Apparence",
@@ -348,7 +352,6 @@
     "account": {
       "title": "Compte",
       "email": "E-mail",
-      "password": "Changer le mot de passe",
       "export": "Exporter mes données",
       "exportDesc": "Téléchargez votre journal et votre progression en JSON.",
       "exporting": "Préparation du fichier…",

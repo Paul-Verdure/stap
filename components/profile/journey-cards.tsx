@@ -7,7 +7,6 @@ import { Cta } from "@/components/ui/button";
 import { ChevronIcon } from "@/components/ui/icons";
 import { CenteredModal, ModalClose } from "@/components/ui/modal";
 import { type RhythmDay, RhythmUnit, countSteps } from "@/components/ui/rhythm";
-import { Tag } from "@/components/ui/surface";
 
 /* ===========================================================================
    JourneyCards (G8) — the two "My journey" cells: a weekly-rhythm preview and
@@ -91,11 +90,13 @@ export function JourneyCards({
           trigger={
             <button type="button" className={CELL}>
               <span className="flex flex-col gap-2">
-                <span className="flex items-center gap-2">
-                  <span className="font-display text-body font-semibold text-foreground">
-                    {t("season.title")}
-                  </span>
-                  <Tag tone="amber">{t("season.recap")}</Tag>
+                {/* No "New recap" badge here. An amber tag is the app's
+                    notification affordance — it says fresh content is waiting
+                    — and this cell opens "Coming in v2 — this screen isn't
+                    built yet". The modal is honest; a badge advertising it was
+                    not. Bring the tag back with the seasonal review itself. */}
+                <span className="font-display text-body font-semibold text-foreground">
+                  {t("season.title")}
                 </span>
                 <span className="text-helper text-muted">
                   {t("season.summary", {

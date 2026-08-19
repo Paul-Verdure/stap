@@ -76,8 +76,21 @@ function splitLastWord(nl: string): {
 }
 
 /**
- * Build up to three fill rounds from `phrases` (first N become rounds; all of
- * them seed the distractor pool of blanked words). Deterministic per seed.
+ * Build up to three fill rounds from `phrases`. Phrases with a sentence around
+ * the blank are used first; all of them seed the distractor pool of blanked
+ * words. Deterministic per seed.
+ *
+ * The preference is the whole point of the mechanic: this game blanks the LAST
+ * word, so a single-word phrase leaves an empty frame with nothing to read
+ * around it, and "put the missing word back in the sentence" degrades into
+ * guessing a word from its translation. Whole themes are single-word (the
+ * numbers, the greetings), so this is reachable rather than theoretical.
+ *
+ * Single-word phrases are still used to top the round count back up, instead
+ * of being dropped. Filtering them out strictly would leave a numbers-heavy
+ * day with one round or none at all, and a short game is a worse answer than
+ * an occasional bare frame. `pnpm content:check` reports the multi-word ratio
+ * per level, which is what keeps the good case the common one.
  */
 export function buildFillRounds(
   phrases: MatchPair[],
@@ -86,7 +99,15 @@ export function buildFillRounds(
   const parsed = phrases.map((p) => ({ ...p, ...splitLastWord(p.nl) }));
   const pool = [...new Set(parsed.map((p) => p.answer))];
 
-  return parsed.slice(0, FILL_ROUNDS).map((p, i) => {
+  // Stable partition: order within each group is preserved, so the day's
+  // rounds stay deterministic for a given seed.
+  const hasSentence = (p: (typeof parsed)[number]) => p.prefix.trim().length > 0;
+  const preferred = [
+    ...parsed.filter(hasSentence),
+    ...parsed.filter((p) => !hasSentence(p)),
+  ];
+
+  return preferred.slice(0, FILL_ROUNDS).map((p, i) => {
     const distractors = seededShuffle(
       pool.filter((w) => w !== p.answer),
       `${seed}:distractor${i}`,
@@ -114,8 +135,10 @@ export function buildFillRounds(
 /* ---------------------------------------------------------------------------
    Game C — "A sharp ear" (Listen). Each round plays one phrase; the player
    picks it from three close Dutch variants. The phrase keeps its audio path
-   so the disc can play it (currently null for the whole catalog — the game
-   renders an honest degraded state, see the listen game component).
+   so the disc can play it. The catalog has been fully voiced since 2026-08-07,
+   so this normally plays; `audioPath` stays nullable because a phrase can
+   legitimately exist for a moment before its clip does, and the game keeps its
+   degraded state for that case rather than assuming sound.
 --------------------------------------------------------------------------- */
 
 export type ListenSource = {

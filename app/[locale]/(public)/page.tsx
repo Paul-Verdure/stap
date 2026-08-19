@@ -4,9 +4,9 @@ import { Link } from "@/i18n/navigation";
 import { Cta, SecondaryLink } from "@/components/ui/button";
 import { Eyebrow, Helper, Nl, Question } from "@/components/ui/typography";
 
-// Public entry (welcome). Scaffolding placeholder — the real onboarding /
-// magic-link entry is built in G3 (Phase C auth). For now it exercises the
-// design system and gives the shell a way into the authenticated app.
+// Public entry (welcome) — the first screen every visitor sees, and where an
+// unauthenticated request to any app route lands. Two ways in: /onboarding for
+// a new account, /login for an existing one (magic link, see lib/auth/actions).
 export default async function Welcome({
   params,
 }: {
