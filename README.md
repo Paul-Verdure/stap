@@ -106,7 +106,7 @@ app/
     (public)/          onboarding/, login/, legal/
     ~offline/          PWA offline fallback page
   api/cron/reminders/  Daily Web Push sender (Vercel Cron)
-  auth/confirm/        Magic-link target: verifies the OTP, sets the session
+  auth/confirm/        Sign-in link target: verifies the OTP, sets the session
   manifest.ts          Web app manifest
   sw.ts                Service worker (Serwist)
   serwist/[path]/      Route handler that bundles & serves the SW
@@ -215,6 +215,7 @@ Architecture decisions with lasting consequences are recorded in
 | [0002](docs/decisions/0002-daily-challenge-level-band.md) | The daily challenge is drawn from a sliding two-level band, not from everything at or below the user's level. |
 | [0003](docs/decisions/0003-account-deletion.md) | Account deletion is an irreversible hard delete through the Supabase admin API, not a tombstone. |
 | [0004](docs/decisions/0004-catalog-audio-source.md) | Catalog audio is synthesized with Google Cloud TTS using one `nl-NL` voice throughout, not recorded and not varied by register. |
+| [0005](docs/decisions/0005-sign-in-code.md) | Sign-in is a numeric code typed into the app, with the emailed link kept as a shortcut — iOS never opens a link in an installed web app. |
 
 ## Connecting Supabase
 

@@ -3,6 +3,7 @@
 import {
   type InputHTMLAttributes,
   type ReactNode,
+  type Ref,
   type TextareaHTMLAttributes,
   useId,
   useState,
@@ -33,6 +34,8 @@ export function TextInput({
   hideLabel?: boolean;
   helper?: ReactNode;
   className?: string;
+  /** Forwarded to the <input> — React 19 passes a ref as a plain prop. */
+  ref?: Ref<HTMLInputElement>;
 } & InputHTMLAttributes<HTMLInputElement>) {
   const autoId = useId();
   const id = idProp ?? autoId;
