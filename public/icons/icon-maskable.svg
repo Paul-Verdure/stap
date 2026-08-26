@@ -1,5 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Stap">
-  <!-- Maskable: full-bleed background, glyph kept inside the ~80% safe zone. -->
-  <rect width="512" height="512" fill="#F5F0E8"/>
-  <text x="256" y="276" font-family="Syne, system-ui, sans-serif" font-size="248" font-weight="800" fill="#1A1A1A" text-anchor="middle" dominant-baseline="middle">S</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Stap">
+  <!-- Full-bleed twin of icon.svg (see it for the mark's reasoning). Used
+       wherever the platform supplies the shape: Android's maskable purpose,
+       and iOS, which masks every home-screen icon to its own squircle and
+       renders transparent corners as artefacts. So no corner radius here, and
+       the mark stays inside the 80% safe circle. -->
+  <rect width="512" height="512" fill="#1A1A1A"/>
+  <path d="M95 359 V271 H183 V183 H271 V95 H359 V359 Z" fill="#E8A020"/>
 </svg>

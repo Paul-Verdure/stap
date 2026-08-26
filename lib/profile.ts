@@ -126,6 +126,8 @@ export type PreferenceValues = {
   /** null = never persisted (the UI falls back to the opt-out default). */
   notificationsEnabled: boolean | null;
   soundEnabled: boolean | null;
+  /** IANA zone the reminder slot is read in (never null — column default). */
+  timezone: string;
 };
 
 /** The authenticated user's stored preference toggles, or null if no user. */
@@ -135,13 +137,18 @@ export async function getPreferences(): Promise<PreferenceValues | null> {
 
   const row = await db.user.findUnique({
     where: { id: user.id },
-    select: { notificationsEnabled: true, soundEnabled: true },
+    select: {
+      notificationsEnabled: true,
+      soundEnabled: true,
+      timezone: true,
+    },
   });
   if (!row) return null;
 
   return {
     notificationsEnabled: row.notificationsEnabled,
     soundEnabled: row.soundEnabled,
+    timezone: row.timezone,
   };
 }
 

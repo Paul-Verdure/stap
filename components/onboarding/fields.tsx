@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 
 import { Chip, TimeSlot } from "@/components/ui/chip";
 import { RadioGroup, RadioRow } from "@/components/ui/radio-group";
@@ -28,29 +28,37 @@ import {
 
 export type LifeContextOption = { slug: string; name: string };
 
-/* Slot naming. A stored slot is a UTC hour (see REMINDER_SLOTS), so it must
-   never be rendered as a clock time: doing so promised "8:00 AM" and delivered
-   10:00 Dutch time in summer. Both hooks map the slot to a time-of-day word,
-   which stays true across the DST hour the fixed cron cannot track.
+/* Slot naming. A stored slot is now a LOCAL wall-clock time (see
+   REMINDER_SLOTS), so it can finally be shown as one: the chip is the time
+   itself, formatted for the locale ("08:00" / "8:00 AM").
 
-   Two forms, because one string cannot be both a chip and part of a sentence
-   in English and French at once: `label` is the standalone chip ("Morning"),
-   `phrase` is the in-sentence form ("in the morning" / "le matin"). */
+   The in-sentence form keeps the time-of-day word and adds the hour — "in the
+   morning, around 8:00 AM". "Around" is not filler: Vercel's Hobby plan
+   schedules a cron job to the hour, not the minute, so the send lands inside
+   its hour rather than on it. Naming the hour is honest; promising the minute
+   would not be. */
+
+/** A Date carrying only the slot's wall-clock time, for the "slot" format. */
+function slotAsTime(slot: string): Date {
+  const [hours, minutes] = slot.split(":").map(Number);
+  return new Date(Date.UTC(2000, 0, 1, hours ?? 0, minutes ?? 0));
+}
 
 /** Standalone name for a slot — chips, recap rows. */
 export function useSlotLabel() {
-  const t = useTranslations("Onboarding.slots");
-  const tt = t as unknown as (key: string) => string;
-  return (slot: string) =>
-    tt(`${REMINDER_SLOT_KEYS[slot as ReminderSlot] ?? "morning"}.label`);
+  const format = useFormatter();
+  return (slot: string) => format.dateTime(slotAsTime(slot), "slot");
 }
 
-/** In-sentence form for a slot — "A daily nudge in the morning." */
+/** In-sentence form — "A daily nudge in the morning, around 8:00 AM." */
 export function useSlotPhrase() {
   const t = useTranslations("Onboarding.slots");
-  const tt = t as unknown as (key: string) => string;
+  const tt = t as unknown as (key: string, values: { time: string }) => string;
+  const format = useFormatter();
   return (slot: string) =>
-    tt(`${REMINDER_SLOT_KEYS[slot as ReminderSlot] ?? "morning"}.phrase`);
+    tt(`${REMINDER_SLOT_KEYS[slot as ReminderSlot] ?? "morning"}.phrase`, {
+      time: format.dateTime(slotAsTime(slot), "slot"),
+    });
 }
 
 /* ---------------------------------------------------------------------------

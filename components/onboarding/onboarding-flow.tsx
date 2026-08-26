@@ -23,6 +23,10 @@ import {
   requestOnboardingLink,
 } from "@/lib/onboarding-actions";
 import {
+  DEFAULT_TIMEZONE,
+  browserTimezone,
+} from "@/lib/timezone";
+import {
   initialOnboardingState,
   isOnboardingComplete,
   ONBOARDING_LAST_STEP,
@@ -110,7 +114,10 @@ export function OnboardingFlow({
 
   // Persist the profile for the authenticated user, then enter the app.
   const startFinalize = () => {
-    const payload = toOnboardingPayload(state);
+    const payload = toOnboardingPayload(
+      state,
+      browserTimezone() ?? DEFAULT_TIMEZONE,
+    );
     if (!payload) {
       setPhase("error");
       return;

@@ -109,6 +109,15 @@ model User {
   notificationsEnabled Boolean? @map("notifications_enabled")
   soundEnabled         Boolean? @map("sound_enabled")
 
+  // Reminder scheduling. `timezone` is an IANA name captured from the
+  // browser, so `reminderTime` above is a LOCAL wall-clock slot the UI can
+  // name honestly; the sender converts per user (DST included) rather than
+  // storing a UTC hour. `lastRemindedOn` is the user's LOCAL date of the last
+  // reminder sent — the idempotence key that lets a missed cron firing be
+  // caught up by the next one without ever double-sending in a local day.
+  timezone       String    @default("Europe/Amsterdam")
+  lastRemindedOn DateTime? @map("last_reminded_on") @db.Date
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 

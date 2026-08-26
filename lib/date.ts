@@ -5,6 +5,12 @@
    and matches Prisma's @db.Date columns (which carry no time/zone). A real
    product would use the user's timezone; UTC is a deliberate, documented
    simplification for now.
+
+   Reminders are the one thing that no longer works this way: a reminder slot is
+   a local time in the user's own zone (lib/timezone.ts), converted by Postgres.
+   The day *key* stayed UTC on purpose — moving it would move the challenge, the
+   streak and the journal with it — so the reminder's "already done today" check
+   deliberately asks the UTC question, the same one /today answers.
 =========================================================================== */
 
 const DAY_MS = 86_400_000;

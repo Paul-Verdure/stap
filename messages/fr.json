@@ -90,9 +90,9 @@
     "reminderTitle": "Rappel quotidien",
     "reminderOff": "Désactivé",
     "slots": {
-      "morning": { "label": "Matin", "phrase": "le matin" },
-      "midday": { "label": "Midi", "phrase": "vers midi" },
-      "evening": { "label": "Soir", "phrase": "le soir" }
+      "morning": { "phrase": "le matin, vers {time}" },
+      "midday": { "phrase": "vers {time}" },
+      "evening": { "phrase": "le soir, vers {time}" }
     },
     "recapName": "Prénom",
     "recapLevel": "Niveau",

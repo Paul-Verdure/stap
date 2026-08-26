@@ -30,6 +30,24 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Stap — Leer Nederlands",
   description: "Apprendre le néerlandais, pas à pas.",
+  // The manifest carries the same icons, but iOS does not take a home-screen
+  // icon from it reliably: `apple` is the link tag Safari actually reads, and
+  // without it iOS falls back to a screenshot of the page. See ADR 0006.
+  icons: {
+    icon: [
+      { url: "/icons/icon.svg", type: "image/svg+xml" },
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: { url: "/icons/apple-touch-icon.png", sizes: "180x180" },
+  },
+  // Installed-app hints for iOS. `statusBarStyle` stays "default": the
+  // translucent variant lets content run under the status bar, which this
+  // layout does not account for.
+  appleWebApp: {
+    capable: true,
+    title: "Stap",
+    statusBarStyle: "default",
+  },
 };
 
 // Statically render every known locale at build time.

@@ -91,6 +91,7 @@ Supabase dashboard ("Connect" → Prisma / ORMs).
 | `pnpm typecheck` | `tsc --noEmit` |
 | `pnpm test` | Unit tests (Vitest) — `pnpm test:watch` to iterate |
 | `pnpm content:check` | Validate the seed catalog (add `--strict` to enforce coverage) |
+| `pnpm icons:generate` | Rasterize the app icons from their two SVG masters |
 | `pnpm db:seed` | Sync the catalog from `prisma/seed-data/` |
 | `pnpm db:generate` | Generate the Prisma client |
 | `pnpm db:migrate` | Run a dev migration |
@@ -216,6 +217,7 @@ Architecture decisions with lasting consequences are recorded in
 | [0003](docs/decisions/0003-account-deletion.md) | Account deletion is an irreversible hard delete through the Supabase admin API, not a tombstone. |
 | [0004](docs/decisions/0004-catalog-audio-source.md) | Catalog audio is synthesized with Google Cloud TTS using one `nl-NL` voice throughout, not recorded and not varied by register. |
 | [0005](docs/decisions/0005-sign-in-code.md) | Sign-in is a numeric code typed into the app, with the emailed link kept as a shortcut — iOS never opens a link in an installed web app. |
+| [0006](docs/decisions/0006-app-icon.md) | The app icon is a drawn staircase, rasterized to PNG from two SVG masters by a committed script — an icon cannot load a webfont, and iOS needs a raster. |
 
 ## Connecting Supabase
 
