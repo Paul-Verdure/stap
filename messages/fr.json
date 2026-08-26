@@ -89,6 +89,7 @@
     },
     "reminderTitle": "Rappel quotidien",
     "reminderOff": "Désactivé",
+    "reminderHelper": "Les rappels arrivent en notification. Vous les activerez depuis votre profil — et sur iPhone, Stap doit d'abord être installé sur l'écran d'accueil.",
     "slots": {
       "morning": { "phrase": "le matin, vers {time}" },
       "midday": { "phrase": "vers {time}" },

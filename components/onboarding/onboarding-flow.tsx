@@ -480,6 +480,16 @@ export function OnboardingFlow({
                 patch({ frequency, reminderTime })
               }
             />
+            {/* What a slot actually costs to receive, said here rather than
+                discovered later by a reminder that never arrives. Web Push
+                needs permission, which this flow never asks for, and on iOS
+                it needs the home-screen app — Safari has no push for a tab.
+                Stated for everyone instead of sniffed: the same reasoning as
+                the sign-in code (ADR 0005). Someone who picked "own pace" has
+                declined reminders, so it is not addressed to them. */}
+            {state.frequency !== "OWN_PACE" && (
+              <Helper>{t("reminderHelper")}</Helper>
+            )}
             <div className="mt-auto">
               <Cta fullWidth disabled={!canContinue} onClick={goNext}>
                 {t("next")}

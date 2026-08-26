@@ -89,6 +89,7 @@
     },
     "reminderTitle": "Daily reminder",
     "reminderOff": "Off",
+    "reminderHelper": "Reminders arrive as a notification. You'll switch them on from your profile — and on iPhone, Stap has to be on the home screen first.",
     "slots": {
       "morning": { "phrase": "in the morning, around {time}" },
       "midday": { "phrase": "around {time}" },
