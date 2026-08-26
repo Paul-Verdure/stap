@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Stap">
+  <!-- Stap's mark: a staircase of three equal steps, ascending. "Stap" is
+       Dutch for "step", so the word is drawn rather than initialled — and pure
+       geometry needs no font, which an icon cannot load anyway.
+
+       The steps are one connected silhouette on purpose. Drawn as three
+       separate columns the same idea reads as a bar chart, which is the icon
+       of an analytics app, not of a language one.
+
+       Ink field, amber mark: the pairing the design system reserves for the
+       hero, and the only one that holds on a light and a dark home screen
+       alike.
+
+       Geometry. The 264x264 mark is offset up-left rather than centred on its
+       bounding box: a staircase carries its mass low and right, so centring
+       the box leaves the icon looking bottom-heavy. This position puts the
+       shape's centroid on 256,256, and keeps every corner ~191 units from
+       centre — inside the 205 that Android's 80% maskable safe circle allows.
+
+       Rounded-corner variant, for surfaces that apply no mask of their own
+       (favicon, Chrome's install UI). Full-bleed twin: icon-maskable.svg. -->
+  <rect width="512" height="512" rx="96" fill="#1A1A1A"/>
+  <path d="M95 359 V271 H183 V183 H271 V95 H359 V359 Z" fill="#E8A020"/>
+</svg>
