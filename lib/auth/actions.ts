@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 
 import { getLocale } from "next-intl/server";
 
+import { APP_HOME } from "@/lib/auth/routes";
 import { createClient } from "@/lib/supabase/server";
 
 // Passwordless sign-in. One `signInWithOtp` call emails BOTH a link (a
@@ -57,8 +58,9 @@ export async function requestSignInCode(
     options: {
       shouldCreateUser: true,
       // The email template appends `&token_hash=...&type=email` to this.
-      // /auth/confirm reads `next` to land the user on their locale.
-      emailRedirectTo: `${origin}/auth/confirm?next=/${locale}`,
+      // /auth/confirm reads `next`, so the link lands on the same app home
+      // the code path does.
+      emailRedirectTo: `${origin}/auth/confirm?next=/${locale}${APP_HOME}`,
     },
   });
 
@@ -90,9 +92,11 @@ export async function verifySignInCode(
   if (error) return { status: "error" };
 
   // verifyOtp wrote the session cookies onto this action's response; the
-  // redirect that follows is the first request to carry them.
+  // redirect that follows is the first request to carry them. Land on the app
+  // home, not the welcome screen — signing in IS entering the app, so there is
+  // nothing left to click.
   const locale = await getLocale();
-  redirect(`/${locale}`);
+  redirect(`/${locale}${APP_HOME}`);
 }
 
 export async function signOut() {
