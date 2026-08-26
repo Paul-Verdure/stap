@@ -6,11 +6,11 @@ import { DeletedNotice } from "./deleted-notice";
 import { LoginForm } from "./login-form";
 import { Link } from "@/i18n/navigation";
 import { SecondaryLink } from "@/components/ui/button";
-import { Eyebrow, Helper, Question } from "@/components/ui/typography";
+import { Eyebrow, Question } from "@/components/ui/typography";
 
-// Public reconnect entry — the "I already have an account" path. Sends a
-// magic link to a known address; the link returns to /auth/callback, which
-// establishes the session. Real login flow for returning users (Phase C).
+// Public reconnect entry — the "I already have an account" path. Emails a
+// sign-in code (plus the magic link handled by /auth/confirm) to a known
+// address; LoginForm owns both steps. Real login flow for returning users.
 export default async function LoginPage({
   params,
 }: {
@@ -25,12 +25,13 @@ export default async function LoginPage({
       <div className="border-structural flex w-full max-w-md flex-col gap-5 rounded-lg bg-surface p-6">
         <Eyebrow>Stap</Eyebrow>
         <Question>{t("title")}</Question>
-        <Helper>{t("subtitle")}</Helper>
         {/* Suspense keeps the surrounding shell prerendered — the notice
             reads the query string, so only it renders on the client. */}
         <Suspense fallback={null}>
           <DeletedNotice />
         </Suspense>
+        {/* The subtitle lives inside the form: it instructs step 1 only, and
+            would read as a stale instruction once the code step is up. */}
         <LoginForm />
         <SecondaryLink asChild className="self-center">
           <Link href="/">{t("back")}</Link>
