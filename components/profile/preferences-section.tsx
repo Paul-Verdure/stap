@@ -9,13 +9,14 @@ import { RadioGroup, RadioRow } from "@/components/ui/radio-group";
 import { Toggle } from "@/components/ui/toggle";
 import { SectionRule } from "@/components/ui/typography";
 import { clearLegacyPreferences, readLegacyPreference } from "@/lib/preferences";
-import { updatePreference } from "@/lib/preferences-actions";
+import { syncTimezone, updatePreference } from "@/lib/preferences-actions";
 import {
   removePushSubscription,
   savePushSubscription,
 } from "@/lib/push-actions";
 import { subscribeToPush, unsubscribeFromPush } from "@/lib/push";
 import type { ThemePreference } from "@/lib/theme";
+import { browserTimezone } from "@/lib/timezone";
 
 /* ===========================================================================
    PreferencesSection (G8 → DB-backed in G9) — the two toggles (Notifications,
@@ -31,10 +32,12 @@ export function PreferencesSection({
   reminderTime,
   notificationsEnabled,
   soundEnabled,
+  timezone,
 }: {
   reminderTime: string | null;
   notificationsEnabled: boolean | null;
   soundEnabled: boolean | null;
+  timezone: string;
 }) {
   const t = useTranslations("Profile.preferences");
   const slotPhrase = useSlotPhrase();
@@ -80,6 +83,15 @@ export function PreferencesSection({
     clearLegacyPreferences();
   }, [notificationsEnabled, soundEnabled]);
 
+  // Reminder slots are local times, so a stale timezone sends them at the
+  // wrong hour. This is the screen where the reminder is configured, so it is
+  // where the zone is re-checked: compare first, write only on a real change,
+  // which means no request at all in the ordinary case.
+  useEffect(() => {
+    const current = browserTimezone();
+    if (current && current !== timezone) void syncTimezone(current);
+  }, [timezone]);
+
   const { preference, setPreference: setThemePreference } = useTheme();
 
   // Notifications gate Web Push: turning it on requests permission and creates
@@ -94,7 +106,7 @@ export function PreferencesSection({
         void updatePreference("notifications", false);
         return;
       }
-      await savePushSubscription(sub);
+      await savePushSubscription(sub, browserTimezone() ?? undefined);
       void updatePreference("notifications", true);
     } else {
       const endpoint = await unsubscribeFromPush();

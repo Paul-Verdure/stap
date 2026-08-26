@@ -10,6 +10,7 @@ import {
   type Frequency,
   type OnboardingPayload,
 } from "@/lib/onboarding";
+import { DEFAULT_TIMEZONE, isValidTimezone } from "@/lib/timezone";
 
 // Outcome of requesting the onboarding magic link. Unlike the login flow this
 // one creates the account (shouldCreateUser), since onboarding IS sign-up.
@@ -100,6 +101,11 @@ export async function completeOnboarding(
         level: payload.level,
         frequency: payload.frequency,
         reminderTime: payload.reminderTime,
+        // A zone the sender cannot resolve would break the reminder query for
+        // everyone, so an unrecognized one falls back rather than being stored.
+        timezone: isValidTimezone(payload.timezone)
+          ? payload.timezone
+          : DEFAULT_TIMEZONE,
         onboardedAt: new Date(),
         lifeContexts: { create: ctx.map((c) => ({ lifeContextId: c.id })) },
       },

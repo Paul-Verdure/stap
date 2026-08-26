@@ -66,9 +66,13 @@ Cleanups and decisions left open at G9 close. None block a deploy unless noted.
   English-only. It is a dev primitives showcase, so this is optional.
 
 ### Push robustness (post-v1 hardening)
-- **Timezones**: reminder slots are matched in **UTC** (a documented
-  simplification in `lib/date.ts`). Real per-user timezones would make the
-  reminder fire at the user's local time.
+- **Timezones**: ~~reminder slots are matched in UTC~~ — **resolved
+  2026-08-26.** A slot is a local time in the user's own `timezone` column;
+  Postgres converts per user, so DST is handled and the UI can name the hour.
+  What is still UTC is the *day key* (`lib/date.ts`): the challenge, the streak
+  and the journal all count days in UTC, and the reminder's "already done
+  today" check follows them deliberately. Far from Greenwich those two notions
+  of "today" diverge, which is a separate and much larger change.
 - **Cross-device subscriptions**: `notifications_enabled` is a global column but
   a `PushSubscription` is per-device. A device can show the toggle "on" (from
   the column) without a local subscription. Optional: on mount, if the toggle is
@@ -133,15 +137,20 @@ live only in your local `.env` (gitignored) — never commit secrets.
 5. **VAPID / push.** Confirm the three VAPID vars are set and `VAPID_SUBJECT` is
    a real contact. The client subscribes with the public key; the server signs
    sends with the private key.
-6. **Cron.** `vercel.json` declares three daily reminder crons
-   (`/api/cron/reminders` at `0 8/12/18 * * *` UTC — one per
-   `REMINDER_SLOTS` value; the Hobby plan caps each cron job at one run/day,
-   so a single hourly job isn't allowed, but multiple daily jobs are). Vercel
-   schedules them automatically and calls them with
+6. **Cron.** `vercel.json` declares **24 daily reminder crons** — one per hour,
+   `0 0 * * *` through `0 23 * * *`. The Hobby plan caps each *job* at one run
+   per day but allows 100 jobs per project, so 24 daily jobs buy hourly
+   coverage without Vercel Pro; a single `0 * * * *` would be rejected at
+   deploy. Vercel schedules them automatically and calls them with
    `Authorization: Bearer $CRON_SECRET`, so `CRON_SECRET` must be set. The
-   endpoint no-ops if the VAPID keys are missing. Each run only reminds users
-   whose chosen slot matches that hour, so exact per-slot delivery is honored
-   without needing Vercel Pro.
+   endpoint no-ops if the VAPID keys are missing.
+
+   The hours carry no meaning any more: the sender decides who is due from each
+   user's own local clock. Hobby firings land anywhere inside their hour and
+   can be skipped, which is why a reminder is still sent up to
+   `CATCH_UP_MINUTES` after its slot and stamped with the local date it went
+   out on (`lib/reminders.ts`). Adding or removing an hour only changes how
+   often the sender gets to look.
 7. **Deploy** (push to `main` or trigger from the Vercel dashboard).
 
 ### 3.4 Post-deploy verification

@@ -18,29 +18,23 @@ export const LEVELS: DutchLevel[] = ["A0", "A1", "A2", "B1", "B2"];
 export const FREQUENCIES: Frequency[] = ["DAILY", "THREE_PER_WEEK", "OWN_PACE"];
 /* Reminder slots.
 
-   The stored value is the **UTC hour the cron fires at**, not a time anyone is
-   shown. That is forced by the sender: `sendDueReminders` selects users whose
-   `reminderTime` starts with the current UTC hour (lib/push-sender.ts), so the
-   slot value and the cron schedule in vercel.json are the same number by
-   construction — change one and you must change the other, or the query
-   matches nobody and reminders stop silently.
+   These are LOCAL wall-clock times, read in the user's own `timezone` (see
+   lib/timezone.ts). The sender converts per user with `AT TIME ZONE`, so the
+   value is a time the UI can name honestly in both halves of the DST year —
+   which it could not while a slot was secretly the UTC hour a cron fired at.
 
-   These three land at 08:00 / 12:00 / 18:00 in the Netherlands in summer, and
-   an hour earlier in winter. That hour of drift is why the UI names slots in
-   words (morning / midday / evening) rather than claiming a clock time: with
-   crons pinned to UTC and one plan-capped run per slot per day, a precise
-   local time is not something the app can honestly promise. Serving arbitrary
-   timezones at a chosen local hour needs an hourly cron — a hosting decision,
-   not a code one. See docs/audit-2026-08-13.md (F7). */
-export const REMINDER_SLOTS = ["06:00", "10:00", "16:00"] as const;
+   Nothing outside this file depends on the numbers any more: vercel.json fires
+   the sender every hour and lib/reminders.ts decides who is due. A fourth slot
+   would be a one-line change here plus its copy. */
+export const REMINDER_SLOTS = ["08:00", "12:00", "18:00"] as const;
 
 export type ReminderSlot = (typeof REMINDER_SLOTS)[number];
 
 /** Time-of-day key each slot is presented as. Drives the message catalog. */
 export const REMINDER_SLOT_KEYS: Record<ReminderSlot, string> = {
-  "06:00": "morning",
-  "10:00": "midday",
-  "16:00": "evening",
+  "08:00": "morning",
+  "12:00": "midday",
+  "18:00": "evening",
 };
 
 export const MAX_CONTEXTS = 4;
@@ -67,6 +61,8 @@ export type OnboardingPayload = {
   contexts: string[];
   frequency: Frequency;
   reminderTime: string | null;
+  /** IANA zone the reminder slot is meant in — read from the browser. */
+  timezone: string;
 };
 
 export function isOnboardingComplete(s: OnboardingState): boolean {
@@ -79,8 +75,15 @@ export function isOnboardingComplete(s: OnboardingState): boolean {
   );
 }
 
-/** Build the server payload, or null when answers are incomplete. */
-export function toOnboardingPayload(s: OnboardingState): OnboardingPayload | null {
+/**
+ * Build the server payload, or null when answers are incomplete. `timezone` is
+ * a parameter rather than read here: this module is imported on both sides, and
+ * Intl on the server would happily answer with the server's own zone.
+ */
+export function toOnboardingPayload(
+  s: OnboardingState,
+  timezone: string,
+): OnboardingPayload | null {
   if (!isOnboardingComplete(s) || !s.level || !s.frequency) return null;
   return {
     firstName: s.firstName.trim(),
@@ -89,6 +92,7 @@ export function toOnboardingPayload(s: OnboardingState): OnboardingPayload | nul
     contexts: s.contexts,
     frequency: s.frequency,
     reminderTime: s.reminderTime,
+    timezone,
   };
 }
 

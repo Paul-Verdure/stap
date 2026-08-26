@@ -11,6 +11,7 @@ import { SetupSection } from "@/components/profile/setup-section";
 import { IconButton } from "@/components/ui/button";
 import { SettingsIcon } from "@/components/ui/icons";
 import { SectionRule } from "@/components/ui/typography";
+import { DEFAULT_TIMEZONE } from "@/lib/timezone";
 import {
   daysSince,
   getJourneyPreview,
@@ -92,6 +93,7 @@ export default async function ProfilePage({
           reminderTime={setup?.reminderTime ?? null}
           notificationsEnabled={preferences?.notificationsEnabled ?? null}
           soundEnabled={preferences?.soundEnabled ?? null}
+          timezone={preferences?.timezone ?? DEFAULT_TIMEZONE}
         />
 
         <AccountSection email={identity.email} />

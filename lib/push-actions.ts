@@ -3,6 +3,7 @@
 import { db } from "@/lib/db";
 import type { PushSubscriptionPayload } from "@/lib/push";
 import { createClient } from "@/lib/supabase/server";
+import { isValidTimezone } from "@/lib/timezone";
 
 /* ===========================================================================
    Push subscription writes (G9) — persist / remove a device's subscription.
@@ -15,8 +16,14 @@ import { createClient } from "@/lib/supabase/server";
 
 export type PushResult = { status: "done" | "error" };
 
+/**
+ * Persist a device's subscription. `timezone` comes from the same click: the
+ * device that just agreed to be notified is also the best evidence of where
+ * the user is, and the reminder slot is meaningless without it.
+ */
 export async function savePushSubscription(
   sub: PushSubscriptionPayload,
+  timezone?: string,
 ): Promise<PushResult> {
   const supabase = await createClient();
   const {
@@ -35,6 +42,10 @@ export async function savePushSubscription(
     },
     update: { userId: user.id, p256dh: sub.p256dh, auth: sub.auth },
   });
+
+  if (timezone && isValidTimezone(timezone)) {
+    await db.user.update({ where: { id: user.id }, data: { timezone } });
+  }
   return { status: "done" };
 }
 

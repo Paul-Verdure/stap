@@ -90,9 +90,9 @@
     "reminderTitle": "Daily reminder",
     "reminderOff": "Off",
     "slots": {
-      "morning": { "label": "Morning", "phrase": "in the morning" },
-      "midday": { "label": "Midday", "phrase": "around midday" },
-      "evening": { "label": "Evening", "phrase": "in the evening" }
+      "morning": { "phrase": "in the morning, around {time}" },
+      "midday": { "phrase": "around {time}" },
+      "evening": { "phrase": "in the evening, around {time}" }
     },
     "recapName": "Name",
     "recapLevel": "Level",

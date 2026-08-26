@@ -35,10 +35,19 @@ export const formats = {
       year: "numeric",
       timeZone: "UTC",
     },
-    // "8:00 AM" / "08:00" — reminder slots, timestamps.
+    // "8:00 AM" / "08:00" — a real timestamp, rendered in the viewer's zone.
     time: {
       hour: "numeric",
       minute: "numeric",
+    },
+    // "8:00 AM" / "08:00" — a reminder slot, which is a wall-clock time rather
+    // than an instant: the same digits everywhere. Pinned to UTC for the same
+    // reason `short` is, so the caller builds its Date with Date.UTC and the
+    // value cannot drift with the zone that happens to render it.
+    slot: {
+      hour: "numeric",
+      minute: "numeric",
+      timeZone: "UTC",
     },
   },
   number: {

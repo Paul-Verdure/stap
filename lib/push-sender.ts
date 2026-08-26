@@ -3,9 +3,9 @@ import "server-only";
 import { createTranslator } from "next-intl";
 import webpush from "web-push";
 
-import { dateOnlyUTC } from "@/lib/date";
 import { db } from "@/lib/db";
-import { ChallengeFrequency, ChallengeState } from "@/lib/generated/prisma/enums";
+import type { Frequency } from "@/lib/onboarding";
+import { isReminderDue } from "@/lib/reminders";
 import en from "@/messages/en.json";
 import fr from "@/messages/fr.json";
 
@@ -16,20 +16,21 @@ import fr from "@/messages/fr.json";
    absent it no-ops, so a deploy without the keys is safe — push simply stays
    dormant. Reminders are non-judgmental ("waiting", never "missed") and deep
    link to the user's localized /today. Expired subscriptions (404/410) are
-   pruned. Cadence: DAILY every day, THREE_PER_WEEK on Mon/Wed/Fri; OWN_PACE
-   never (its reminderTime is null). Reminder slots are whole hours, so
-   matching the current UTC hour is enough — vercel.json triggers this route
-   once per slot (06:00/10:00/16:00 UTC) rather than hourly (Vercel Hobby caps
-   each cron job at one run/day, but allows multiple jobs).
+   pruned.
 
-   THE COUPLING: `reminderTime` stores the UTC hour this route runs at, so the
-   slot values in lib/onboarding.ts and the cron schedules in vercel.json are
-   the same three numbers. They must be changed together. Moving one alone does
-   not fail loudly — the query below simply matches nobody, at every firing,
-   and reminders stop with no error anywhere. The slots were 08/12/18 until
-   2026-08-14; they moved so the send lands in the Dutch morning, midday and
-   evening instead of two hours late, and the UI stopped naming a clock time it
-   could not honour. See docs/audit-2026-08-13.md (F7).
+   TIMEZONES: `reminderTime` is a LOCAL slot in the user's own `timezone`, so
+   Postgres converts `now()` per row with `AT TIME ZONE` (DST included, without
+   a date library) and lib/reminders.ts decides who is owed a reminder. The
+   route fires every hour — 24 daily cron jobs in vercel.json, which is what
+   the Hobby plan allows: a cap of one run per job per day, not a cap on jobs.
+   Nothing here is coupled to those hours any more; adding or removing one only
+   changes how often the sender gets to look.
+
+   Not losing a day is the reason for `lastRemindedOn`. Hobby cron firings land
+   anywhere inside their hour and can be skipped altogether, so the sender
+   accepts a slot that passed up to CATCH_UP_MINUTES ago and records the local
+   date it sent on. A missed firing is caught by the next one; a user is never
+   reminded twice in one local day.
 =========================================================================== */
 
 const MESSAGES = { en, fr } as const;
@@ -94,49 +95,105 @@ async function sendToSubscriptions(
   return { sent, pruned };
 }
 
+/* One candidate for a reminder, with its own local clock resolved by Postgres.
+   Only users who could still be reminded today are returned: opted in, with a
+   slot and a device, not already reminded in their local day, and not already
+   done with today's challenge. */
+type DueCandidate = {
+  id: string;
+  uiLocale: Locale;
+  frequency: Frequency;
+  reminderTime: string;
+  localDate: string;
+  localTime: string;
+  localDow: number;
+};
+
+async function findCandidates(): Promise<DueCandidate[]> {
+  // Raw SQL because `AT TIME ZONE` has no Prisma equivalent, and doing the
+  // conversion per row in the database is what keeps DST correct for free.
+  // The zone comes from a column, never from interpolated input.
+  //
+  // The "already done" check is deliberately in UTC: `challenges.date` is a
+  // UTC day key (lib/date.ts), so this asks the same question the app itself
+  // answers on /today. It is the app's day model that is UTC, not this query.
+  return db.$queryRaw<DueCandidate[]>`
+    SELECT
+      u.id,
+      u.ui_locale::text                                        AS "uiLocale",
+      u.frequency::text                                        AS "frequency",
+      u.reminder_time                                          AS "reminderTime",
+      to_char(now() AT TIME ZONE u.timezone, 'YYYY-MM-DD')     AS "localDate",
+      to_char(now() AT TIME ZONE u.timezone, 'HH24:MI')        AS "localTime",
+      EXTRACT(ISODOW FROM now() AT TIME ZONE u.timezone)::int  AS "localDow"
+    FROM users u
+    WHERE u.notifications_enabled IS TRUE
+      AND u.reminder_time IS NOT NULL
+      AND u.frequency IS NOT NULL
+      AND EXISTS (
+        SELECT 1 FROM push_subscriptions s WHERE s.user_id = u.id
+      )
+      AND (
+        u.last_reminded_on IS NULL
+        OR u.last_reminded_on <> (now() AT TIME ZONE u.timezone)::date
+      )
+      AND NOT EXISTS (
+        SELECT 1 FROM challenges c
+        WHERE c.user_id = u.id
+          AND c.state = 'DONE'
+          AND c.date = (now() AT TIME ZONE 'UTC')::date
+      )
+  `;
+}
+
 /**
- * Send the daily reminder to every user who is due in the current UTC hour:
- * opted in, with a reminder slot this hour, due by their cadence, not already
- * done today, and with at least one subscription. Returns send/prune counts.
+ * Send the daily reminder to every user whose local slot has come up and who
+ * has not been reminded yet in their own day. Returns send/prune counts plus
+ * how many users were reminded.
  */
-export async function sendDueReminders(
-  now: Date = new Date(),
-): Promise<{ sent: number; pruned: number; users: number }> {
+export async function sendDueReminders(): Promise<{
+  sent: number;
+  pruned: number;
+  users: number;
+}> {
   if (!ensureConfigured()) return { sent: 0, pruned: 0, users: 0 };
 
-  const hh = String(now.getUTCHours()).padStart(2, "0");
-  const day = now.getUTCDay(); // 0 = Sunday … 6 = Saturday
-  const isMwf = day === 1 || day === 3 || day === 5;
-  const today = dateOnlyUTC(now);
-
-  const users = await db.user.findMany({
-    where: {
-      notificationsEnabled: true,
-      reminderTime: { startsWith: `${hh}:` },
-      frequency: isMwf
-        ? { in: [ChallengeFrequency.DAILY, ChallengeFrequency.THREE_PER_WEEK] }
-        : ChallengeFrequency.DAILY,
-      pushSubscriptions: { some: {} },
-      // Don't nag someone who already did today's challenge.
-      challenges: { none: { date: today, state: ChallengeState.DONE } },
-    },
-    select: {
-      uiLocale: true,
-      pushSubscriptions: { select: { endpoint: true, p256dh: true, auth: true } },
-    },
-  });
+  const candidates = await findCandidates();
 
   let sent = 0;
   let pruned = 0;
-  for (const user of users) {
-    const result = await sendToSubscriptions(
-      user.pushSubscriptions,
-      reminderPayload(user.uiLocale),
-    );
+  let users = 0;
+
+  for (const user of candidates) {
+    const due = isReminderDue({
+      localTime: user.localTime,
+      isoWeekday: user.localDow,
+      slot: user.reminderTime,
+      frequency: user.frequency,
+    });
+    if (!due) continue;
+
+    const subs = await db.pushSubscription.findMany({
+      where: { userId: user.id },
+      select: { endpoint: true, p256dh: true, auth: true },
+    });
+    const result = await sendToSubscriptions(subs, reminderPayload(user.uiLocale));
     sent += result.sent;
     pruned += result.pruned;
+
+    // Stamp only on a delivery the push service accepted. A transient failure
+    // is therefore retried on the next hourly run, and the catch-up window is
+    // what stops that retry from continuing all day.
+    if (result.sent > 0) {
+      users++;
+      await db.user.update({
+        where: { id: user.id },
+        data: { lastRemindedOn: new Date(`${user.localDate}T00:00:00.000Z`) },
+      });
+    }
   }
-  return { sent, pruned, users: users.length };
+
+  return { sent, pruned, users };
 }
 
 /**
