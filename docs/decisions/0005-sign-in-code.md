@@ -55,6 +55,14 @@ The code step is shown to **everyone**. No user-agent sniffing, no
 desktop user loses nothing, and one code path is one path to keep accessible
 and to keep tested.
 
+**Signing up ends the same way.** Onboarding collects its six answers before
+any account exists, so its last screen is the same code step, reached with the
+same `signInWithOtp` — only the email template differs (*Confirm signup*
+rather than *Magic Link*, which is why §3 of the runbook insists both carry
+`{{ .Token }}`). It verifies without redirecting: the answers are still in the
+browser at that point, so the flow verifies and then writes the profile,
+landing in the app with nothing further to tap.
+
 Four details are what make it pleasant rather than merely correct:
 
 - The code goes **first in the subject line**, so iOS renders it in the
@@ -82,6 +90,10 @@ Four details are what make it pleasant rather than merely correct:
   `{{ .Token }}`. A template edited without it silently removes the only iOS
   path while leaving desktop sign-in working — the failure would look like an
   iPhone bug. §3 of `docs/auth-setup.md` is the guard against that.
+- The rule is "every place that mints a token offers the code", and there are
+  two of them. Shipping it in one and not the other left the installed iOS app
+  impossible to *sign up* to while being perfectly signable-in — a state worth
+  naming, because the next credential path added would be able to repeat it.
 - The link remains live and still opens in Safari on iOS. Someone who taps it
   there signs into Safari, not the app, and consumes the code. The copy steers
   to the code first; the link is described as the computer route.

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
 
 import {
@@ -20,7 +20,8 @@ import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import {
   completeOnboarding,
-  requestOnboardingLink,
+  requestOnboardingCode,
+  verifyOnboardingCode,
 } from "@/lib/onboarding-actions";
 import {
   DEFAULT_TIMEZONE,
@@ -48,7 +49,10 @@ const TITLE_KEY: Record<number, string> = {
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type LifeContextOption = { slug: string; name: string };
-type Phase = "collect" | "sending" | "sent" | "finalizing" | "error";
+type Phase = "collect" | "sending" | "code" | "finalizing" | "error";
+// One message at a time on the code screen, so the three cases that can
+// follow a keystroke there stay mutually exclusive.
+type CodeNotice = "none" | "invalid" | "resent" | "sendFailed";
 
 export function OnboardingFlow({
   lifeContexts,
@@ -68,6 +72,16 @@ export function OnboardingFlow({
   const [state, setState] = useState<OnboardingState>(initialOnboardingState);
   const [phase, setPhase] = useState<Phase>("collect");
   const [email, setEmail] = useState("");
+  const [code, setCode] = useState("");
+  // `isAuthenticated` is the server's answer at the time this page rendered.
+  // Verifying a code below makes it stale without a new render, so from then
+  // on the session is tracked here. It only ever goes false -> true, which is
+  // what keeps the retry path honest: an account created, then a failed
+  // profile write, must not send a second code.
+  const [signedIn, setSignedIn] = useState(isAuthenticated);
+  const [notice, setNotice] = useState<CodeNotice>("none");
+  const [verifying, setVerifying] = useState(false);
+  const [resending, setResending] = useState(false);
   const hydrated = useRef(false);
 
   // Hydrate once from localStorage (client only): the collected answers must
@@ -86,6 +100,15 @@ export function OnboardingFlow({
     }
     hydrated.current = true;
   }, []);
+
+  // The recap screen unmounts when the code screen takes over, so focus would
+  // fall back to <body>. Move it into the code field: the field's own
+  // description is what tells the user where to find the code, and typing it
+  // is the only thing left to do on that screen.
+  const codeRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (phase === "code") codeRef.current?.focus();
+  }, [phase]);
 
   // Single writer: every mutation persists to localStorage and updates React
   // state together. There is deliberately no [state] persist effect — it would
@@ -137,16 +160,48 @@ export function OnboardingFlow({
     });
   };
 
-  // Screen 6 commit. Authenticated (e.g. returning from the magic link) writes
-  // the profile directly; otherwise we email a magic link first.
+  // Screen 6 commit. Authenticated (e.g. returning from the emailed link)
+  // writes the profile directly; otherwise the account has to exist first, so
+  // we send the code and hand over to the screen below.
   const handleFinish = () => {
-    if (isAuthenticated) {
+    if (signedIn) {
       startFinalize();
       return;
     }
     setPhase("sending");
-    requestOnboardingLink(email.trim(), state.locale ?? "en").then((res) => {
-      setPhase(res.status === "sent" ? "sent" : "error");
+    requestOnboardingCode(email.trim(), state.locale ?? "en").then((res) => {
+      setPhase(res.status === "sent" ? "code" : "error");
+    });
+  };
+
+  // The code screen: verifying it signs the user in, and finalizing writes
+  // the answers this browser has been holding all along. Chained rather than
+  // redirected — a redirect would send a signed-in user with no profile back
+  // through the flow, and the answers would have to be re-read from storage
+  // to survive it.
+  const handleVerify = (e: FormEvent) => {
+    e.preventDefault();
+    setNotice("none");
+    setVerifying(true);
+    verifyOnboardingCode(email.trim(), code).then((res) => {
+      setVerifying(false);
+      if (res.status === "verified") {
+        setSignedIn(true);
+        startFinalize();
+      } else {
+        setNotice("invalid");
+      }
+    });
+  };
+
+  // Same action as screen 6, re-posted with the address already known. The
+  // previous code stops working the moment this one is minted.
+  const handleResend = () => {
+    setNotice("none");
+    setResending(true);
+    requestOnboardingCode(email.trim(), state.locale ?? "en").then((res) => {
+      setResending(false);
+      setNotice(res.status === "sent" ? "resent" : "sendFailed");
     });
   };
 
@@ -170,8 +225,7 @@ export function OnboardingFlow({
   })();
 
   const canFinish =
-    isOnboardingComplete(state) &&
-    (isAuthenticated || EMAIL_RE.test(email.trim()));
+    isOnboardingComplete(state) && (signedIn || EMAIL_RE.test(email.trim()));
 
   const rhythmText = () => {
     if (!state.frequency) return "";
@@ -188,20 +242,74 @@ export function OnboardingFlow({
 
   // --- Terminal phases (no stepper chrome) ---------------------------------
 
-  if (phase === "sent") {
+  // The last step of sign-up, and the only one that works inside the
+  // installed iOS app: a link opens in Safari, whose cookie jar the app
+  // cannot see, so the code is the only credential that crosses (ADR 0005).
+  if (phase === "code") {
     return (
       <main
         id="main-content"
         className="mx-auto flex min-h-full w-full max-w-md flex-1 flex-col justify-center gap-4 p-5"
       >
-        <div
-          role="status"
-          aria-live="polite"
-          className="flex flex-col gap-2 rounded-md border-structural bg-surface p-5"
-        >
-          <p className="font-display text-greeting">{t("sentTitle")}</p>
-          <Helper>{t("sentBody")}</Helper>
+        <Question>{t("codeTitle")}</Question>
+
+        <form onSubmit={handleVerify} className="flex flex-col gap-4">
+          <TextInput
+            ref={codeRef}
+            label={t("codeLabel")}
+            helper={t("codeSentTo", { email: email.trim() })}
+            // No maxLength and no placeholder: the code's length is a Supabase
+            // dashboard setting, and normalizeCode strips everything that is
+            // not a digit, so pasting the whole subject line works too.
+            inputMode="numeric"
+            autoComplete="one-time-code"
+            enterKeyHint="go"
+            required
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            aria-invalid={notice === "invalid" || undefined}
+          />
+          {notice === "invalid" ? (
+            // Error copy stays muted ink on beige — no semantic red in the
+            // palette.
+            <p role="alert" className="text-helper text-muted">
+              {t("codeError")}
+            </p>
+          ) : null}
+          {/* Same amber primary as the sign-in code screen: the two screens
+              are one mechanism, and this one is not the sticky bottom
+              commitment button that `commitment` describes. */}
+          <Cta type="submit" disabled={verifying} fullWidth>
+            {verifying ? t("verifying") : t("verify")}
+          </Cta>
+        </form>
+
+        <p role="status" aria-live="polite" className="text-helper text-muted">
+          {notice === "resent" ? t("resent") : ""}
+        </p>
+
+        <div className="flex flex-col items-center gap-3">
+          <SecondaryLink onClick={handleResend} disabled={resending}>
+            {resending ? t("sending") : t("resend")}
+          </SecondaryLink>
+          {notice === "sendFailed" ? (
+            <p role="alert" className="text-helper text-muted">
+              {t("errorGeneric")}
+            </p>
+          ) : null}
+          {/* Back to the recap, answers intact, with the address editable. */}
+          <SecondaryLink
+            onClick={() => {
+              setCode("");
+              setNotice("none");
+              setPhase("collect");
+            }}
+          >
+            {t("changeEmail")}
+          </SecondaryLink>
         </div>
+
+        <Helper>{t("linkHint")}</Helper>
       </main>
     );
   }
@@ -372,6 +480,16 @@ export function OnboardingFlow({
                 patch({ frequency, reminderTime })
               }
             />
+            {/* What a slot actually costs to receive, said here rather than
+                discovered later by a reminder that never arrives. Web Push
+                needs permission, which this flow never asks for, and on iOS
+                it needs the home-screen app — Safari has no push for a tab.
+                Stated for everyone instead of sniffed: the same reasoning as
+                the sign-in code (ADR 0005). Someone who picked "own pace" has
+                declined reminders, so it is not addressed to them. */}
+            {state.frequency !== "OWN_PACE" && (
+              <Helper>{t("reminderHelper")}</Helper>
+            )}
             <div className="mt-auto">
               <Cta fullWidth disabled={!canContinue} onClick={goNext}>
                 {t("next")}
@@ -411,7 +529,7 @@ export function OnboardingFlow({
               <p className="mt-2 text-body text-hero-fg">{t("teaserBody")}</p>
             </HeroSurface>
 
-            {!isAuthenticated && (
+            {!signedIn && (
               <TextInput
                 label={t("emailLabel")}
                 helper={t("emailHelper")}

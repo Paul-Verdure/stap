@@ -3,6 +3,7 @@
 import { headers } from "next/headers";
 
 import { routing } from "@/i18n/routing";
+import { normalizeCode } from "@/lib/auth/code";
 import { createClient } from "@/lib/supabase/server";
 import { db } from "@/lib/db";
 import {
@@ -12,9 +13,12 @@ import {
 } from "@/lib/onboarding";
 import { DEFAULT_TIMEZONE, isValidTimezone } from "@/lib/timezone";
 
-// Outcome of requesting the onboarding magic link. Unlike the login flow this
-// one creates the account (shouldCreateUser), since onboarding IS sign-up.
+// Outcome of requesting the sign-up email. Unlike the login flow this one
+// creates the account (shouldCreateUser), since onboarding IS sign-up.
 export type StartState = { status: "idle" | "sent" | "error" };
+
+// Outcome of verifying the code from that email.
+export type VerifyState = { status: "verified" | "error" };
 
 async function resolveOrigin() {
   const h = await headers();
@@ -31,7 +35,7 @@ function safeLocale(locale: string) {
     : routing.defaultLocale;
 }
 
-export async function requestOnboardingLink(
+export async function requestOnboardingCode(
   email: string,
   locale: string,
 ): Promise<StartState> {
@@ -44,7 +48,10 @@ export async function requestOnboardingLink(
     email: clean,
     options: {
       shouldCreateUser: true,
-      // Land back on onboarding (authenticated); the flow then finalizes.
+      // The link lands back on onboarding (authenticated) and the flow
+      // finalizes from there. It is the desktop shortcut; the code in the
+      // same email is the path that also works inside the installed iOS app,
+      // which cannot follow a link into itself at all (ADR 0005).
       emailRedirectTo: `${origin}/auth/confirm?next=/${safeLocale(locale)}/onboarding`,
     },
   });
@@ -54,6 +61,34 @@ export async function requestOnboardingLink(
     return { status: "error" };
   }
   return { status: "sent" };
+}
+
+// Verifies the code from that email. Deliberately does NOT redirect the way
+// the sign-in action does: sign-up is only half done here — the answers are
+// still sitting in the browser, and completeOnboarding below is what turns
+// this session into an account. The flow calls the two in sequence, so the
+// cookies verifyOtp writes here are already on the next request.
+//
+// `type: "email"` is right for a confirm-signup token as well as a magic-link
+// one (verified against this project's auth server, see ADR 0005), so a
+// returning address and a brand-new one take the same path.
+export async function verifyOnboardingCode(
+  email: string,
+  code: string,
+): Promise<VerifyState> {
+  const clean = email.trim();
+  const token = normalizeCode(code);
+  if (!clean || !token) return { status: "error" };
+
+  const supabase = await createClient();
+  const { error } = await supabase.auth.verifyOtp({
+    email: clean,
+    token,
+    type: "email",
+  });
+  if (error) return { status: "error" };
+
+  return { status: "verified" };
 }
 
 const LEVELS: DutchLevel[] = ["A0", "A1", "A2", "B1", "B2"];
