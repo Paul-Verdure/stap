@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 
 import { getLocale } from "next-intl/server";
 
+import { normalizeCode } from "@/lib/auth/code";
 import { APP_HOME } from "@/lib/auth/routes";
 import { createClient } from "@/lib/supabase/server";
 
@@ -74,7 +75,7 @@ export async function verifySignInCode(
 ): Promise<VerifyCodeState> {
   const email = String(formData.get("email") ?? "").trim();
   // Tolerate what a paste or an autofill brings along (spaces, dashes).
-  const token = String(formData.get("code") ?? "").replace(/\D/g, "");
+  const token = normalizeCode(String(formData.get("code") ?? ""));
   if (!email || !token) return { status: "error" };
 
   const supabase = await createClient();

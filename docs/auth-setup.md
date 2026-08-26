@@ -146,12 +146,25 @@ Subject line (both templates):
    (protected-by-default).
 2. Enter your email, submit → the code step, focus already in the field.
 3. Read the code from the email **subject** (no need to open the message),
-   type it, submit → lands authenticated on `/<locale>`.
+   type it, submit → lands authenticated on `/<locale>/today`.
 4. Sign out → back to `/<locale>/login`.
 5. Repeat once from the iPhone home-screen app: same two steps, no browser
    involved. That is the case the code exists for.
 6. Optional, on a computer: request a code and click the link in the email
    instead — the other half of §3 should still work.
+
+Sign-up is the same check with a brand-new address, and it exercises the
+*Confirm signup* template rather than the *Magic Link* one:
+
+7. Open `/<locale>/onboarding`, answer the six screens, enter an address with
+   no account, submit → the code step, focus already in the field.
+8. Type the code → the profile is written and the app opens on
+   `/<locale>/today`, with no further tap. There is no sign-in screen in
+   between: the answers are still in the browser, so the flow verifies and
+   finalizes in one go.
+9. Repeat from the iPhone home-screen app. Signing **up** there is the case
+   this half exists for — the emailed link opens in Safari, whose cookie jar
+   the installed app cannot see.
 
 If a code is refused, check: the template actually contains `{{ .Token }}`
 (both templates), the OTP has not expired, and the link in the same email was
